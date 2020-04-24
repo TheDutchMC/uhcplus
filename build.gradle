@@ -6,6 +6,9 @@
  */
 plugins {
 	id 'java'
+	id 'application'
+	id 'com.github.johnrengelman.shadow' version '5.0.0'
+	
 }
 
 version '0.1-ALPHA'
@@ -17,8 +20,23 @@ repositories {
 	maven {
 		url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
 	}
+	
+	maven {
+		url "https://oss.sonatype.org/content/repositories/snapshots"
+	}
 }
 
 dependencies {
 	compileOnly "org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT"
+	
+	compile fileTree(dir: '/', include: '*.yml')
+	compile fileTree(dir: '/presets/', include: '*.yml')
+	
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
 }
+
+application {
+    mainClassName = 'nl.thedutchmc.uhcplus.UhcPlus'
+}
+	

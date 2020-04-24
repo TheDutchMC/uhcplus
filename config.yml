@@ -1,0 +1,5 @@
+#Welcome to the configuration file of UHCPLus!
+
+#Set the active Presets configuration. Default: "default"
+#Do not include the file extension!
+activePreset: "default"
