@@ -2,4 +2,8 @@
 
 #Set the active Presets configuration. Default: "default"
 #Do not include the file extension!
-activePreset: "default"
+defaultPreset: "default"
+
+#List of available config files
+availablePresets:
+- "default"

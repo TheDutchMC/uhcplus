@@ -24,6 +24,9 @@ public class UhcPlus extends JavaPlugin {
 		//Load all the presets
 		PresetHandler presetHandler = new PresetHandler(this);
 		presetHandler.loadPresets();
+		
+		//Check if the files in the presets/ directory match what's in config.
+		configurationHandler.readAvailablePresets();
 	}
 	
 	@Override

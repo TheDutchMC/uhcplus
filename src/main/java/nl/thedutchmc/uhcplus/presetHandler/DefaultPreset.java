@@ -2,6 +2,7 @@ package nl.thedutchmc.uhcplus.presetHandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -13,8 +14,8 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 public class DefaultPreset {
 	
 	private UhcPlus plugin;
-	
-	public static int maxTeamCount, maxPlayerCountPerTeam;
+
+	public static String maxTeamCount, maxPlayerCountPerTeam;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -25,11 +26,10 @@ public class DefaultPreset {
 	
 	public FileConfiguration getPresetConfig() {
 		return this.presetConfig;
-	}
+	} 
 	
-	String presetName = "default";
-	
-	public void loadPreset() {
+	public HashMap<String, String> loadPreset(String presetName, boolean shouldReturn) {
+		
 		presetConfigFile = new File(plugin.getDataFolder() + File.separator + "presets", presetName + ".yml");
 		
 		presetConfig = YamlConfiguration.loadConfiguration(presetConfigFile);
@@ -39,7 +39,7 @@ public class DefaultPreset {
 			presetConfigFile.getParentFile().mkdirs();
 			
 			try {
-				FileUtils.copyToFile(plugin.getResource(presetName + ".yml"), presetConfigFile);
+				FileUtils.copyToFile(plugin.getResource("default.yml"), presetConfigFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -49,16 +49,29 @@ public class DefaultPreset {
 		try {
 			presetConfig.load(presetConfigFile);
 			
-			readPreset();
+			if(shouldReturn) {
+				readPreset();
+			}
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 			//TODO better error handling
 		}
+		
+		if(shouldReturn) {
+			HashMap<String, String> toReturn = new HashMap<String, String>();
+			
+			toReturn.put("maxTeamCount", maxTeamCount);
+			toReturn.put("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
+			
+			return toReturn;
+		} else {
+			return null;
+		}
 	}
 	
 	public void readPreset() {
-		maxTeamCount = this.getPresetConfig().getInt("maxTeamCount");
-		maxPlayerCountPerTeam = this.getPresetConfig().getInt("maxPlayerCountPerTeam");
-				
+		maxTeamCount = this.getPresetConfig().getString("maxTeamCount");
+		maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
+			
 	}
 }
