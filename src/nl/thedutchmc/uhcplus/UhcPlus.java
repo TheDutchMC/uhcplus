@@ -1,5 +1,16 @@
 package nl.thedutchmc.uhcplus;
 
-public class UhcPlus {
+import org.bukkit.plugin.java.JavaPlugin;
 
+public class UhcPlus extends JavaPlugin {
+
+	@Override
+	public void onEnable() {
+		
+	}
+	
+	@Override
+	public void onDisable() {
+		
+	}
 }
