@@ -41,7 +41,7 @@ public class CommandHandler implements CommandExecutor {
 					sender.sendMessage("- " + cg + "/uhcp " + cw + "UHCPlus base command.");
 					sender.sendMessage("- " + cg + "/uhcp help " + cw + "Shows this page.");
 					sender.sendMessage("- " + cg + "/uhcp version " + cw + "Shows you the version of UHCPlus you are on.");
-					sender.sendMessage("- " + cg + "/uhcp preset" + cw + "Manage the presets.");
+					sender.sendMessage("- " + cg + "/uhcp preset " + cw + "Manage the presets.");
 					
 					return true;
 					
