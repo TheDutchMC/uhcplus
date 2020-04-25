@@ -9,7 +9,8 @@ import org.bukkit.command.CommandSender;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
+import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class CommandHandler implements CommandExecutor {
 
@@ -43,12 +44,10 @@ public class CommandHandler implements CommandExecutor {
 					sender.sendMessage("- " + cg + "/uhcp version " + cw + "Shows you the version of UHCPlus you are on.");
 					sender.sendMessage("- " + cg + "/uhcp preset " + cw + "Manage the presets.");
 					
-					return true;
 					
 				} else if(args[0].equalsIgnoreCase("version")) { //Returns the version to the sender
 					
 					sender.sendMessage(cg + "You are on UHCPlus version " + cr + UhcPlus.VERSION + cg + ".");
-					return true;
 					
 				} else if(args[0].equalsIgnoreCase("preset")) {
 					
@@ -56,7 +55,6 @@ public class CommandHandler implements CommandExecutor {
  						
 						sender.sendMessage(cr + "Invalid usage! See /uhcp preset help for help.");
 						
-						return true;
 						
 					} else { //Args length is more than or equal to 2, meaning they have entered /uhcp preset <subcommand>
 						
@@ -73,7 +71,6 @@ public class CommandHandler implements CommandExecutor {
 							sender.sendMessage("- " + cg + "/uchp preset options list " + cw + "Lists the available options you can modify.");
 							sender.sendMessage("- " + cg + "/uhcp preset options <option> <value> " + cw + "Modifies the option to the set value. This will modify the currently active preset!");
 							
-							return true;
 							
 						} else if(args[1].equalsIgnoreCase("create")) {
 							
@@ -81,7 +78,6 @@ public class CommandHandler implements CommandExecutor {
 								
 								sender.sendMessage(cr + "You need to specify what you want the new preset to be named. Usage: /uhcp preset create <preset name>");
 								
-								return true;
 									
 							} else { //The args length is equal to 3, meaning they have entered /uhcp preset create <preset name>
 								
@@ -90,7 +86,6 @@ public class CommandHandler implements CommandExecutor {
 								;
 								sender.sendMessage(cg + "Created a new preset with the name " + cr + args[2] + cg + ".");
 								
-								return true;
 							}
 						} else if (args[1].equalsIgnoreCase("list" )) {
 							
@@ -106,7 +101,6 @@ public class CommandHandler implements CommandExecutor {
 								sender.sendMessage(cg + "- " + str);
 							}
 							
-							return true;
 							
 						} else if(args[1].equalsIgnoreCase("setdefault")) {
 							
@@ -123,14 +117,12 @@ public class CommandHandler implements CommandExecutor {
 								sender.sendMessage(cr + "This preset does not exist!");
 							}
 							
-							return true;
 
 						} else if(args[1].equalsIgnoreCase("load")) {
 								if(args.length != 3) { //Check if the args length is not equal to 3, if this is the case the user hasn't specified a name for the preset, inform them about this.
 
 									sender.sendMessage(cr + "You need to specify which preset you want to load. Usage: /uhcp preset load <preset name>");
 								
-								return true;
 									
 							} else { //The args length is equal to 3, meaning they have entered /uhcp preset load <preset name>
 								
@@ -145,13 +137,11 @@ public class CommandHandler implements CommandExecutor {
 									sender.sendMessage(cr + "This preset does not exist!");
 								}
 								
-								return true;
 							}
 						} else if(args[1].equalsIgnoreCase("seeloaded")) {
 							
 							sender.sendMessage(cg + "The currently loaded preset is " + cr + PresetHandler.loadedPreset);
 							
-							return true;
 							
 						} else if(args[1].equalsIgnoreCase("delete")) {
 							
@@ -159,7 +149,6 @@ public class CommandHandler implements CommandExecutor {
 
 								sender.sendMessage(cr + "You need to specify which preset you want to delete. Usage: /uhcp preset delete <preset name>");
 							
-							return true;
 								
 							} else { //The args length is equal to 3, meaning they have entered /uhcp preset delete <preset name>
 								
@@ -176,13 +165,11 @@ public class CommandHandler implements CommandExecutor {
 									sender.sendMessage(cr + "This preset does not exist!");
 								}
 							
-								return true;
 							}
 						} else if(args[1].equalsIgnoreCase("options")) { //uhcp preset options
 							
 							if(!(args.length >= 3)) { //Check if the args length is not equal than or more than 3, this means the user has entered /uhcp preset options, and hasn't given an option
 								sender.sendMessage(cr + "You need to specifiy which option you want to modify! See /uhcp preset options list, for a list of available options!");
-								return true;
 							} else {
 								
 								if(args[2].equalsIgnoreCase("list")) { //uchp preset options list
@@ -194,14 +181,12 @@ public class CommandHandler implements CommandExecutor {
 									sender.sendMessage("- " + cg + "moduleoreautosmelt " + cw + "Enable or disable the automatic smelting of ores. Options: true/false");
 									sender.sendMessage("- " + cg + "ingotdropcount " + cw + "Sets the amount of ingots that will drop from an ore. moduleoreautosmelt needs to be enabled for this. Range: 1-infinite");
 									
-									return true;
 									
 								} else {
 									
 									if(args.length != 4) { //check if args length is not equal to 4, meaning the user didnt /uhcp preset options <option> <value>, inform them.
 										sender.sendMessage(cr + "Missing arguments! Usage: /uhcp preset options <option> <value>");
 										
-										return true;
 									} else {
 										
 										if(args[2].equalsIgnoreCase("maxteamcount")) { // /uhcp preset option maxteamcount <value>
@@ -218,16 +203,13 @@ public class CommandHandler implements CommandExecutor {
 
 													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
 													
-													return true;
 													
 												} else {
 													sender.sendMessage(cr + "Out of range! Range: 1-16");
 													
-													return true;
 												}
 											} else {
 												sender.sendMessage(cr + "Invalid value! Must be a number and in range 1-16!");
-												return true;
 											}
 										} else if(args[2].equalsIgnoreCase("maxplayersperteam")) { // /uhcp preset option maxplayersperteam <value>
 											
@@ -239,17 +221,13 @@ public class CommandHandler implements CommandExecutor {
 													presetHandler.changePresetOption();
 													
 													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
-													
-													return true;
-													
+																										
 												} else {
 													sender.sendMessage(cr + "Value may not be negative or zero!");
-													return true;
 												}
 																							
 											} else {
 												sender.sendMessage(cr + "Invalid value! Must be a number!");
-												return true;
 											}
 										} else if(args[2].equalsIgnoreCase("moduleoreautosmelt")) {
 											if(args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("false")) {
@@ -259,7 +237,6 @@ public class CommandHandler implements CommandExecutor {
 												
 												sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
 												
-												return true;
 											} else {
 												sender.sendMessage(cr + "Invalid value! Options: true/false");
 											}
@@ -273,14 +250,11 @@ public class CommandHandler implements CommandExecutor {
 													
 													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
 													
-													return true;
 												} else {
 													sender.sendMessage(cr + "Value may not be negative or zero!");
-													return true;
 												}
 											} else {
 												sender.sendMessage(cr + "Invalid value! Must be a number!");
-												return true;
 											}
 										}
 									}
@@ -288,10 +262,34 @@ public class CommandHandler implements CommandExecutor {
 							}
 						}
 					}
+				} else if(args[0].equalsIgnoreCase("teams")) { // /uhcp teams
+					
+					if(args.length >= 2) {
+						
+						if(args[1].equalsIgnoreCase("help")) { // /uhcp teams help
+							
+							sender.sendMessage(cg + "UHCPlus Teams Help Page");
+							sender.sendMessage(cg + "---------------------");
+							sender.sendMessage("- " + cg + "/uchp teams teamCount " + cw + "Show the amount of teams configured");
+							sender.sendMessage("- " + cg + "/uhcp teams randomfill " + cw + "Randomly fill the teams with player");
+
+						} else if(args[1].equalsIgnoreCase("teamcount")) {
+							sender.sendMessage(cg + "You have configured that there may be a maximum of " + cr + PresetHandler.maxTeamCount + cg + " teams.");
+							
+						} else if(args[1].equalsIgnoreCase("randomfill")) {
+							
+							TeamHandler teamHandler = new TeamHandler(plugin, sender);
+							teamHandler.playerTeamJoiner();
+						}
+						
+						
+					} else {
+						sender.sendMessage(cr + "Missing arguments! See /uhcp teams help, for help");
+					}
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	//Iterate over all the available presets, to check if the one the user wants to use exists

@@ -3,7 +3,7 @@ package nl.thedutchmc.uhcplus.modules;
 import org.bukkit.event.HandlerList;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
+import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class ModuleHandler {
 

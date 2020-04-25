@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
+import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class ModuleOreAutoSmelt implements Listener {
 

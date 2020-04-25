@@ -4,7 +4,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import nl.thedutchmc.uhcplus.commands.CommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
-import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
+import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class UhcPlus extends JavaPlugin {
 
@@ -22,13 +23,16 @@ public class UhcPlus extends JavaPlugin {
 		ConfigurationHandler configurationHandler = new ConfigurationHandler(this);
 		configurationHandler.loadConfig();
 		
-		
 		//Load all the presets
 		PresetHandler presetHandler = new PresetHandler(this);
 		presetHandler.loadPresets();
 		
 		//Check if the files in the presets/ directory match what's in config.
 		configurationHandler.readAvailablePresets();
+		
+		//Set up the teams
+		TeamHandler teamHandler = new TeamHandler(this, null);
+		teamHandler.createTeams();
 	}
 	
 	@Override

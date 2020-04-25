@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.presetHandler;
+package nl.thedutchmc.uhcplus.presets;
 
 import java.io.File;
 import java.io.IOException;
