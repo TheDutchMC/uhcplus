@@ -7,12 +7,15 @@ import java.util.Map;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.modules.ModuleHandler;
 
 public class PresetHandler {
 
 	public static String loadedPreset;
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
+	public static boolean moduleOreAutoSmelt;
+	public static int moduleOreAutoSmeltIngotDrop;
 	
 	private UhcPlus plugin;
 	
@@ -45,6 +48,12 @@ public class PresetHandler {
 		
 		loadPresetValuesIntoVariables(hasReturned);
 		
+		ModuleHandler moduleHandler = new ModuleHandler(plugin);
+		moduleHandler.unloadModules();
+		moduleHandler.loadModules();
+		
+		
+		
 		loadedPreset = presetName;
 	}
 	
@@ -58,8 +67,12 @@ public class PresetHandler {
 				maxTeamCount = value;
 			} else if(key == "maxPlayerCountPerTeam") {
 				maxPlayerCountPerTeam = value;
+			} else if(key == "moduleOreAutoSmelt") {
+				moduleOreAutoSmelt = Boolean.valueOf(value);
+			} else if(key == "moduleOreAutoSmeltIngotDrop") {
+				moduleOreAutoSmeltIngotDrop = Integer.valueOf(value);
 			}
-		}
+ 		}
 	}
 	
 	public void createPreset(String presetName) {
@@ -79,5 +92,21 @@ public class PresetHandler {
 		File file = new File(plugin.getDataFolder() + File.separator + "presets", presetName + ".yml");
 		
 		file.delete();
+	}
+	
+	public void changePresetOption() {
+		
+		DefaultPreset.maxTeamCount = maxTeamCount;
+		DefaultPreset.maxPlayerCountPerTeam = maxPlayerCountPerTeam;
+		DefaultPreset.moduleOreAutoSmelt = String.valueOf(moduleOreAutoSmelt);
+		DefaultPreset.moduleOreAutoSmeltIngotDrop = String.valueOf(moduleOreAutoSmeltIngotDrop);
+		
+		
+		DefaultPreset defaultPreset = new DefaultPreset(plugin);
+		defaultPreset.writePreset(loadedPreset);
+		
+		ModuleHandler moduleHandler = new ModuleHandler(plugin);
+		moduleHandler.unloadModules();
+		moduleHandler.loadModules();
 	}
 }

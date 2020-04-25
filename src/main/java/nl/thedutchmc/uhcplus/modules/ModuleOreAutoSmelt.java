@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.listeners;
+package nl.thedutchmc.uhcplus.modules;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -7,25 +7,19 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
 
-public class OreMinedListener implements Listener {
+public class ModuleOreAutoSmelt implements Listener {
 
+	@SuppressWarnings("unused")
 	private UhcPlus plugin;
 	
-	public OreMinedListener(UhcPlus plugin) {
+	public ModuleOreAutoSmelt(UhcPlus plugin) {
 		this.plugin = plugin;
-		setDropCount(1);
+		dropCount = PresetHandler.moduleOreAutoSmeltIngotDrop;
 	}
-	
-	
+
 	int dropCount;
-	
-	void setDropCount(int dropCount) {
-		//TODO integrate with preset settings
-		
-		dropCount = 1;
-		//this.dropCount = dropCount;
-	}
 	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
@@ -33,25 +27,19 @@ public class OreMinedListener implements Listener {
 		Material blockBroken = event.getBlock().getType();
 		
 		if(blockBroken.equals(Material.GOLD_ORE)) {
-			event.setDropItems(true);
+			event.setDropItems(false);
 			event.setExpToDrop(5);
 			
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.GOLD_INGOT, dropCount));
 			
 		} else if(blockBroken.equals(Material.IRON_ORE)) {
-			event.setDropItems(true);
+			event.setDropItems(false);
 			event.setExpToDrop(5);
 			
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.IRON_INGOT, dropCount));
 			
-		} else if(blockBroken.equals(Material.EMERALD_ORE)) {
-			event.setDropItems(true);
-			event.setExpToDrop(5);
-
-			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.EMERALD, dropCount));
-			
 		} else if(blockBroken.equals(Material.COAL_ORE)) {
-			event.setDropItems(true);
+			event.setDropItems(false);
 			event.setExpToDrop(5);
 
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.TORCH, 2));

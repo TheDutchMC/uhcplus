@@ -15,7 +15,7 @@ public class DefaultPreset {
 	
 	private UhcPlus plugin;
 
-	public static String maxTeamCount, maxPlayerCountPerTeam;
+	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -62,6 +62,8 @@ public class DefaultPreset {
 			
 			toReturn.put("maxTeamCount", maxTeamCount);
 			toReturn.put("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
+			toReturn.put("moduleOreAutoSmelt", moduleOreAutoSmelt);
+			toReturn.put("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
 			
 			return toReturn;
 		} else {
@@ -70,8 +72,29 @@ public class DefaultPreset {
 	}
 	
 	public void readPreset() {
+		
 		maxTeamCount = this.getPresetConfig().getString("maxTeamCount");
 		maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
-			
+		moduleOreAutoSmelt = this.getPresetConfig().getString("moduleOreAutoSmelt");
+		moduleOreAutoSmeltIngotDrop = this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop");		
+	}
+	
+	public void writePreset(String presetName) {
+		loadPreset(presetName, false);
+		
+		this.getPresetConfig().set("maxTeamCount", maxTeamCount);
+		this.getPresetConfig().set("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
+		this.getPresetConfig().set("moduleOreAutoSmelt", moduleOreAutoSmelt);
+		this.getPresetConfig().set("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
+	
+		savePreset();
+	}
+	
+	public void savePreset() {
+		try {
+			this.getPresetConfig().save(presetConfigFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus;
+package nl.thedutchmc.uhcplus.commands;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import nl.thedutchmc.uhcplus.ConfigurationHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presetHandler.PresetHandler;
 
 public class CommandHandler implements CommandExecutor {
 
-
-	@SuppressWarnings("unused")
 	private UhcPlus plugin;
 
 	public CommandHandler(UhcPlus plugin) {
@@ -70,6 +70,8 @@ public class CommandHandler implements CommandExecutor {
 							sender.sendMessage("- " + cg + "/uhcp preset load <preset name> " + cw + "Load the specified preset.");
 							sender.sendMessage("- " + cg + "/uhcp preset seeloaded " + cw + "Shows which preset is curretly loaded");
 							sender.sendMessage("- " + cg + "/uhcp preset delete <preset name> " + cw + "Deletes the specified preset. Warning: This action cannot be undone!");
+							sender.sendMessage("- " + cg + "/uchp preset options list " + cw + "Lists the available options you can modify.");
+							sender.sendMessage("- " + cg + "/uhcp preset options <option> <value> " + cw + "Modifies the option to the set value. This will modify the currently active preset!");
 							
 							return true;
 							
@@ -176,6 +178,114 @@ public class CommandHandler implements CommandExecutor {
 							
 								return true;
 							}
+						} else if(args[1].equalsIgnoreCase("options")) { //uhcp preset options
+							
+							if(!(args.length >= 3)) { //Check if the args length is not equal than or more than 3, this means the user has entered /uhcp preset options, and hasn't given an option
+								sender.sendMessage(cr + "You need to specifiy which option you want to modify! See /uhcp preset options list, for a list of available options!");
+								return true;
+							} else {
+								
+								if(args[2].equalsIgnoreCase("list")) { //uchp preset options list
+									
+									sender.sendMessage(cg + "UHCPlus Preset Options");
+									sender.sendMessage(cg + "--------------------");
+									sender.sendMessage("- " + cg + "maxteamcount " + cw + "Sets the maximum number of teams. Range: 1-16");
+									sender.sendMessage("- " + cg + "maxplayersperteam " + cw + "Sets the maximum amount of players per team. Range: 1-infinite");
+									sender.sendMessage("- " + cg + "moduleoreautosmelt " + cw + "Enable or disable the automatic smelting of ores. Options: true/false");
+									sender.sendMessage("- " + cg + "ingotdropcount " + cw + "Sets the amount of ingots that will drop from an ore. moduleoreautosmelt needs to be enabled for this. Range: 1-infinite");
+									
+									return true;
+									
+								} else {
+									
+									if(args.length != 4) { //check if args length is not equal to 4, meaning the user didnt /uhcp preset options <option> <value>, inform them.
+										sender.sendMessage(cr + "Missing arguments! Usage: /uhcp preset options <option> <value>");
+										
+										return true;
+									} else {
+										
+										if(args[2].equalsIgnoreCase("maxteamcount")) { // /uhcp preset option maxteamcount <value>
+											
+											if(isNumber(args[3])) {
+												int teamCount = Integer.valueOf(args[3]);
+												
+												if(teamCount <= 16 && teamCount >= 1) {
+												
+													PresetHandler.maxTeamCount = args[3];
+													
+													PresetHandler presetHandler = new PresetHandler(plugin);
+													presetHandler.changePresetOption();
+
+													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+													
+													return true;
+													
+												} else {
+													sender.sendMessage(cr + "Out of range! Range: 1-16");
+													
+													return true;
+												}
+											} else {
+												sender.sendMessage(cr + "Invalid value! Must be a number and in range 1-16!");
+												return true;
+											}
+										} else if(args[2].equalsIgnoreCase("maxplayersperteam")) { // /uhcp preset option maxplayersperteam <value>
+											
+											if(isNumber(args[3])) {
+												if(Integer.valueOf(args[3]) >= 1) {
+													
+													PresetHandler.maxPlayerCountPerTeam = args[3];
+													PresetHandler presetHandler = new PresetHandler(plugin);
+													presetHandler.changePresetOption();
+													
+													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+													
+													return true;
+													
+												} else {
+													sender.sendMessage(cr + "Value may not be negative or zero!");
+													return true;
+												}
+																							
+											} else {
+												sender.sendMessage(cr + "Invalid value! Must be a number!");
+												return true;
+											}
+										} else if(args[2].equalsIgnoreCase("moduleoreautosmelt")) {
+											if(args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("false")) {
+												PresetHandler.moduleOreAutoSmelt = Boolean.valueOf(args[3]);
+												PresetHandler presetHandler = new PresetHandler(plugin);
+												presetHandler.changePresetOption();
+												
+												sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+												
+												return true;
+											} else {
+												sender.sendMessage(cr + "Invalid value! Options: true/false");
+											}
+										} else if(args[2].equalsIgnoreCase("ingotdropcount")) { // /uhcp preset option ingotdropcount <value>
+											if(isNumber(args[3])) {
+												if(Integer.valueOf(args[3]) >= 1) {
+													PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(args[3]);
+													
+													PresetHandler presetHandler = new PresetHandler(plugin);
+													presetHandler.changePresetOption();
+													
+													sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+													
+													return true;
+												} else {
+													sender.sendMessage(cr + "Value may not be negative or zero!");
+													return true;
+												}
+											} else {
+												sender.sendMessage(cr + "Invalid value! Must be a number!");
+												return true;
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
@@ -189,5 +299,18 @@ public class CommandHandler implements CommandExecutor {
 		List<String> availablePresets = ConfigurationHandler.availablePresets;
 		
 		return availablePresets.contains(presetName);
+	}
+	
+	//Check if the supplied String is a round number
+	boolean isNumber(String value) {
+		try {
+			Integer.valueOf(value);
+			
+			return true;
+		} catch(NumberFormatException e) {
+			
+			return false;
+		}
+		
 	}
 }
