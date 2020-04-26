@@ -17,6 +17,7 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class CommandHandler implements CommandExecutor {
 
@@ -287,12 +288,12 @@ public class CommandHandler implements CommandExecutor {
 							
 						} else if(args[1].equalsIgnoreCase("randomfill")) { // /uhcp teams randomfill
 							
-							TeamHandler teamHandler = new TeamHandler(plugin, sender);
+							TeamHandler teamHandler = new TeamHandler(plugin, sender, true);
 							teamHandler.playerTeamJoiner();
 							
 						} else if(args[1].equalsIgnoreCase("getteams")) { // /uhcp teams getteams
 							
-							TeamHandler teamHandler = new TeamHandler(plugin, sender);
+							TeamHandler teamHandler = new TeamHandler(plugin, sender, true);
 							HashMap<Integer, Integer> teamSizes = teamHandler.getTeamSizes();
 							
 							for(Map.Entry<Integer, Integer> entry : teamSizes.entrySet()) {
@@ -326,6 +327,20 @@ public class CommandHandler implements CommandExecutor {
 					} else {
 						sender.sendMessage(cr + "Missing arguments! See /uhcp teams help, for help");
 					}
+				} else if(args[0].equalsIgnoreCase("start")) { // /uhcp start
+					UhcHandler uhcHandler = new UhcHandler(plugin);
+					
+					if(args.length == 2) {
+						
+						if(args[1].equalsIgnoreCase("true")) {
+							uhcHandler.startUhc(true);
+						} else {
+							uhcHandler.startUhc(false);
+						}
+					} else {
+						uhcHandler.startUhc(true);
+					}
+					
 				}
 			}
 		}
