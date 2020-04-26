@@ -15,7 +15,7 @@ public class PresetHandler {
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
 	public static boolean moduleOreAutoSmelt;
-	public static int moduleOreAutoSmeltIngotDrop;
+	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
 	
 	private UhcPlus plugin;
 	
@@ -63,14 +63,33 @@ public class PresetHandler {
 			String key = entry.getKey();
 			String value = entry.getValue();
 			
-			if(key == "maxTeamCount") {
-				maxTeamCount = value;
-			} else if(key == "maxPlayerCountPerTeam") {
-				maxPlayerCountPerTeam = value;
-			} else if(key == "moduleOreAutoSmelt") {
-				moduleOreAutoSmelt = Boolean.valueOf(value);
-			} else if(key == "moduleOreAutoSmeltIngotDrop") {
-				moduleOreAutoSmeltIngotDrop = Integer.valueOf(value);
+			switch(key) {
+				case "maxTeamCount":
+					maxTeamCount = value;
+					break;
+				case "maxPlayerCountPerTeam":
+					maxPlayerCountPerTeam = value;
+					break;
+				case "moduleOreAutoSmelt":
+					moduleOreAutoSmelt = Boolean.valueOf(value);
+					break;
+				case "moduleOreAutoSmeltIngotDrop":
+					moduleOreAutoSmeltIngotDrop = Integer.valueOf(value);
+					break;
+				case "timeToPvp":
+					timeToPvp = Integer.valueOf(value);
+					break;
+				case "worldBorderSize":
+					worldBorderSize = Integer.valueOf(value);
+					break;
+				case "worldBorderShrinkAfter":
+					worldBorderShrinkAfter = Integer.valueOf(value);
+					break;
+				case "worldBorderShrinkTo":
+					worldBorderShrinkTo = Integer.valueOf(value);
+					break;
+				case "gameTime":
+					gameTime = Integer.valueOf(value);
 			}
  		}
 	}
@@ -100,7 +119,10 @@ public class PresetHandler {
 		DefaultPreset.maxPlayerCountPerTeam = maxPlayerCountPerTeam;
 		DefaultPreset.moduleOreAutoSmelt = String.valueOf(moduleOreAutoSmelt);
 		DefaultPreset.moduleOreAutoSmeltIngotDrop = String.valueOf(moduleOreAutoSmeltIngotDrop);
-		
+		DefaultPreset.timeToPvp = String.valueOf(timeToPvp);
+		DefaultPreset.worldBorderSize = String.valueOf(worldBorderSize);
+		DefaultPreset.worldBorderShrinkAfter = String.valueOf(worldBorderShrinkAfter);
+		DefaultPreset.gameTime = String.valueOf(gameTime);
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
 		defaultPreset.writePreset(loadedPreset);

@@ -15,7 +15,7 @@ public class DefaultPreset {
 	
 	private UhcPlus plugin;
 
-	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop;
+	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -64,6 +64,12 @@ public class DefaultPreset {
 			toReturn.put("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
 			toReturn.put("moduleOreAutoSmelt", moduleOreAutoSmelt);
 			toReturn.put("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
+			toReturn.put("timeToPvp", timeToPvp);
+			toReturn.put("worldBorderSize", worldBorderSize);
+			toReturn.put("worldBorderShrinkAfter", worldBorderShrinkAfter);
+			toReturn.put("worldBorderShrinkTo", worldBorderShrinkTo);
+			toReturn.put("gameTime", gameTime);
+
 			
 			return toReturn;
 		} else {
@@ -77,6 +83,11 @@ public class DefaultPreset {
 		maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
 		moduleOreAutoSmelt = this.getPresetConfig().getString("moduleOreAutoSmelt");
 		moduleOreAutoSmeltIngotDrop = this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop");		
+		timeToPvp = this.getPresetConfig().getString("timeToPvp");
+		worldBorderSize = this.getPresetConfig().getString("worldBorderSize");
+		worldBorderShrinkAfter = this.getPresetConfig().getString("worldBorderShrinkAfter");
+		worldBorderShrinkTo = this.getPresetConfig().getString("worldBorderShrinkTo");
+		gameTime = this.getPresetConfig().getString("gameTime");		
 	}
 	
 	public void writePreset(String presetName) {
@@ -86,6 +97,11 @@ public class DefaultPreset {
 		this.getPresetConfig().set("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
 		this.getPresetConfig().set("moduleOreAutoSmelt", moduleOreAutoSmelt);
 		this.getPresetConfig().set("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
+		this.getPresetConfig().set("timeToPvp", timeToPvp);
+		this.getPresetConfig().set("worldBorderSize", worldBorderSize);
+		this.getPresetConfig().set("worldBorderShrinkAfter", worldBorderShrinkAfter);
+		this.getPresetConfig().set("worldBorderShrinkTo", worldBorderShrinkTo);
+		this.getPresetConfig().set("gameTime", gameTime);
 	
 		savePreset();
 	}

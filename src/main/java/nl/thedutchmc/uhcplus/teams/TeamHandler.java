@@ -23,12 +23,15 @@ public class TeamHandler {
 	private int maxTeamCount = Integer.valueOf(PresetHandler.maxTeamCount);
 	private int maxPlayerCountPerTeam = Integer.valueOf(PresetHandler.maxPlayerCountPerTeam);
 	
+	private boolean shouldReturn = false;
+	
 	private CommandSender sender;
 	public static List<Team> teams = new ArrayList<>();
 	
-	public TeamHandler(UhcPlus plugin, CommandSender sender) {
+	public TeamHandler(UhcPlus plugin, CommandSender sender, boolean shouldReturn) {
 		this.plugin = plugin;
 		this.sender = sender;
+		this.shouldReturn = shouldReturn;
 	}
 	
 	public void createTeams() {		
@@ -46,7 +49,7 @@ public class TeamHandler {
 		List<UUID> playersNotInTeam = new ArrayList<>();
 		Bukkit.getServer().getOnlinePlayers().toArray(players);
 		
-		if((Bukkit.getServer().getOnlinePlayers().size() / maxTeamCount) > maxPlayerCountPerTeam) {
+		if((Bukkit.getServer().getOnlinePlayers().size() / maxTeamCount) > maxPlayerCountPerTeam && shouldReturn) {
 			sender.sendMessage(ChatColor.RED + "There are more players than that can be fit into all the teams! There might be spectators!");
 		}
 		
@@ -82,7 +85,7 @@ public class TeamHandler {
 			playersNotInTeamNames += new String(player.getName() + ", ");
 		}
 		
-		if(playersNotInTeamNames.length() > 1) {
+		if(playersNotInTeamNames.length() > 1 && shouldReturn) {
 			sender.sendMessage(ChatColor.GOLD + "The following players were not added to a team, and have been put in spectator mode: " + playersNotInTeamNames);
 		}
 	}
