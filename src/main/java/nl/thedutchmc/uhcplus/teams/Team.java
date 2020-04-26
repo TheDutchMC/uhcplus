@@ -1,5 +1,6 @@
 package nl.thedutchmc.uhcplus.teams;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,14 +9,13 @@ import org.bukkit.entity.Player;
 
 public class Team {
 
-	private List<UUID> teamMembers;
+	private List<UUID> teamMembers = new ArrayList<>();
 	private ChatColor teamColor;
-	private List<UUID> teamMembersAlive;
+	private List<UUID> teamMembersAlive = new ArrayList<>();
 	private int teamId;
 	
 	public Team(int teamId) {
 		this.teamId = teamId;
-		teamMembers = null;
 	}
 	
 	public List<UUID> getTeamMembers() {

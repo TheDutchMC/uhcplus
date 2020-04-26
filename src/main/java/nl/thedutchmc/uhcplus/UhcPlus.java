@@ -29,10 +29,6 @@ public class UhcPlus extends JavaPlugin {
 		
 		//Check if the files in the presets/ directory match what's in config.
 		configurationHandler.readAvailablePresets();
-		
-		//Set up the teams
-		TeamHandler teamHandler = new TeamHandler(this, null);
-		teamHandler.createTeams();
 	}
 	
 	@Override

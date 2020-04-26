@@ -2,6 +2,7 @@ package nl.thedutchmc.uhcplus.teams;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class TeamHandler {
 	private int maxPlayerCountPerTeam = Integer.valueOf(PresetHandler.maxPlayerCountPerTeam);
 	
 	private CommandSender sender;
-	static List<Team> teams = new ArrayList<>();
+	public static List<Team> teams = new ArrayList<>();
 	
 	public TeamHandler(UhcPlus plugin, CommandSender sender) {
 		this.plugin = plugin;
@@ -37,19 +38,19 @@ public class TeamHandler {
 	}
 	
 	public void playerTeamJoiner() {
+		
+		teams.clear();
+		createTeams();
+		
 		Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().size()];
 		List<UUID> playersNotInTeam = new ArrayList<>();
 		Bukkit.getServer().getOnlinePlayers().toArray(players);
-		
-		if((Bukkit.getServer().getOnlinePlayers().size() / maxPlayerCountPerTeam) % 2 != 0) {
-			sender.sendMessage(ChatColor.RED + "Cannot evenly divide players over all the teams! You might get teams of unequal size!");
-		}
 		
 		if((Bukkit.getServer().getOnlinePlayers().size() / maxTeamCount) > maxPlayerCountPerTeam) {
 			sender.sendMessage(ChatColor.RED + "There are more players than that can be fit into all the teams! There might be spectators!");
 		}
 		
-		for(int i = 0; i <= players.length; i++) {
+		for(int i = 0; i < players.length; i++) {
 			
 			UUID playerUuid = players[i].getUniqueId();
 			
@@ -57,13 +58,11 @@ public class TeamHandler {
 			
 			for(Team team : teams) {
 				
-				System.out.println(team.getTeamId());
-				System.out.println(teams.size());
-				
-				if(team.getTeamSize() != maxPlayerCountPerTeam) {
+				if(team.getTeamSize() != maxPlayerCountPerTeam && !team.isPlayerInTeam(playerUuid)) {
 					team.playerJoinTeam(playerUuid);
 					isPlayerInTeam = true;
 					Bukkit.getServer().getPlayer(playerUuid).sendMessage(ChatColor.GOLD + "You are now in team " + ChatColor.RED + team.getTeamId());
+					break;
 				}
 			}
 			
@@ -78,11 +77,14 @@ public class TeamHandler {
 		for(UUID uuid : playersNotInTeam) {
 			Player player = Bukkit.getServer().getPlayer(uuid);
 			player.setGameMode(GameMode.SPECTATOR);
+			player.sendMessage(ChatColor.GOLD + "You are not put into a team, and are now a spectator.");
 			
 			playersNotInTeamNames += new String(player.getName() + ", ");
 		}
 		
-		sender.sendMessage(ChatColor.GOLD + "The following players were not added to a team, and have been put in spectator mode: " + playersNotInTeamNames);
+		if(playersNotInTeamNames.length() > 1) {
+			sender.sendMessage(ChatColor.GOLD + "The following players were not added to a team, and have been put in spectator mode: " + playersNotInTeamNames);
+		}
 	}
 	
 	
@@ -95,5 +97,17 @@ public class TeamHandler {
 			}
 		}
 		return false;
+	}
+	
+	public HashMap<Integer, Integer> getTeamSizes() {
+		
+		HashMap<Integer, Integer> returnTeamSizes = new HashMap<>();
+		
+		for(Team team : teams) {
+			returnTeamSizes.put(team.getTeamId(), team.getTeamSize());
+		}
+		
+		return returnTeamSizes;
+		
 	}
 }

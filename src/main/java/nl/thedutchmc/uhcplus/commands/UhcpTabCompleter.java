@@ -3,9 +3,11 @@ package nl.thedutchmc.uhcplus.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 
@@ -19,6 +21,7 @@ public class UhcpTabCompleter implements TabCompleter {
 			possibleCommands.add("help");
 			possibleCommands.add("version");
 			possibleCommands.add("preset");
+			possibleCommands.add("teams");
 			
 			return possibleCommands;
 			
@@ -35,7 +38,18 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("delete");
 				possibleCommands.add("options");
 				
-				return possibleCommands;	
+				return possibleCommands;
+				
+			} else if(args[0].equalsIgnoreCase("teams")) {
+				
+				List<String> possibleCommands = new ArrayList<>();
+				possibleCommands.add("help");
+				possibleCommands.add("randomfill");
+				possibleCommands.add("getteams");
+				possibleCommands.add("whichteam");
+				
+				return possibleCommands;
+				
 			}
 		} else if(args.length == 3) {
 			
@@ -45,15 +59,30 @@ public class UhcpTabCompleter implements TabCompleter {
 					return ConfigurationHandler.availablePresets;
 					
 				} else if (args[1].equalsIgnoreCase("options")) {
-					List<String> availableCommands = new ArrayList<>();
-					availableCommands.add("list");
-					availableCommands.add("maxTeamCount");
-					availableCommands.add("maxPlayersPerTeam");
-					availableCommands.add("moduleOreAutoSmelt");
-					availableCommands.add("ingotDropCount");
+					List<String> possibleCommands = new ArrayList<>();
+					possibleCommands.add("list");
+					possibleCommands.add("maxTeamCount");
+					possibleCommands.add("maxPlayersPerTeam");
+					possibleCommands.add("moduleOreAutoSmelt");
+					possibleCommands.add("ingotDropCount");
 
-					return availableCommands;
+					return possibleCommands;
 				}
+			} else if(args[0].equalsIgnoreCase("teams")) {
+				if(args[1].equalsIgnoreCase("whichteam")) {
+					Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().toArray().length];
+					
+					Bukkit.getServer().getOnlinePlayers().toArray(players);
+					
+					List<String> playerNames = new ArrayList<>();
+					for(Player player : players) {
+						playerNames.add(player.getName());
+					}
+					
+					return playerNames;
+					
+				}
+				
 			}
 		}
 		
