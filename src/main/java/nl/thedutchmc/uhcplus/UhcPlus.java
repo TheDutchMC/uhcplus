@@ -1,11 +1,13 @@
 package nl.thedutchmc.uhcplus;
 
+import java.io.File;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 import nl.thedutchmc.uhcplus.commands.CommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
-import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.world.ChunkGenerator;
 
 public class UhcPlus extends JavaPlugin {
 
@@ -29,6 +31,13 @@ public class UhcPlus extends JavaPlugin {
 		
 		//Check if the files in the presets/ directory match what's in config.
 		configurationHandler.readAvailablePresets();
+		
+		//Create a folder for the deathmatch schematics
+		File file = new File(this.getDataFolder() + File.separator + "deathmatch");
+		file.mkdir();
+		
+		ChunkGenerator chunkGenerator = new ChunkGenerator(this);
+		chunkGenerator.generateChunks();
 	}
 	
 	@Override

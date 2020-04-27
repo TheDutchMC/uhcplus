@@ -28,3 +28,6 @@ worldBorderShrinkTo: "40"
 
 #Game time in minutes, default 60
 gameTime: "60"
+
+#Chop down trees when one block of the tree is broken. Can be true/false. Default: true
+moduleTreeFullRemove: "true"

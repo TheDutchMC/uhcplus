@@ -16,7 +16,7 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class TeamHandler {
-
+	
 	@SuppressWarnings("unused")
 	private UhcPlus plugin;
 
@@ -112,5 +112,58 @@ public class TeamHandler {
 		
 		return returnTeamSizes;
 		
+	}
+	
+	public int teamsWithPlayers() {
+		
+		int teamsWithPlayers = 0;
+		
+		for(Team team : teams) {
+			if(team.getTeamMembers().size() > 0) {
+				teamsWithPlayers++;
+			}
+		}
+		
+		return teamsWithPlayers;
+	}
+
+	public int teamsAlive() {
+		
+		int teamsAlive = 0;
+		
+		for(Team team : teams) {
+			if(team.getAliveTeamMembers().size() > 0) {
+				teamsAlive++;
+			}
+		}
+		
+		return teamsAlive;
+	}
+	
+	public List<Team> getAliveTeams() {
+		
+		List<Team> aliveTeams = new ArrayList<>();
+		
+		for(Team team : teams) {
+			if(team.getAliveTeamMembers().size() > 0) {
+				aliveTeams.add(team);
+			}
+		}
+		
+		return aliveTeams;
+	}
+
+	public void playerDied(UUID uuid) {
+		
+		for(Team team : teams) {
+			
+			if(team.getAliveTeamMembers().contains(uuid)) {
+				List<UUID> newAliveTeamMembers = new ArrayList<>();
+				newAliveTeamMembers = team.getAliveTeamMembers();
+				newAliveTeamMembers.remove(uuid);
+				
+				team.setAliveTeamMembers(newAliveTeamMembers);
+			}
+		}
 	}
 }

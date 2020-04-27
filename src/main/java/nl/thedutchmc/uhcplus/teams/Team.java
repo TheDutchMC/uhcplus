@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class Team {
@@ -13,6 +14,7 @@ public class Team {
 	private ChatColor teamColor;
 	private List<UUID> teamMembersAlive = new ArrayList<>();
 	private int teamId;
+	private Location startingLocation;
 	
 	public Team(int teamId) {
 		this.teamId = teamId;
@@ -34,7 +36,7 @@ public class Team {
 		this.teamColor = teamColor;
 	}
 	
-	public List<UUID> getAliveteamMembers() {
+	public List<UUID> getAliveTeamMembers() {
 		return teamMembersAlive;
 	}
 	
@@ -56,14 +58,26 @@ public class Team {
 	
 	public void playerJoinTeam(UUID playerUuid) {
 		teamMembers.add(playerUuid);
+		teamMembersAlive.add(playerUuid);
 	}
 	
 	public void playerLeaveTeam(UUID playerUuid) {
+		teamMembers.remove(playerUuid);
 		teamMembers.remove(playerUuid);
 	}
 	
 	public boolean isPlayerInTeam(UUID playerUuid) {
 		return teamMembers.contains(playerUuid);
 	}
+	
+	public Location getStartingLocation() {
+		return startingLocation;
+	}
+	
+	public void setStartingLocation(Location startingLocation) {
+		this.startingLocation = startingLocation;
+	}
+	
+	
 	
 }

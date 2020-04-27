@@ -47,7 +47,7 @@ public class WorldborderScheduler {
 		worldBorder.setSize(worldBorderStartingSize);
 		worldBorder.setCenter(0, 0);
 		
-		String minuteSinglePlural = (worldBorderStartShrinkAfter > 1) ? " minutes" : " minute"; 		
+		String minuteSinglePlural = (worldBorderStartShrinkAfter != 1) ? " minutes" : " minute"; 		
 		Bukkit.broadcastMessage(ChatColor.AQUA + "The world border will start shrinking in " + ChatColor.RED + worldBorderStartShrinkAfter + ChatColor.AQUA + minuteSinglePlural + "!");
 		
 		new BukkitRunnable() {

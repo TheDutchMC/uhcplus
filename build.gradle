@@ -24,18 +24,39 @@ repositories {
 	maven {
 		url "https://oss.sonatype.org/content/repositories/snapshots"
 	}
+	
+	maven {
+		url "https://maven.enginehub.org/repo/"
+	}
+	
+    maven {
+        name 'papermc'
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
 }
 
 dependencies {
+	//Spigot API
 	compileOnly "org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT"
 	
+	//All the YML files
 	compile fileTree(dir: '/', include: '*.yml')
 	
+	//Apache Commons
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
-
+	
+	//WorldEdit API
+	compile group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0'
+	
+    compile "io.papermc:paperlib:1.0.2"
 }
 
 application {
     mainClassName = 'nl.thedutchmc.uhcplus.UhcPlus'
+}
+
+shadowJar {
+   relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
+
 }
 	

@@ -15,7 +15,8 @@ public class DefaultPreset {
 	
 	private UhcPlus plugin;
 
-	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
+	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime,
+	moduleTreeFullRemove;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -69,8 +70,8 @@ public class DefaultPreset {
 			toReturn.put("worldBorderShrinkAfter", worldBorderShrinkAfter);
 			toReturn.put("worldBorderShrinkTo", worldBorderShrinkTo);
 			toReturn.put("gameTime", gameTime);
+			toReturn.put("moduleTreeFullRemove", moduleTreeFullRemove);
 
-			
 			return toReturn;
 		} else {
 			return null;
@@ -87,7 +88,9 @@ public class DefaultPreset {
 		worldBorderSize = this.getPresetConfig().getString("worldBorderSize");
 		worldBorderShrinkAfter = this.getPresetConfig().getString("worldBorderShrinkAfter");
 		worldBorderShrinkTo = this.getPresetConfig().getString("worldBorderShrinkTo");
-		gameTime = this.getPresetConfig().getString("gameTime");		
+		gameTime = this.getPresetConfig().getString("gameTime");
+		moduleTreeFullRemove = this.getPresetConfig().getString("moduleTreeFullRemove");		
+
 	}
 	
 	public void writePreset(String presetName) {
@@ -102,6 +105,7 @@ public class DefaultPreset {
 		this.getPresetConfig().set("worldBorderShrinkAfter", worldBorderShrinkAfter);
 		this.getPresetConfig().set("worldBorderShrinkTo", worldBorderShrinkTo);
 		this.getPresetConfig().set("gameTime", gameTime);
+		this.getPresetConfig().set("moduleTreeFullRemove", moduleTreeFullRemove);
 	
 		savePreset();
 	}

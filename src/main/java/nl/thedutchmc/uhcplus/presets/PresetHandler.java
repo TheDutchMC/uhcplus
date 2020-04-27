@@ -14,7 +14,7 @@ public class PresetHandler {
 	public static String loadedPreset;
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
-	public static boolean moduleOreAutoSmelt;
+	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove;
 	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
 	
 	private UhcPlus plugin;
@@ -90,6 +90,10 @@ public class PresetHandler {
 					break;
 				case "gameTime":
 					gameTime = Integer.valueOf(value);
+					break;
+				case "moduleTreeFullRemove":
+					moduleTreeFullRemove = Boolean.valueOf(value);
+					break;
 			}
  		}
 	}
@@ -123,6 +127,7 @@ public class PresetHandler {
 		DefaultPreset.worldBorderSize = String.valueOf(worldBorderSize);
 		DefaultPreset.worldBorderShrinkAfter = String.valueOf(worldBorderShrinkAfter);
 		DefaultPreset.gameTime = String.valueOf(gameTime);
+		DefaultPreset.moduleTreeFullRemove = String.valueOf(moduleTreeFullRemove);
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
 		defaultPreset.writePreset(loadedPreset);
