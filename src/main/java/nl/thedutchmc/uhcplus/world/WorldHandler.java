@@ -39,6 +39,7 @@ public class WorldHandler {
 		worldFolder.delete();
 		
 		
+		
 	}
 	
 }

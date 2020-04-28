@@ -11,7 +11,7 @@ import nl.thedutchmc.uhcplus.world.ChunkGenerator;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION = "0.1-ALPHA";
+	public static String VERSION = "0.1-BETA";
 		
 	@Override
 	public void onEnable() {

@@ -2,7 +2,6 @@ package nl.thedutchmc.uhcplus.uhc.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
