@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import io.papermc.lib.PaperLib;
@@ -37,11 +36,7 @@ public class ChunkGenerator {
 		
 		z = -startingCoordZ;		
 		
-		for(World world : Bukkit.getServer().getWorlds()) {
-			if(world.getEnvironment().equals(Environment.NORMAL)) {
-				overworld = world;
-			}
-		}
+		overworld = Bukkit.getServer().getWorld("uhcworld");
 		
 		
 		//Calculate the amount of chunks
@@ -91,7 +86,9 @@ public class ChunkGenerator {
 						
 						z += 16;
 					} else {
-						System.out.println("Done.");
+						System.out.println("[UhcPlus] Done. Players may now join.");
+						UhcPlus.PLAYER_CAN_JOIN = true;
+						
 						this.cancel();
 					}
 				} else {

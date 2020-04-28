@@ -1,6 +1,5 @@
 package nl.thedutchmc.uhcplus.modules.moduleListeners;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;

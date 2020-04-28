@@ -1,10 +1,7 @@
 package nl.thedutchmc.uhcplus.uhc.scheduler;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,17 +28,7 @@ public class WorldborderScheduler {
 		long worldBorderStartShrinkAfterTick = worldBorderStartShrinkAfter * 60 * 20;
 		long gameTimeLeftSecond = gameTimeLeft * 60;
 		
-		World overworld = null;
-		
-		List<World> worlds = Bukkit.getWorlds();
-		for(World world : worlds) {
-			Environment e = world.getEnvironment();
-			
-			if(e.equals(Environment.NORMAL)) {
-				overworld = world;
-			}
-			
-		}
+		World overworld = Bukkit.getServer().getWorld("uhcworld");
 		
 		WorldBorder worldBorder = overworld.getWorldBorder();
 		worldBorder.setSize(worldBorderStartingSize);

@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -39,16 +38,7 @@ public class UhcHandler {
 		
 		List<Team> teams = TeamHandler.teams;
 		
-		World overworld = null;
-		
-		//Get the overworld
-		List<World> worlds = Bukkit.getServer().getWorlds();
-		for(World world : worlds) {
-			Environment e = world.getEnvironment();
-			if(e.equals(Environment.NORMAL)) {
-				overworld = world;
-			}
-		}
+		World overworld = Bukkit.getServer().getWorld("uhcworld");
 		
 		//Set the required gamerules.
 		overworld.setGameRule(GameRule.NATURAL_REGENERATION, false);

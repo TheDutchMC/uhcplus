@@ -13,7 +13,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 
@@ -46,12 +45,7 @@ public class DeathmatchHandler {
 	
 	public void startDeathmatch() {
 		
-		List<World> worlds = Bukkit.getWorlds();
-		for(World world : worlds) {
-			if(world.getEnvironment().equals(Environment.NORMAL)) {
-				overworld = world;
-			}
-		}
+		overworld = Bukkit.getServer().getWorld("uhcworld");
 		
 		loadSchematic(chooseDeathmatch());
 		
