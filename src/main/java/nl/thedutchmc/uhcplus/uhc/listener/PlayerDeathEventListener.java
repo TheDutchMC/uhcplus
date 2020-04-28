@@ -33,10 +33,9 @@ public class PlayerDeathEventListener implements Listener {
 		
 		if(event.getEntity().getKiller() != null) {
 			Bukkit.broadcastMessage(ChatColor.AQUA + player.getName() + " was killed by " + player.getKiller().getName());
+		} else {
+			
+			Bukkit.broadcastMessage(ChatColor.AQUA + player.getName() + "died!");
 		}
-		
-		
-		
-		
 	}
 }

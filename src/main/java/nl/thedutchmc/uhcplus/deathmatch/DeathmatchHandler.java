@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -47,7 +48,12 @@ public class DeathmatchHandler {
 		
 		overworld = Bukkit.getServer().getWorld("uhcworld");
 		
+		//Load the arena
 		loadSchematic(chooseDeathmatch());
+		
+		//set difficulty to peaceful
+		overworld.setDifficulty(Difficulty.PEACEFUL);
+		
 		
 		//TP all players to the arena
 		Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().toArray().length];
@@ -55,6 +61,7 @@ public class DeathmatchHandler {
 		
 		Location locationSpectators = new Location(overworld, 0, 120, 0);
 
+		//Calculate spawn positions
 		int arenaRadius = 50;
 		int spawnCircleRadius = arenaRadius / 5 * 4;
 		
@@ -137,6 +144,8 @@ public class DeathmatchHandler {
 		//Pick a random deathmatch schematic (thus arena)
 		Random random = new Random();
 		int i = random.nextInt((availableSchematics.size() - 0) + 1) + 0;
+		
+		availableSchematics.size();
 		
 		return availableSchematics.get(i-1);
 	}

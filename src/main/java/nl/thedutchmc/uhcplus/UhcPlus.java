@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import nl.thedutchmc.uhcplus.commands.CommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;
 
@@ -25,6 +26,9 @@ public class UhcPlus extends JavaPlugin {
 	
 		//Register the LoginPlayerListener
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
+		
+		//Register the EntityDamageByEntityEventListener
+		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(this), this);
 		
 		//Set the executor for the /uhcp command
 		getCommand("uhcp").setExecutor(new CommandHandler(this));

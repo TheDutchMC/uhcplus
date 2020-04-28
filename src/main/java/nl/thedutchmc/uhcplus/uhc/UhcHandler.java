@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -59,6 +60,18 @@ public class UhcHandler {
 		
 		//Disable PVP
 		overworld.setPVP(false);
+		
+		//Difficuly to hard
+		overworld.setDifficulty(Difficulty.HARD);
+		
+		//Clear player inventory
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+			
+			player.getInventory().clear();
+		}
+		
+		//Spawn protection to 0
+		Bukkit.getServer().setSpawnRadius(0);
 		
 		PvpScheduler pvpScheduler = new PvpScheduler(overworld, plugin);
 		pvpScheduler.schedulePvp();
