@@ -1,5 +1,7 @@
 package nl.thedutchmc.uhcplus.uhc.listener;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -9,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class PlayerDeathEventListener implements Listener {
@@ -37,5 +40,16 @@ public class PlayerDeathEventListener implements Listener {
 			
 			Bukkit.broadcastMessage(ChatColor.AQUA + player.getName() + "died!");
 		}
+		
+		
+		//Check if the killer is the last player alive
+		List<Team> aliveTeams = teamHandler.getAliveTeams();
+		
+		if(aliveTeams.size() == 1) {
+			
+			//Only one team is left alive, thus they won
+			Bukkit.broadcastMessage(ChatColor.AQUA + "UHC Ended!");
+		}
+		
 	}
 }
