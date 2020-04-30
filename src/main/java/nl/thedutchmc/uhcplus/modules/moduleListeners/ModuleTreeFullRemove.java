@@ -12,7 +12,7 @@ public class ModuleTreeFullRemove implements Listener {
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		Block block = event.getBlock();
+		Block block = event.getBlock();		
 				
 		if(BlockChecker.isLog(block.getType())) {
 			breakTree(block, 2);

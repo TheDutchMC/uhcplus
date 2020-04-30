@@ -32,7 +32,7 @@ public class ModuleHandler {
 		moduleLeaveDecay = new ModuleLeaveDecay(plugin);
 		moduleEnchantedTools = new ModuleEnchantedTools();
 		moduleInfiniteEnchanting = new ModuleInfiniteEnchanting();
-		
+				
 		if(PresetHandler.moduleOreAutoSmelt) {
 			plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 		} 

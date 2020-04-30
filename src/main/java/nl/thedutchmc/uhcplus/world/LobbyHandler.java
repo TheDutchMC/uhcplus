@@ -112,7 +112,7 @@ public class LobbyHandler {
 			e.printStackTrace();
 		}
 		
-		//Paste the clipboard at 0,0
+		//Paste the clipboard at 0,200,0
 		
 		com.sk89q.worldedit.world.World weWorld = BukkitAdapter.adapt(overworld);
 		

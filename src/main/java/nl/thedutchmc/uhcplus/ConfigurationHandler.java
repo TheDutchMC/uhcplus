@@ -13,9 +13,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class ConfigurationHandler {
 private UhcPlus plugin;
 	
-	public static String defaultPreset;
+	public static String defaultPreset, onlyAllowedSeeds;
 	
 	public static List<String> availablePresets = new ArrayList<String>();
+	public static List<String> allowedSeeds = new ArrayList<String>();
 	
 	public ConfigurationHandler(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -54,11 +55,15 @@ private UhcPlus plugin;
 	public void readConfig() {
 		defaultPreset = this.getUHCPConfig().getString("defaultPreset");
 		availablePresets = (List<String>) this.getUHCPConfig().getList("availablePresets");
+		onlyAllowedSeeds = this.getUHCPConfig().getString("onlyAllowedSeeds");
+		allowedSeeds = (List<String>) this.getUHCPConfig().getList("allowedSeeds");
 	}
 	
 	public void setDefaultPreset(String presetName) {
 		loadConfig();
+		
 		this.getUHCPConfig().set("defaultPreset", presetName);
+		
 		saveConfig();
 	}
 	
@@ -67,6 +72,7 @@ private UhcPlus plugin;
 		
 		availablePresets.add(presetName);
 		this.getUHCPConfig().set("availablePresets", availablePresets);
+		
 		saveConfig();
 	}
 	

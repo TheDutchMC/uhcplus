@@ -1,12 +1,15 @@
 package nl.thedutchmc.uhcplus.modules.moduleListeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -86,6 +89,25 @@ public class ModuleLeaveDecay implements Listener {
 					
 					if(!leaveDecayEvent.isCancelled()) {
 						relativeBlock.breakNaturally();
+						
+						//Since not all leaves drop apples in vanilla, we add a chance that they do, chance is 0.5% (same as Oka and dark oak leaves)
+						//Because Oak and Dark oak leaves already drop apples naturally, we don't add the dropchance for those leaves
+						
+						if(!(relativeBlock.getType().equals(Material.OAK_LEAVES) || relativeBlock.getType().equals(Material.DARK_OAK_LEAVES))) {
+							
+							//0.005 = 0.5%
+							if(Math.random() < 0.005) {
+								
+								//Get the location of the leave that decayed
+								Location location = new Location(relativeBlock.getWorld(), relativeBlock.getX(), relativeBlock.getY(), relativeBlock.getZ());
+								
+								//Drop the apple
+								relativeBlock.getWorld().dropItem(location, new ItemStack(Material.APPLE, 1));
+							}
+							
+						}
+						
+						
 						
 					}
 					

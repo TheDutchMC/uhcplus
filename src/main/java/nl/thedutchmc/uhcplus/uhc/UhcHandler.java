@@ -18,6 +18,7 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerDeathEventListener;
+import nl.thedutchmc.uhcplus.uhc.listener.UhcStartedEventListener;
 import nl.thedutchmc.uhcplus.uhc.scheduler.GameEndScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.PvpScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
@@ -42,6 +43,9 @@ public class UhcHandler {
 		List<Team> teams = TeamHandler.teams;
 		
 		World overworld = Bukkit.getServer().getWorld("uhcworld");
+		
+		//Add event listener for UhcStartedEventListener (this listener will remove the lobby)
+		plugin.getServer().getPluginManager().registerEvents(new UhcStartedEventListener(), plugin);
 		
 		//Set the required gamerules.
 		overworld.setGameRule(GameRule.NATURAL_REGENERATION, false);
@@ -76,9 +80,11 @@ public class UhcHandler {
 		//Spawn protection to 0
 		Bukkit.getServer().setSpawnRadius(0);
 		
+		//Schedule the pvp timer
 		PvpScheduler pvpScheduler = new PvpScheduler(overworld, plugin);
 		pvpScheduler.schedulePvp();
 		
+		//Schedule the worldborder
 		WorldborderScheduler worldborderScheduler = new WorldborderScheduler(plugin);
 		worldborderScheduler.scheduleWorldborder();
 		
@@ -86,7 +92,6 @@ public class UhcHandler {
 		GameEndScheduler gameEndScheduler = new GameEndScheduler(plugin);
 		gameEndScheduler.scheduleGameEnd();
 		
-
 		//Get a list of all Players playing
 		List<Player> playersPlaying = new ArrayList<>();
 		
@@ -96,9 +101,6 @@ public class UhcHandler {
 			}
 		}
 		
-		//Call the UhcStartedEvent
-		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent(playersPlaying));
-		
 		//Spread the teams
 		
 		//Calculate distance that the "spawncircle" should be from 0,0.
@@ -107,6 +109,7 @@ public class UhcHandler {
 		
 		List<Location> teleportLocations = new ArrayList<>();
 		
+		//Calculate the actual locations
 		int teamCount = teamHandler.teamsWithPlayers();
 		int increment = 360 / teamCount;
 		int startAngle = 0;
@@ -125,6 +128,7 @@ public class UhcHandler {
 			
 		}
 		
+		//TP the players of each team to the previously calculated locations
 		for(int i = 0; i < teamCount; i++) {
 			Team team = teams.get(i);
 			
@@ -134,6 +138,9 @@ public class UhcHandler {
 				Player player = Bukkit.getServer().getPlayer(uuid);
 				player.teleport(location);
 			}	
-		}	
+		}
+		
+		//lastly, Call the UhcStartedEvent
+		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent(playersPlaying));
 	}
 }

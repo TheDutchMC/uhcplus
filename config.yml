@@ -7,3 +7,11 @@ defaultPreset: "default"
 #List of available config files
 availablePresets:
 - "default"
+
+#Do we only allow the UHC world to be a specified List of seeds. Default: true
+onlyAllowedSeeds: "true"
+
+#Allowed seeds, for this list to be used, onlyAllowedSeeds needs to be true!
+#NUMERICAL SEEDS ONLY! NO ALPHABETIC SEEDS!
+allowedSeeds:
+- "-4088290688367012214"

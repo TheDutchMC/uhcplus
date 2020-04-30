@@ -2,11 +2,15 @@ package nl.thedutchmc.uhcplus.world;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
+import org.bukkit.World.Environment;
 
+import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class WorldHandler {
@@ -21,6 +25,7 @@ public class WorldHandler {
 		
 		//First we want to remove the old world
 		removeOldWorld();
+		
 		
 		makeNewWorld();
 				
@@ -54,7 +59,31 @@ public class WorldHandler {
 	}
 	
 	void makeNewWorld() {
-		plugin.getServer().createWorld(new WorldCreator("uhcworld"));
+		
+		
+		if(Boolean.valueOf(ConfigurationHandler.onlyAllowedSeeds)) {
+			
+			List<String> allowedSeeds = ConfigurationHandler.allowedSeeds;
+			
+			//Pick a random seed from the list of allowed
+			Random random = new Random();
+			int i = random.nextInt((allowedSeeds.size()));
+			
+			Long seed = Long.valueOf(allowedSeeds.get(i));
+			
+			//Now generate world with that seed
+			plugin.getServer().createWorld(new WorldCreator("uhcworld")
+					.environment(Environment.NORMAL)
+					.seed(seed));
+		} else {
+			
+			//Allow any random seed
+			plugin.getServer().createWorld(new WorldCreator("uhcworld")
+					.environment(Environment.NORMAL));
+			
+		}
+		
+		
 	}
 	
 	boolean deleteWorld(File path) {
