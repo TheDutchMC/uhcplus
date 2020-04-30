@@ -6,12 +6,14 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
@@ -64,9 +66,10 @@ public class UhcHandler {
 		//Difficuly to hard
 		overworld.setDifficulty(Difficulty.HARD);
 		
-		//Clear player inventory
+		//Clear player inventory and 
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
+			player.setGameMode(GameMode.SURVIVAL);
 			player.getInventory().clear();
 		}
 		
@@ -82,6 +85,19 @@ public class UhcHandler {
 		//Schedule game end
 		GameEndScheduler gameEndScheduler = new GameEndScheduler(plugin);
 		gameEndScheduler.scheduleGameEnd();
+		
+
+		//Get a list of all Players playing
+		List<Player> playersPlaying = new ArrayList<>();
+		
+		for(Team team : teams) {
+			for(UUID uuid : team.getTeamMembers()) {
+				playersPlaying.add(Bukkit.getServer().getPlayer(uuid));
+			}
+		}
+		
+		//Call the UhcStartedEvent
+		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent(playersPlaying));
 		
 		//Spread the teams
 		

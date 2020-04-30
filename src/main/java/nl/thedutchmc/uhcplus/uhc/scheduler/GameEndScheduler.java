@@ -7,8 +7,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.deathmatch.DeathmatchHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
 
 public class GameEndScheduler {
 

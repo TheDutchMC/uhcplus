@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.deathmatch;
+package nl.thedutchmc.uhcplus.world;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -131,7 +131,7 @@ public class DeathmatchHandler {
 		//Iterate over all the files in folder
 		for(String filename : filenames) {
 						
-			//Split the name because we dont want the .yml extension
+			//Split the name because we dont want the .schem extension
 			String[] filenameParts = filename.split(".schem");
 						
 			//Check if it's in config, if not, add it.
@@ -141,12 +141,10 @@ public class DeathmatchHandler {
 		}
 		
 		
-		//Pick a random deathmatch schematic (thus arena)
+		//Pick a random deathmatch schematic
 		Random random = new Random();
 		int i = random.nextInt((availableSchematics.size() - 0) + 1) + 0;
-		
-		availableSchematics.size();
-		
+				
 		return availableSchematics.get(i-1);
 	}
 	
@@ -172,7 +170,7 @@ public class DeathmatchHandler {
 		try (EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(weWorld, -1)) {
 			Operation operation = new ClipboardHolder(clipboard)
 					.createPaste(editSession)
-					.to(BlockVector3.at(0, 100, 0)).build();
+					.to(BlockVector3.at(0, 200, 0)).build();
 			Operations.complete(operation);
 		} catch (WorldEditException e) {
 			e.printStackTrace();

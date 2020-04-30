@@ -31,3 +31,12 @@ gameTime: "60"
 
 #Chop down trees when one block of the tree is broken. Can be true/false. Default: true
 moduleTreeFullRemove: "true"
+
+#Should leaves decay fast. Default: true
+moduleLeaveDecay: "true"
+
+#Should all tools get the enchants Efficiency 4 and Unbreaking 2. Default: true
+moduleEnchantedTools: "true"
+
+#Should player get a stack of enchanting tables, lapis blocks, anvils and the maximum amount of levels possible at the start of the UHC. Default: true
+moduleInfiniteEnchanting: "true"

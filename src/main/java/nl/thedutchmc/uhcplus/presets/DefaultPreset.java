@@ -16,7 +16,7 @@ public class DefaultPreset {
 	private UhcPlus plugin;
 
 	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime,
-	moduleTreeFullRemove;
+	moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -60,7 +60,7 @@ public class DefaultPreset {
 		
 		if(shouldReturn) {
 			HashMap<String, String> toReturn = new HashMap<String, String>();
-			
+						
 			toReturn.put("maxTeamCount", maxTeamCount);
 			toReturn.put("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
 			toReturn.put("moduleOreAutoSmelt", moduleOreAutoSmelt);
@@ -71,6 +71,9 @@ public class DefaultPreset {
 			toReturn.put("worldBorderShrinkTo", worldBorderShrinkTo);
 			toReturn.put("gameTime", gameTime);
 			toReturn.put("moduleTreeFullRemove", moduleTreeFullRemove);
+			toReturn.put("moduleLeaveDecay", moduleLeaveDecay);
+			toReturn.put("moduleEnchantedTools", moduleEnchantedTools);
+			toReturn.put("moduleInfiniteEnchanting", moduleInfiniteEnchanting);
 
 			return toReturn;
 		} else {
@@ -89,7 +92,10 @@ public class DefaultPreset {
 		worldBorderShrinkAfter = this.getPresetConfig().getString("worldBorderShrinkAfter");
 		worldBorderShrinkTo = this.getPresetConfig().getString("worldBorderShrinkTo");
 		gameTime = this.getPresetConfig().getString("gameTime");
-		moduleTreeFullRemove = this.getPresetConfig().getString("moduleTreeFullRemove");		
+		moduleTreeFullRemove = this.getPresetConfig().getString("moduleTreeFullRemove");	
+		moduleLeaveDecay = this.getPresetConfig().getString("moduleLeaveDecay");
+		moduleEnchantedTools = this.getPresetConfig().getString("moduleEnchantedTools");
+		moduleInfiniteEnchanting = this.getPresetConfig().getString("moduleInfiniteEnchanting");
 
 	}
 	
@@ -106,6 +112,9 @@ public class DefaultPreset {
 		this.getPresetConfig().set("worldBorderShrinkTo", worldBorderShrinkTo);
 		this.getPresetConfig().set("gameTime", gameTime);
 		this.getPresetConfig().set("moduleTreeFullRemove", moduleTreeFullRemove);
+		this.getPresetConfig().set("moduleLeaveDecay", moduleLeaveDecay);
+		this.getPresetConfig().set("moduleEnchantedTools", moduleEnchantedTools);
+		this.getPresetConfig().set("moduleInfiniteEnchanting", moduleInfiniteEnchanting);
 	
 		savePreset();
 	}

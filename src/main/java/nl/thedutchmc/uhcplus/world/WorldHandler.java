@@ -1,9 +1,10 @@
 package nl.thedutchmc.uhcplus.world;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.WorldCreator;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -23,31 +24,32 @@ public class WorldHandler {
 		
 		makeNewWorld();
 				
+		//Place the lobby
+		LobbyHandler lobbyHandler = new LobbyHandler(plugin);
+		lobbyHandler.loadLobby();
+		
 		ChunkGenerator chunkGenerator = new ChunkGenerator(plugin);
 		chunkGenerator.generateChunks();
 		
-		
-		
+
 	}
 	
 	void removeOldWorld() {
 		
 		System.out.println("[UhcPlus] Removing old world...");
 		
-		World uhcworld = Bukkit.getServer().getWorld("uhcworld");
+		File worldFile = new File(Bukkit.getServer().getWorldContainer() + File.separator + "uhcworld");
 		
-		if(uhcworld != null) {
+		if(worldFile.exists()) {
+			System.out.println(worldFile.getAbsolutePath());
 			
-			System.out.println("Deleting overworld");
-			
-			Bukkit.getServer().unloadWorld(uhcworld, true);
-		
-			File overworldFolder = uhcworld.getWorldFolder();
-			
-			deleteWorld(overworldFolder);
-			
+			try {
+				FileUtils.deleteDirectory(worldFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
-			System.out.println("Cant find world!");
+			System.out.println("[UhcPlus] World doesn't exist. Skipping.");
 		}
 	}
 	

@@ -14,7 +14,7 @@ public class PresetHandler {
 	public static String loadedPreset;
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
-	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove;
+	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting;
 	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
 	
 	private UhcPlus plugin;
@@ -94,6 +94,15 @@ public class PresetHandler {
 				case "moduleTreeFullRemove":
 					moduleTreeFullRemove = Boolean.valueOf(value);
 					break;
+				case "moduleLeaveDecay":
+					moduleLeaveDecay = Boolean.valueOf(value);
+					break;
+				case "moduleEnchantedTools":
+					moduleEnchantedTools = Boolean.valueOf(value);
+					break;
+				case "moduleInfiniteEnchanting":
+					moduleInfiniteEnchanting = Boolean.valueOf(value);
+					break;
 			}
  		}
 	}
@@ -128,6 +137,10 @@ public class PresetHandler {
 		DefaultPreset.worldBorderShrinkAfter = String.valueOf(worldBorderShrinkAfter);
 		DefaultPreset.gameTime = String.valueOf(gameTime);
 		DefaultPreset.moduleTreeFullRemove = String.valueOf(moduleTreeFullRemove);
+		DefaultPreset.moduleLeaveDecay = String.valueOf(moduleLeaveDecay);
+		DefaultPreset.moduleEnchantedTools = String.valueOf(moduleEnchantedTools);
+		DefaultPreset.moduleInfiniteEnchanting = String.valueOf(moduleInfiniteEnchanting);
+
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
 		defaultPreset.writePreset(loadedPreset);

@@ -2,6 +2,8 @@ package nl.thedutchmc.uhcplus.uhc.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,7 +33,8 @@ public class PlayerLoginJoinEventListener implements Listener {
 			
 			World uhcWorld = Bukkit.getServer().getWorld("uhcworld");
 						
-			player.teleport(uhcWorld.getSpawnLocation());
+			player.setGameMode(GameMode.ADVENTURE);
+			player.teleport(new Location(uhcWorld, 0, 201, 0));
 		}
 	}
 }
