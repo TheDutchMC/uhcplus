@@ -60,12 +60,17 @@ public class LobbyHandler {
 	}
 	
 	String chooseLobby() {
-		List<String> availableSchematics = new ArrayList<>();
+	List<String> availableSchematics = new ArrayList<>();
 	
-		//Iterate over all schematic files in the schematics folder
-		String[] filenames;
-
-		File file = new File(plugin.getDataFolder() + File.separator + "lobby");
+	//Iterate over all schematic files in the schematics folder
+	String[] filenames;
+	
+	File file = new File(plugin.getDataFolder() + File.separator + "lobby");
+	
+	//Check if the directory exists, if not, make it.
+	if(!file.exists()) {
+		file.mkdirs();
+	}
 
 	//A filter, since we only want the files ending in .schem
 	FilenameFilter filter = new FilenameFilter() {
@@ -77,6 +82,12 @@ public class LobbyHandler {
 	};
 
 	filenames = file.list(filter);
+	
+	//Check if any lobby's exist.
+	if(filenames.length < 1) {
+		System.out.println("[UhcPlus] No deathmatch arena schematics found! Disabling UhcPlus");
+		plugin.getServer().getPluginManager().disablePlugin(plugin);	
+	}
 
 	//Iterate over all the files in folder
 	for(String filename : filenames) {

@@ -37,7 +37,7 @@ repositories {
 
 dependencies {
 	//Spigot API
-	compileOnly "org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT"
+	implementation "org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT"
 	
 	//All the YML files
 	compile fileTree(dir: '/', include: '*.yml')
@@ -46,7 +46,7 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	
 	//WorldEdit API
-	compile group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0'
+	implementation group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0'
 	
     compile "io.papermc:paperlib:1.0.2"
 }
