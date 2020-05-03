@@ -3,6 +3,8 @@ package nl.thedutchmc.uhcplus.uhc.listener;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,7 +43,10 @@ public class PlayerDeathEventListener implements Listener {
 			Bukkit.broadcastMessage(ChatColor.AQUA + player.getName() + " died!");
 		}
 		
-		
+		//Put the died player into spectator mode and TP them to 0,0 in the UHC World
+		player.setGameMode(GameMode.SPECTATOR);
+		player.teleport(new Location(Bukkit.getServer().getWorld("uhcworld"), 0, 100, 0));
+
 		//Check if the killer is the last player alive
 		List<Team> aliveTeams = teamHandler.getAliveTeams();
 		

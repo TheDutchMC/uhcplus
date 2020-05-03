@@ -53,6 +53,9 @@ public class LobbyHandler {
 		//Set difficulty to peaceful since we dont want mobs now
 		overworld.setDifficulty(Difficulty.PEACEFUL);
 		
+		//Turn PVP off
+		overworld.setPVP(false);
+		
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setGameMode(GameMode.ADVENTURE);
 		}

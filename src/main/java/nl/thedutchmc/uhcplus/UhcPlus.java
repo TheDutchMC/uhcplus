@@ -3,12 +3,18 @@ package nl.thedutchmc.uhcplus;
 import java.io.File;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import nl.thedutchmc.uhcplus.commands.CommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.uhc.ScoreboardHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;
@@ -17,15 +23,23 @@ public class UhcPlus extends JavaPlugin {
 
 	public static String VERSION = "1.0-BETA";
 		
-	public static boolean PLAYER_CAN_JOIN = false;
-	
+	public static boolean PLAYER_CAN_JOIN = true;	
 	
 	@Override
 	public void onEnable() {
 		System.out.println("Welcome to UHCPlus - Version " + VERSION);
-	
+		
 		//Register the LoginPlayerListener
-		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(this), this);
+		
+		//Show hearts in the tablist
+		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+		Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+		
+		@SuppressWarnings("deprecation")
+		Objective healthObjective = scoreboard.registerNewObjective("health", "health");
+		
+		healthObjective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		
 		//Register the EntityDamageByEntityEventListener
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(this), this);
@@ -63,6 +77,8 @@ public class UhcPlus extends JavaPlugin {
 		
 		}.runTaskLater(plugin, 120);
 
+		
+		
 	}
 	
 	@Override

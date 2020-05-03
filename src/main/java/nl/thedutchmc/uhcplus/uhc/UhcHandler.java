@@ -11,12 +11,15 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.Scoreboard;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.listener.EntityDeathEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerDeathEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.UhcStartedEventListener;
 import nl.thedutchmc.uhcplus.uhc.scheduler.GameEndScheduler;
@@ -61,11 +64,13 @@ public class UhcHandler {
 		}
 		
 		//Register the PlayerDeathEvent listener
-		PlayerDeathEventListener playerDeathEventListener = new PlayerDeathEventListener(plugin);
-		plugin.getServer().getPluginManager().registerEvents(playerDeathEventListener, plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(plugin), plugin);
 		
 		//Disable PVP
 		overworld.setPVP(false);
+		
+		//Register the EntityDeathEvent listener
+		plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventListener(), plugin);
 		
 		//Difficuly to hard
 		overworld.setDifficulty(Difficulty.HARD);
@@ -87,6 +92,26 @@ public class UhcHandler {
 		//Schedule the worldborder
 		WorldborderScheduler worldborderScheduler = new WorldborderScheduler(plugin);
 		worldborderScheduler.scheduleWorldborder();
+		
+		//Set the information scoreboard for all the players
+		ScoreboardHandler scoreboardHandler = new ScoreboardHandler();
+		
+		Scoreboard informationScoreboard = scoreboardHandler.getInformationScoreboard();
+		
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+			player.setScoreboard(informationScoreboard);
+		}
+		
+		//Schedule the information scoreboard to update every 5 seconds (100 ticks)
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				
+				scoreboardHandler.updateInformationScoreboard(informationScoreboard.getObjective("infObj"));
+			}
+		}.runTaskTimer(plugin, 0, 100);
+		
 		
 		//Schedule game end
 		GameEndScheduler gameEndScheduler = new GameEndScheduler(plugin);

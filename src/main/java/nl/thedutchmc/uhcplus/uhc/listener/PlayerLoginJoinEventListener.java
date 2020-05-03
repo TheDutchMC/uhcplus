@@ -16,6 +16,13 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerLoginJoinEventListener implements Listener {
 
+	@SuppressWarnings("unused")
+	private UhcPlus plugin;
+	
+	public PlayerLoginJoinEventListener(UhcPlus plugin) {
+		this.plugin = plugin;
+	}
+	
 	@EventHandler
 	public void onPlayerLoginEvent(PlayerLoginEvent event) {
 
@@ -35,6 +42,7 @@ public class PlayerLoginJoinEventListener implements Listener {
 						
 			player.setGameMode(GameMode.ADVENTURE);
 			player.teleport(new Location(uhcWorld, 0, 201, 0));
+
 		}
 	}
 }
