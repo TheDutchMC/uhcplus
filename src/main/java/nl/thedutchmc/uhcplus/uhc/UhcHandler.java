@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Objective;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
@@ -21,6 +21,7 @@ import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDeathEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerDeathEventListener;
+import nl.thedutchmc.uhcplus.uhc.listener.PlayerRespawnEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.UhcStartedEventListener;
 import nl.thedutchmc.uhcplus.uhc.scheduler.GameEndScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.PvpScheduler;
@@ -37,7 +38,14 @@ public class UhcHandler {
 	TeamHandler teamHandler = new TeamHandler(plugin, null, false);
 	
 	public void startUhc(boolean resortTeams) {
+		
+		//Start the countdown timer for the scoreboard
+		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator(plugin);
+		uhcTRC.startCountdown();
 	
+		//Set the global flag that the uhc has started to true
+		UhcPlus.UHC_STARTED = true;
+		
 		//If we need to resort the teams, do it.
 		if(resortTeams) {
 			teamHandler.playerTeamJoiner();
@@ -45,21 +53,25 @@ public class UhcHandler {
 		
 		List<Team> teams = TeamHandler.teams;
 		
-		World overworld = Bukkit.getServer().getWorld("uhcworld");
+		World uhcworld = Bukkit.getServer().getWorld("uhcworld");
 		
 		//Add event listener for UhcStartedEventListener (this listener will remove the lobby)
 		plugin.getServer().getPluginManager().registerEvents(new UhcStartedEventListener(), plugin);
 		
 		//Set the required gamerules.
-		overworld.setGameRule(GameRule.NATURAL_REGENERATION, false);
-		overworld.setGameRule(GameRule.DO_FIRE_TICK, false);
-		overworld.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
+		uhcworld.setGameRule(GameRule.NATURAL_REGENERATION, false);
+		uhcworld.setGameRule(GameRule.DO_FIRE_TICK, false);
+		uhcworld.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
+		uhcworld.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
+		
+		//Set weather to clear (no rain)
+		uhcworld.setStorm(false);
+		
+		//Time to day
+		uhcworld.setTime(6000);
 		
 		//Set full health
-		Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().toArray().length];
-		Bukkit.getServer().getOnlinePlayers().toArray(players);
-		
-		for(Player player : players) {
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
 		}
 		
@@ -67,15 +79,18 @@ public class UhcHandler {
 		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(plugin), plugin);
 		
 		//Disable PVP
-		overworld.setPVP(false);
+		uhcworld.setPVP(false);
 		
 		//Register the EntityDeathEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventListener(), plugin);
 		
-		//Difficuly to hard
-		overworld.setDifficulty(Difficulty.HARD);
+		//Register the RespawnEvent listener
+		plugin.getServer().getPluginManager().registerEvents(new PlayerRespawnEventListener(plugin), plugin);
 		
-		//Clear player inventory and 
+		//Difficuly to hard
+		uhcworld.setDifficulty(Difficulty.HARD);
+		
+		//Clear player inventory and set their gamemode to survival
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
 			player.setGameMode(GameMode.SURVIVAL);
@@ -86,7 +101,7 @@ public class UhcHandler {
 		Bukkit.getServer().setSpawnRadius(0);
 		
 		//Schedule the pvp timer
-		PvpScheduler pvpScheduler = new PvpScheduler(overworld, plugin);
+		PvpScheduler pvpScheduler = new PvpScheduler(uhcworld, plugin);
 		pvpScheduler.schedulePvp();
 		
 		//Schedule the worldborder
@@ -96,21 +111,21 @@ public class UhcHandler {
 		//Set the information scoreboard for all the players
 		ScoreboardHandler scoreboardHandler = new ScoreboardHandler();
 		
-		Scoreboard informationScoreboard = scoreboardHandler.getInformationScoreboard();
+		Objective infObjective = scoreboardHandler.getInformationObjective();
 		
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
-			player.setScoreboard(informationScoreboard);
+			player.setScoreboard(UhcPlus.scoreboard);
 		}
 		
-		//Schedule the information scoreboard to update every 5 seconds (100 ticks)
+		//Schedule the information scoreboard to update every seconds (20 ticks)
 		new BukkitRunnable() {
 			
 			@Override
 			public void run() {
 				
-				scoreboardHandler.updateInformationScoreboard(informationScoreboard.getObjective("infObj"));
+				scoreboardHandler.updateInformationScoreboard(infObjective);
 			}
-		}.runTaskTimer(plugin, 0, 100);
+		}.runTaskTimerAsynchronously(plugin, 0, 20);
 		
 		
 		//Schedule game end
@@ -147,7 +162,7 @@ public class UhcHandler {
 			double x = 0 + spawnCircleRadius * Math.cos(rads);
 			double z = 0 + spawnCircleRadius * Math.sin(rads);
 			
-			Location location = new Location(overworld, x, overworld.getHighestBlockYAt((int) x, (int) z) + 1, z);
+			Location location = new Location(uhcworld, x, uhcworld.getHighestBlockYAt((int) x, (int) z) + 1, z);
 			
 			teleportLocations.add(location);
 			

@@ -5,8 +5,6 @@ import org.bukkit.WorldBorder;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -16,36 +14,20 @@ public class ScoreboardHandler {
 
 	private UhcPlus plugin;
 	
-	public Scoreboard getInformationScoreboard() {
+	static String previousWorldborder, previousTeamsAlive, previousTimeRemaining;
+	
+	public Objective getInformationObjective() {
 		
-		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+		Objective informationObjective = UhcPlus.scoreboard.registerNewObjective("infObj", "dummy", ChatColor.GOLD + "=== " + ChatColor.AQUA + "UHC " + ChatColor.GOLD + "===");
 		
-		Scoreboard informationScoreboard = scoreboardManager.getNewScoreboard();
-		
-		@SuppressWarnings("deprecation")
-		Objective informationObjective = informationScoreboard.registerNewObjective("infObj", "dummy");
-		
-		informationObjective.setDisplayName("=== UHC ===");
 		informationObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
-		/* What the scoreboard should look like:
-		 === UHC ===
-		 
-		 World Border: (x) , (z) 
-		 
-		 Teams alive: (alive teams)
-		 
-		 Players alive in your team: (players alive)
-		 
-		 ============
-		
-		 */
-
 		updateInformationScoreboard(informationObjective);
 		
-		return informationScoreboard;
+		return informationObjective;
 	}
 	
+
 	public void updateInformationScoreboard(Objective objective) {
 		
 		WorldBorder worldborder = Bukkit.getWorld("uhcworld").getWorldBorder();
@@ -53,14 +35,32 @@ public class ScoreboardHandler {
 		
 		TeamHandler teamHandler = new TeamHandler(plugin, null, false);
 		
-		Score line1 = objective.getScore("");
-		Score line2 = objective.getScore(ChatColor.GOLD + "World border: " + ChatColor.RED + worldborderCoord + " " + -worldborderCoord);
-		Score line3 = objective.getScore("");
-		Score line4 = objective.getScore(ChatColor.GOLD + "Teams alive: " + ChatColor.RED + teamHandler.getAliveTeams().size());
+		if(previousWorldborder != null && previousTeamsAlive != null) {
+			UhcPlus.scoreboard.resetScores(previousWorldborder);
+			UhcPlus.scoreboard.resetScores("");
+			UhcPlus.scoreboard.resetScores(previousTeamsAlive);
+			UhcPlus.scoreboard.resetScores(previousTimeRemaining);
+		}
+
+		int seconds = UhcTimeRemainingCalculator.getTimeRemaining();
 		
-		line1.setScore(3);
-		line2.setScore(2);
-		line3.setScore(1);
-		line4.setScore(0);
+		previousWorldborder = ChatColor.GOLD + "World border: " + ChatColor.RED + worldborderCoord + " " + -worldborderCoord;
+		previousTeamsAlive = ChatColor.GOLD + "Teams alive: " + ChatColor.RED + teamHandler.getAliveTeams().size();
+		previousTimeRemaining = ChatColor.GOLD + "Time remaining: " + String.format("%02d:%02d", seconds / 60, seconds % 60);
+		
+		Score line0 = objective.getScore("");
+		Score line1 = objective.getScore(previousTimeRemaining);
+		Score line2 = objective.getScore(" ");
+		Score line3 = objective.getScore(previousWorldborder);
+		Score line4 = objective.getScore("");
+		Score line5 = objective.getScore(previousTeamsAlive);
+		
+		line0.setScore(5);
+		line1.setScore(4);
+		line2.setScore(3);
+		line3.setScore(2);
+		line4.setScore(1);
+		line5.setScore(0);
+
 	}
 }

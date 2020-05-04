@@ -13,10 +13,11 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.teams.Team;
+import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class PlayerLoginJoinEventListener implements Listener {
 
-	@SuppressWarnings("unused")
 	private UhcPlus plugin;
 	
 	public PlayerLoginJoinEventListener(UhcPlus plugin) {
@@ -40,9 +41,36 @@ public class PlayerLoginJoinEventListener implements Listener {
 			
 			World uhcWorld = Bukkit.getServer().getWorld("uhcworld");
 						
-			player.setGameMode(GameMode.ADVENTURE);
-			player.teleport(new Location(uhcWorld, 0, 201, 0));
+			player.setScoreboard(UhcPlus.scoreboard);
+			player.getInventory().clear();
+			player.setExp(0);
 
+			//If the UHC has started, we dont want the players to spawn in survival, so put them in spectator and tp them to 0,100,0. Else TP them to the lobby
+			if(UhcPlus.UHC_STARTED) {
+				
+				boolean playerWasPlaying = false;
+				
+				TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+				
+				//We want to check if the player was already playing in the UHC, because then we just want them to join like they usually would, and not TP them or change their gamemode
+				for(Team team : teamHandler.getAliveTeams()) {
+					if(team.isPlayerInTeam(player.getUniqueId())) {
+						playerWasPlaying = true;
+						break;
+					}
+				}
+				
+				if(!playerWasPlaying) {
+					player.teleport(new Location(uhcWorld, 0, 100, 0));
+					player.setGameMode(GameMode.SPECTATOR);
+					
+					player.sendMessage(ChatColor.GOLD + "The UHC has already started. You are a spectator.");
+				}
+			} else {
+				player.setGameMode(GameMode.ADVENTURE);
+				player.teleport(new Location(uhcWorld, 0, 201, 0));
+			}
+			
 		}
 	}
 }
