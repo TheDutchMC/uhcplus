@@ -46,7 +46,7 @@ public class ScoreboardHandler {
 		
 		previousWorldborder = ChatColor.GOLD + "World border: " + ChatColor.RED + worldborderCoord + " " + -worldborderCoord;
 		previousTeamsAlive = ChatColor.GOLD + "Teams alive: " + ChatColor.RED + teamHandler.getAliveTeams().size();
-		previousTimeRemaining = ChatColor.GOLD + "Time remaining: " + String.format("%02d:%02d", seconds / 60, seconds % 60);
+		previousTimeRemaining = ChatColor.GOLD + "Time remaining: " + ChatColor.RED + String.format("%02d:%02d:%02d", seconds / 60 / 60, seconds / 60, seconds % 60);
 		
 		Score line0 = objective.getScore("");
 		Score line1 = objective.getScore(previousTimeRemaining);

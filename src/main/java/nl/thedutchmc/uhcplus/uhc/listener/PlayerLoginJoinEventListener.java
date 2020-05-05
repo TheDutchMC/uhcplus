@@ -42,8 +42,6 @@ public class PlayerLoginJoinEventListener implements Listener {
 			World uhcWorld = Bukkit.getServer().getWorld("uhcworld");
 						
 			player.setScoreboard(UhcPlus.scoreboard);
-			player.getInventory().clear();
-			player.setExp(0);
 
 			//If the UHC has started, we dont want the players to spawn in survival, so put them in spectator and tp them to 0,100,0. Else TP them to the lobby
 			if(UhcPlus.UHC_STARTED) {
@@ -64,9 +62,13 @@ public class PlayerLoginJoinEventListener implements Listener {
 					player.teleport(new Location(uhcWorld, 0, 100, 0));
 					player.setGameMode(GameMode.SPECTATOR);
 					
+
 					player.sendMessage(ChatColor.GOLD + "The UHC has already started. You are a spectator.");
 				}
 			} else {
+				player.getInventory().clear();
+				player.setExp(0);
+				
 				player.setGameMode(GameMode.ADVENTURE);
 				player.teleport(new Location(uhcWorld, 0, 201, 0));
 			}

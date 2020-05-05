@@ -90,25 +90,16 @@ public class ModuleLeaveDecay implements Listener {
 					if(!leaveDecayEvent.isCancelled()) {
 						relativeBlock.breakNaturally();
 						
-						//Since not all leaves drop apples in vanilla, we add a chance that they do, chance is 0.5% (same as Oak and Dark Oak leaves)
-						//Because Oak and Dark oak leaves already drop apples naturally, we don't add the dropchance for those leaves
-						
-						if(!(relativeBlock.getType().equals(Material.OAK_LEAVES) || relativeBlock.getType().equals(Material.DARK_OAK_LEAVES))) {
+						//Since not all leaves drop apples in vanilla, we add a chance that they do, chance is 1.5%
+						//0.015 = 1.5%
+						if(Math.random() < 0.015) {
 							
-							//0.005 = 0.5%
-							if(Math.random() < 0.005) {
-								
-								//Get the location of the leave that decayed
-								Location location = new Location(relativeBlock.getWorld(), relativeBlock.getX(), relativeBlock.getY(), relativeBlock.getZ());
-								
-								//Drop the apple
-								relativeBlock.getWorld().dropItem(location, new ItemStack(Material.APPLE, 1));
-							}
+							//Get the location of the leave that decayed
+							Location location = new Location(relativeBlock.getWorld(), relativeBlock.getX(), relativeBlock.getY(), relativeBlock.getZ());
 							
+							//Drop the apple
+							relativeBlock.getWorld().dropItem(location, new ItemStack(Material.APPLE, 1));
 						}
-						
-						
-						
 					}
 					
 					

@@ -22,6 +22,7 @@ public class UhcpTabCompleter implements TabCompleter {
 			possibleCommands.add("version");
 			possibleCommands.add("preset");
 			possibleCommands.add("teams");
+			possibleCommands.add("start");
 			
 			return possibleCommands;
 			
