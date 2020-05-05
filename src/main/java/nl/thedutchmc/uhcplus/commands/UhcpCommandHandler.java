@@ -10,11 +10,11 @@ import nl.thedutchmc.uhcplus.commands.subcommands.Preset;
 import nl.thedutchmc.uhcplus.commands.subcommands.Teams;
 import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
-public class CommandHandler implements CommandExecutor {
+public class UhcpCommandHandler implements CommandExecutor {
 
 	private UhcPlus plugin;
 
-	public CommandHandler(UhcPlus plugin) {
+	public UhcpCommandHandler(UhcPlus plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -43,6 +43,7 @@ public class CommandHandler implements CommandExecutor {
 					sender.sendMessage("- " + cg + "/uhcp help " + cw + "Shows this page.");
 					sender.sendMessage("- " + cg + "/uhcp version " + cw + "Shows you the version of UHCPlus you are on.");
 					sender.sendMessage("- " + cg + "/uhcp preset " + cw + "Manage the presets.");
+					sender.sendMessage("- " + cg + "/uhcp start <resort teams> " + cw + "Start the UHC. The <resort teams> is not required, and defaults to true.");
 					
 					
 				//uhcp version

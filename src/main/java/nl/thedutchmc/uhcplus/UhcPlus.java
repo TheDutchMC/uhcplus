@@ -11,7 +11,8 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import nl.thedutchmc.uhcplus.commands.CommandHandler;
+import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
+import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
@@ -22,13 +23,11 @@ public class UhcPlus extends JavaPlugin {
 
 	public static String VERSION = "1.0-BETA";
 		
-	public static boolean PLAYER_CAN_JOIN = true;	
+	public static boolean PLAYER_CAN_JOIN = false;	
 	
 	public static boolean UHC_STARTED = false;
 	
 	public static Scoreboard scoreboard;
-	
-	
 	
 	@Override
 	public void onEnable() {
@@ -46,9 +45,12 @@ public class UhcPlus extends JavaPlugin {
 		//Register the EntityDamageByEntityEventListener
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(this), this);
 		
-		//Set the executor for the /uhcp command
-		getCommand("uhcp").setExecutor(new CommandHandler(this));
+		//Set the executor and tab completer for the /uhcp command
+		getCommand("uhcp").setExecutor(new UhcpCommandHandler(this));
 		getCommand("uhcp").setTabCompleter(new UhcpTabCompleter());
+		
+		//Set the executor for the /chat command
+		getCommand("chat").setExecutor(new ChatCommandHandler());
 		
 		//Load the configuration file
 		ConfigurationHandler configurationHandler = new ConfigurationHandler(this);

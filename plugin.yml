@@ -8,3 +8,5 @@ depend: [WorldEdit]
 commands:
  uhcp:
   description: uhcp base command. See /uhcp help for help.
+ chat:
+  description: toggle between team chat and global chat

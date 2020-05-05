@@ -19,10 +19,7 @@ import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
-import nl.thedutchmc.uhcplus.uhc.listener.EntityDeathEventListener;
-import nl.thedutchmc.uhcplus.uhc.listener.PlayerDeathEventListener;
-import nl.thedutchmc.uhcplus.uhc.listener.PlayerRespawnEventListener;
-import nl.thedutchmc.uhcplus.uhc.listener.UhcStartedEventListener;
+import nl.thedutchmc.uhcplus.uhc.listener.*;
 import nl.thedutchmc.uhcplus.uhc.scheduler.GameEndScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.PvpScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
@@ -75,6 +72,9 @@ public class UhcHandler {
 			player.setHealth(20);
 		}
 		
+		//Register the chat listener, for team chat
+		plugin.getServer().getPluginManager().registerEvents(new ChatEventListener(), plugin);
+		
 		//Register the PlayerDeathEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(plugin), plugin);
 		
@@ -86,6 +86,9 @@ public class UhcHandler {
 		
 		//Register the RespawnEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new PlayerRespawnEventListener(plugin), plugin);
+		
+		//Register the CommandPreprocessEvent listener
+		plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessEventListener(), plugin);
 		
 		//Difficuly to hard
 		uhcworld.setDifficulty(Difficulty.HARD);
@@ -126,7 +129,6 @@ public class UhcHandler {
 				scoreboardHandler.updateInformationScoreboard(infObjective);
 			}
 		}.runTaskTimerAsynchronously(plugin, 0, 20);
-		
 		
 		//Schedule game end
 		GameEndScheduler gameEndScheduler = new GameEndScheduler(plugin);

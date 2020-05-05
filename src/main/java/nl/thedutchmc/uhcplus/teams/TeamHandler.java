@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.players.PlayerHandler;
+import nl.thedutchmc.uhcplus.players.PlayerObject;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class TeamHandler {
@@ -62,6 +64,13 @@ public class TeamHandler {
 				
 				if(team.getTeamSize() != maxPlayerCountPerTeam && !team.isPlayerInTeam(playerUuid)) {
 					team.playerJoinTeam(playerUuid);
+					
+					PlayerHandler playerHandler = new PlayerHandler();
+					PlayerObject playerObject = playerHandler.addPlayerToListAndReturn(playerUuid);
+					playerObject.setTeam(team);
+					playerObject.setTeamChatEnabled(true);
+					
+					
 					isPlayerInTeam = true;
 					Bukkit.getServer().getPlayer(playerUuid).sendMessage(ChatColor.GOLD + "You are now in team " + ChatColor.RED + team.getTeamId());
 					break;
@@ -139,7 +148,7 @@ public class TeamHandler {
 		return teamsAlive;
 	}
 	
-	public List<Team> getAliveTeams() {
+	public static List<Team> getAliveTeams() {
 		
 		List<Team> aliveTeams = new ArrayList<>();
 		
