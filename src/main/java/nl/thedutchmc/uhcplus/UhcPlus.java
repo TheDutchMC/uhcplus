@@ -21,7 +21,7 @@ import nl.thedutchmc.uhcplus.world.WorldHandler;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION = "1.0-BETA";
+	public static String VERSION = "1.1-BETA";
 		
 	public static boolean PLAYER_CAN_JOIN = false;	
 	
