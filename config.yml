@@ -15,3 +15,16 @@ onlyAllowedSeeds: "true"
 #NUMERICAL SEEDS ONLY! NO ALPHABETIC SEEDS!
 allowedSeeds:
 - "-4088290688367012214"
+
+#Can spectators run commands, operators are excluded. Default: false
+spectatorsCanRunCommand: "false"
+
+#Can spectators whisper to players who are still playing, operators are excluded. Default: false
+#Is overriden by spectatorsCanRunCommand
+spectatorCanWhisperToPlayer: "false"
+
+#Do we enfore limited crafting of stone and wooden weapons and tools. Default: true
+limitCrafting: "true"
+
+#How many tools/weapons may be crafted. Default: 4
+limitCraftingAmount: "4"

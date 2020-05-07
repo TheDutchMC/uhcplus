@@ -2,7 +2,6 @@ package nl.thedutchmc.uhcplus.presets;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -14,9 +13,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 public class DefaultPreset {
 	
 	private UhcPlus plugin;
-
-	public static String maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmelt, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime,
-	moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting;
 	
 	public DefaultPreset(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -29,7 +25,7 @@ public class DefaultPreset {
 		return this.presetConfig;
 	} 
 	
-	public HashMap<String, String> loadPreset(String presetName, boolean shouldReturn) {
+	public void loadPreset(String presetName, boolean shouldReturn) {
 		
 		presetConfigFile = new File(plugin.getDataFolder() + File.separator + "presets", presetName + ".yml");
 		
@@ -57,64 +53,47 @@ public class DefaultPreset {
 			e.printStackTrace();
 			//TODO better error handling
 		}
-		
-		if(shouldReturn) {
-			HashMap<String, String> toReturn = new HashMap<String, String>();
-						
-			toReturn.put("maxTeamCount", maxTeamCount);
-			toReturn.put("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
-			toReturn.put("moduleOreAutoSmelt", moduleOreAutoSmelt);
-			toReturn.put("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
-			toReturn.put("timeToPvp", timeToPvp);
-			toReturn.put("worldBorderSize", worldBorderSize);
-			toReturn.put("worldBorderShrinkAfter", worldBorderShrinkAfter);
-			toReturn.put("worldBorderShrinkTo", worldBorderShrinkTo);
-			toReturn.put("gameTime", gameTime);
-			toReturn.put("moduleTreeFullRemove", moduleTreeFullRemove);
-			toReturn.put("moduleLeaveDecay", moduleLeaveDecay);
-			toReturn.put("moduleEnchantedTools", moduleEnchantedTools);
-			toReturn.put("moduleInfiniteEnchanting", moduleInfiniteEnchanting);
-
-			return toReturn;
-		} else {
-			return null;
-		}
 	}
 	
 	public void readPreset() {
 		
-		maxTeamCount = this.getPresetConfig().getString("maxTeamCount");
-		maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
-		moduleOreAutoSmelt = this.getPresetConfig().getString("moduleOreAutoSmelt");
-		moduleOreAutoSmeltIngotDrop = this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop");		
-		timeToPvp = this.getPresetConfig().getString("timeToPvp");
-		worldBorderSize = this.getPresetConfig().getString("worldBorderSize");
-		worldBorderShrinkAfter = this.getPresetConfig().getString("worldBorderShrinkAfter");
-		worldBorderShrinkTo = this.getPresetConfig().getString("worldBorderShrinkTo");
-		gameTime = this.getPresetConfig().getString("gameTime");
-		moduleTreeFullRemove = this.getPresetConfig().getString("moduleTreeFullRemove");	
-		moduleLeaveDecay = this.getPresetConfig().getString("moduleLeaveDecay");
-		moduleEnchantedTools = this.getPresetConfig().getString("moduleEnchantedTools");
-		moduleInfiniteEnchanting = this.getPresetConfig().getString("moduleInfiniteEnchanting");
+		//String
+		PresetHandler.maxTeamCount = this.getPresetConfig().getString("maxTeamCount");
+		PresetHandler.maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
+		
+		//Boolean
+		PresetHandler.moduleOreAutoSmelt = Boolean.valueOf(this.getPresetConfig().getString("moduleOreAutoSmelt"));
+		PresetHandler.moduleTreeFullRemove = Boolean.valueOf(this.getPresetConfig().getString("moduleTreeFullRemove"));	
+		PresetHandler.moduleLeaveDecay = Boolean.valueOf(this.getPresetConfig().getString("moduleLeaveDecay"));
+		PresetHandler.moduleEnchantedTools = Boolean.valueOf(this.getPresetConfig().getString("moduleEnchantedTools"));
+		PresetHandler.moduleInfiniteEnchanting = Boolean.valueOf(this.getPresetConfig().getString("moduleInfiniteEnchanting"));
 
+		//Integer
+		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
+		PresetHandler.timeToPvp = Integer.valueOf(this.getPresetConfig().getString("timeToPvp"));
+		PresetHandler.worldBorderSize = Integer.valueOf(this.getPresetConfig().getString("worldBorderSize"));
+		PresetHandler.worldBorderShrinkAfter = Integer.valueOf(this.getPresetConfig().getString("worldBorderShrinkAfter"));
+		PresetHandler.worldBorderShrinkTo = Integer.valueOf(this.getPresetConfig().getString("worldBorderShrinkTo"));
+		PresetHandler.gameTime = Integer.valueOf(this.getPresetConfig().getString("gameTime"));
+	
 	}
 	
 	public void writePreset(String presetName) {
 		loadPreset(presetName, false);
 		
-		this.getPresetConfig().set("maxTeamCount", maxTeamCount);
-		this.getPresetConfig().set("maxPlayerCountPerTeam", maxPlayerCountPerTeam);
-		this.getPresetConfig().set("moduleOreAutoSmelt", moduleOreAutoSmelt);
-		this.getPresetConfig().set("moduleOreAutoSmeltIngotDrop", moduleOreAutoSmeltIngotDrop);
-		this.getPresetConfig().set("timeToPvp", timeToPvp);
-		this.getPresetConfig().set("worldBorderSize", worldBorderSize);
-		this.getPresetConfig().set("worldBorderShrinkAfter", worldBorderShrinkAfter);
-		this.getPresetConfig().set("worldBorderShrinkTo", worldBorderShrinkTo);
-		this.getPresetConfig().set("gameTime", gameTime);
-		this.getPresetConfig().set("moduleTreeFullRemove", moduleTreeFullRemove);
-		this.getPresetConfig().set("moduleLeaveDecay", moduleLeaveDecay);
-		this.getPresetConfig().set("moduleEnchantedTools", moduleEnchantedTools);
-		this.getPresetConfig().set("moduleInfiniteEnchanting", moduleInfiniteEnchanting);
+		this.getPresetConfig().set("maxTeamCount", PresetHandler.maxTeamCount);
+		this.getPresetConfig().set("maxPlayerCountPerTeam", PresetHandler.maxPlayerCountPerTeam);
+		this.getPresetConfig().set("moduleOreAutoSmelt", PresetHandler.moduleOreAutoSmelt);
+		this.getPresetConfig().set("moduleOreAutoSmeltIngotDrop", PresetHandler.moduleOreAutoSmeltIngotDrop);
+		this.getPresetConfig().set("timeToPvp", PresetHandler.timeToPvp);
+		this.getPresetConfig().set("worldBorderSize", PresetHandler.worldBorderSize);
+		this.getPresetConfig().set("worldBorderShrinkAfter", PresetHandler.worldBorderShrinkAfter);
+		this.getPresetConfig().set("worldBorderShrinkTo", PresetHandler.worldBorderShrinkTo);
+		this.getPresetConfig().set("gameTime", PresetHandler.gameTime);
+		this.getPresetConfig().set("moduleTreeFullRemove", PresetHandler.moduleTreeFullRemove);
+		this.getPresetConfig().set("moduleLeaveDecay", PresetHandler.moduleLeaveDecay);
+		this.getPresetConfig().set("moduleEnchantedTools", PresetHandler.moduleEnchantedTools);
+		this.getPresetConfig().set("moduleInfiniteEnchanting", PresetHandler.moduleInfiniteEnchanting);
 	
 		savePreset();
 	}

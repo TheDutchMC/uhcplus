@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 
+import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
@@ -70,6 +71,11 @@ public class UhcHandler {
 		//Set full health
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
+		}
+		
+		//Register the CraftItemEventListener, for limited crafting, if enabled
+		if(ConfigurationHandler.limitCrafting) {
+			plugin.getServer().getPluginManager().registerEvents(new CraftItemEventListener(), plugin);
 		}
 		
 		//Register the chat listener, for team chat

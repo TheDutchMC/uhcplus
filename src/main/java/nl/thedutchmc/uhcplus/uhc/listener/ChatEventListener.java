@@ -11,6 +11,7 @@ import nl.thedutchmc.uhcplus.players.PlayerObject;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class ChatEventListener implements Listener {
@@ -22,21 +23,43 @@ public class ChatEventListener implements Listener {
 		
 		UUID playerUuid = p.getUniqueId();
 		
-		
-		for(PlayerObject playerObject : PlayerHandler.playerObjects) {
+		//Spectator chat
+		//Check if the gamemode is spectator
+		if(p.getGameMode().equals(GameMode.SPECTATOR)) {
 			
-			if(playerObject.getPlayerUuid().equals(playerUuid)) {
+			event.setCancelled(true);
+			
+			//loop over all the online players
+			for(Player onlinePlayer : Bukkit.getServer().getOnlinePlayers()) {
 				
-				String message = event.getMessage();
-				
-				if(playerObject.getTeamChatEnabled()) {
-					event.setCancelled(true);
+				//check if the gamemode is spectator and that the player isnt the sender
+				if(onlinePlayer.getGameMode().equals(GameMode.SPECTATOR)) {
 					
-					for(UUID uuid : playerObject.getTeam().getTeamMembers()) {
+					//send the message to the spectator
+					onlinePlayer.sendMessage(ChatColor.AQUA + "[Spectator] " + ChatColor.WHITE + p.getName() + ": " + event.getMessage());
+				}	
+			}
+		} else {
+			
+			//Loop over all the playerObjects
+			for(PlayerObject playerObject : PlayerHandler.playerObjects) {
+				
+				//if the current playerObject is the sender
+				if(playerObject.getPlayerUuid().equals(playerUuid)) {
+					
+					String message = event.getMessage();
+					
+					//Check if the sender has teamchat enabled
+					if(playerObject.getTeamChatEnabled()) {
+						event.setCancelled(true);
 						
-						Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
-						teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
-						
+						//loop over the team and send the message to them
+						for(UUID uuid : playerObject.getTeam().getTeamMembers()) {
+							
+							Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
+							teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
+							
+						}
 					}
 				}
 			}

@@ -1,9 +1,7 @@
 package nl.thedutchmc.uhcplus.presets;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -28,11 +26,10 @@ public class PresetHandler {
 		List<String> availablePresets = ConfigurationHandler.availablePresets;
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
-		
 		defaultPreset = new DefaultPreset(plugin);
 
-		for(String str : availablePresets) {
-			defaultPreset.loadPreset(str, false);
+		for(String presetName : availablePresets) {
+			defaultPreset.loadPreset(presetName, false);
 		}
 		
 		loadPreset(ConfigurationHandler.defaultPreset);
@@ -40,73 +37,16 @@ public class PresetHandler {
 	
 	
 	public void loadPreset(String presetName) {
-		HashMap<String, String> hasReturned;
-		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
-		
-		hasReturned = defaultPreset.loadPreset(presetName, true);
-		
-		loadPresetValuesIntoVariables(hasReturned);
+		defaultPreset.loadPreset(presetName, true);
 		
 		ModuleHandler moduleHandler = new ModuleHandler(plugin);
 		moduleHandler.unloadModules();
 		moduleHandler.loadModules();
 		
-		
-		
 		loadedPreset = presetName;
 	}
-	
-	public void loadPresetValuesIntoVariables(HashMap<String, String> presetValues) {
 		
-		for(Map.Entry<String, String> entry : presetValues.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-			
-			switch(key) {
-				case "maxTeamCount":
-					maxTeamCount = value;
-					break;
-				case "maxPlayerCountPerTeam":
-					maxPlayerCountPerTeam = value;
-					break;
-				case "moduleOreAutoSmelt":
-					moduleOreAutoSmelt = Boolean.valueOf(value);
-					break;
-				case "moduleOreAutoSmeltIngotDrop":
-					moduleOreAutoSmeltIngotDrop = Integer.valueOf(value);
-					break;
-				case "timeToPvp":
-					timeToPvp = Integer.valueOf(value);
-					break;
-				case "worldBorderSize":
-					worldBorderSize = Integer.valueOf(value);
-					break;
-				case "worldBorderShrinkAfter":
-					worldBorderShrinkAfter = Integer.valueOf(value);
-					break;
-				case "worldBorderShrinkTo":
-					worldBorderShrinkTo = Integer.valueOf(value);
-					break;
-				case "gameTime":
-					gameTime = Integer.valueOf(value);
-					break;
-				case "moduleTreeFullRemove":
-					moduleTreeFullRemove = Boolean.valueOf(value);
-					break;
-				case "moduleLeaveDecay":
-					moduleLeaveDecay = Boolean.valueOf(value);
-					break;
-				case "moduleEnchantedTools":
-					moduleEnchantedTools = Boolean.valueOf(value);
-					break;
-				case "moduleInfiniteEnchanting":
-					moduleInfiniteEnchanting = Boolean.valueOf(value);
-					break;
-			}
- 		}
-	}
-	
 	public void createPreset(String presetName) {
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
@@ -127,20 +67,6 @@ public class PresetHandler {
 	}
 	
 	public void changePresetOption() {
-		
-		DefaultPreset.maxTeamCount = maxTeamCount;
-		DefaultPreset.maxPlayerCountPerTeam = maxPlayerCountPerTeam;
-		DefaultPreset.moduleOreAutoSmelt = String.valueOf(moduleOreAutoSmelt);
-		DefaultPreset.moduleOreAutoSmeltIngotDrop = String.valueOf(moduleOreAutoSmeltIngotDrop);
-		DefaultPreset.timeToPvp = String.valueOf(timeToPvp);
-		DefaultPreset.worldBorderSize = String.valueOf(worldBorderSize);
-		DefaultPreset.worldBorderShrinkAfter = String.valueOf(worldBorderShrinkAfter);
-		DefaultPreset.gameTime = String.valueOf(gameTime);
-		DefaultPreset.moduleTreeFullRemove = String.valueOf(moduleTreeFullRemove);
-		DefaultPreset.moduleLeaveDecay = String.valueOf(moduleLeaveDecay);
-		DefaultPreset.moduleEnchantedTools = String.valueOf(moduleEnchantedTools);
-		DefaultPreset.moduleInfiniteEnchanting = String.valueOf(moduleInfiniteEnchanting);
-
 		
 		DefaultPreset defaultPreset = new DefaultPreset(plugin);
 		defaultPreset.writePreset(loadedPreset);
