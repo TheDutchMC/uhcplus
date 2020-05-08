@@ -20,7 +20,7 @@ public class ModuleInfiniteEnchanting implements Listener {
 		ItemStack enchantingTables = new ItemStack(Material.ENCHANTING_TABLE, 64);
 		
 		
-		for(Player player : event.getPlayingPlayers()) {
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
 			player.getInventory().addItem(anvils, enchantingTables);
 			player.setLevel(Integer.MAX_VALUE);
