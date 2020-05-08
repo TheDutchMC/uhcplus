@@ -3,11 +3,7 @@ package nl.thedutchmc.uhcplus.modules;
 import org.bukkit.event.HandlerList;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.ModuleEnchantedTools;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.ModuleInfiniteEnchanting;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.ModuleLeaveDecay;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.ModuleOreAutoSmelt;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.ModuleTreeFullRemove;
+import nl.thedutchmc.uhcplus.modules.moduleListeners.*;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class ModuleHandler {
@@ -19,6 +15,8 @@ public class ModuleHandler {
 	static ModuleLeaveDecay moduleLeaveDecay;
 	static ModuleEnchantedTools moduleEnchantedTools;
 	static ModuleInfiniteEnchanting moduleInfiniteEnchanting;
+	static ModuleSheepDropString moduleSheepDropString;
+	static ModuleGravelDropArrow moduleGravelDropArrow;
 	
 	public ModuleHandler(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -32,7 +30,9 @@ public class ModuleHandler {
 		moduleLeaveDecay = new ModuleLeaveDecay(plugin);
 		moduleEnchantedTools = new ModuleEnchantedTools();
 		moduleInfiniteEnchanting = new ModuleInfiniteEnchanting();
-				
+		moduleSheepDropString = new ModuleSheepDropString();
+		moduleGravelDropArrow = new ModuleGravelDropArrow();		
+		
 		if(PresetHandler.moduleOreAutoSmelt) {
 			plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 		} 
@@ -51,6 +51,14 @@ public class ModuleHandler {
 				
 		if(PresetHandler.moduleInfiniteEnchanting) {
 			plugin.getServer().getPluginManager().registerEvents(moduleInfiniteEnchanting, plugin);
+		}
+		
+		if(PresetHandler.moduleSheepDropString) {
+			plugin.getServer().getPluginManager().registerEvents(moduleSheepDropString, plugin);
+		}
+		
+		if(PresetHandler.moduleGravelDropArrow) {
+			plugin.getServer().getPluginManager().registerEvents(moduleGravelDropArrow, plugin);
 		}
 		
 	}
@@ -76,5 +84,12 @@ public class ModuleHandler {
 			HandlerList.unregisterAll(moduleInfiniteEnchanting);
 		}
 		
+		if(!PresetHandler.moduleSheepDropString) {
+			HandlerList.unregisterAll(moduleSheepDropString);
+		}
+		
+		if(!PresetHandler.moduleGravelDropArrow) {
+			HandlerList.unregisterAll(moduleGravelDropArrow);
+		}
 	}
 }

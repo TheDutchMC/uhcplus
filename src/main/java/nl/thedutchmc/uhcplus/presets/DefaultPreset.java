@@ -67,7 +67,9 @@ public class DefaultPreset {
 		PresetHandler.moduleLeaveDecay = Boolean.valueOf(this.getPresetConfig().getString("moduleLeaveDecay"));
 		PresetHandler.moduleEnchantedTools = Boolean.valueOf(this.getPresetConfig().getString("moduleEnchantedTools"));
 		PresetHandler.moduleInfiniteEnchanting = Boolean.valueOf(this.getPresetConfig().getString("moduleInfiniteEnchanting"));
-
+		PresetHandler.moduleSheepDropString = Boolean.valueOf(this.getPresetConfig().getString("moduleSheepDropString"));
+		PresetHandler.moduleGravelDropArrow = Boolean.valueOf(this.getPresetConfig().getString("moduleGravelDropArrow"));
+		
 		//Integer
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
 		PresetHandler.timeToPvp = Integer.valueOf(this.getPresetConfig().getString("timeToPvp"));
@@ -94,7 +96,9 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleLeaveDecay", PresetHandler.moduleLeaveDecay);
 		this.getPresetConfig().set("moduleEnchantedTools", PresetHandler.moduleEnchantedTools);
 		this.getPresetConfig().set("moduleInfiniteEnchanting", PresetHandler.moduleInfiniteEnchanting);
-	
+		this.getPresetConfig().set("moduleSheepDropString", PresetHandler.moduleSheepDropString);
+		this.getPresetConfig().set("moduleGravelDropArrow", PresetHandler.moduleGravelDropArrow);
+
 		savePreset();
 	}
 	

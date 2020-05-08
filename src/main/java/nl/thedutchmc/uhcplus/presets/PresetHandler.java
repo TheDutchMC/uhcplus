@@ -12,7 +12,7 @@ public class PresetHandler {
 	public static String loadedPreset;
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
-	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting;
+	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow;
 	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
 	
 	private UhcPlus plugin;

@@ -40,3 +40,9 @@ moduleEnchantedTools: "true"
 
 #Should player get a stack of enchanting tables, lapis blocks, anvils and the maximum amount of levels possible at the start of the UHC. Default: true
 moduleInfiniteEnchanting: "true"
+
+#Should sheep drop string when they die. Default: true
+moduleSheepDropString: "true"
+
+#Should gravel drop arrows when broken. Default: true
+moduleGravelDropArrow: "true"
