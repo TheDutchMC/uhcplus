@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
@@ -53,7 +54,7 @@ public class Teams {
 			} else if(args[1].equalsIgnoreCase("randomfill")) {
 				
 				TeamHandler teamHandler = new TeamHandler(plugin, sender, true);
-				teamHandler.playerTeamJoiner();
+				teamHandler.playerRandomTeamJoiner();
 				
 				
 			//uhcp teams getteams
@@ -89,6 +90,32 @@ public class Teams {
 					sender.sendMessage(cr + "Missing arguments! Usage: /uhcp teams whichteam <player name>");
 				}
 
+			//uhcp teams jointeam <arg>
+			} else if(args[1].equalsIgnoreCase("jointeam")) {
+				
+				//uhcp teams jointeam <team id>
+				if(args.length >= 3) {
+					
+					int teamId = 0;
+					
+					try {
+						teamId = Integer.valueOf(args[2]);
+					} catch (Exception e) {
+						sender.sendMessage(ChatColor.RED + "Invalid ID!");
+					}
+					
+					TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+					
+					Player playerSender = (Player) sender;
+					
+					teamHandler.playerJoinTeam(teamId, playerSender.getUniqueId());
+					
+					
+				//uchp teams jointeam <no args>	
+				} else {
+					
+					sender.sendMessage(ChatColor.RED + "Missing argument! Usage: /uhcp teams join <team id>");
+				}
 			}
 		
 		//uhcp teams

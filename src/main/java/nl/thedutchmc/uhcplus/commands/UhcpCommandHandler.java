@@ -43,7 +43,7 @@ public class UhcpCommandHandler implements CommandExecutor {
 					sender.sendMessage("- " + cg + "/uhcp help " + cw + "Shows this page.");
 					sender.sendMessage("- " + cg + "/uhcp version " + cw + "Shows you the version of UHCPlus you are on.");
 					sender.sendMessage("- " + cg + "/uhcp preset " + cw + "Manage the presets.");
-					sender.sendMessage("- " + cg + "/uhcp start <resort teams> " + cw + "Start the UHC. The <resort teams> is not required, and defaults to true.");
+					sender.sendMessage("- " + cg + "/uhcp start <resort teams> " + cw + "Start the UHC. The <resort teams> is not required, and defaults to false.");
 					
 					
 				//uhcp version
@@ -65,9 +65,9 @@ public class UhcpCommandHandler implements CommandExecutor {
 							uhcHandler.startUhc(false);
 						}
 						
-					//the second arg is not given, so default to true.
+					//the second arg is not given, so default to false.
 					} else {
-						uhcHandler.startUhc(true);
+						uhcHandler.startUhc(false);
 					}
 
 					

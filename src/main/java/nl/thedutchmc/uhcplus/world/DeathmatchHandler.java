@@ -95,6 +95,9 @@ public class DeathmatchHandler {
 			
 			for(UUID uuid: team.getAliveTeamMembers()) {
 				Player player = Bukkit.getPlayer(uuid);
+				
+				System.out.println("[UhcPlus][Debug][world.DeathmatchHandler: 99] Player: " + player + " Location: " + location);
+				
 				player.teleport(location);
 			}
 			
@@ -155,9 +158,11 @@ public class DeathmatchHandler {
 		
 		//Pick a random deathmatch schematic
 		Random random = new Random();
-		int i = random.nextInt((availableSchematics.size() - 0) + 1) + 0;
+		int i = random.nextInt((availableSchematics.size() - 0) + 1);
 				
-		return availableSchematics.get(i-1);
+		System.out.println("[UhcPlus][Debug][world.DeathmatchHandler: 163] i: " + i);
+		
+		return availableSchematics.get(i);
 	}
 	
 	void loadSchematic(String deathmatchArena) {
@@ -176,7 +181,6 @@ public class DeathmatchHandler {
 		}
 		
 		//Paste the clipboard at 0,0
-		
 		com.sk89q.worldedit.world.World weWorld = BukkitAdapter.adapt(overworld);
 		
 		try (EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(weWorld, -1)) {
@@ -192,6 +196,5 @@ public class DeathmatchHandler {
 		WorldBorder worldborder = overworld.getWorldBorder();
 		worldborder.setCenter(0, 0);
 		worldborder.setSize(140);
-		
 	}
 }

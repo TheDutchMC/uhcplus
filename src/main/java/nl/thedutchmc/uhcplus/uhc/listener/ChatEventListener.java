@@ -55,10 +55,10 @@ public class ChatEventListener implements Listener {
 						
 						//loop over the team and send the message to them
 						for(UUID uuid : playerObject.getTeam().getTeamMembers()) {
-							
-							Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
-							teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
-							
+							if(uuid != null) {
+								Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
+								teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
+							}
 						}
 					}
 				}

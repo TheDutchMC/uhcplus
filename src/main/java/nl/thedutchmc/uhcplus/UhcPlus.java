@@ -23,7 +23,7 @@ public class UhcPlus extends JavaPlugin {
 
 	public static String VERSION = "1.1-BETA";
 		
-	public static boolean PLAYER_CAN_JOIN = false;	
+	public static boolean PLAYER_CAN_JOIN = true;	
 	
 	public static boolean UHC_STARTED = false;
 	

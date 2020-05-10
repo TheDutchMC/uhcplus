@@ -6,11 +6,17 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
+import org.bukkit.HeightMap;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 
@@ -46,7 +52,7 @@ public class UhcHandler {
 		
 		//If we need to resort the teams, do it.
 		if(resortTeams) {
-			teamHandler.playerTeamJoiner();
+			teamHandler.playerRandomTeamJoiner();
 		}
 		
 		List<Team> teams = TeamHandler.teams;
@@ -170,9 +176,12 @@ public class UhcHandler {
 			double x = 0 + spawnCircleRadius * Math.cos(rads);
 			double z = 0 + spawnCircleRadius * Math.sin(rads);
 			
-			Location location = new Location(uhcworld, x, uhcworld.getHighestBlockYAt((int) x, (int) z) + 1, z);
-			
+			Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 2, (int) z);
+					
 			teleportLocations.add(location);
+			
+			location.getBlock().setType(Material.AIR);
+			new Location(uhcworld, location.getX(), location.getY() + 1, location.getZ()).getBlock().setType(Material.AIR);
 			
 		}
 		
@@ -182,9 +191,21 @@ public class UhcHandler {
 			
 			Location location = teleportLocations.get(i);
 			
+			System.out.println(location.getBlock());
+
+			
+			//Check if the block they're being teleported to is air or not, if not Y+1
+			while(location.getBlock().getType() != Material.AIR) {
+			
+				System.out.println(location.getBlock());
+
+				location = new Location(uhcworld, location.getX(), location.getY() + 1, location.getZ());
+			}
+			
 			for(UUID uuid : team.getTeamMembers()) {
 				Player player = Bukkit.getServer().getPlayer(uuid);
 				player.teleport(location);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 200));
 			}	
 		}
 		

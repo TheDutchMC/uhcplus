@@ -1,5 +1,6 @@
 package nl.thedutchmc.uhcplus.modules.moduleListeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,14 +16,11 @@ public class ModuleInfiniteEnchanting implements Listener {
 
 	@EventHandler
 	public void onUhcStartedEvent(UhcStartedEvent event) {
-		
-		ItemStack anvils = new ItemStack(Material.ANVIL, 64);
-		ItemStack enchantingTables = new ItemStack(Material.ENCHANTING_TABLE, 64);
-		
-		
+				
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
-			player.getInventory().addItem(anvils, enchantingTables);
+			player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 64));
+			player.getInventory().addItem(new ItemStack(Material.ANVIL, 64));
 			player.setLevel(Integer.MAX_VALUE);
 		}
 	}
@@ -35,7 +33,6 @@ public class ModuleInfiniteEnchanting implements Listener {
 			event.getInventory().setItem(1, new ItemStack(Material.LAPIS_LAZULI, 64));
 			
 		}
-		
 	}
 	
 	@EventHandler

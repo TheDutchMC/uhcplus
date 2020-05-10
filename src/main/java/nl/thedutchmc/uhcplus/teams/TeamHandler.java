@@ -41,7 +41,54 @@ public class TeamHandler {
 		}	
 	}
 	
-	public void playerTeamJoiner() {
+	
+	public void playerJoinTeam(int teamId, UUID uuid) {
+	
+		//Check if teams have been made yet, if not do so
+		if(teams.isEmpty()) {
+			createTeams();
+		}
+		
+		System.out.println("1");
+		
+		//Loop over all teams
+		for(Team team : teams) {
+			
+			//Check if the current team is the team the player wants to join
+			if(team.getTeamId() == teamId) {
+				
+				System.out.println("2");
+				
+				//Check if the player is already in the team, if yes inform them
+				if(team.getTeamMembers().contains(uuid)) {
+					Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "You are already in this team!");
+				} else {
+					
+					//Check if the selected team isnt full yet
+					if(team.getTeamSize() < maxPlayerCountPerTeam) {
+						
+						System.out.println("3");
+
+						//Add the player to the team
+						team.playerJoinTeam(uuid);
+						
+						//Set the player object values
+						PlayerHandler playerHandler = new PlayerHandler();
+						PlayerObject playerObject = playerHandler.addPlayerToListAndReturn(uuid);
+						playerObject.setTeam(team);
+						playerObject.setTeamChatEnabled(true);
+						
+						Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "You joined team " + ChatColor.RED + team.getTeamId());
+					} else {
+
+						Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "Sorry, this team is full.");
+					}
+				}
+			}
+		}
+	}
+	
+	public void playerRandomTeamJoiner() {
 		
 		teams.clear();
 		createTeams();
@@ -69,7 +116,6 @@ public class TeamHandler {
 					PlayerObject playerObject = playerHandler.addPlayerToListAndReturn(playerUuid);
 					playerObject.setTeam(team);
 					playerObject.setTeamChatEnabled(true);
-					
 					
 					isPlayerInTeam = true;
 					Bukkit.getServer().getPlayer(playerUuid).sendMessage(ChatColor.GOLD + "You are now in team " + ChatColor.RED + team.getTeamId());
