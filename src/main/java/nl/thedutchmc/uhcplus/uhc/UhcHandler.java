@@ -176,7 +176,7 @@ public class UhcHandler {
 			double x = 0 + spawnCircleRadius * Math.cos(rads);
 			double z = 0 + spawnCircleRadius * Math.sin(rads);
 			
-			Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 2, (int) z);
+			Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 20, (int) z);
 					
 			teleportLocations.add(location);
 			
