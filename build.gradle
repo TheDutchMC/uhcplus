@@ -7,9 +7,11 @@
 plugins {
 	id 'java'
 	id 'application'
-	id 'com.github.johnrengelman.shadow' version '5.0.0'
-	
+	id 'com.github.johnrengelman.shadow' version '5.0.0'	
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 version '1.1-BETA'
 
@@ -29,34 +31,32 @@ repositories {
 		url "https://maven.enginehub.org/repo/"
 	}
 	
-    maven {
-        name 'papermc'
-        url 'https://papermc.io/repo/repository/maven-public/'
-    }
+    	maven {
+        	name 'papermc'
+        	url 'https://papermc.io/repo/repository/maven-public/'
+	}
 }
 
 dependencies {
+
 	//Spigot API
-	implementation "org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT"
-	
-	//All the YML files
-	compile fileTree(dir: '/', include: '*.yml')
+	compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 	
 	//Apache Commons
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	
 	//WorldEdit API
-	implementation group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0'
+	compileOnly group: 'com.sk89q.worldedit', name: 'worldedit-bukkit', version: '7.1.0'
 	
-    compile "io.papermc:paperlib:1.0.2"
+	//PaperLib
+    	compile "io.papermc:paperlib:1.0.2"
 }
 
 application {
-    mainClassName = 'nl.thedutchmc.uhcplus.UhcPlus'
+	mainClassName = 'nl.thedutchmc.uhcplus.UhcPlus'
 }
 
 shadowJar {
-   relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
-
+	relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
 }
 	
