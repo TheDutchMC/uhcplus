@@ -18,12 +18,6 @@ import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class PlayerLoginJoinEventListener implements Listener {
 
-	private UhcPlus plugin;
-	
-	public PlayerLoginJoinEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	@EventHandler
 	public void onPlayerLoginEvent(PlayerLoginEvent event) {
 
@@ -47,11 +41,9 @@ public class PlayerLoginJoinEventListener implements Listener {
 			if(UhcPlus.UHC_STARTED) {
 				
 				boolean playerWasPlaying = false;
-				
-				TeamHandler teamHandler = new TeamHandler(plugin, null, false);
-				
+								
 				//We want to check if the player was already playing in the UHC, because then we just want them to join like they usually would, and not TP them or change their gamemode
-				for(Team team : teamHandler.getAliveTeams()) {
+				for(Team team : TeamHandler.getAliveTeams()) {
 					if(team.isPlayerInTeam(player.getUniqueId())) {
 						playerWasPlaying = true;
 						break;

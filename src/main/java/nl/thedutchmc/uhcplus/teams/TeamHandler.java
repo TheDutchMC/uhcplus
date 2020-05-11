@@ -26,6 +26,8 @@ public class TeamHandler {
 	
 	private boolean shouldReturn = false;
 	
+	public static boolean teamManuallySelect = false;
+	
 	private CommandSender sender;
 	public static List<Team> teams = new ArrayList<>();
 	
@@ -85,6 +87,73 @@ public class TeamHandler {
 					}
 				}
 			}
+		}
+	}
+	
+	public void sortPlayersNotInTeam() {
+		
+		List<UUID> playersInTeams = new ArrayList<>();
+		List<UUID> playersToBeSorted = new ArrayList<>();
+				
+		for(Team team : teams) {
+			
+			for(UUID player : team.getTeamMembers()) {
+				
+				playersInTeams.add(player);	
+			}
+		}
+		
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+			
+			System.out.println("1");
+			
+			if(!playersInTeams.contains(player.getUniqueId())) {
+				
+				System.out.println("2");
+				
+				playersToBeSorted.add(player.getUniqueId());
+			}
+		}
+		
+		System.out.println("ptbs size " + playersToBeSorted.size());
+		
+		List<UUID> playersLeftUnsorted = new ArrayList<>();
+		
+		for(UUID uuid : playersToBeSorted) {
+			
+			boolean playerInTeam = false;
+			
+			for(Team team : teams) {
+				
+				if(team.getTeamSize() != maxPlayerCountPerTeam && !playerInTeam) {
+					team.playerJoinTeam(uuid);
+					
+					PlayerHandler playerHandler = new PlayerHandler();
+					PlayerObject playerObject = playerHandler.addPlayerToListAndReturn(uuid);
+					
+					playerObject.setTeam(team);
+					playerObject.setTeamChatEnabled(true);
+					
+					playerInTeam = true;
+					
+					break;
+				}	
+			}
+			
+			if(!playerInTeam) {
+				playersLeftUnsorted.add(uuid);
+			}
+		}
+		
+		System.out.println("plu size " + playersLeftUnsorted.size());
+		
+		if(playersLeftUnsorted.size() != 0) {
+			
+			for(UUID uuid : playersLeftUnsorted) {
+				Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "You were not put into a team since all teams were full. You will be a spectator");
+				Bukkit.getPlayer(uuid).setGameMode(GameMode.SPECTATOR);
+			}
+			
 		}
 	}
 	

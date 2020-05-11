@@ -110,6 +110,7 @@ public class Teams {
 					
 					teamHandler.playerJoinTeam(teamId, playerSender.getUniqueId());
 					
+					TeamHandler.teamManuallySelect = true;
 					
 				//uchp teams jointeam <no args>	
 				} else {

@@ -7,17 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class EntityDamageByEntityEventListener implements Listener {
-
-	private UhcPlus plugin;
-	
-	public EntityDamageByEntityEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
@@ -26,8 +19,7 @@ public class EntityDamageByEntityEventListener implements Listener {
 			Player wasHit = (Player) event.getEntity();
 			Player hit = (Player) event.getDamager();
 			
-			TeamHandler teamHandler = new TeamHandler(plugin, null, false);
-			List<Team> teamsAlive = teamHandler.getAliveTeams();
+			List<Team> teamsAlive = TeamHandler.getAliveTeams();
 			
 			for(Team team : teamsAlive) {
 

@@ -6,14 +6,12 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
-import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -52,6 +50,12 @@ public class UhcHandler {
 		
 		//If we need to resort the teams, do it.
 		if(resortTeams) {
+			teamHandler.playerRandomTeamJoiner();
+		}
+		
+		if(TeamHandler.teamManuallySelect) {
+			teamHandler.sortPlayersNotInTeam();
+		} else {
 			teamHandler.playerRandomTeamJoiner();
 		}
 		

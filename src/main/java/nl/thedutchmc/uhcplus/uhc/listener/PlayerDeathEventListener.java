@@ -42,7 +42,7 @@ public class PlayerDeathEventListener implements Listener {
 		}
 
 		//Check if the killer is the last player alive
-		List<Team> aliveTeams = teamHandler.getAliveTeams();
+		List<Team> aliveTeams = TeamHandler.getAliveTeams();
 		
 		if(aliveTeams.size() == 1) {
 			

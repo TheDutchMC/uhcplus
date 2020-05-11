@@ -34,7 +34,7 @@ public class UhcPlus extends JavaPlugin {
 		System.out.println("Welcome to UHCPlus - Version " + VERSION);
 		
 		//Register the LoginPlayerListener
-		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
 		
 		ScoreboardManager sbManager = Bukkit.getScoreboardManager();
 		scoreboard = sbManager.getNewScoreboard();
@@ -43,7 +43,7 @@ public class UhcPlus extends JavaPlugin {
 		healthObjective.setRenderType(RenderType.HEARTS);
 		
 		//Register the EntityDamageByEntityEventListener
-		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(), this);
 		
 		//Set the executor and tab completer for the /uhcp command
 		getCommand("uhcp").setExecutor(new UhcpCommandHandler(this));

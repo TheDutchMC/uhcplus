@@ -11,8 +11,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class ScoreboardHandler {
-
-	private UhcPlus plugin;
 	
 	static String previousWorldborder, previousTeamsAlive, previousTimeRemaining;
 	
@@ -32,9 +30,7 @@ public class ScoreboardHandler {
 		
 		WorldBorder worldborder = Bukkit.getWorld("uhcworld").getWorldBorder();
 		int worldborderCoord = (int) worldborder.getSize() / 2;
-		
-		TeamHandler teamHandler = new TeamHandler(plugin, null, false);
-		
+				
 		if(previousWorldborder != null && previousTeamsAlive != null) {
 			UhcPlus.scoreboard.resetScores(previousWorldborder);
 			UhcPlus.scoreboard.resetScores("");
@@ -45,7 +41,7 @@ public class ScoreboardHandler {
 		int seconds = UhcTimeRemainingCalculator.getTimeRemaining();
 		
 		previousWorldborder = ChatColor.GOLD + "World border: " + ChatColor.RED + worldborderCoord + " " + -worldborderCoord;
-		previousTeamsAlive = ChatColor.GOLD + "Teams alive: " + ChatColor.RED + teamHandler.getAliveTeams().size();
+		previousTeamsAlive = ChatColor.GOLD + "Teams alive: " + ChatColor.RED + TeamHandler.getAliveTeams().size();
 		previousTimeRemaining = ChatColor.GOLD + "Time remaining: " + ChatColor.RED + String.format("%02d:%02d:%02d", seconds / 60 / 60, seconds / 60, seconds % 60);
 		
 		Score line0 = objective.getScore("");
