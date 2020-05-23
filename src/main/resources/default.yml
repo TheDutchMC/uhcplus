@@ -49,3 +49,9 @@ moduleGravelDropArrow: "true"
 
 #Should we block tools crafted with the Enchanted Tools module from being used in a grindstone
 moduleDissalowGrindingEnchantedTools: "true"
+
+#Do we allow the crafting of light golden apples
+moduleLightGoldenApple: "true"
+
+#Do we allow the crafting of light anvils
+moduleLightAnvil: "true"

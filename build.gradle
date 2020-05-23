@@ -42,6 +42,14 @@ dependencies {
 	//Spigot API
 	compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 	
+	//JDA API
+   	compile fileTree(dir: '/', include: '*.jar')
+    //compile 'net.dv8tion:JDA:4.0.0_39'
+    
+    
+    //SLF4j
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+	
 	//Apache Commons
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	
@@ -58,5 +66,6 @@ application {
 
 shadowJar {
 	relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
+	relocate 'org.slf4j', 'nl.thedutchmc.uhcplus.slf4j'
 }
 	

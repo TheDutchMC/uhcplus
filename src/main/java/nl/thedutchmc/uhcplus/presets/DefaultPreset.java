@@ -70,6 +70,9 @@ public class DefaultPreset {
 		PresetHandler.moduleSheepDropString = Boolean.valueOf(this.getPresetConfig().getString("moduleSheepDropString"));
 		PresetHandler.moduleGravelDropArrow = Boolean.valueOf(this.getPresetConfig().getString("moduleGravelDropArrow"));
 		PresetHandler.moduleDissalowGrindingEnchantedTools = Boolean.valueOf(this.getPresetConfig().getString("moduleDissalowGrindingEnchantedTools"));
+		PresetHandler.moduleLightGoldenApple = Boolean.valueOf(this.getPresetConfig().getString("moduleLightGoldenApple"));
+		PresetHandler.moduleLightAnvil = Boolean.valueOf(this.getPresetConfig().getString("moduleLightAnvil"));
+		PresetHandler.ModuleProximityVoice = Boolean.valueOf(this.getPresetConfig().getString("moduleProximityVoice"));
 		
 		//Integer
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
@@ -100,6 +103,9 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleSheepDropString", PresetHandler.moduleSheepDropString);
 		this.getPresetConfig().set("moduleGravelDropArrow", PresetHandler.moduleGravelDropArrow);
 		this.getPresetConfig().set("moduleDissalowGrindingEnchantedTools", PresetHandler.moduleDissalowGrindingEnchantedTools);
+		this.getPresetConfig().set("moduleLightGoldenApple", PresetHandler.moduleLightGoldenApple);
+		this.getPresetConfig().set("moduleLightAnvil", PresetHandler.moduleLightAnvil);
+		this.getPresetConfig().set("moduleProximityVoice", PresetHandler.ModuleProximityVoice);
 		
 		savePreset();
 	}
