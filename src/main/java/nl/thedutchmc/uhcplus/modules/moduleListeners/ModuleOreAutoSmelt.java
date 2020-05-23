@@ -44,6 +44,12 @@ public class ModuleOreAutoSmelt implements Listener {
 
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.TORCH, 2));
 		}
+		else if(blockBroken.equals(Material.DIAMOND_ORE)) {
+			event.setDropItems(false);
+			event.setExpToDrop(5);
+			
+			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), getItemStack(Material.DIAMOND, dropCount));
+		}
 	}
 	
 	ItemStack getItemStack(Material material, int count) {
