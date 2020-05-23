@@ -68,7 +68,7 @@ public class DeathmatchHandler {
 		TeamHandler teamHandler = new TeamHandler(plugin, null, false);
 		
 		List<Location> teleportLocation = new ArrayList<>();
-		List<Team> aliveTeams = teamHandler.getAliveTeams();
+		List<Team> aliveTeams = TeamHandler.getAliveTeams();
 		
 		int teamAliveCount = teamHandler.teamsAlive();
 		int increment = 360 / teamAliveCount;
@@ -160,6 +160,8 @@ public class DeathmatchHandler {
 		Random random = new Random();
 		int i = random.nextInt((availableSchematics.size() - 0) + 1);
 				
+		i -= 1;
+		
 		System.out.println("[UhcPlus][Debug][world.DeathmatchHandler: 163] i: " + i);
 		
 		return availableSchematics.get(i);

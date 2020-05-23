@@ -31,9 +31,9 @@ repositories {
 		url "https://maven.enginehub.org/repo/"
 	}
 	
-    	maven {
-        	name 'papermc'
-        	url 'https://papermc.io/repo/repository/maven-public/'
+	maven {
+    	name 'papermc'
+    	url 'https://papermc.io/repo/repository/maven-public/'
 	}
 }
 
