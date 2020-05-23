@@ -29,6 +29,11 @@ public class UhcPlus extends JavaPlugin {
 	
 	public static Scoreboard scoreboard;
 	
+	public static void debugLog(String log) {
+		System.out.println("[UhcPlus][Debug]" + log);
+	}
+	
+	
 	@Override
 	public void onEnable() {
 		System.out.println("Welcome to UHCPlus - Version " + VERSION);

@@ -41,6 +41,8 @@ public class UhcHandler {
 	
 	public void startUhc(boolean resortTeams) {
 		
+		UhcPlus.debugLog("[UhcHandler: 44] Method startUhc called");
+				
 		//Start the countdown timer for the scoreboard
 		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator(plugin);
 		uhcTRC.startCountdown();
@@ -81,11 +83,6 @@ public class UhcHandler {
 		//Set full health
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
-		}
-		
-		//Register the CraftItemEventListener, for limited crafting, if enabled
-		if(ConfigurationHandler.limitCrafting) {
-			plugin.getServer().getPluginManager().registerEvents(new CraftItemEventListener(), plugin);
 		}
 		
 		//Register the chat listener, for team chat
@@ -214,6 +211,6 @@ public class UhcHandler {
 		}
 		
 		//lastly, Call the UhcStartedEvent
-		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent(playersPlaying));
+		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent());
 	}
 }

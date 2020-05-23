@@ -69,6 +69,7 @@ public class DefaultPreset {
 		PresetHandler.moduleInfiniteEnchanting = Boolean.valueOf(this.getPresetConfig().getString("moduleInfiniteEnchanting"));
 		PresetHandler.moduleSheepDropString = Boolean.valueOf(this.getPresetConfig().getString("moduleSheepDropString"));
 		PresetHandler.moduleGravelDropArrow = Boolean.valueOf(this.getPresetConfig().getString("moduleGravelDropArrow"));
+		PresetHandler.moduleDissalowGrindingEnchantedTools = Boolean.valueOf(this.getPresetConfig().getString("moduleDissalowGrindingEnchantedTools"));
 		
 		//Integer
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
@@ -98,7 +99,8 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleInfiniteEnchanting", PresetHandler.moduleInfiniteEnchanting);
 		this.getPresetConfig().set("moduleSheepDropString", PresetHandler.moduleSheepDropString);
 		this.getPresetConfig().set("moduleGravelDropArrow", PresetHandler.moduleGravelDropArrow);
-
+		this.getPresetConfig().set("moduleDissalowGrindingEnchantedTools", PresetHandler.moduleDissalowGrindingEnchantedTools);
+		
 		savePreset();
 	}
 	

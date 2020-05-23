@@ -17,6 +17,7 @@ public class ModuleHandler {
 	static ModuleInfiniteEnchanting moduleInfiniteEnchanting;
 	static ModuleSheepDropString moduleSheepDropString;
 	static ModuleGravelDropArrow moduleGravelDropArrow;
+	static ModuleDissalowGrindingEnchantedTools moduleDissalowGrindingEnchantedTools;
 	
 	public ModuleHandler(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -31,7 +32,8 @@ public class ModuleHandler {
 		moduleEnchantedTools = new ModuleEnchantedTools();
 		moduleInfiniteEnchanting = new ModuleInfiniteEnchanting();
 		moduleSheepDropString = new ModuleSheepDropString();
-		moduleGravelDropArrow = new ModuleGravelDropArrow();		
+		moduleGravelDropArrow = new ModuleGravelDropArrow();	
+		moduleDissalowGrindingEnchantedTools = new ModuleDissalowGrindingEnchantedTools(plugin);
 		
 		if(PresetHandler.moduleOreAutoSmelt) {
 			plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
@@ -59,6 +61,10 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleGravelDropArrow) {
 			plugin.getServer().getPluginManager().registerEvents(moduleGravelDropArrow, plugin);
+		}
+		
+		if(PresetHandler.moduleDissalowGrindingEnchantedTools) {
+			plugin.getServer().getPluginManager().registerEvents(moduleDissalowGrindingEnchantedTools, plugin);
 		}
 		
 	}
@@ -90,6 +96,10 @@ public class ModuleHandler {
 		
 		if(!PresetHandler.moduleGravelDropArrow) {
 			HandlerList.unregisterAll(moduleGravelDropArrow);
+		}
+		
+		if(!PresetHandler.moduleDissalowGrindingEnchantedTools) {
+			HandlerList.unregisterAll(moduleDissalowGrindingEnchantedTools);
 		}
 	}
 }

@@ -16,7 +16,9 @@ public class ModuleInfiniteEnchanting implements Listener {
 
 	@EventHandler
 	public void onUhcStartedEvent(UhcStartedEvent event) {
-				
+		
+		System.out.println("[UhcPlus][Debug][ModuleInfiniteEnchanting: 20] Event run");
+		
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
 			player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 64));

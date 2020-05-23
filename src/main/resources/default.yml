@@ -46,3 +46,6 @@ moduleSheepDropString: "true"
 
 #Should gravel drop arrows when broken. Default: true
 moduleGravelDropArrow: "true"
+
+#Should we block tools crafted with the Enchanted Tools module from being used in a grindstone
+moduleDissalowGrindingEnchantedTools: "true"
