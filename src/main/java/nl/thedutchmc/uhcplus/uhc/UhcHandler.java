@@ -1,8 +1,10 @@
 package nl.thedutchmc.uhcplus.uhc;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -18,7 +20,15 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.requests.restaction.ChannelAction;
+import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.discord.DiscordConfigurationHandler;
+import nl.thedutchmc.uhcplus.discord.JdaSetup;
+import nl.thedutchmc.uhcplus.discord.ModuleProximityVoice;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
@@ -31,6 +41,8 @@ import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
 public class UhcHandler {
 
 	private UhcPlus plugin;
+	
+	public static List<UUID> createdChannels; 
 
 	public UhcHandler(UhcPlus plugin) {
 		this.plugin = plugin;
@@ -40,8 +52,62 @@ public class UhcHandler {
 	
 	public void startUhc(boolean resortTeams) {
 		
-		UhcPlus.debugLog("[UhcHandler: 44] Method startUhc called");
+		UhcPlus.debugLog("[UhcHandler: 43] Method startUhc called");
 				
+		//Proximity voice checks
+		if(PresetHandler.ModuleProximityVoice) {
+			ModuleProximityVoice moduleProximityVoice = new ModuleProximityVoice(plugin);
+			
+			boolean someoneNotInVoice = false;
+			for(UUID uuid : moduleProximityVoice.usersNotInVoice()) {
+				
+				
+				someoneNotInVoice = true;
+				Player p = Bukkit.getServer().getPlayer(uuid);
+				p.sendMessage(ChatColor.RED + "You are not in the lobby voice channel, please connect now!");
+			}
+			
+			if(someoneNotInVoice) {
+				Bukkit.getServer().broadcastMessage(ChatColor.AQUA + "[UhcPlus] Starting of UHC aborted! Not all users are in the lobby voice channel!");
+				
+				return;
+			} else {
+				
+				Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
+				Collection<Permission> allowedActions = new ArrayList<>();
+				
+				allowedActions.add(Permission.VOICE_SPEAK);
+				
+				Collection<Permission> blockedActions = new ArrayList<>();
+				blockedActions.add(Permission.VOICE_CONNECT);
+				
+				createdChannels = new ArrayList<>();
+
+				for(Player p : Bukkit.getOnlinePlayers()) {
+					
+					UUID uuid = p.getUniqueId();
+					
+					ChannelAction<VoiceChannel> createAction = guild.createVoiceChannel(uuid.toString());
+					createAction.addRolePermissionOverride(guild.getPublicRole().getIdLong(), allowedActions, blockedActions);
+					createAction.queue();
+					
+					createdChannels.add(uuid);
+					
+					try {
+						TimeUnit.MILLISECONDS.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			ModuleProximityVoice.joinUsersToChannels();
+			
+			
+			moduleProximityVoice.startLocationCalculations();
+		}
+		
+		
 		//Start the countdown timer for the scoreboard
 		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator(plugin);
 		uhcTRC.startCountdown();

@@ -67,7 +67,7 @@ public class PvpScheduler {
 			public void run() {
 				
 				for(int i = 10; i > 0; i--) {
-					Bukkit.broadcastMessage(ChatColor.AQUA + String.valueOf(i));
+					Bukkit.broadcastMessage(ChatColor.AQUA + "PVP starting in " + String.valueOf(i));
 					
 					try {
 						TimeUnit.SECONDS.sleep(1);

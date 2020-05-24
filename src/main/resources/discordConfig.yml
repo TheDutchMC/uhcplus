@@ -1,0 +1,10 @@
+#Discord bot token
+token: "TOKEN HERE"
+
+guildId: "Guild ID here"
+
+#Voice channel IDs to be used by the plugin for voice. For every user you need a seperate voice channel?
+voiceChannels:
+ - "CHANNEL 0"
+ - "CHANNEL 1"
+ - "ANOTHER CHANNEL"

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.*;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 
@@ -22,18 +22,20 @@ public class ModuleProximityVoice {
 
 	private UhcPlus plugin;
 	
-	private JDA jda;
 	public static HashMap<UUID, String> discordNicknames;
 	
 	private static PlayerLoginJoinEventListener playerLoginJoinEventListener;
 	
 	static int proxmityDistance = 20;
+	public static boolean isEnabled = false;
 	
 	public ModuleProximityVoice(UhcPlus plugin) {
 		this.plugin = plugin;
 	}
 	
 	public void enableModule() {
+		isEnabled = true;
+		
 		discordNicknames = new HashMap<>();
 		
 		JdaSetup jdaSetup = new JdaSetup();
@@ -41,9 +43,7 @@ public class ModuleProximityVoice {
 		if(!JdaSetup.jdaConnected) {
 			jdaSetup.setupJda();	
 		}
-		
-		jda = jdaSetup.getJda();
-		
+				
 		plugin.getCommand("discord").setExecutor(new ProximityVoiceCommandHandler());
 		
 		playerLoginJoinEventListener = new PlayerLoginJoinEventListener();
@@ -74,50 +74,110 @@ public class ModuleProximityVoice {
 			
 			@Override
 			public void run() {
-				
+							
 				HashMap <UUID, Location> playerLocations = new HashMap<>();				
 				for(Player player : Bukkit.getOnlinePlayers()) {
 					
 					playerLocations.put(player.getUniqueId(), player.getLocation());
 				}
 				
+				HashMap<UUID, UUID> playersCompared = new HashMap<>();
+				
 				for(Map.Entry<UUID, Location> entryA : playerLocations.entrySet()) {
 					UUID uuidA = entryA.getKey();
 					Location locationA = entryA.getValue();
 					
 					List<UUID> playersInProximity = new ArrayList<>();
-					playersInProximity.add(uuidA);
 					
 					for(Map.Entry<UUID, Location> entryB : playerLocations.entrySet()) {
 						UUID uuidB = entryB.getKey();
 						Location locationB = entryB.getValue();
 						
-						//Calculate horizontal distance
-						double distanceCylindrical = Math.pow((locationA.getX() - locationB.getX()), 2) + Math.pow((locationA.getZ() - locationB.getZ()), 2);
-						
-						//Check if the players are within horizontal distance of each other
-						boolean isInHorizontalProximity = (distanceCylindrical <= proxmityDistance) ? true : false;
-						
-						//if the player is in horizontal proxmity we calculate the vertical proxmity, if not we do nothing
-						if(isInHorizontalProximity)  {
-							//Calculate the vertical distance, not sure if the calculation is correct
-							double distanceY = Math.pow((locationA.getY() - locationB.getY()), 2);
+						if(!uuidA.equals(uuidB)) {								
+							//Calculate the distance
+							double distance = Math.sqrt(Math.pow(locationB.getX() - locationA.getX(), 2) + Math.pow(locationB.getY() - locationA.getY(), 2) + Math.pow(locationB.getZ() - locationA.getZ(), 2));
+							System.out.println("Distance : " + distance);
 							
-							//Check if the players are within vertical distance of each other
-							boolean isInVerticalProximity = (distanceY <= proxmityDistance) ? true : false;
+							playersCompared.put(uuidA, uuidB);
 							
-							//Combine the two booleans, to form one final answer
-							boolean isInProximity = (isInHorizontalProximity && isInVerticalProximity) ? true : false;
-							
-							//If isInProximity is true, add the player to the list.
-							if(isInProximity) playersInProximity.add(uuidB);
+							if(distance <= proxmityDistance) playersInProximity.add(uuidB);
 						}
-
 					}
+					
+					System.out.println("Players in prox: " + playersInProximity.size());
+					
+					for(UUID uuid : playersInProximity) {
+						
+						UhcPlus.debugLog("Players near " + Bukkit.getServer().getPlayer(uuidA).getName() + ": " + Bukkit.getServer().getPlayer(uuid).getName());
+						
+						Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
+						
+						List<VoiceChannel> channels = guild.getVoiceChannelsByName(uuidA.toString(), false);
+						VoiceChannel channel = channels.get(0);
+							
+						guild.moveVoiceMember(guild.getMember(JdaSetup.getJda().getUserById(discordNicknames.get(uuid))), channel).queue();
+					}
+					
+					playersInProximity = null;
 				}
 				
 			}
 		}.runTaskTimer(plugin, 0, 60);
 	}
 	
+	public List<UUID> usersNotInVoice() {
+		
+		List<UUID> playersNotInVoice = new ArrayList<>();
+		
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			
+			//Get the user
+			UUID uuid = p.getUniqueId();
+			
+			User user = JdaSetup.getJda().getUserById(discordNicknames.get(uuid));
+			
+			//Get the guild and voice channel
+			Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
+			
+			VoiceChannel lobbyVoiceChannel = guild.getVoiceChannelById(DiscordConfigurationHandler.voiceChannelIds.get(0));
+			
+			//Check if the user is in the voice channel, if not add them to the list of players who aren't in a voice channel
+			if(!lobbyVoiceChannel.getMembers().contains(guild.getMember(user))) playersNotInVoice.add(uuid);
+		}
+		
+		return playersNotInVoice;
+	}
+	
+	public static void setupModule() {
+		Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
+		
+		boolean categoryExists = false;
+		for(Category cat : guild.getCategories()) {
+			if(cat.getName().equals("ProximityVoice")) categoryExists = true;
+		}
+		
+		if(!categoryExists) {
+			guild.createCategory("ProximityVoice");
+		}
+	}
+	
+	public static void joinUsersToChannels() {
+		
+		Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
+		
+		for(Map.Entry<UUID, String> entry : discordNicknames.entrySet()) {
+			
+			System.out.println(entry.getKey());
+			
+			List<VoiceChannel> channels = guild.getVoiceChannelsByName(entry.getKey().toString(), true);
+			User user = JdaSetup.getJda().getUserById(entry.getValue());
+			Member member = guild.getMember(user);
+
+			System.out.println(channels.size());
+			
+			guild.moveVoiceMember(member, channels.get(0)).queue();
+			
+		}
+		
+	}
 }

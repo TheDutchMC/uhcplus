@@ -7,8 +7,10 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import io.papermc.lib.PaperLib;
-
+import net.dv8tion.jda.api.entities.Guild;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.discord.DiscordConfigurationHandler;
+import nl.thedutchmc.uhcplus.discord.JdaSetup;
 
 public class ChunkGenerator {
 
@@ -37,13 +39,11 @@ public class ChunkGenerator {
 		z = -startingCoordZ;		
 		
 		overworld = Bukkit.getServer().getWorld("uhcworld");
-		
-		
+				
 		//Calculate the amount of chunks
 		double chunkCount = Math.pow((worldRadius/8), 2);
 		checkEvery = (int) chunkCount / 20;
 		checkEveryOriginal = checkEvery;
-		
 		
 		//Generate the chunks 
 		new BukkitRunnable() {
@@ -65,7 +65,7 @@ public class ChunkGenerator {
 							x -= 16;
 							z = -startingCoordZ;
 						}
-						
+												
 						cIndex++;
 						chunksDone++;
 						

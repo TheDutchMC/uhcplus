@@ -18,8 +18,10 @@ public class Recipes {
 	}
 	
 	public static NamespacedKey lightGoldenAppleKey, lightAnvilKey;
+	public static boolean lightGoldenAppleRegistered, lightAnvilRegistered;
 	
 	public ShapedRecipe getLightGoldenAppleRecipe() {
+		lightGoldenAppleRegistered = true;
 		
 		ItemStack stack = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta meta = stack.getItemMeta();
@@ -37,6 +39,8 @@ public class Recipes {
 	}
 	
 	public ShapedRecipe getLightAnvilRecipe() {
+		lightAnvilRegistered = true;
+		
 		ItemStack stack = new ItemStack(Material.ANVIL);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Light Anvil");

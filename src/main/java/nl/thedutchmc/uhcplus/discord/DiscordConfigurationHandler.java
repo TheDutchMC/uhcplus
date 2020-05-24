@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 
@@ -13,6 +14,7 @@ public class DiscordConfigurationHandler {
 
 	public static String token;
 	public static List<String> voiceChannelIds;
+	public static long guildId;
 	
 	private UhcPlus plugin;
 	 
@@ -36,8 +38,11 @@ public class DiscordConfigurationHandler {
 			plugin.saveResource("discordConfig.yml", false);
 		}
 		
+		config = new YamlConfiguration();
+		
 		try {
 			config.load(configFile);
+			readConfig();
 		} catch (IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
@@ -47,5 +52,6 @@ public class DiscordConfigurationHandler {
 	public void readConfig() {
 		token = this.getConfig().getString("token");
 		voiceChannelIds = (List<String>) this.getConfig().getList("voiceChannels");
+		guildId = Long.valueOf(this.getConfig().getString("guildId"));
 	}
 }

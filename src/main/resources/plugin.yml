@@ -10,3 +10,5 @@ commands:
   description: uhcp base command. See /uhcp help for help.
  chat:
   description: toggle between team chat and global chat
+ discord:
+  description: Allows the user to add their discord name to their minecraft profile

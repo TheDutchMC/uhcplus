@@ -45,9 +45,7 @@ public class ModuleHandler {
 		
 		recipes = new Recipes(plugin);
 		moduleProximityVoice = new ModuleProximityVoice(plugin);
-		
-		
-		
+	
 		if(PresetHandler.moduleOreAutoSmelt) plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 
 		if(PresetHandler.moduleTreeFullRemove) plugin.getServer().getPluginManager().registerEvents(moduleTreeFullRemove, plugin);
@@ -64,10 +62,11 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleDissalowGrindingEnchantedTools) plugin.getServer().getPluginManager().registerEvents(moduleDissalowGrindingEnchantedTools, plugin);
 		
-		if(PresetHandler.moduleLightGoldenApple) plugin.getServer().addRecipe(recipes.getLightGoldenAppleRecipe());
+		if(PresetHandler.moduleLightGoldenApple && !Recipes.lightGoldenAppleRegistered) plugin.getServer().addRecipe(recipes.getLightGoldenAppleRecipe());
 		
-		if(PresetHandler.moduleLightAnvil) plugin.getServer().addRecipe(recipes.getLightAnvilRecipe());
+		if(PresetHandler.moduleLightAnvil && !Recipes.lightAnvilRegistered) plugin.getServer().addRecipe(recipes.getLightAnvilRecipe());
 		
+		System.out.println("Module status: " + PresetHandler.ModuleProximityVoice);
 		if(PresetHandler.ModuleProximityVoice) moduleProximityVoice.enableModule();
 	}
 	
@@ -88,16 +87,14 @@ public class ModuleHandler {
 		
 		if(!PresetHandler.moduleDissalowGrindingEnchantedTools) HandlerList.unregisterAll(moduleDissalowGrindingEnchantedTools);
 		
-		if(!PresetHandler.moduleLightGoldenApple) {
+		if(!PresetHandler.moduleLightGoldenApple && Recipes.lightGoldenAppleRegistered) {
 			if(Recipes.lightGoldenAppleKey != null) plugin.getServer().removeRecipe(Recipes.lightGoldenAppleKey);
 		}
 		
-		if(!PresetHandler.moduleLightAnvil) {
+		if(!PresetHandler.moduleLightAnvil && Recipes.lightAnvilRegistered) {
 			if(Recipes.lightAnvilKey != null) plugin.getServer().removeRecipe(Recipes.lightAnvilKey);
 		}
 		
-		if(!PresetHandler.ModuleProximityVoice) moduleProximityVoice.enableModule();
-
-		
+		if(!PresetHandler.ModuleProximityVoice && ModuleProximityVoice.isEnabled) moduleProximityVoice.disableModule();
 	}
 }
