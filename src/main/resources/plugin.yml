@@ -12,3 +12,5 @@ commands:
   description: toggle between team chat and global chat
  discord:
   description: Allows the user to add their discord name to their minecraft profile
+ broadcast:
+  description: Broadcast a message to all online players.

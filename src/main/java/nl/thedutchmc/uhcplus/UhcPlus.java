@@ -13,14 +13,10 @@ import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import nl.thedutchmc.uhcplus.commands.BroadcastCommandHandler;
 import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
-import nl.thedutchmc.uhcplus.discord.DiscordConfigurationHandler;
-import nl.thedutchmc.uhcplus.discord.JdaSetup;
-import nl.thedutchmc.uhcplus.discord.ModuleProximityVoice;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
@@ -65,13 +61,12 @@ public class UhcPlus extends JavaPlugin {
 		//Set the executor for the /chat command
 		getCommand("chat").setExecutor(new ChatCommandHandler());
 		
+		//set the executor for the /broadcast command
+		getCommand("broadcast").setExecutor(new BroadcastCommandHandler());
+		
 		//Load the configuration file
 		ConfigurationHandler configurationHandler = new ConfigurationHandler(this);
 		configurationHandler.loadConfig();
-		
-		//Load and read the Discord configuration file
-		DiscordConfigurationHandler discordConfigurationHandler = new DiscordConfigurationHandler(this);
-		discordConfigurationHandler.loadDiscordConfig();
 		
 		//Load all the presets
 		PresetHandler presetHandler = new PresetHandler(this);
@@ -84,39 +79,20 @@ public class UhcPlus extends JavaPlugin {
 		File file = new File(this.getDataFolder() + File.separator + "deathmatch");
 		file.mkdir();
 		
-		//setup discord
-		if(PresetHandler.ModuleProximityVoice) {
-			ModuleProximityVoice.setupModule();
-		}
-		
 		UhcPlus plugin = this;
 		
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
+				
 				WorldHandler worldHandler = new WorldHandler(plugin);
 				worldHandler.setupWorld();				
 			}
-			
-		
-		
 		}.runTaskLater(plugin, 120);
-
-		
-		
 	}
 	
 	@Override
 	public void onDisable() {
-		
-		Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
-		
-		for(UUID uuid : UhcHandler.createdChannels) {
-			
-			List<VoiceChannel> channels = guild.getVoiceChannelsByName(uuid.toString(), true);
-			channels.get(0).delete().reason("Plugin Shutdown").queue();
-		}
-		
 	}
 }

@@ -3,9 +3,9 @@ package nl.thedutchmc.uhcplus.uhc.scheduler;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
@@ -45,7 +45,7 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 				
-				Bukkit.broadcastMessage(ChatColor.AQUA + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.AQUA + " minutes!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.GRAY + " minutes!");
 				
 			}
 		}.runTaskLaterAsynchronously(plugin, fiveMinGameTimeTicks);
@@ -56,7 +56,7 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 				
-				Bukkit.broadcastMessage(ChatColor.AQUA + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.AQUA + " minute!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.GRAY + " minute!");
 				
 			}
 		}.runTaskLaterAsynchronously(plugin, oneminGameTimeTicks);
@@ -67,7 +67,7 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 				
-				Bukkit.broadcastMessage(ChatColor.AQUA + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.AQUA + " seconds!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.GRAY + " seconds!");
 				
 			}
 		}.runTaskLaterAsynchronously(plugin, thirtySecondGameTimeTicks);

@@ -47,13 +47,21 @@ moduleSheepDropString: "true"
 #Should gravel drop arrows when broken. Default: true
 moduleGravelDropArrow: "true"
 
-#Should we block tools crafted with the Enchanted Tools module from being used in a grindstone
+#Should we block tools crafted with the Enchanted Tools module from being used in a grindstone.  Default: trueDefault: true
 moduleDissalowGrindingEnchantedTools: "true"
 
-#Do we allow the crafting of light golden apples
+#Do we allow the crafting of light golden apples. Default: true
 moduleLightGoldenApple: "true"
 
-#Do we allow the crafting of light anvils
+#Do we allow the crafting of light anvils. Default: true
 moduleLightAnvil: "true"
 
-moduleProximityVoice: "true"
+#Enable or disable the anti cheat module. Default: true
+moduleAntiCheat: "true"
+
+#The time after which a player can safely mine diamond ore again without OPs being notified. In Seconds, Default: 60
+moduleAntiCheatTime: "60"
+
+moduleAxeOfDestruction: "true"
+
+axeOfDestructionLevelling: "true"

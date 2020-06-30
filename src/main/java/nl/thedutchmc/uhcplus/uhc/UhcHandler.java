@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
-import org.bukkit.HeightMap;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,15 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.requests.restaction.ChannelAction;
-import net.md_5.bungee.api.ChatColor;
+
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.discord.DiscordConfigurationHandler;
-import nl.thedutchmc.uhcplus.discord.JdaSetup;
-import nl.thedutchmc.uhcplus.discord.ModuleProximityVoice;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
@@ -53,60 +45,6 @@ public class UhcHandler {
 	public void startUhc(boolean resortTeams) {
 		
 		UhcPlus.debugLog("[UhcHandler: 43] Method startUhc called");
-				
-		//Proximity voice checks
-		if(PresetHandler.ModuleProximityVoice) {
-			ModuleProximityVoice moduleProximityVoice = new ModuleProximityVoice(plugin);
-			
-			boolean someoneNotInVoice = false;
-			for(UUID uuid : moduleProximityVoice.usersNotInVoice()) {
-				
-				
-				someoneNotInVoice = true;
-				Player p = Bukkit.getServer().getPlayer(uuid);
-				p.sendMessage(ChatColor.RED + "You are not in the lobby voice channel, please connect now!");
-			}
-			
-			if(someoneNotInVoice) {
-				Bukkit.getServer().broadcastMessage(ChatColor.AQUA + "[UhcPlus] Starting of UHC aborted! Not all users are in the lobby voice channel!");
-				
-				return;
-			} else {
-				
-				Guild guild = JdaSetup.getJda().getGuildById(DiscordConfigurationHandler.guildId);
-				Collection<Permission> allowedActions = new ArrayList<>();
-				
-				allowedActions.add(Permission.VOICE_SPEAK);
-				
-				Collection<Permission> blockedActions = new ArrayList<>();
-				blockedActions.add(Permission.VOICE_CONNECT);
-				
-				createdChannels = new ArrayList<>();
-
-				for(Player p : Bukkit.getOnlinePlayers()) {
-					
-					UUID uuid = p.getUniqueId();
-					
-					ChannelAction<VoiceChannel> createAction = guild.createVoiceChannel(uuid.toString());
-					createAction.addRolePermissionOverride(guild.getPublicRole().getIdLong(), allowedActions, blockedActions);
-					createAction.queue();
-					
-					createdChannels.add(uuid);
-					
-					try {
-						TimeUnit.MILLISECONDS.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			
-			ModuleProximityVoice.joinUsersToChannels();
-			
-			
-			moduleProximityVoice.startLocationCalculations();
-		}
-		
 		
 		//Start the countdown timer for the scoreboard
 		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator(plugin);
@@ -242,7 +180,9 @@ public class UhcHandler {
 			double x = 0 + spawnCircleRadius * Math.cos(rads);
 			double z = 0 + spawnCircleRadius * Math.sin(rads);
 			
-			Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 20, (int) z);
+			
+			Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z).getY() + 20, (int) z);
+			//Location location = new Location(uhcworld, (int) x, uhcworld.getHighestBlockAt((int) x, (int) z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 20, (int) z);
 					
 			teleportLocations.add(location);
 			

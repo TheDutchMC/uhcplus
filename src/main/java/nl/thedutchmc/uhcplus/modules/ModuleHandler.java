@@ -1,9 +1,13 @@
 package nl.thedutchmc.uhcplus.modules;
 
+import java.util.Iterator;
+
 import org.bukkit.event.HandlerList;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.discord.ModuleProximityVoice;
+import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.ModuleAntiCheat;
 import nl.thedutchmc.uhcplus.modules.moduleListeners.*;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.Recipes;
@@ -20,11 +24,10 @@ public class ModuleHandler {
 	static ModuleSheepDropString moduleSheepDropString;
 	static ModuleGravelDropArrow moduleGravelDropArrow;
 	static ModuleDissalowGrindingEnchantedTools moduleDissalowGrindingEnchantedTools;
+	static ModuleDioriteDamage moduleDioriteDamage;
 	
 	static Recipes recipes;
-	
-	static ModuleProximityVoice moduleProximityVoice;
-	
+	static ModuleAntiCheat moduleAntiCheat;
 	
 	
 	public ModuleHandler(UhcPlus plugin) {
@@ -42,9 +45,10 @@ public class ModuleHandler {
 		moduleSheepDropString = new ModuleSheepDropString();
 		moduleGravelDropArrow = new ModuleGravelDropArrow();	
 		moduleDissalowGrindingEnchantedTools = new ModuleDissalowGrindingEnchantedTools(plugin);
+		moduleDioriteDamage = new ModuleDioriteDamage(plugin);
+		moduleAntiCheat = new ModuleAntiCheat(plugin);
 		
 		recipes = new Recipes(plugin);
-		moduleProximityVoice = new ModuleProximityVoice(plugin);
 	
 		if(PresetHandler.moduleOreAutoSmelt) plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 
@@ -62,12 +66,16 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleDissalowGrindingEnchantedTools) plugin.getServer().getPluginManager().registerEvents(moduleDissalowGrindingEnchantedTools, plugin);
 		
+		if(PresetHandler.moduleDioriteDamage) plugin.getServer().getPluginManager().registerEvents(moduleDioriteDamage, plugin);
+		
 		if(PresetHandler.moduleLightGoldenApple && !Recipes.lightGoldenAppleRegistered) plugin.getServer().addRecipe(recipes.getLightGoldenAppleRecipe());
 		
 		if(PresetHandler.moduleLightAnvil && !Recipes.lightAnvilRegistered) plugin.getServer().addRecipe(recipes.getLightAnvilRecipe());
 		
-		System.out.println("Module status: " + PresetHandler.ModuleProximityVoice);
-		if(PresetHandler.ModuleProximityVoice) moduleProximityVoice.enableModule();
+		if(PresetHandler.moduleAxeOfDestruction && !Recipes.axeOfDestructionRegistered) plugin.getServer().addRecipe(recipes.getAxeOfDestructionRecipe());
+		
+		if(PresetHandler.moduleAntiCheat) moduleAntiCheat.enableModule();
+		
 	}
 	
 	public void unloadModules() {
@@ -87,14 +95,28 @@ public class ModuleHandler {
 		
 		if(!PresetHandler.moduleDissalowGrindingEnchantedTools) HandlerList.unregisterAll(moduleDissalowGrindingEnchantedTools);
 		
-		if(!PresetHandler.moduleLightGoldenApple && Recipes.lightGoldenAppleRegistered) {
+		if(!PresetHandler.moduleAntiCheat) moduleAntiCheat.disableModule();
+
+		/*Iterator<Recipe> it = plugin.getServer().recipeIterator();
+		while(it.hasNext()) {
+			Recipe itRecipe = it.next();
+			if(itRecipe instanceof ShapedRecipe) {
+				ShapedRecipe itShaped = (ShapedRecipe) itRecipe;
+				if(itShaped.equals(recipes.getLightAnvilRecipe())) it.remove();
+				
+				if(itShaped.equals(recipes.getLightGoldenAppleRecipe())) it.remove();
+			}
+		}*/
+		
+		/*if(!PresetHandler.moduleLightGoldenApple && Recipes.lightGoldenAppleRegistered) {
 			if(Recipes.lightGoldenAppleKey != null) plugin.getServer().removeRecipe(Recipes.lightGoldenAppleKey);
 		}
 		
 		if(!PresetHandler.moduleLightAnvil && Recipes.lightAnvilRegistered) {
 			if(Recipes.lightAnvilKey != null) plugin.getServer().removeRecipe(Recipes.lightAnvilKey);
-		}
+		}*/
 		
-		if(!PresetHandler.ModuleProximityVoice && ModuleProximityVoice.isEnabled) moduleProximityVoice.disableModule();
+		if(!PresetHandler.moduleDioriteDamage) HandlerList.unregisterAll(moduleDioriteDamage);
+
 	}
 }

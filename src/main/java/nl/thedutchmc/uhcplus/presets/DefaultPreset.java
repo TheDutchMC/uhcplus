@@ -72,7 +72,10 @@ public class DefaultPreset {
 		PresetHandler.moduleDissalowGrindingEnchantedTools = Boolean.valueOf(this.getPresetConfig().getString("moduleDissalowGrindingEnchantedTools"));
 		PresetHandler.moduleLightGoldenApple = Boolean.valueOf(this.getPresetConfig().getString("moduleLightGoldenApple"));
 		PresetHandler.moduleLightAnvil = Boolean.valueOf(this.getPresetConfig().getString("moduleLightAnvil"));
-		PresetHandler.ModuleProximityVoice = Boolean.valueOf(this.getPresetConfig().getString("moduleProximityVoice"));
+		PresetHandler.moduleAntiCheat = Boolean.valueOf(this.getPresetConfig().getString("moduleAntiCheat"));
+		PresetHandler.moduleAxeOfDestruction = Boolean.valueOf(this.getPresetConfig().getString("moduleAxeOfDestruction"));
+		PresetHandler.axeOfDestructionLevelling = Boolean.valueOf(this.getPresetConfig().getString("axeOfDestructionLevelling"));
+
 		
 		//Integer
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
@@ -81,6 +84,7 @@ public class DefaultPreset {
 		PresetHandler.worldBorderShrinkAfter = Integer.valueOf(this.getPresetConfig().getString("worldBorderShrinkAfter"));
 		PresetHandler.worldBorderShrinkTo = Integer.valueOf(this.getPresetConfig().getString("worldBorderShrinkTo"));
 		PresetHandler.gameTime = Integer.valueOf(this.getPresetConfig().getString("gameTime"));
+		PresetHandler.moduleAntiCheatTime = Integer.valueOf(this.getPresetConfig().getString("moduleAntiCheatTime"));
 	
 	}
 	
@@ -105,7 +109,10 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleDissalowGrindingEnchantedTools", PresetHandler.moduleDissalowGrindingEnchantedTools);
 		this.getPresetConfig().set("moduleLightGoldenApple", PresetHandler.moduleLightGoldenApple);
 		this.getPresetConfig().set("moduleLightAnvil", PresetHandler.moduleLightAnvil);
-		this.getPresetConfig().set("moduleProximityVoice", PresetHandler.ModuleProximityVoice);
+		this.getPresetConfig().set("moduleAntiCheat", PresetHandler.moduleAntiCheat);
+		this.getPresetConfig().set("moduleAntiCheatTime", PresetHandler.moduleAntiCheatTime);
+		this.getPresetConfig().set("moduleAxeOfDestruction", PresetHandler.moduleAxeOfDestruction);
+		this.getPresetConfig().set("axeOfDestructionLevelling", PresetHandler.axeOfDestructionLevelling);
 		
 		savePreset();
 	}

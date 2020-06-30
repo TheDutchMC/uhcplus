@@ -13,8 +13,8 @@ public class PresetHandler {
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
 	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow, moduleDissalowGrindingEnchantedTools,
-	moduleLightGoldenApple, moduleLightAnvil, ModuleProximityVoice;
-	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime;
+	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling;
+	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime;
 	
 	private UhcPlus plugin;
 	

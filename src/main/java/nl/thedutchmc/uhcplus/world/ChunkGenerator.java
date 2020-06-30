@@ -7,10 +7,7 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import io.papermc.lib.PaperLib;
-import net.dv8tion.jda.api.entities.Guild;
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.discord.DiscordConfigurationHandler;
-import nl.thedutchmc.uhcplus.discord.JdaSetup;
 
 public class ChunkGenerator {
 

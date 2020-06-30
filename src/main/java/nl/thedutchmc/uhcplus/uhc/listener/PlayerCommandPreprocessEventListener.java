@@ -2,13 +2,13 @@ package nl.thedutchmc.uhcplus.uhc.listener;
 
 import java.util.UUID;
 
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
@@ -68,6 +68,10 @@ public class PlayerCommandPreprocessEventListener implements Listener {
 					}
 				}
 			}
+			
+		} else if(commandParts[0].equalsIgnoreCase("/me")) {
+			event.setCancelled(true);
+			event.getPlayer().sendMessage(ChatColor.RED + "You're not allowed to use /me!");
 		}
 	}
 }

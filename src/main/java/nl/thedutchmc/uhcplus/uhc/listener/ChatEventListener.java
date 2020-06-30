@@ -4,13 +4,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.players.PlayerHandler;
 import nl.thedutchmc.uhcplus.players.PlayerObject;
 
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 

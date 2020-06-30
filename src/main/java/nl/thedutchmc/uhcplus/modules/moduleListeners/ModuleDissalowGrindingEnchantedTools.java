@@ -3,6 +3,7 @@ package nl.thedutchmc.uhcplus.modules.moduleListeners;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +14,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleDissalowGrindingEnchantedTools implements Listener {
@@ -27,7 +27,7 @@ public class ModuleDissalowGrindingEnchantedTools implements Listener {
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
 		
-		if(event.getInventory().getType().equals(InventoryType.GRINDSTONE)) {
+		if(event.getInventory().getType().equals(InventoryType.CHEST)) {
 			
 
 			

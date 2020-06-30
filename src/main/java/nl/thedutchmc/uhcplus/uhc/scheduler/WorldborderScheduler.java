@@ -1,11 +1,11 @@
 package nl.thedutchmc.uhcplus.uhc.scheduler;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
@@ -35,7 +35,7 @@ public class WorldborderScheduler {
 		worldBorder.setCenter(0, 0);
 		
 		String minuteSinglePlural = (worldBorderStartShrinkAfter != 1) ? " minutes" : " minute"; 		
-		Bukkit.broadcastMessage(ChatColor.AQUA + "The world border will start shrinking in " + ChatColor.RED + worldBorderStartShrinkAfter + ChatColor.AQUA + minuteSinglePlural + "!");
+		Bukkit.broadcastMessage(ChatColor.GRAY + "The world border will start shrinking in " + ChatColor.RED + worldBorderStartShrinkAfter + ChatColor.GRAY + minuteSinglePlural + "!");
 		
 		new BukkitRunnable() {
 			

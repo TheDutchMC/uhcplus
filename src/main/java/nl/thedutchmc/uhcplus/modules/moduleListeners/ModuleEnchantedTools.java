@@ -19,7 +19,11 @@ public class ModuleEnchantedTools implements Listener {
 		
 		ItemStack item = event.getCurrentItem();
 		
-		try {
+		if(item.getItemMeta().getDisplayName().equals(ChatColor.RED + "Axe of Destruction")) return;
+		
+		
+		try {	
+			
 			item.addEnchantment(Enchantment.DIG_SPEED, 4);
 			item.addEnchantment(Enchantment.DURABILITY, 2);
 			

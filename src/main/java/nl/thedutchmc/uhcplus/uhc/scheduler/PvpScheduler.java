@@ -3,10 +3,10 @@ package nl.thedutchmc.uhcplus.uhc.scheduler;
 import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
@@ -37,7 +37,7 @@ public class PvpScheduler {
 			public void run() {
 				overworld.setPVP(true);
 				
-				Bukkit.broadcastMessage(ChatColor.AQUA + "PVP is now enabled!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "PVP is now enabled!");
 				
 			}
 		}.runTaskLaterAsynchronously(plugin, timeToPvpTick);
@@ -47,7 +47,7 @@ public class PvpScheduler {
 			
 			@Override
 			public void run() {
-				Bukkit.broadcastMessage(ChatColor.AQUA + "One minute until PVP will be enabled!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "One minute until PVP will be enabled!");
 			}
 		}.runTaskLaterAsynchronously(plugin, oneMinuteToPvpTick);
 		
@@ -56,7 +56,7 @@ public class PvpScheduler {
 			
 			@Override
 			public void run() {
-				Bukkit.broadcastMessage(ChatColor.AQUA + "Thirty seconds until PVP will be enabled!");
+				Bukkit.broadcastMessage(ChatColor.GRAY + "Thirty seconds until PVP will be enabled!");
 			}
 		}.runTaskLaterAsynchronously(plugin, thirtySecondsToPvptick);
 		
@@ -67,7 +67,7 @@ public class PvpScheduler {
 			public void run() {
 				
 				for(int i = 10; i > 0; i--) {
-					Bukkit.broadcastMessage(ChatColor.AQUA + "PVP starting in " + String.valueOf(i));
+					Bukkit.broadcastMessage(ChatColor.GRAY + "PVP starting in " + String.valueOf(i));
 					
 					try {
 						TimeUnit.SECONDS.sleep(1);
