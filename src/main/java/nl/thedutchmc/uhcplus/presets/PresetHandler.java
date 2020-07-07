@@ -13,8 +13,9 @@ public class PresetHandler {
 	
 	public static String maxTeamCount, maxPlayerCountPerTeam;
 	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow, moduleDissalowGrindingEnchantedTools,
-	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling;
-	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime;
+	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity, swordOfDivinityLevelling;
+	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime, moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime,
+	moduleSwordOfDivinityLevelOneTime, moduleSwordOfDivinityLevelTwoTime;
 	
 	private UhcPlus plugin;
 	

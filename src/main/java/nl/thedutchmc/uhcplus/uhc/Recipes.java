@@ -1,5 +1,9 @@
 package nl.thedutchmc.uhcplus.uhc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -18,8 +22,8 @@ public class Recipes {
 		this.plugin = plugin;
 	}
 	
-	public static NamespacedKey lightGoldenAppleKey, lightAnvilKey, axeOfDestructionKey;
-	public static boolean lightGoldenAppleRegistered, lightAnvilRegistered, axeOfDestructionRegistered;
+	public static NamespacedKey lightGoldenAppleKey, lightAnvilKey, axeOfDestructionKey, swordOfDivinityKey;
+	public static boolean lightGoldenAppleRegistered, lightAnvilRegistered, axeOfDestructionRegistered, swordOfDivinityRegistered;
 	
 	public ShapedRecipe getLightGoldenAppleRecipe() {
 		lightGoldenAppleRegistered = true;
@@ -65,6 +69,10 @@ public class Recipes {
 		ItemMeta meta = stack.getItemMeta();
 		
 		meta.setDisplayName(ChatColor.RED + "Axe of Destruction");
+		List<String> lores = new ArrayList<>();
+		lores.add("Level 1");
+		lores.add(UUID.randomUUID().toString());
+		meta.setLore(lores);
 		stack.setItemMeta(meta);
 		
 		stack.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
@@ -76,6 +84,34 @@ public class Recipes {
 		ShapedRecipe recipe = new ShapedRecipe(axeOfDestructionKey, stack);
 		
 		recipe.shape("xii", "xbi", "xbx");
+		recipe.setIngredient('x', Material.AIR);
+		recipe.setIngredient('i', Material.IRON_INGOT);
+		recipe.setIngredient('b', Material.IRON_BLOCK);
+		
+		return recipe;
+	}
+	
+	public ShapedRecipe getSwordOfDivinity() {
+		swordOfDivinityRegistered = true;
+		
+		ItemStack stack = new ItemStack(Material.IRON_SWORD);
+		ItemMeta meta = stack.getItemMeta();
+		
+		meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Sword of Divinity");
+		List<String> lores = new ArrayList<>();
+		lores.add("Level 1");
+		lores.add(UUID.randomUUID().toString());
+		meta.setLore(lores);
+		stack.setItemMeta(meta);
+		
+		stack.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
+		stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
+		stack.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
+		
+		swordOfDivinityKey = new NamespacedKey(plugin, "sword_of_divinity");
+		ShapedRecipe recipe = new ShapedRecipe(swordOfDivinityKey, stack);
+		
+		recipe.shape("xbx", "xbx", "xix");
 		recipe.setIngredient('x', Material.AIR);
 		recipe.setIngredient('i', Material.IRON_INGOT);
 		recipe.setIngredient('b', Material.IRON_BLOCK);

@@ -1,10 +1,7 @@
 package nl.thedutchmc.uhcplus.modules;
 
-import java.util.Iterator;
-
+import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.ModuleAntiCheat;
@@ -25,9 +22,12 @@ public class ModuleHandler {
 	static ModuleGravelDropArrow moduleGravelDropArrow;
 	static ModuleDissalowGrindingEnchantedTools moduleDissalowGrindingEnchantedTools;
 	static ModuleDioriteDamage moduleDioriteDamage;
+	static ModuleAxeOfDestruction moduleAxeOfDestruction;
+	static ModuleSwordOfDivinity moduleSwordOfDivinity;
 	
 	static Recipes recipes;
 	static ModuleAntiCheat moduleAntiCheat;
+
 	
 	
 	public ModuleHandler(UhcPlus plugin) {
@@ -47,6 +47,8 @@ public class ModuleHandler {
 		moduleDissalowGrindingEnchantedTools = new ModuleDissalowGrindingEnchantedTools(plugin);
 		moduleDioriteDamage = new ModuleDioriteDamage(plugin);
 		moduleAntiCheat = new ModuleAntiCheat(plugin);
+		moduleAxeOfDestruction = new ModuleAxeOfDestruction(plugin);
+		moduleSwordOfDivinity = new ModuleSwordOfDivinity(plugin);
 		
 		recipes = new Recipes(plugin);
 	
@@ -74,8 +76,14 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleAxeOfDestruction && !Recipes.axeOfDestructionRegistered) plugin.getServer().addRecipe(recipes.getAxeOfDestructionRecipe());
 		
+		if(PresetHandler.moduleSwordOfDivinity && !Recipes.swordOfDivinityRegistered) plugin.getServer().addRecipe(recipes.getSwordOfDivinity());
+		
 		if(PresetHandler.moduleAntiCheat) moduleAntiCheat.enableModule();
 		
+		if(PresetHandler.axeOfDestructionLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleAxeOfDestruction, plugin);
+		
+		if(PresetHandler.swordOfDivinityLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleSwordOfDivinity, plugin);
+
 	}
 	
 	public void unloadModules() {
@@ -96,6 +104,11 @@ public class ModuleHandler {
 		if(!PresetHandler.moduleDissalowGrindingEnchantedTools) HandlerList.unregisterAll(moduleDissalowGrindingEnchantedTools);
 		
 		if(!PresetHandler.moduleAntiCheat) moduleAntiCheat.disableModule();
+		
+		if(!PresetHandler.axeOfDestructionLevelling) HandlerList.unregisterAll(moduleAxeOfDestruction);
+
+		if(!PresetHandler.swordOfDivinityLevelling) HandlerList.unregisterAll(moduleSwordOfDivinity);
+
 
 		/*Iterator<Recipe> it = plugin.getServer().recipeIterator();
 		while(it.hasNext()) {

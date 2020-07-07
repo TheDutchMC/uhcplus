@@ -62,6 +62,30 @@ moduleAntiCheat: "true"
 #The time after which a player can safely mine diamond ore again without OPs being notified. In Seconds, Default: 60
 moduleAntiCheatTime: "60"
 
+#Do we want the Axe of Destruction to be craftable? Default: true
 moduleAxeOfDestruction: "true"
 
+#Do we want the Axe of Destruction to level up over time? Default: true
 axeOfDestructionLevelling: "true"
+ 
+#Time in seconds until the Axe levels up to level 2, Requires axeOfDestructionLevelling to be true to work. Default: 1200
+moduleAxeOfDestructionLevelOneTime: "1200"
+
+#Time in seconds until the Axe levels up to level 3, Requires axeOfDestructionLevelling to be true to work. Default: 2400
+moduleAxeOfDestructionLevelTwoTime: "2400"
+
+#Do we want the Sword of Divinty to be craftable: 
+moduleSwordOfDivinity: "true"
+
+#Do we want the Sword of Divnity to level up over time? Default: true
+swordOfDivinityLevelling: "true"
+
+#Time in seconds until the Sword levels up to level 2, Requires swordOfDivinityLevelling to be true to work. Default: 1200
+moduleSwordOfDivinityLevelOneTime: "1200"
+
+#Time in seconds until the Sword levels up to level 3, Requires swordOfDivinityLevelling to be true to work. Default: 2400
+moduleSwordOfDivinityLevelTwoTime: "2400"
+
+
+
+

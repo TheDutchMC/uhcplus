@@ -27,7 +27,7 @@ public class ModuleDissalowGrindingEnchantedTools implements Listener {
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
 		
-		if(event.getInventory().getType().equals(InventoryType.CHEST)) {
+		if(event.getInventory().getType().equals(InventoryType.GRINDSTONE)) {
 			
 
 			

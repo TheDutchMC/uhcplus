@@ -1,8 +1,6 @@
 package nl.thedutchmc.uhcplus;
 
 import java.io.File;
-import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,7 +16,6 @@ import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
-import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;

@@ -75,7 +75,8 @@ public class DefaultPreset {
 		PresetHandler.moduleAntiCheat = Boolean.valueOf(this.getPresetConfig().getString("moduleAntiCheat"));
 		PresetHandler.moduleAxeOfDestruction = Boolean.valueOf(this.getPresetConfig().getString("moduleAxeOfDestruction"));
 		PresetHandler.axeOfDestructionLevelling = Boolean.valueOf(this.getPresetConfig().getString("axeOfDestructionLevelling"));
-
+		PresetHandler.moduleSwordOfDivinity = Boolean.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinity"));
+		PresetHandler.swordOfDivinityLevelling = Boolean.valueOf(this.getPresetConfig().getString("swordOfDivinityLevelling"));
 		
 		//Integer
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
@@ -85,7 +86,12 @@ public class DefaultPreset {
 		PresetHandler.worldBorderShrinkTo = Integer.valueOf(this.getPresetConfig().getString("worldBorderShrinkTo"));
 		PresetHandler.gameTime = Integer.valueOf(this.getPresetConfig().getString("gameTime"));
 		PresetHandler.moduleAntiCheatTime = Integer.valueOf(this.getPresetConfig().getString("moduleAntiCheatTime"));
-	
+		PresetHandler.moduleAxeOfDestructionLevelOneTime = Integer.valueOf(this.getPresetConfig().getString("moduleAxeOfDestructionLevelOneTime"));
+		PresetHandler.moduleAxeOfDestructionLevelTwoTime = Integer.valueOf(this.getPresetConfig().getString("moduleAxeOfDestructionLevelTwoTime"));
+		PresetHandler.moduleSwordOfDivinityLevelOneTime = Integer.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinityLevelOneTime"));
+		PresetHandler.moduleSwordOfDivinityLevelTwoTime = Integer.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinityLevelTwoTime"));
+
+
 	}
 	
 	public void writePreset(String presetName) {
@@ -113,6 +119,12 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleAntiCheatTime", PresetHandler.moduleAntiCheatTime);
 		this.getPresetConfig().set("moduleAxeOfDestruction", PresetHandler.moduleAxeOfDestruction);
 		this.getPresetConfig().set("axeOfDestructionLevelling", PresetHandler.axeOfDestructionLevelling);
+		this.getPresetConfig().set("moduleAxeOfDestructionLevelOneTime", PresetHandler.moduleAxeOfDestructionLevelOneTime);
+		this.getPresetConfig().set("moduleAxeOfDestructionLevelTwoTime", PresetHandler.moduleAxeOfDestructionLevelTwoTime);
+		this.getPresetConfig().set("moduleSwordOfDivinity", PresetHandler.moduleSwordOfDivinity);
+		this.getPresetConfig().set("swordOfDivinityLevelling", PresetHandler.swordOfDivinityLevelling);
+		this.getPresetConfig().set("moduleSwordOfDivinityLevelOneTime", PresetHandler.moduleSwordOfDivinityLevelOneTime);
+		this.getPresetConfig().set("moduleSwordOfDivinityLevelTwoTime", PresetHandler.moduleSwordOfDivinityLevelTwoTime);
 		
 		savePreset();
 	}
