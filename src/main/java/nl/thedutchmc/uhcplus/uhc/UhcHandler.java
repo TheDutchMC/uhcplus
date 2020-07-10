@@ -1,10 +1,8 @@
 package nl.thedutchmc.uhcplus.uhc;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -18,7 +16,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
-
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
@@ -87,6 +84,9 @@ public class UhcHandler {
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
 		}
+		
+		//Register the UHCEndedEventListener, this fires after the UHC ends
+		plugin.getServer().getPluginManager().registerEvents(new UhcEndedEventListener(plugin), plugin);
 		
 		//Register the chat listener, for team chat
 		plugin.getServer().getPluginManager().registerEvents(new ChatEventListener(), plugin);
