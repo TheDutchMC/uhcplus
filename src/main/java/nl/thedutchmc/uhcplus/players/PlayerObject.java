@@ -2,16 +2,16 @@ package nl.thedutchmc.uhcplus.players;
 
 import java.util.UUID;
 
-import nl.thedutchmc.uhcplus.teams.Team;
-
 public class PlayerObject {
 
 	private UUID playerUuid;
 	private boolean teamChatEnabled;
-	private Team team;
+	private int teamId;
 	
 	public PlayerObject(UUID playerUuid) {
 		this.playerUuid = playerUuid;
+		
+		teamId = -1;
 	}
 	
 	public UUID getPlayerUuid() {
@@ -26,11 +26,11 @@ public class PlayerObject {
 		return teamChatEnabled;
 	}
 	
-	public void setTeam(Team team) {
-		this.team = team;
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
 	}
 	
-	public Team getTeam() {
-		return team;
+	public int getTeamId() {
+		return teamId;
 	}
 }

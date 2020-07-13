@@ -6,7 +6,10 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import nl.thedutchmc.uhcplus.players.PlayerHandler;
 import nl.thedutchmc.uhcplus.players.PlayerObject;
+import nl.thedutchmc.uhcplus.teams.Team;
+import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -42,7 +45,8 @@ public class ChatEventListener implements Listener {
 		} else {
 			
 			//Loop over all the playerObjects
-			for(PlayerObject playerObject : PlayerHandler.playerObjects) {
+			for(Map.Entry<UUID, PlayerObject> entry : PlayerHandler.playerObjects.entrySet()) {
+				PlayerObject playerObject = entry.getValue();
 				
 				//if the current playerObject is the sender
 				if(playerObject.getPlayerUuid().equals(playerUuid)) {
@@ -54,7 +58,8 @@ public class ChatEventListener implements Listener {
 						event.setCancelled(true);
 						
 						//loop over the team and send the message to them
-						for(UUID uuid : playerObject.getTeam().getTeamMembers()) {
+						Team team = TeamHandler.getTeamById(playerObject.getTeamId());
+						for(UUID uuid : team.getAliveTeamMembers()) {
 							if(uuid != null) {
 								Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
 								teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);

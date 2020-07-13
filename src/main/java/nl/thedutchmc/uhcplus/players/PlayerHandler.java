@@ -1,19 +1,22 @@
 package nl.thedutchmc.uhcplus.players;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerHandler {
 
-	public static List<PlayerObject> playerObjects = new ArrayList<>();
+	public static HashMap<UUID, PlayerObject> playerObjects = new HashMap<>();
 	
-	public PlayerObject addPlayerToListAndReturn(UUID playerUuid) {
+	public static PlayerObject addPlayerToListAndReturn(UUID playerUuid) {
 		
 		PlayerObject newPlayerObject = new PlayerObject(playerUuid);
-		playerObjects.add(newPlayerObject);
+		playerObjects.put(playerUuid,newPlayerObject);
 		
 		return newPlayerObject;
 		
+	}
+	
+	public PlayerObject getPlayerObject(UUID playerUUID) {
+		return playerObjects.get(playerUUID);
 	}
 }

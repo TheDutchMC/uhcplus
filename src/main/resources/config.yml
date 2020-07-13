@@ -34,3 +34,6 @@ restartAfterUhc: "true"
 
 #How many seconds after the UHC should the server restart. Default: 180
 timeUntilRestart: "180"
+
+#Should we pregenerate chunks. Default: false
+pregenChunks: "false"

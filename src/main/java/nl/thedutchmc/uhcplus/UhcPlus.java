@@ -15,7 +15,9 @@ import nl.thedutchmc.uhcplus.commands.BroadcastCommandHandler;
 import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
+import nl.thedutchmc.uhcplus.gui.GuiHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;
@@ -24,7 +26,7 @@ public class UhcPlus extends JavaPlugin {
 
 	public static String VERSION = "1.1-BETA";
 		
-	public static boolean PLAYER_CAN_JOIN = true;	
+	public static boolean PLAYER_CAN_JOIN = false;	
 	
 	public static boolean UHC_STARTED = false;
 	
@@ -33,7 +35,6 @@ public class UhcPlus extends JavaPlugin {
 	public static void debugLog(String log) {
 		System.out.println("[UhcPlus][Debug]" + log);
 	}
-	
 	
 	@Override
 	public void onEnable() {
@@ -76,6 +77,14 @@ public class UhcPlus extends JavaPlugin {
 		File file = new File(this.getDataFolder() + File.separator + "deathmatch");
 		file.mkdir();
 		
+		//Create teams
+		TeamHandler teamHandler = new TeamHandler(this, null, false);
+		teamHandler.createTeams();
+		
+		//Set up the GUI system
+		GuiHandler gHandler = new GuiHandler(this);
+		gHandler.setupGuiSystem();
+		
 		UhcPlus plugin = this;
 		
 		new BukkitRunnable() {
@@ -91,5 +100,6 @@ public class UhcPlus extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
+		
 	}
 }

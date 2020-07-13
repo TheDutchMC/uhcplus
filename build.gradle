@@ -54,6 +54,9 @@ dependencies {
 }
 
 shadowJar {
+
+	destinationDir = file("$rootDir/server/plugins")
+	
 	relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
 }
 

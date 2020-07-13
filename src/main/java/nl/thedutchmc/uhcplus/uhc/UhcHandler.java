@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 
+import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
@@ -68,6 +69,15 @@ public class UhcHandler {
 		//Add event listener for UhcStartedEventListener (this listener will remove the lobby)
 		plugin.getServer().getPluginManager().registerEvents(new UhcStartedEventListener(), plugin);
 		
+		//Set the correct tab list color and display name color for every player
+		for(Team team : teams) {
+			for(UUID uuid : team.getTeamMembers()) {
+				Player p = Bukkit.getPlayer(uuid);
+				p.setPlayerListName(team.getTeamColor() + p.getName());
+				p.setDisplayName(team.getTeamColor() + p.getName() + ChatColor.WHITE);
+			}
+		}
+		
 		//Set the required gamerules.
 		uhcworld.setGameRule(GameRule.NATURAL_REGENERATION, false);
 		uhcworld.setGameRule(GameRule.DO_FIRE_TICK, false);
@@ -81,8 +91,12 @@ public class UhcHandler {
 		uhcworld.setTime(6000);
 		
 		//Set full health
+		//Clear player inventory and set their gamemode to survival
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
+			
+			player.setGameMode(GameMode.SURVIVAL);
+			player.getInventory().clear();
 		}
 		
 		//Register the UHCEndedEventListener, this fires after the UHC ends
@@ -108,14 +122,7 @@ public class UhcHandler {
 		
 		//Difficuly to hard
 		uhcworld.setDifficulty(Difficulty.HARD);
-		
-		//Clear player inventory and set their gamemode to survival
-		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
-			
-			player.setGameMode(GameMode.SURVIVAL);
-			player.getInventory().clear();
-		}
-		
+				
 		//Spawn protection to 0
 		Bukkit.getServer().setSpawnRadius(0);
 		

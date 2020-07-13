@@ -80,7 +80,7 @@ public class ModuleSwordOfDivinity implements Listener {
 							if(swordLevel == 1) {
 								
 								inv.remove(is);
-								inv.addItem(getSwordOfDivinityLevelOne(swordUuid));
+								inv.setItem(i, getSwordOfDivinityLevelOne(swordUuid));
 								
 								new BukkitRunnable() {
 									@Override
@@ -129,7 +129,7 @@ public class ModuleSwordOfDivinity implements Listener {
 						if(is.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Sword of Divinity")) {
 							
 							inv.remove(is);
-							inv.addItem(getSwordOfDivinityLevelTwo(swordUuid));
+							inv.setItem(i, getSwordOfDivinityLevelTwo(swordUuid));
 						}	
 					}
 				}

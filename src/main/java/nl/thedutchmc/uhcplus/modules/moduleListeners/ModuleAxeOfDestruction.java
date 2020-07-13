@@ -94,7 +94,7 @@ public class ModuleAxeOfDestruction implements Listener {
 								
 								//Remove the axe and give a new one of a higher level
 								inv.remove(is);
-								inv.addItem(getAxeOfDestructionLevelOne(axeUuid));
+								inv.setItem(i, getAxeOfDestructionLevelOne(axeUuid));
 								
 								//Calling events should be sync
 								new BukkitRunnable() {
@@ -151,7 +151,7 @@ public class ModuleAxeOfDestruction implements Listener {
 
 							//Remove the axe, and give a new one of a higher level.
 							inv.remove(is);
-							inv.addItem(getAxeOfDestructionLevelTwo(axeUuid));
+							inv.setItem(i, getAxeOfDestructionLevelTwo(axeUuid));
 							
 						}
 					}

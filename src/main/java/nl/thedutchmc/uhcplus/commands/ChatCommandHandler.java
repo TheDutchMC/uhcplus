@@ -1,5 +1,8 @@
 package nl.thedutchmc.uhcplus.commands;
 
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,7 +22,8 @@ public class ChatCommandHandler implements CommandExecutor {
 			
 			Player p = (Player) sender;
 			
-			for(PlayerObject playerObject : PlayerHandler.playerObjects) {
+			for(Map.Entry<UUID, PlayerObject> entry : PlayerHandler.playerObjects.entrySet()) {
+				PlayerObject playerObject = entry.getValue();
 				
 				if(playerObject.getPlayerUuid().equals(p.getUniqueId())) {
 					

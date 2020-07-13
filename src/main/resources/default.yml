@@ -1,6 +1,6 @@
 #Welcome to the preset configuration file of UHCPLus!
 
-#Set the maximum amount of teams. Range: 1-16, default: 16
+#Set the maximum amount of teams. default: 16
 maxTeamCount: "16"
 
 #Set the maximum amount of players per team. Range: 1-infinite. Default: 4.

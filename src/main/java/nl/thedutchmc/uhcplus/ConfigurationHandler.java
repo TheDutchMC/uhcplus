@@ -18,7 +18,7 @@ private UhcPlus plugin;
 	public static List<String> availablePresets = new ArrayList<String>();
 	public static List<String> allowedSeeds = new ArrayList<String>();
 	
-	public static boolean spectatorCanRunCommand, spectatorCanWhisperToPlayer, limitCrafting, restartAfterUhc;
+	public static boolean spectatorCanRunCommand, spectatorCanWhisperToPlayer, limitCrafting, restartAfterUhc, pregenWorld;
 	
 	public static int limitCraftingAmount, timeUntilRestart;
 	
@@ -70,6 +70,7 @@ private UhcPlus plugin;
 		spectatorCanWhisperToPlayer = Boolean.valueOf(this.getUHCPConfig().getString("spectatorCanWhisperToPlayer"));
 		limitCrafting = Boolean.valueOf(this.getUHCPConfig().getString("limitCrafting"));
 		restartAfterUhc = Boolean.valueOf(this.getUHCPConfig().getString("restartAfterUhc"));
+		pregenWorld = Boolean.valueOf(this.getUHCPConfig().getString("pregenWorld"));
 		
 		//Integer
 		limitCraftingAmount = Integer.valueOf(this.getUHCPConfig().getString("limitCraftingAmount"));

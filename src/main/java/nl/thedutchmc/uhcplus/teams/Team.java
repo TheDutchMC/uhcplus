@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class Team {
 

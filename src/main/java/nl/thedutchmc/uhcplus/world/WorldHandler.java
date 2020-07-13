@@ -33,10 +33,13 @@ public class WorldHandler {
 		LobbyHandler lobbyHandler = new LobbyHandler(plugin);
 		lobbyHandler.loadLobby();
 		
-		ChunkGenerator chunkGenerator = new ChunkGenerator(plugin);
-		chunkGenerator.generateChunks();
-		
-
+		if(ConfigurationHandler.pregenWorld) {
+			ChunkGenerator chunkGenerator = new ChunkGenerator(plugin);
+			chunkGenerator.generateChunks();
+		} else {
+			System.out.println("[UhcPlus] Done. Players may now join.");
+			UhcPlus.PLAYER_CAN_JOIN = true;
+		}
 	}
 	
 	void removeOldWorld() {
