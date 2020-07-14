@@ -103,7 +103,7 @@ public class ModuleSwordOfDivinity implements Listener {
 	public void onEntityPickupItemEvent(EntityPickupItemEvent event) {
 		
 		itemStackEntityPickupEvent = event.getItem().getItemStack();
-		if(itemStackEntityPickupEvent.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Sword of Divinity"));
+		if(!itemStackEntityPickupEvent.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Sword of Divinity")) return;
 		
 		swordPlayerTracker.replace(UUID.fromString(itemStackEntityPickupEvent.getItemMeta().getLore().get(1)), event.getEntity().getUniqueId());
 	}

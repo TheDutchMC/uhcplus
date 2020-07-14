@@ -219,6 +219,7 @@ public class UhcHandler {
 				Player player = Bukkit.getServer().getPlayer(uuid);
 				player.teleport(location);
 				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 200));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 200));
 			}	
 		}
 		

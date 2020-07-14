@@ -1,8 +1,8 @@
 name: UHCPlus
 main: nl.thedutchmc.uhcplus.UhcPlus
-version: 1.0.0
+version: 1.0
 author: [TheDutchMC, TimeMaster111]
-api-version: 1.15
+api-version: 1.16
 description: TBD
 depend: [WorldEdit]
 commands:

@@ -32,7 +32,7 @@ public class BlockBreakEventListener implements Listener {
 				long seconds = (dateNow.getTime() - ModuleAntiCheat.timeSinceLastDiamond.get(uuid).getTime()) / 1000;
 				
 				//Check if its more than 5 and less than the configured (default 60 seconds) time
-				if(seconds > 5 && seconds <= PresetHandler.moduleAntiCheatTime) {
+				if(seconds > 10 && seconds <= PresetHandler.moduleAntiCheatTime) {
 					
 					//Get all players, and then check for the OP Players
 					for(Player p : Bukkit.getOnlinePlayers()) {

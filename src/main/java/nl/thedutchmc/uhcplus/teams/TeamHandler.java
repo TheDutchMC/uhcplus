@@ -67,6 +67,8 @@ public class TeamHandler {
 
 	public void playerJoinTeam(int teamId, UUID uuid) {
 	
+		teamManuallySelect = true;
+		
 		//Check if teams have been made yet, if not do so
 		if(teams.isEmpty()) {
 			createTeams();

@@ -11,6 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerInteractEventListener;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerJoinEventListener;
+import nl.thedutchmc.uhcplus.gui.recipe.RecipeGui;
 import nl.thedutchmc.uhcplus.gui.team.TeamEventListener;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
 import nl.thedutchmc.uhcplus.gui.team.subgui.listTeamsGui.ListTeamsEventListener;
@@ -40,12 +41,16 @@ public class GuiHandler {
 		itemsForPlayers.add(CreateItem.create(Material.IRON_SWORD, ChatColor.GOLD + "Teams", "Right click me"));
 		Bukkit.getPluginManager().registerEvents(new TeamEventListener(), plugin);
 		
-		
 		//Setup the ListTeams GUI
 		ListTeamsGui.initGui();
 		Bukkit.getPluginManager().registerEvents(new ListTeamsEventListener(plugin), plugin);
 		
 		//END OF TEAM GUI
+		
+		//START OF RECIPE GUI
+		RecipeGui.setupGui();
+		itemsForPlayers.add(CreateItem.create(Material.CRAFTING_TABLE, "Recipes", "Right click me"));
+		
 	}
 	
 	public static List<ItemStack> getItemsForPlayers() {
