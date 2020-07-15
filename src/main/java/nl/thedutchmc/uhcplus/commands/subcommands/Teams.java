@@ -11,18 +11,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class Teams {
-
-	private UhcPlus plugin;
-	
-	public Teams(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public boolean teamsSubcommand(CommandSender sender, Command command, String label, String[] args) {
 		
@@ -42,6 +35,7 @@ public class Teams {
 				sender.sendMessage("- " + cg + "/uhcp teams randomfill " + cw + "Randomly fill the teams with player");
 				sender.sendMessage("- " + cg + "/uhcp teams getteams " + cw + "Returns how many players are in each team.");
 				sender.sendMessage("- " + cg + "/uchp teams whichteam <player name> " + cw + "Returns in which team the player is.");
+				sender.sendMessage("- " + cg + "/uhcp teams jointeam <team id> " + cw + "Join a team.");
 
 				
 			//uhcp teams teamcount
@@ -53,14 +47,14 @@ public class Teams {
 			//uhcp teams randomfill
 			} else if(args[1].equalsIgnoreCase("randomfill")) {
 				
-				TeamHandler teamHandler = new TeamHandler(plugin, sender, true);
+				TeamHandler teamHandler = new TeamHandler(sender, true);
 				teamHandler.playerRandomTeamJoiner();
 				
 				
 			//uhcp teams getteams
 			} else if(args[1].equalsIgnoreCase("getteams")) {
 				
-				TeamHandler teamHandler = new TeamHandler(plugin, sender, true);
+				TeamHandler teamHandler = new TeamHandler(sender, true);
 				HashMap<Integer, Integer> teamSizes = teamHandler.getTeamSizes();
 				
 				for(Map.Entry<Integer, Integer> entry : teamSizes.entrySet()) {
@@ -104,7 +98,7 @@ public class Teams {
 						sender.sendMessage(ChatColor.RED + "Invalid ID!");
 					}
 					
-					TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+					TeamHandler teamHandler = new TeamHandler(null, false);
 					
 					Player playerSender = (Player) sender;
 					

@@ -11,24 +11,16 @@ public class PresetHandler {
 
 	public static String loadedPreset;
 	
-	public static String maxTeamCount, maxPlayerCountPerTeam;
 	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow, moduleDissalowGrindingEnchantedTools,
-	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity, swordOfDivinityLevelling;
-	public static int moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime, moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime,
+	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity, swordOfDivinityLevelling, moduleTeamInventory;
+	public static int maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime, moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime,
 	moduleSwordOfDivinityLevelOneTime, moduleSwordOfDivinityLevelTwoTime;
-	
-	private UhcPlus plugin;
-	
-	public PresetHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	
 	public void loadPresets() {
 		List<String> availablePresets = ConfigurationHandler.availablePresets;
 		
-		DefaultPreset defaultPreset = new DefaultPreset(plugin);
-		defaultPreset = new DefaultPreset(plugin);
+		DefaultPreset defaultPreset = new DefaultPreset();
+		defaultPreset = new DefaultPreset();
 
 		for(String presetName : availablePresets) {
 			defaultPreset.loadPreset(presetName, false);
@@ -39,10 +31,10 @@ public class PresetHandler {
 	
 	
 	public void loadPreset(String presetName) {
-		DefaultPreset defaultPreset = new DefaultPreset(plugin);
+		DefaultPreset defaultPreset = new DefaultPreset();
 		defaultPreset.loadPreset(presetName, true);
 		
-		ModuleHandler moduleHandler = new ModuleHandler(plugin);
+		ModuleHandler moduleHandler = new ModuleHandler();
 		moduleHandler.unloadModules();
 		moduleHandler.loadModules();
 		
@@ -51,29 +43,29 @@ public class PresetHandler {
 		
 	public void createPreset(String presetName) {
 		
-		DefaultPreset defaultPreset = new DefaultPreset(plugin);
+		DefaultPreset defaultPreset = new DefaultPreset();
 		defaultPreset.loadPreset(presetName, false);
 	
-		ConfigurationHandler configurationHandler = new ConfigurationHandler(plugin);
+		ConfigurationHandler configurationHandler = new ConfigurationHandler();
 		configurationHandler.addNewPreset(presetName);
 	}
 	
 	public void removePreset(String presetName) {
 		
-		ConfigurationHandler configurationHandler = new ConfigurationHandler(plugin);
+		ConfigurationHandler configurationHandler = new ConfigurationHandler();
 		configurationHandler.removePreset(presetName);
 		
-		File file = new File(plugin.getDataFolder() + File.separator + "presets", presetName + ".yml");
+		File file = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "presets", presetName + ".yml");
 		
 		file.delete();
 	}
 	
-	public void changePresetOption() {
+	public static void changedPresetOption() {
 		
-		DefaultPreset defaultPreset = new DefaultPreset(plugin);
+		DefaultPreset defaultPreset = new DefaultPreset();
 		defaultPreset.writePreset(loadedPreset);
 		
-		ModuleHandler moduleHandler = new ModuleHandler(plugin);
+		ModuleHandler moduleHandler = new ModuleHandler();
 		moduleHandler.unloadModules();
 		moduleHandler.loadModules();
 	}

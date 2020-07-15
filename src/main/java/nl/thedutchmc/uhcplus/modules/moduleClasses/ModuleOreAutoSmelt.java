@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -7,16 +7,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class ModuleOreAutoSmelt implements Listener {
-
-	@SuppressWarnings("unused")
-	private UhcPlus plugin;
 	
-	public ModuleOreAutoSmelt(UhcPlus plugin) {
-		this.plugin = plugin;
+	public ModuleOreAutoSmelt() {
 		dropCount = PresetHandler.moduleOreAutoSmeltIngotDrop;
 	}
 

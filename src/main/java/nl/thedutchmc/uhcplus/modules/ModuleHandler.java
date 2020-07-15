@@ -5,13 +5,11 @@ import org.bukkit.event.HandlerList;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.ModuleAntiCheat;
-import nl.thedutchmc.uhcplus.modules.moduleListeners.*;
+import nl.thedutchmc.uhcplus.modules.moduleClasses.*;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.Recipes;
 
 public class ModuleHandler {
-
-	private UhcPlus plugin;
 	
 	static ModuleOreAutoSmelt moduleOreAutoSmelt;
 	static ModuleTreeFullRemove moduleTreeFullRemove;
@@ -27,31 +25,26 @@ public class ModuleHandler {
 	
 	static Recipes recipes;
 	static ModuleAntiCheat moduleAntiCheat;
-
-	
-	
-	public ModuleHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-				
-	}
 	
 	public void loadModules() {
 		
-		moduleOreAutoSmelt = new ModuleOreAutoSmelt(plugin);
+		moduleOreAutoSmelt = new ModuleOreAutoSmelt();
 		moduleTreeFullRemove = new ModuleTreeFullRemove();
-		moduleLeaveDecay = new ModuleLeaveDecay(plugin);
+		moduleLeaveDecay = new ModuleLeaveDecay();
 		moduleEnchantedTools = new ModuleEnchantedTools();
 		moduleInfiniteEnchanting = new ModuleInfiniteEnchanting();
 		moduleSheepDropString = new ModuleSheepDropString();
 		moduleGravelDropArrow = new ModuleGravelDropArrow();	
-		moduleDissalowGrindingEnchantedTools = new ModuleDissalowGrindingEnchantedTools(plugin);
-		moduleDioriteDamage = new ModuleDioriteDamage(plugin);
-		moduleAntiCheat = new ModuleAntiCheat(plugin);
-		moduleAxeOfDestruction = new ModuleAxeOfDestruction(plugin);
-		moduleSwordOfDivinity = new ModuleSwordOfDivinity(plugin);
+		moduleDissalowGrindingEnchantedTools = new ModuleDissalowGrindingEnchantedTools();
+		moduleDioriteDamage = new ModuleDioriteDamage();
+		moduleAntiCheat = new ModuleAntiCheat();
+		moduleAxeOfDestruction = new ModuleAxeOfDestruction();
+		moduleSwordOfDivinity = new ModuleSwordOfDivinity();
 		
-		recipes = new Recipes(plugin);
+		recipes = new Recipes();
 	
+		UhcPlus plugin = UhcPlus.INSTANCE;
+		
 		if(PresetHandler.moduleOreAutoSmelt) plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 
 		if(PresetHandler.moduleTreeFullRemove) plugin.getServer().getPluginManager().registerEvents(moduleTreeFullRemove, plugin);
@@ -83,7 +76,6 @@ public class ModuleHandler {
 		if(PresetHandler.axeOfDestructionLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleAxeOfDestruction, plugin);
 		
 		if(PresetHandler.swordOfDivinityLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleSwordOfDivinity, plugin);
-
 	}
 	
 	public void unloadModules() {

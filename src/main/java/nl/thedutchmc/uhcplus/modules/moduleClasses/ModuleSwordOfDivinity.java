@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,13 +29,7 @@ public class ModuleSwordOfDivinity implements Listener {
 	public static HashMap<UUID, UUID> swordPlayerTracker = new HashMap<>();
 	public static List<UUID> playerSwordCraftedChecker = new ArrayList<>();
 	
-	private UhcPlus plugin;
-	
 	private static ItemStack itemStackCraftEvent, itemStackEntityPickupEvent;
-	
-	public ModuleSwordOfDivinity(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onCraftItemEvent(CraftItemEvent event) {
@@ -88,7 +82,7 @@ public class ModuleSwordOfDivinity implements Listener {
 										
 										Bukkit.getPluginManager().callEvent(new SwordOfDivinityLevelUpEvent(swordLevel+1, swordUuid));
 									}
-								}.runTask(plugin);
+								}.runTask(UhcPlus.INSTANCE);
 							}
 							
 						}
@@ -96,7 +90,7 @@ public class ModuleSwordOfDivinity implements Listener {
 					
 				}
 			}
-		}.runTaskLaterAsynchronously(plugin, PresetHandler.moduleSwordOfDivinityLevelOneTime * 20);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, PresetHandler.moduleSwordOfDivinityLevelOneTime * 20);
 	}
 	
 	@EventHandler
@@ -133,7 +127,7 @@ public class ModuleSwordOfDivinity implements Listener {
 						}	
 					}
 				}
-			}.runTaskLaterAsynchronously(plugin, (PresetHandler.moduleSwordOfDivinityLevelTwoTime - PresetHandler.moduleSwordOfDivinityLevelOneTime) * 20);
+			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (PresetHandler.moduleSwordOfDivinityLevelTwoTime - PresetHandler.moduleSwordOfDivinityLevelOneTime) * 20);
 		}
 		
 	}

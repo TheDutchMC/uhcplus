@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 
 @SuppressWarnings("deprecation")
 public class ModuleDioriteDamage implements Listener {
-
-	private UhcPlus plugin;
-	
-	public ModuleDioriteDamage(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	static List<UUID> playersWithDiorite = new ArrayList<>();
 	
@@ -47,7 +41,7 @@ public class ModuleDioriteDamage implements Listener {
 						player.damage(0.1);
 					}
 				}
-			}.runTaskTimer(plugin, 20, 20);
+			}.runTaskTimer(UhcPlus.INSTANCE, 20, 20);
 			
 		}
 		

@@ -12,16 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleTeamInventory;
 import nl.thedutchmc.uhcplus.players.PlayerHandler;
 import nl.thedutchmc.uhcplus.players.PlayerObject;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class TeamHandler {
-
-	@SuppressWarnings("unused")
-	private UhcPlus plugin;
-
+	
 	private int maxTeamCount = Integer.valueOf(PresetHandler.maxTeamCount);
 	private int maxPlayerCountPerTeam = Integer.valueOf(PresetHandler.maxPlayerCountPerTeam);
 
@@ -34,8 +31,7 @@ public class TeamHandler {
 	private CommandSender sender;
 	public static List<Team> teams = new ArrayList<>();
 
-	public TeamHandler(UhcPlus plugin, CommandSender sender, boolean shouldReturn) {
-		this.plugin = plugin;
+	public TeamHandler(CommandSender sender, boolean shouldReturn) {
 		this.sender = sender;
 		this.shouldReturn = shouldReturn;
 	}
@@ -51,6 +47,13 @@ public class TeamHandler {
 
 			team.setTeamColor(ChatColor.of("#" + c));
 			colorsUsed.add(c);
+			
+			if(PresetHandler.moduleTeamInventory) {
+				ModuleTeamInventory teamInventory = new ModuleTeamInventory();
+				teamInventory.setupGui();
+				team.setTeamInventory(teamInventory);
+			}
+			
 			teams.add(team);
 		}
 	}

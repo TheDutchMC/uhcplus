@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import java.util.ArrayList;
 import java.util.Arrays;

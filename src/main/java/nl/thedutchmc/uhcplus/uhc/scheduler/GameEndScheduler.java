@@ -11,12 +11,6 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
 
 public class GameEndScheduler {
-
-	private UhcPlus plugin;
-	
-	public GameEndScheduler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public void scheduleGameEnd() { 
 		int gameTime = PresetHandler.gameTime;
@@ -33,11 +27,11 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 				
-				DeathmatchHandler deathmatchHandler = new DeathmatchHandler(plugin);
+				DeathmatchHandler deathmatchHandler = new DeathmatchHandler();
 				deathmatchHandler.startDeathmatch();
 			}
 			
-		}.runTaskLater(plugin, gameTimeTicks);
+		}.runTaskLater(UhcPlus.INSTANCE, gameTimeTicks);
 		
 		//5 minutes until game end 
 		new BukkitRunnable() {
@@ -48,7 +42,7 @@ public class GameEndScheduler {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.GRAY + " minutes!");
 				
 			}
-		}.runTaskLaterAsynchronously(plugin, fiveMinGameTimeTicks);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, fiveMinGameTimeTicks);
 		
 		//1 minute until game end;
 		new BukkitRunnable() {
@@ -59,7 +53,7 @@ public class GameEndScheduler {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.GRAY + " minute!");
 				
 			}
-		}.runTaskLaterAsynchronously(plugin, oneminGameTimeTicks);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, oneminGameTimeTicks);
 		
 		//30 seconds until game end;
 		new BukkitRunnable() {
@@ -70,7 +64,7 @@ public class GameEndScheduler {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.GRAY + " seconds!");
 				
 			}
-		}.runTaskLaterAsynchronously(plugin, thirtySecondGameTimeTicks);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, thirtySecondGameTimeTicks);
 		
 		//10 seconds until game end;
 		new BukkitRunnable() {
@@ -88,7 +82,7 @@ public class GameEndScheduler {
 					}
 				}
 			}
-		}.runTaskLaterAsynchronously(plugin, tenSecGameTimeTicks);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, tenSecGameTimeTicks);
 	
 	}
 }

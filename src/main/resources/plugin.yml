@@ -1,16 +1,19 @@
 name: UHCPlus
 main: nl.thedutchmc.uhcplus.UhcPlus
-version: 1.0
-author: [TheDutchMC, TimeMaster111]
+version: DEV-1.3
+author: TheDutchMC
 api-version: 1.16
-description: TBD
+description: A highly configurable UHC Plugin
+website: https://github.com/TheDutchMC/uhcplus
 depend: [WorldEdit]
 commands:
  uhcp:
   description: uhcp base command. See /uhcp help for help.
  chat:
   description: toggle between team chat and global chat
- discord:
-  description: Allows the user to add their discord name to their minecraft profile
  broadcast:
   description: Broadcast a message to all online players.
+ teaminventory:
+  description: Opens team inventory for the executor's team
+ ti:
+  description: alias for Teaminventory

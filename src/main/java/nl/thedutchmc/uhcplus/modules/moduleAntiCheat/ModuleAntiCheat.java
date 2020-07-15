@@ -16,13 +16,10 @@ public class ModuleAntiCheat {
 	
 	private static BlockBreakEventListener blockBreakEventListener;
 	
-	private UhcPlus plugin;
-	
-	public ModuleAntiCheat(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
+	private static UhcPlus plugin;
 	
 	public void enableModule() {
+		plugin = UhcPlus.INSTANCE;
 		
 		blockBreakEventListener = new BlockBreakEventListener();
 		

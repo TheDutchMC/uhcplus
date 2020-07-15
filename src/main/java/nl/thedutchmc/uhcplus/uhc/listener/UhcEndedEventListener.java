@@ -12,12 +12,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcEndedEvent;
 
 public class UhcEndedEventListener implements Listener {
-
-	private UhcPlus plugin;
-	
-	public UhcEndedEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onUhcEndedEvent(UhcEndedEvent event) {
@@ -57,9 +51,9 @@ public class UhcEndedEventListener implements Listener {
 					public void run() {
 						Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "restart");
 					}
-				}.runTask(plugin);
+				}.runTask(UhcPlus.INSTANCE);
 			}
-		}.runTaskLaterAsynchronously(plugin, ConfigurationHandler.timeUntilRestart * 20);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, ConfigurationHandler.timeUntilRestart * 20);
 		
 		//Check if the time until restart is bigger than 60 seconds
 		if(ConfigurationHandler.timeUntilRestart > 60) {	
@@ -75,10 +69,10 @@ public class UhcEndedEventListener implements Listener {
 						public void run() {
 							Bukkit.broadcastMessage(ChatColor.GRAY + "[UhcPlus]" + ChatColor.AQUA + " Restarting in " + ChatColor.RED + "60" + ChatColor.GOLD + " seconds!");
 						}
-					}.runTask(plugin);
+					}.runTask(UhcPlus.INSTANCE);
 					
 				}
-			}.runTaskLaterAsynchronously(plugin, (ConfigurationHandler.timeUntilRestart - 60) * 20);
+			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (ConfigurationHandler.timeUntilRestart - 60) * 20);
 		}
 		
 		//Check if the time until restart is bigger than 10 seconds
@@ -94,9 +88,9 @@ public class UhcEndedEventListener implements Listener {
 						public void run() {
 							Bukkit.broadcastMessage(ChatColor.GRAY + "[UhcPlus]" + ChatColor.AQUA + "Restarting in " + ChatColor.RED + "10" + ChatColor.AQUA + "seconds!");
 						}
-					}.runTask(plugin);
+					}.runTask(UhcPlus.INSTANCE);
 				}
-			}.runTaskLaterAsynchronously(plugin, (ConfigurationHandler.timeUntilRestart - 10) * 20);
+			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (ConfigurationHandler.timeUntilRestart - 10) * 20);
 		}
 	}
 }

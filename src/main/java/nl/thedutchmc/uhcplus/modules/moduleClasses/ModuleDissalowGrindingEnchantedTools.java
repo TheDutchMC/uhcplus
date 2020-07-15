@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleDissalowGrindingEnchantedTools implements Listener {
-
-	private UhcPlus plugin;
-	
-	public ModuleDissalowGrindingEnchantedTools(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
@@ -57,7 +51,7 @@ public class ModuleDissalowGrindingEnchantedTools implements Listener {
 						}
 					}
 				}
-			}.runTaskLater(plugin, 1);	
+			}.runTaskLater(UhcPlus.INSTANCE, 1);	
 		}
 	}
 }

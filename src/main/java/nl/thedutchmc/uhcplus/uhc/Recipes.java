@@ -15,12 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class Recipes {
-
-	private UhcPlus plugin;
-	
-	public Recipes(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public static NamespacedKey lightGoldenAppleKey, lightAnvilKey, axeOfDestructionKey, swordOfDivinityKey;
 	public static boolean lightGoldenAppleRegistered, lightAnvilRegistered, axeOfDestructionRegistered, swordOfDivinityRegistered;
@@ -33,7 +27,7 @@ public class Recipes {
 		meta.setDisplayName(ChatColor.AQUA + "Light Golden Apple");
 		stack.setItemMeta(meta);
 		
-		lightGoldenAppleKey = new NamespacedKey(plugin, "light_golden_apple");
+		lightGoldenAppleKey = new NamespacedKey(UhcPlus.INSTANCE, "light_golden_apple");
 		ShapedRecipe recipe = new ShapedRecipe(lightGoldenAppleKey, stack);
 		recipe.shape("xgx", "gag", "xgx");
 		recipe.setIngredient('x', Material.AIR);
@@ -51,7 +45,7 @@ public class Recipes {
 		meta.setDisplayName(ChatColor.AQUA + "Light Anvil");
 		stack.setItemMeta(meta);
 		
-		lightAnvilKey = new NamespacedKey(plugin, "light_anvil");
+		lightAnvilKey = new NamespacedKey(UhcPlus.INSTANCE, "light_anvil");
 		ShapedRecipe recipe = new ShapedRecipe(lightAnvilKey, stack);
 		
 		recipe.shape("iii", "xbx", "iii");
@@ -80,7 +74,7 @@ public class Recipes {
 		stack.addUnsafeEnchantment(Enchantment.DIG_SPEED, 3);
 		stack.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
 		
-		axeOfDestructionKey = new NamespacedKey(plugin, "axe_of_destruction");
+		axeOfDestructionKey = new NamespacedKey(UhcPlus.INSTANCE, "axe_of_destruction");
 		ShapedRecipe recipe = new ShapedRecipe(axeOfDestructionKey, stack);
 		
 		recipe.shape("xii", "xbi", "xbx");
@@ -108,7 +102,7 @@ public class Recipes {
 		stack.addUnsafeEnchantment(Enchantment.KNOCKBACK, 1);
 		stack.addUnsafeEnchantment(Enchantment.DURABILITY, 2);
 		
-		swordOfDivinityKey = new NamespacedKey(plugin, "sword_of_divinity");
+		swordOfDivinityKey = new NamespacedKey(UhcPlus.INSTANCE, "sword_of_divinity");
 		ShapedRecipe recipe = new ShapedRecipe(swordOfDivinityKey, stack);
 		
 		recipe.shape("xbx", "xbx", "xix");

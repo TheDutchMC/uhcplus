@@ -10,20 +10,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcEndedEvent;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class PlayerDeathEventListener implements Listener {
-
-	private UhcPlus plugin;
-	
-	public PlayerDeathEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
  	
-	TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+	TeamHandler teamHandler = new TeamHandler(null, false);
 	
 	@EventHandler
 	public void onPlayerDeathEvent(PlayerDeathEvent event) {

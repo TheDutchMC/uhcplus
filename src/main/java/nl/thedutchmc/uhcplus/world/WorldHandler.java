@@ -14,12 +14,6 @@ import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class WorldHandler {
-
-	private UhcPlus plugin;
-	
-	public WorldHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public void setupWorld() {
 		
@@ -30,11 +24,11 @@ public class WorldHandler {
 		makeNewWorld();
 				
 		//Place the lobby
-		LobbyHandler lobbyHandler = new LobbyHandler(plugin);
+		LobbyHandler lobbyHandler = new LobbyHandler();
 		lobbyHandler.loadLobby();
 		
 		if(ConfigurationHandler.pregenWorld) {
-			ChunkGenerator chunkGenerator = new ChunkGenerator(plugin);
+			ChunkGenerator chunkGenerator = new ChunkGenerator();
 			chunkGenerator.generateChunks();
 		} else {
 			System.out.println("[UhcPlus] Done. Players may now join.");
@@ -49,7 +43,6 @@ public class WorldHandler {
 		File worldFile = new File(Bukkit.getServer().getWorldContainer() + File.separator + "uhcworld");
 		
 		if(worldFile.exists()) {
-			System.out.println(worldFile.getAbsolutePath());
 			
 			try {
 				FileUtils.deleteDirectory(worldFile);
@@ -75,13 +68,13 @@ public class WorldHandler {
 			Long seed = Long.valueOf(allowedSeeds.get(i));
 			
 			//Now generate world with that seed
-			plugin.getServer().createWorld(new WorldCreator("uhcworld")
+			UhcPlus.INSTANCE.getServer().createWorld(new WorldCreator("uhcworld")
 					.environment(Environment.NORMAL)
 					.seed(seed));
 		} else {
 			
 			//Allow any random seed
-			plugin.getServer().createWorld(new WorldCreator("uhcworld")
+			UhcPlus.INSTANCE.getServer().createWorld(new WorldCreator("uhcworld")
 					.environment(Environment.NORMAL));
 			
 		}

@@ -61,11 +61,41 @@ public class UhcpTabCompleter implements TabCompleter {
 					
 				} else if (args[1].equalsIgnoreCase("options")) {
 					List<String> possibleCommands = new ArrayList<>();
+					
+					//Mostly the boolean variables
 					possibleCommands.add("list");
 					possibleCommands.add("maxTeamCount");
 					possibleCommands.add("maxPlayersPerTeam");
 					possibleCommands.add("moduleOreAutoSmelt");
+					possibleCommands.add("moduleTreeFullRemove");
+					possibleCommands.add("moduleLeaveDecay");
+					possibleCommands.add("moduleEnchantedTools");
+					possibleCommands.add("moduleInfiniteEnchanting");
+					possibleCommands.add("moduleSheepDropString");
+					possibleCommands.add("moduleGravelDropArrow");
+					possibleCommands.add("moduleDissalowGrindingEnchantedTools");
+					possibleCommands.add("moduleLightGoldenApple");
+					possibleCommands.add("moduleLightAnvil");
+					possibleCommands.add("moduleDioriteDamage");
+					possibleCommands.add("moduleAntiCheat");
+					possibleCommands.add("moduleAxeOfDestruction");
+					possibleCommands.add("axeOfDestructionLevelling");
+					possibleCommands.add("moduleSwordOfDivinity");
+					possibleCommands.add("swordOfDivinityLevelling");
+					possibleCommands.add("moduleTeamInventory");
+					
+					//Most of the integer variables
 					possibleCommands.add("ingotDropCount");
+					possibleCommands.add("timeToPvp");
+					possibleCommands.add("worldBorderSize");
+					possibleCommands.add("worldBorderShrinkAfter");
+					possibleCommands.add("worldBorderShrinkTo");
+					possibleCommands.add("gameTime");
+					possibleCommands.add("moduleAntiCheatTime");
+					possibleCommands.add("moduleAxeOfDestructionLevelOneTime");
+					possibleCommands.add("moduleAxeOfDestructionLevelTwoTime");
+					possibleCommands.add("moduleSwordOfDivinityLevelOneTime");
+					possibleCommands.add("moduleSwordOfDivinityLevelTwoTime");
 
 					return possibleCommands;
 				}
@@ -81,9 +111,7 @@ public class UhcpTabCompleter implements TabCompleter {
 					}
 					
 					return playerNames;
-					
 				}
-				
 			}
 		}
 		

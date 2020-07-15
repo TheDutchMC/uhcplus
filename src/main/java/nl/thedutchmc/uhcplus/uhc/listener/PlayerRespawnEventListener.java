@@ -12,12 +12,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerRespawnEventListener implements Listener {
-
-	private UhcPlus plugin;
-	
-	public PlayerRespawnEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
@@ -32,7 +26,7 @@ public class PlayerRespawnEventListener implements Listener {
 			public void run() {
 				player.setGameMode(GameMode.SPECTATOR);
 			}
-		}.runTaskLater(plugin, 1);
+		}.runTaskLater(UhcPlus.INSTANCE, 1);
 
 	}
 }

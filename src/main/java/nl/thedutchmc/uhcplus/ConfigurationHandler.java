@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ConfigurationHandler {
-private UhcPlus plugin;
 	
 	public static String defaultPreset, onlyAllowedSeeds;
 	
@@ -22,10 +21,6 @@ private UhcPlus plugin;
 	
 	public static int limitCraftingAmount, timeUntilRestart;
 	
-	public ConfigurationHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	private File configFile;
 	private FileConfiguration config;
 	
@@ -34,13 +29,13 @@ private UhcPlus plugin;
 	}
 	
 	public void loadConfig() {
-		configFile = new File(plugin.getDataFolder(), "config.yml");
+		configFile = new File(UhcPlus.INSTANCE.getDataFolder(), "config.yml");
 		
 		//Check if the config file exists, if it doesnt, create it.
 		if(!configFile.exists()) {
 			configFile.getParentFile().mkdirs();
 			
-			plugin.saveResource("config.yml", false);
+			UhcPlus.INSTANCE.saveResource("config.yml", false);
 		}
 		
 		config = new YamlConfiguration();
@@ -107,7 +102,7 @@ private UhcPlus plugin;
 	public void readAvailablePresets() {
 		String[] filenames;
 		
-		File file = new File(plugin.getDataFolder() + File.separator + "presets");
+		File file = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "presets");
 		
 		//A filter, since we only want the files ending in .yml
 		FilenameFilter filter = new FilenameFilter() {

@@ -7,12 +7,6 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class UhcTimeRemainingCalculator {
 	
-	UhcPlus plugin;
-	
-	public UhcTimeRemainingCalculator(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	private static int timeRemaining;
 	
 	public void startCountdown() {
@@ -28,7 +22,7 @@ public class UhcTimeRemainingCalculator {
 				
 			}
 			
-		}.runTaskTimerAsynchronously(plugin, 0, 20);	
+		}.runTaskTimerAsynchronously(UhcPlus.INSTANCE, 0, 20);	
 	}
 	
 	public static int getTimeRemaining() {

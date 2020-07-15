@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 
 import net.md_5.bungee.api.ChatColor;
+import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleTeamInventory;
 
 public class Team {
 
@@ -15,6 +16,8 @@ public class Team {
 	private List<UUID> teamMembersAlive = new ArrayList<>();
 	private int teamId;
 	private Location startingLocation;
+	private ModuleTeamInventory teamInventory;
+	
 	
 	public Team(int teamId) {
 		this.teamId = teamId;
@@ -78,6 +81,13 @@ public class Team {
 		this.startingLocation = startingLocation;
 	}
 	
+	public ModuleTeamInventory getTeamInventory() {
+		return teamInventory;
+	}
+	
+	public void setTeamInventory(ModuleTeamInventory teamInventory) {
+		this.teamInventory = teamInventory;
+	}
 	
 	
 }

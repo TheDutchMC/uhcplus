@@ -35,14 +35,8 @@ import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class DeathmatchHandler {
-
-	private UhcPlus plugin;
 	
 	World overworld = null;
-	
-	public DeathmatchHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public void startDeathmatch() {
 		
@@ -65,7 +59,7 @@ public class DeathmatchHandler {
 		int arenaRadius = 50;
 		int spawnCircleRadius = arenaRadius / 5 * 4;
 		
-		TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+		TeamHandler teamHandler = new TeamHandler(null, false);
 		
 		List<Location> teleportLocation = new ArrayList<>();
 		List<Team> aliveTeams = TeamHandler.getAliveTeams();
@@ -118,7 +112,7 @@ public class DeathmatchHandler {
 		//Iterate over all schematic files in the schematics folder
 		String[] filenames;
 		
-		File file = new File(plugin.getDataFolder() + File.separator + "deathmatch");
+		File file = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "deathmatch");
 		
 		//Check if the directory exists, if not, make it.
 		if(!file.exists()) {
@@ -140,7 +134,7 @@ public class DeathmatchHandler {
 		//Check if any deathmatch arena's exist.
 		if(filenames.length < 1) {
 			System.out.println("[UhcPlus] No deathmatch arena schematics found! Disabling UhcPlus");
-			plugin.getServer().getPluginManager().disablePlugin(plugin);	
+			UhcPlus.INSTANCE.getServer().getPluginManager().disablePlugin(UhcPlus.INSTANCE);	
 		}
 		
 		//Iterate over all the files in folder
@@ -170,7 +164,7 @@ public class DeathmatchHandler {
 	void loadSchematic(String deathmatchArena) {
 		
 		//load the schematic into the clipboard
-		File schematic = new File(plugin.getDataFolder() + File.separator + "deathmatch", deathmatchArena + ".schem");
+		File schematic = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "deathmatch", deathmatchArena + ".schem");
 		
 		Clipboard clipboard = null;
 		ClipboardFormat format = ClipboardFormats.findByFile(schematic);

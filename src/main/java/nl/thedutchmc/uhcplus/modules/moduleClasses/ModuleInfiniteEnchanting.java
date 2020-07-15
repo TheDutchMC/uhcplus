@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,10 +15,7 @@ import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 public class ModuleInfiniteEnchanting implements Listener {
 
 	@EventHandler
-	public void onUhcStartedEvent(UhcStartedEvent event) {
-		
-		System.out.println("[UhcPlus][Debug][ModuleInfiniteEnchanting: 20] Event run");
-		
+	public void onUhcStartedEvent(UhcStartedEvent event) {		
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
 			player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 64));

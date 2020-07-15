@@ -7,20 +7,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class Preset {
-
-	private UhcPlus plugin;
-	
-	public Preset(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	
 	public boolean presetSubcommand(CommandSender sender, Command command, String label, String[] args) {
-		
+				
 		ChatColor cr = ChatColor.RED;
 		ChatColor cg = ChatColor.GOLD;
 		ChatColor cw = ChatColor.WHITE;
@@ -44,10 +36,8 @@ public class Preset {
 				sender.sendMessage("- " + cg + "/uhcp preset load <preset name> " + cw + "Load the specified preset.");
 				sender.sendMessage("- " + cg + "/uhcp preset seeloaded " + cw + "Shows which preset is curretly loaded");
 				sender.sendMessage("- " + cg + "/uhcp preset delete <preset name> " + cw + "Deletes the specified preset. Warning: This action cannot be undone!");
-				sender.sendMessage("- " + cg + "/uchp preset options list " + cw + "Lists the available options you can modify.");
+				sender.sendMessage("- " + cg + "/uchp preset options list <page> " + cw + "Lists the available options you can modify.");
 				sender.sendMessage("- " + cg + "/uhcp preset options <option> <value> " + cw + "Modifies the option to the set value. This will modify the currently active preset!");
-				
-				
 				
 			//uhcp preset create <arg>
 			} else if(args[1].equalsIgnoreCase("create")) {
@@ -59,18 +49,17 @@ public class Preset {
 						
 				} else { //The args length is equal to 3, meaning they have entered /uhcp preset create <preset name>
 					
-					PresetHandler presetHandler = new PresetHandler(plugin);
+					PresetHandler presetHandler = new PresetHandler();
 					presetHandler.createPreset(args[2])
 					;
 					sender.sendMessage(cg + "Created a new preset with the name " + cr + args[2] + cg + ".");
 					
 				}
 				
-			
 			//uhcp preset list
 			} else if (args[1].equalsIgnoreCase("list" )) {
 				
-				ConfigurationHandler configurationHandler = new ConfigurationHandler(plugin);
+				ConfigurationHandler configurationHandler = new ConfigurationHandler();
 				
 				configurationHandler.loadConfig();
 				
@@ -82,15 +71,13 @@ public class Preset {
 					sender.sendMessage(cg + "- " + str);
 				}
 				
-				
-				
 			//uhcp preset setdefault <arg>
 			} else if(args[1].equalsIgnoreCase("setdefault")) {
 				
 				
 				boolean presetExists = doesPresetExist(args[2]);
 				
-				ConfigurationHandler configurationHandler = new ConfigurationHandler(plugin);
+				ConfigurationHandler configurationHandler = new ConfigurationHandler();
 				
 				if(presetExists) {
 					configurationHandler.setDefaultPreset(args[2]);
@@ -106,21 +93,19 @@ public class Preset {
 					if(args.length != 3) { //Check if the args length is not equal to 3, if this is the case the user hasn't specified a name for the preset, inform them about this.
 
 						sender.sendMessage(cr + "You need to specify which preset you want to load. Usage: /uhcp preset load <preset name>");
-					
 						
 				} else { //The args length is equal to 3, meaning they have entered /uhcp preset load <preset name>
 					
 					boolean presetExists = doesPresetExist(args[2]);
 					
-					PresetHandler presetHandler = new PresetHandler(plugin);
+					PresetHandler presetHandler = new PresetHandler();
 
 					if(presetExists) {
 						presetHandler.loadPreset(args[2]);
 						sender.sendMessage(cg + "Loaded the preset " + cr + args[2] + cg + ".");
 					} else {
 						sender.sendMessage(cr + "This preset does not exist!");
-					}
-					
+					}	
 				}
 					
 			//uhcp preset seeloaded
@@ -128,22 +113,19 @@ public class Preset {
 				
 				sender.sendMessage(cg + "The currently loaded preset is " + cr + PresetHandler.loadedPreset);
 				
-				
 			//uhcp preset delete <arg>
 			} else if(args[1].equalsIgnoreCase("delete")) {
 				
 				if(args.length != 3) { //Check if the args length is not equal to 3, if this is the case the user hasn't specified a name for the preset, inform them about this.
 
 					sender.sendMessage(cr + "You need to specify which preset you want to delete. Usage: /uhcp preset delete <preset name>");
-				
 					
 				} else { //The args length is equal to 3, meaning they have entered /uhcp preset delete <preset name>
 					
 					boolean presetExists = doesPresetExist(args[2]);
 					
 					if(presetExists) {
-						
-						PresetHandler presetHandler = new PresetHandler(plugin);
+						PresetHandler presetHandler = new PresetHandler();
 						presetHandler.removePreset(args[2]);
 						
 						sender.sendMessage(cg + "The preset " + cr + args[2] + cg + " has been deleted!");
@@ -151,32 +133,63 @@ public class Preset {
 					} else {
 						sender.sendMessage(cr + "This preset does not exist!");
 					}
-				
 				}
 				
 			//uhcp preset options <args>
 			} else if(args[1].equalsIgnoreCase("options")) { //uhcp preset options
 				
-				
 				//uhcp preset options <no arg>
 				if(!(args.length >= 3)) { //Check if the args length is not equal than or more than 3, this means the user has entered /uhcp preset options, and hasn't given an option
-					sender.sendMessage(cr + "You need to specifiy which option you want to modify! See /uhcp preset options list, for a list of available options!");
+					sender.sendMessage(cr + "You need to specifiy which option you want to modify! See /uhcp preset options list <page>, for a list of available options!");
 				} else {
-					
 					
 					//uhcp preset options list
 					if(args[2].equalsIgnoreCase("list")) { //uchp preset options list
 						
-						sender.sendMessage(cg + "UHCPlus Preset Options");
-						sender.sendMessage(cg + "--------------------");
-						sender.sendMessage("- " + cg + "maxteamcount " + cw + "Sets the maximum number of teams. Range: 1-16");
-						sender.sendMessage("- " + cg + "maxplayersperteam " + cw + "Sets the maximum amount of players per team. Range: 1-infinite");
-						sender.sendMessage("- " + cg + "moduleoreautosmelt " + cw + "Enable or disable the automatic smelting of ores. Options: true/false");
-						sender.sendMessage("- " + cg + "ingotdropcount " + cw + "Sets the amount of ingots that will drop from an ore. moduleoreautosmelt needs to be enabled for this. Range: 1-infinite");
-						
-						
+						//uhcp preset options list 2
+						//options list page 2
+						if(args.length >= 4 && args[3].equalsIgnoreCase("2")) {
+							
+							sender.sendMessage(cg + "UHCPlus Preset Options: page 2");
+							sender.sendMessage(cg + "-----------------------------");
+							sender.sendMessage("- " + cg + "ingotDropCount " + cw + "Sets the amount of ingots that will drop from an ore. moduleoreautosmelt needs to be enabled for this. Range: 1-infinite");
+							sender.sendMessage("- " + cg + "timeToPvp " + cw + "Sets after how many minutes PVP will be enabled");
+							sender.sendMessage("- " + cg + "worldBorderSize " + cw + "The size of the world border at game start, in side length, For example: 1400 means the border will be at coordinate 700");
+							sender.sendMessage("- " + cg + "worldBorderShrinkAfter " + cw + "Time until the world border starts shrinking in minutes");
+							sender.sendMessage("- " + cg + "worldBorderShrinkTo " + cw + "The size of the world border after it has stopped shrinking, in side length");
+							sender.sendMessage("- " + cg + "gameTime " + cw + "Game time in minutes");
+							sender.sendMessage("- " + cg + "moduleAntiCheatTime " + cw + "The time after which a player can safely mine diamond ore again without OPs being notified. In Seconds");
+							sender.sendMessage("- " + cg + "moduleAxeOfDestructionLevelOneTime " + cw + "Time in seconds until the Axe levels up to level 2 in seconds");
+							sender.sendMessage("- " + cg + "moduleAxeOfDestructionLevelTwoTime " + cw + "Time in seconds until the Axe levels up to level 3 in seconds");
+							sender.sendMessage("- " + cg + "moduleSwordOfDivinityLevelOneTime " + cw + "Time in seconds until the Sword levels up to level 2 in Seconds");
+							sender.sendMessage("- " + cg + "moduleSwordOfDivinityLevelTwoTime " + cw + "Time in seconds until the Sword levels up to level 3 in Seconds");
+
+						//uhcp preset options list
+						//preset options list page 1
+						} else {
+							sender.sendMessage(cg + "UHCPlus Preset Options: page 1");
+							sender.sendMessage(cg + "-----------------------------");
+							sender.sendMessage("- " + cg + "maxTeamCount " + cw + "Sets the maximum number of teams. Range: 1-infinite");
+							sender.sendMessage("- " + cg + "maxPlayersPerTeam " + cw + "Sets the maximum amount of players per team. Range: 1-infinite");
+							sender.sendMessage("- " + cg + "moduleOreAutoSmelt " + cw + "Enable or disable the automatic smelting of ores. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleTreeFullRemove " + cw + "This Module will remove the entire stem if one block is broken. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleLeaveDecay " + cw + "This module will decay all leaves as soon as one decays. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleEnchantedTools " + cw + "This module will turn all crafted tools into enchanted tools. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleInfiniteEnchanting " + cw + "This module will give the player a stack of enchanting tables and anvils, and the maximum amount of levels. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleSheepDropString " + cw + "This module will let sheep drop string instead of wool. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleGravelDropArrow " + cw + "This module will let gravel drop arrows instead of the default drops. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleDissalowGrindingEnchantedTools " + cw + "This module will prevent tools crafted with moduleEnchantedTools from being grinded for XP. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleLightGoldenApple " + cw + "This module will add a light golden apple, crafted with four gold ingots instead of eight. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleLightAnvil " + cw + "This module will add a light anvil, crafted with six iron ingots and one iron block. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleDioriteDamage " + cw + "[WIP] This module will damage players if they have diorite in their inventory for too long. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleAntiCheat " + cw + "This module will alert OPs if a player finds diamonds too quickly. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleAxeOfDestruction " + cw + "This module will add the Axe of Destruction, crafted with two iron blocks and three iron ingots. Options: true/false");
+							sender.sendMessage("- " + cg + "axeOfDestructionLevelling " + cw + "Enabling this will allow the Axe of Destruction to level up. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleSwordOfDivinity " + cw + "This module will add the Sword of Divinity, crafted with two iron blocks and one iron ingot. Options: true/false");
+							sender.sendMessage("- " + cg + "swordOfDivinityLevelling " + cw + "Enabling this will allow the Sword of Divinity to level up. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleTeamInventory " + cw + "This module will add an inventory accessible by every member of a team. Options: true/false");
+						}
 					} else {
-						
 						
 						//uhcp preset options <arg> <no arg>
 						if(args.length != 4) { //check if args length is not equal to 4, meaning the user didnt /uhcp preset options <option> <value>, inform them.
@@ -184,50 +197,32 @@ public class Preset {
 							
 						} else {
 							
-							
 							//uhcp preset options maxteamcount <arg>
-							if(args[2].equalsIgnoreCase("maxteamcount")) { // /uhcp preset option maxteamcount <value>
+							if(args[2].equalsIgnoreCase("maxTeamCount")) { // /uhcp preset option maxteamcount <value>
 								
-								if(isNumber(args[3])) {
-									int teamCount = Integer.valueOf(args[3]);
+								if(isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {
 									
-									if(teamCount <= 16 && teamCount >= 1) {
-									
-										PresetHandler.maxTeamCount = args[3];
-										
-										PresetHandler presetHandler = new PresetHandler(plugin);
-										presetHandler.changePresetOption();
+									PresetHandler.maxTeamCount = Integer.valueOf(args[3]);
+									PresetHandler.changedPresetOption();
 
-										sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
-										
-										
-									} else {
-										sender.sendMessage(cr + "Out of range! Range: 1-16");
-										
-									}
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+
 								} else {
-									sender.sendMessage(cr + "Invalid value! Must be a number and in range 1-16!");
+									sender.sendMessage(cr + "Invalid value! Must be a positive number!");
 								}
 								
 							
 							//uhcp preset options maxplayersperteam <arg>
 							} else if(args[2].equalsIgnoreCase("maxplayersperteam")) { // /uhcp preset option maxplayersperteam <value>
 								
-								if(isNumber(args[3])) {
-									if(Integer.valueOf(args[3]) >= 1) {
-										
-										PresetHandler.maxPlayerCountPerTeam = args[3];
-										PresetHandler presetHandler = new PresetHandler(plugin);
-										presetHandler.changePresetOption();
+								if(isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {	
+										PresetHandler.maxPlayerCountPerTeam = Integer.valueOf(args[3]);
+										PresetHandler.changedPresetOption();
 										
 										sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
-																							
-									} else {
-										sender.sendMessage(cr + "Value may not be negative or zero!");
-									}
 																				
 								} else {
-									sender.sendMessage(cr + "Invalid value! Must be a number!");
+									sender.sendMessage(cr + "Invalid value! Must be a positive number!");
 								}
 								
 								
@@ -235,8 +230,7 @@ public class Preset {
 							} else if(args[2].equalsIgnoreCase("moduleoreautosmelt")) {
 								if(args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("false")) {
 									PresetHandler.moduleOreAutoSmelt = Boolean.valueOf(args[3]);
-									PresetHandler presetHandler = new PresetHandler(plugin);
-									presetHandler.changePresetOption();
+									PresetHandler.changedPresetOption();
 									
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
 									
@@ -245,22 +239,382 @@ public class Preset {
 								}
 								
 							
-							//uhcp preset options ingotdropcount <arg>
-							} else if(args[2].equalsIgnoreCase("ingotdropcount")) { // /uhcp preset option ingotdropcount <value>
-								if(isNumber(args[3])) {
-									if(Integer.valueOf(args[3]) >= 1) {
-										PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(args[3]);
-										
-										PresetHandler presetHandler = new PresetHandler(plugin);
-										presetHandler.changePresetOption();
-										
-										sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
-										
-									} else {
-										sender.sendMessage(cr + "Value may not be negative or zero!");
-									}
+							//uhcp preset options ingotDropCount <arg>
+							} else if(args[2].equalsIgnoreCase("ingotdropcount")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {
+									PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(args[3]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + args[3] + cg + "!");
+								
 								} else {
-									sender.sendMessage(cr + "Invalid value! Must be a number!");
+									sender.sendMessage(cr + "Invalid value! Must be a positive number!");
+								}
+								
+							//uhcp preset options moduleTreeFullRemove <arg>	
+							} else if(args[2].equalsIgnoreCase("moduletreefullremove")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleTreeFullRemove = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+									
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleTreeFullRemove = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleLeaveDecay <arg>
+							} else if(args[2].equalsIgnoreCase("moduleleavedecay")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleLeaveDecay = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+									
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleLeaveDecay = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleEnchantedTools <arg>
+							} else if(args[2].equalsIgnoreCase("moduleenchantedtools")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleEnchantedTools = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+									
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleEnchantedTools = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options moduleInfiniteEnchanting <arg>
+							} else if(args[2].equalsIgnoreCase("moduleinfiniteenchanting")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleInfiniteEnchanting = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleInfiniteEnchanting = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options moduleSheepDropString <arg>
+							} else if(args[2].equalsIgnoreCase("modulesheepdropstring")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleSheepDropString = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleSheepDropString = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleGravelDropArrow <arg>
+							} else if(args[2].equalsIgnoreCase("graveldroparrow")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleGravelDropArrow = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleGravelDropArrow = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleDissalowGrindingEnchantedTools <arg>
+							} else if(args[2].equalsIgnoreCase("moduledissalowgrindingenchantedtools")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleDissalowGrindingEnchantedTools = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleDissalowGrindingEnchantedTools = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleLightGoldenApple <arg>
+							} else if(args[2].equalsIgnoreCase("modulelightgoldenapple")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleLightGoldenApple = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleLightGoldenApple = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleLightAnvil <arg>
+							} else if(args[2].equalsIgnoreCase("modulelightanvil")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleLightAnvil = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleLightAnvil = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleDioriteDamage <arg>
+							} else if(args[2].equalsIgnoreCase("moduledioritedamage")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleDioriteDamage = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleDioriteDamage = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleAntiCheat <arg>
+							} else if(args[2].equalsIgnoreCase("moduleanticheat")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleAntiCheat = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleAntiCheat = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleAxeOfDestruction <arg>
+							} else if(args[2].equalsIgnoreCase("moduleaxeofdestruction")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleAxeOfDestruction = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleAxeOfDestruction = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options axeOfDestructionLevelling <arg>
+							} else if(args[2].equalsIgnoreCase("axeofdestructionlevelling")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.axeOfDestructionLevelling = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.axeOfDestructionLevelling = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options moduleSwordOfDivinity <arg>
+							} else if(args[2].equalsIgnoreCase("moduleswordofdivinity")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleSwordOfDivinity = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleSwordOfDivinity = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options swordOfDivinityLevelling <arg>
+							} else if(args[2].equalsIgnoreCase("swordofdivinitylevelling")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.swordOfDivinityLevelling = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.swordOfDivinityLevelling = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							//uhcp preset options moduleTeamInventory <arg>
+							} else if(args[2].equalsIgnoreCase("moduleteaminventory")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleTeamInventory = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleTeamInventory = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+							
+							//uhcp preset options timeToPvp <arg>
+							} else if(args[2].equalsIgnoreCase("timetopvp")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.timeToPvp = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a positive number!");
+								}
+								
+							//uhcp preset options worldBorderSize <arg>
+							} else if(args[2].equalsIgnoreCase("worldbordersize")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.worldBorderSize = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+								
+							//uhcp preset options worldBorderShrinkAfter <arg>
+							} else if(args[2].equalsIgnoreCase("worldbordershrinkafter")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.worldBorderShrinkAfter = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+								
+							//uhcp preset options worldBorderShrinkTo <arg>
+							} else if(args[2].equalsIgnoreCase("worldbordershrinkto")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.worldBorderShrinkTo = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+								
+							//uhcp preset options gameTime <arg>
+							} else if(args[2].equalsIgnoreCase("gametime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.gameTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+							
+							//uhcp preset options moduleAntiCheatTime <arg>
+							} else if(args[2].equalsIgnoreCase("moduleanticheattime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.moduleAntiCheatTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+									
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+								
+							//uhcp preset options moduleAxeOfDestructionLevelOneTime <arg>
+							} else if(args[2].equalsIgnoreCase("moduleaxeofdestructionlevelonetime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.moduleAxeOfDestructionLevelOneTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+							
+							//uhcp preset options moduleAxeOfDestructionLevelTwoTime <arg>
+							} else if(args[2].equalsIgnoreCase("moduleaxeofdestructionleveltwotime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.moduleAxeOfDestructionLevelTwoTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+									
+								}
+								
+							//uhcp preset options moduleSwordOfDivinityLevelOneTime <arg>
+							} else if(args[2].equalsIgnoreCase("moduleswordofdivinitylevelonetime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.moduleSwordOfDivinityLevelOneTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
+								}
+							
+							//uhcp preset options moduleSwordOfDivinityLevelTwoTime <arg>
+							} else if(args[2].equalsIgnoreCase("moduleswordofdivinityleveltwotime")) {
+								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
+									PresetHandler.moduleSwordOfDivinityLevelTwoTime = Integer.valueOf(args[4]);
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr + args[4] + cg + "!");
+									
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
 								}
 							}
 						}
@@ -268,7 +622,6 @@ public class Preset {
 				}
 			}
 		}
-		
 		return true;
 	}
 	

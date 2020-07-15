@@ -63,15 +63,15 @@ public class ListTeamsGui {
 			}
 			
 			//add the item to the gui
-			gui.setItem(i, createItems(Material.PAPER, team.getTeamColor() + "Team " + i, lore));
+			gui.setItem(i, createItems(Material.PAPER, ChatColor.RESET + "" + team.getTeamColor() + "Team " + i, lore));
 			
 		}
 		
 		//Add the next page button if need be
-		if(guiPages.size() > 0) gui.setItem(guiSize - 2, CreateItem.create(Material.BLACK_STAINED_GLASS_PANE, "Next page")); 
+		if(guiPages.size() > 0) gui.setItem(guiSize - 2, CreateItem.create(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET + "Next page")); 
 		
 		//Button to go back to the main menu
-		gui.setItem(guiSize -1, CreateItem.create(Material.BARRIER, "Main menu"));
+		gui.setItem(guiSize -1, CreateItem.create(Material.BARRIER, ChatColor.RESET + "Main menu"));
 	}
 	
 	public static void openGui(final HumanEntity ent) {

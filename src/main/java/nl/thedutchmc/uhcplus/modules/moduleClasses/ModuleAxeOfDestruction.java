@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,14 +30,8 @@ public class ModuleAxeOfDestruction implements Listener {
 	//Second UUID: Player UUID
 	public static HashMap<UUID, UUID> axePlayerTracker = new HashMap<>();
 	public static List<UUID> playerAxeCraftedTracker = new ArrayList<>();
-	
-	private UhcPlus plugin;
-	
+		
 	private static ItemStack itemStackCraftEvent, itemStackEntityPickupEvent;
-	
-	public ModuleAxeOfDestruction(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	//Whenever a player crafts an item
 	@EventHandler
@@ -104,13 +98,13 @@ public class ModuleAxeOfDestruction implements Listener {
 										//Call the levelUp event
 										Bukkit.getPluginManager().callEvent(new AxeOfDestructionLevelUpEvent(axeLevel+1, axeUuid));
 									}
-								}.runTask(plugin);	
+								}.runTask(UhcPlus.INSTANCE);	
 							}
 						}
 					}
 				}
 			}			
-		}.runTaskLaterAsynchronously(plugin, PresetHandler.moduleAxeOfDestructionLevelOneTime * 20);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, PresetHandler.moduleAxeOfDestructionLevelOneTime * 20);
 	}
 	
 	//If a player picks up the axe, we want to transfer the ownership, ie change it in the hashmap
@@ -157,7 +151,7 @@ public class ModuleAxeOfDestruction implements Listener {
 					}
 					
 				}			
-			}.runTaskLaterAsynchronously(plugin, (PresetHandler.moduleAxeOfDestructionLevelTwoTime - PresetHandler.moduleAxeOfDestructionLevelOneTime) * 20);
+			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (PresetHandler.moduleAxeOfDestructionLevelTwoTime - PresetHandler.moduleAxeOfDestructionLevelOneTime) * 20);
 		}
 		
 	}

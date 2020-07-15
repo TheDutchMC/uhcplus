@@ -12,12 +12,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class DefaultPreset {
 	
-	private UhcPlus plugin;
-	
-	public DefaultPreset(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	private File presetConfigFile;
 	private FileConfiguration presetConfig;
 	
@@ -27,7 +21,7 @@ public class DefaultPreset {
 	
 	public void loadPreset(String presetName, boolean shouldReturn) {
 		
-		presetConfigFile = new File(plugin.getDataFolder() + File.separator + "presets", presetName + ".yml");
+		presetConfigFile = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "presets", presetName + ".yml");
 		
 		presetConfig = YamlConfiguration.loadConfiguration(presetConfigFile);
 		
@@ -36,7 +30,7 @@ public class DefaultPreset {
 			presetConfigFile.getParentFile().mkdirs();
 			
 			try {
-				FileUtils.copyToFile(plugin.getResource("default.yml"), presetConfigFile);
+				FileUtils.copyToFile(UhcPlus.INSTANCE.getResource("default.yml"), presetConfigFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -57,10 +51,6 @@ public class DefaultPreset {
 	
 	public void readPreset() {
 		
-		//String
-		PresetHandler.maxTeamCount = this.getPresetConfig().getString("maxTeamCount");
-		PresetHandler.maxPlayerCountPerTeam = this.getPresetConfig().getString("maxPlayerCountPerTeam");
-		
 		//Boolean
 		PresetHandler.moduleOreAutoSmelt = Boolean.valueOf(this.getPresetConfig().getString("moduleOreAutoSmelt"));
 		PresetHandler.moduleTreeFullRemove = Boolean.valueOf(this.getPresetConfig().getString("moduleTreeFullRemove"));	
@@ -77,8 +67,11 @@ public class DefaultPreset {
 		PresetHandler.axeOfDestructionLevelling = Boolean.valueOf(this.getPresetConfig().getString("axeOfDestructionLevelling"));
 		PresetHandler.moduleSwordOfDivinity = Boolean.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinity"));
 		PresetHandler.swordOfDivinityLevelling = Boolean.valueOf(this.getPresetConfig().getString("swordOfDivinityLevelling"));
+		PresetHandler.moduleTeamInventory = Boolean.valueOf(this.getPresetConfig().getString("moduleTeamInventory"));
 		
 		//Integer
+		PresetHandler.maxTeamCount = Integer.valueOf(this.getPresetConfig().getString("maxTeamCount"));
+		PresetHandler.maxPlayerCountPerTeam = Integer.valueOf(this.getPresetConfig().getString("maxPlayerCountPerTeam"));
 		PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(this.getPresetConfig().getString("moduleOreAutoSmeltIngotDrop"));	
 		PresetHandler.timeToPvp = Integer.valueOf(this.getPresetConfig().getString("timeToPvp"));
 		PresetHandler.worldBorderSize = Integer.valueOf(this.getPresetConfig().getString("worldBorderSize"));
@@ -90,6 +83,7 @@ public class DefaultPreset {
 		PresetHandler.moduleAxeOfDestructionLevelTwoTime = Integer.valueOf(this.getPresetConfig().getString("moduleAxeOfDestructionLevelTwoTime"));
 		PresetHandler.moduleSwordOfDivinityLevelOneTime = Integer.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinityLevelOneTime"));
 		PresetHandler.moduleSwordOfDivinityLevelTwoTime = Integer.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinityLevelTwoTime"));
+
 
 
 	}
@@ -125,6 +119,7 @@ public class DefaultPreset {
 		this.getPresetConfig().set("swordOfDivinityLevelling", PresetHandler.swordOfDivinityLevelling);
 		this.getPresetConfig().set("moduleSwordOfDivinityLevelOneTime", PresetHandler.moduleSwordOfDivinityLevelOneTime);
 		this.getPresetConfig().set("moduleSwordOfDivinityLevelTwoTime", PresetHandler.moduleSwordOfDivinityLevelTwoTime);
+		this.getPresetConfig().set("moduleTeamInventory", PresetHandler.moduleTeamInventory);
 		
 		savePreset();
 	}

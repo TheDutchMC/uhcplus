@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleListeners;
+package nl.thedutchmc.uhcplus.modules.moduleClasses;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,12 +16,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.BlockChecker;
 
 public class ModuleLeaveDecay implements Listener {
-
-	private UhcPlus plugin;
-	
-	public ModuleLeaveDecay(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	private final static int decayRange = 7;
 	
@@ -50,7 +44,7 @@ public class ModuleLeaveDecay implements Listener {
 			public void run() {
 				onBlockBreak(blockBroken);
 			}
-		}.runTask(plugin);
+		}.runTask(UhcPlus.INSTANCE);
 		
 	}
 	
@@ -105,7 +99,7 @@ public class ModuleLeaveDecay implements Listener {
 					
 				}
 				
-			}.runTaskLater(plugin, 5);
+			}.runTaskLater(UhcPlus.INSTANCE, 5);
 		}
 	}
 	

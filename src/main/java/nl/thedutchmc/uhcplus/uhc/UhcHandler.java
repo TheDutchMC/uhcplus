@@ -20,6 +20,7 @@ import org.bukkit.scoreboard.Objective;
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
+import nl.thedutchmc.uhcplus.gui.GuiHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
@@ -29,23 +30,14 @@ import nl.thedutchmc.uhcplus.uhc.scheduler.PvpScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
 
 public class UhcHandler {
-
-	private UhcPlus plugin;
-	
-	public static List<UUID> createdChannels; 
-
-	public UhcHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
-	TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+		
+	TeamHandler teamHandler = new TeamHandler(null, false);
 	
 	public void startUhc(boolean resortTeams) {
-		
-		UhcPlus.debugLog("[UhcHandler: 43] Method startUhc called");
-		
+		UhcPlus plugin = UhcPlus.INSTANCE;
+			
 		//Start the countdown timer for the scoreboard
-		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator(plugin);
+		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator();
 		uhcTRC.startCountdown();
 	
 		//Set the global flag that the uhc has started to true
@@ -91,22 +83,23 @@ public class UhcHandler {
 		uhcworld.setTime(6000);
 		
 		//Set full health
-		//Clear player inventory and set their gamemode to survival
+		//Clear player's inventory, set their health to 20, their gamemode to survival, inform them that they're in teamchat and clear their inventory.
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			player.setHealth(20);
 			
 			player.setGameMode(GameMode.SURVIVAL);
+			player.sendMessage(ChatColor.GOLD + "You are currently typing in " + ChatColor.RED + "team " + ChatColor.GOLD + "chat! Use " + ChatColor.RED + "/chat " + ChatColor.GOLD + " to switch between global and team chat!");
 			player.getInventory().clear();
 		}
 		
 		//Register the UHCEndedEventListener, this fires after the UHC ends
-		plugin.getServer().getPluginManager().registerEvents(new UhcEndedEventListener(plugin), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new UhcEndedEventListener(), plugin);
 		
 		//Register the chat listener, for team chat
 		plugin.getServer().getPluginManager().registerEvents(new ChatEventListener(), plugin);
 		
 		//Register the PlayerDeathEvent listener
-		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(plugin), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(), plugin);
 		
 		//Disable PVP
 		uhcworld.setPVP(false);
@@ -115,7 +108,7 @@ public class UhcHandler {
 		plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventListener(), plugin);
 		
 		//Register the RespawnEvent listener
-		plugin.getServer().getPluginManager().registerEvents(new PlayerRespawnEventListener(plugin), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerRespawnEventListener(), plugin);
 		
 		//Register the CommandPreprocessEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessEventListener(), plugin);
@@ -127,11 +120,11 @@ public class UhcHandler {
 		Bukkit.getServer().setSpawnRadius(0);
 		
 		//Schedule the pvp timer
-		PvpScheduler pvpScheduler = new PvpScheduler(uhcworld, plugin);
+		PvpScheduler pvpScheduler = new PvpScheduler(uhcworld);
 		pvpScheduler.schedulePvp();
 		
 		//Schedule the worldborder
-		WorldborderScheduler worldborderScheduler = new WorldborderScheduler(plugin);
+		WorldborderScheduler worldborderScheduler = new WorldborderScheduler();
 		worldborderScheduler.scheduleWorldborder();
 		
 		//Set the information scoreboard for all the players
@@ -154,7 +147,7 @@ public class UhcHandler {
 		}.runTaskTimerAsynchronously(plugin, 0, 20);
 		
 		//Schedule game end
-		GameEndScheduler gameEndScheduler = new GameEndScheduler(plugin);
+		GameEndScheduler gameEndScheduler = new GameEndScheduler();
 		gameEndScheduler.scheduleGameEnd();
 		
 		//Get a list of all Players playing
@@ -204,14 +197,9 @@ public class UhcHandler {
 			
 			Location location = teleportLocations.get(i);
 			
-			System.out.println(location.getBlock());
-
-			
 			//Check if the block they're being teleported to is air or not, if not Y+1
 			while(location.getBlock().getType() != Material.AIR) {
 			
-				System.out.println(location.getBlock());
-
 				location = new Location(uhcworld, location.getX(), location.getY() + 1, location.getZ());
 			}
 			
@@ -222,6 +210,9 @@ public class UhcHandler {
 				player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 200));
 			}	
 		}
+		
+		//Remove the gui system, since we no longer want it
+		GuiHandler.unregisterGuiSystem();
 		
 		//lastly, Call the UhcStartedEvent
 		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent());

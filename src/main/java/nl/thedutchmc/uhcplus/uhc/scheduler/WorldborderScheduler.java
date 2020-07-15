@@ -10,12 +10,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class WorldborderScheduler {
-
-	private UhcPlus plugin;
-	
-	public WorldborderScheduler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public void scheduleWorldborder() {
 		
@@ -44,7 +38,7 @@ public class WorldborderScheduler {
 				worldBorder.setSize(worldBorderShrinkTo, gameTimeLeftSecond);
 				
 			}
-		}.runTaskLaterAsynchronously(plugin, worldBorderStartShrinkAfterTick);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, worldBorderStartShrinkAfterTick);
 		
 	}
 }

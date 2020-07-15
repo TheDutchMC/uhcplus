@@ -20,7 +20,7 @@ timeToPvp: "5"
 #The size of the world border at game start, in side length, For example: 1400 means the border will be at coordinate 700. Default: 1400
 worldBorderSize: "1400"
 
-#Time until the world border starts shrinking. Default: 0
+#Time until the world border starts shrinking in minutes. Default: 0
 worldBorderShrinkAfter: "0"
 
 #The size of the world border after it has stopped shrinking, in side length. Default: 40
@@ -68,10 +68,10 @@ moduleAxeOfDestruction: "true"
 #Do we want the Axe of Destruction to level up over time? Default: true
 axeOfDestructionLevelling: "true"
  
-#Time in seconds until the Axe levels up to level 2, Requires axeOfDestructionLevelling to be true to work. Default: 1200
+#Time in seconds until the Axe levels up to level 2, Requires axeOfDestructionLevelling to be true to work. In seconds. Default: 1200
 moduleAxeOfDestructionLevelOneTime: "1200"
 
-#Time in seconds until the Axe levels up to level 3, Requires axeOfDestructionLevelling to be true to work. Default: 2400
+#Time in seconds until the Axe levels up to level 3, Requires axeOfDestructionLevelling to be true to work. In seconds. Default: 2400
 moduleAxeOfDestructionLevelTwoTime: "2400"
 
 #Do we want the Sword of Divinty to be craftable: 
@@ -80,11 +80,14 @@ moduleSwordOfDivinity: "true"
 #Do we want the Sword of Divnity to level up over time? Default: true
 swordOfDivinityLevelling: "true"
 
-#Time in seconds until the Sword levels up to level 2, Requires swordOfDivinityLevelling to be true to work. Default: 1200
+#Time in seconds until the Sword levels up to level 2, Requires swordOfDivinityLevelling to be true to work. In Seconds. Default: 1200
 moduleSwordOfDivinityLevelOneTime: "1200"
 
-#Time in seconds until the Sword levels up to level 3, Requires swordOfDivinityLevelling to be true to work. Default: 2400
+#Time in seconds until the Sword levels up to level 3, Requires swordOfDivinityLevelling to be true to work. In Seconds. Default: 2400
 moduleSwordOfDivinityLevelTwoTime: "2400"
+
+#Do we enable team inventory. Default: true
+moduleTeamInventory: "true"
 
 
 

@@ -11,12 +11,6 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ChunkGenerator {
 
-	private UhcPlus plugin;
-	
-	public ChunkGenerator(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-
 	static World overworld;
 	static int x = 700;
 	static int z;
@@ -92,7 +86,7 @@ public class ChunkGenerator {
 					System.gc();
 				}
 			}
-		}.runTaskTimer(plugin, 200, 1);
+		}.runTaskTimer(UhcPlus.INSTANCE, 200, 1);
 	}
 
 }

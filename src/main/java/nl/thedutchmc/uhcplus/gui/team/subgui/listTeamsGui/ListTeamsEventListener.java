@@ -10,17 +10,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 
 public class ListTeamsEventListener implements Listener {
-
-	private UhcPlus plugin;
-	
-	public ListTeamsEventListener(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
@@ -78,7 +71,7 @@ public class ListTeamsEventListener implements Listener {
 			final Player player = (Player) event.getWhoClicked();
 		
 			//join the player to the team
-			TeamHandler teamHandler = new TeamHandler(plugin, null, false);
+			TeamHandler teamHandler = new TeamHandler(null, false);
 			teamHandler.playerJoinTeam(teamId, player.getUniqueId());
 			
 			//get the current page id from the inventory name

@@ -13,11 +13,9 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 public class PvpScheduler {
 
 	private World overworld;
-	private UhcPlus plugin;
 	
-	public PvpScheduler(World overworld, UhcPlus plugin) {
+	public PvpScheduler(World overworld) {
 		this.overworld = overworld;
-		this.plugin = plugin;
 	}
 	
 	public void schedulePvp() {
@@ -40,7 +38,7 @@ public class PvpScheduler {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "PVP is now enabled!");
 				
 			}
-		}.runTaskLaterAsynchronously(plugin, timeToPvpTick);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, timeToPvpTick);
 		
 		//1 min until PVP
 		new BukkitRunnable() {
@@ -49,7 +47,7 @@ public class PvpScheduler {
 			public void run() {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "One minute until PVP will be enabled!");
 			}
-		}.runTaskLaterAsynchronously(plugin, oneMinuteToPvpTick);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, oneMinuteToPvpTick);
 		
 		//30 sec until PVP
 		new  BukkitRunnable() {
@@ -58,7 +56,7 @@ public class PvpScheduler {
 			public void run() {
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Thirty seconds until PVP will be enabled!");
 			}
-		}.runTaskLaterAsynchronously(plugin, thirtySecondsToPvptick);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, thirtySecondsToPvptick);
 		
 		//10-0 sec until PVP
 		new BukkitRunnable() {
@@ -76,7 +74,7 @@ public class PvpScheduler {
 					}
 				}
 			}
-		}.runTaskLaterAsynchronously(plugin, tenSecondsToPvpTick);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, tenSecondsToPvpTick);
 
 	}
 

@@ -12,12 +12,6 @@ import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class UhcpCommandHandler implements CommandExecutor {
 
-	private UhcPlus plugin;
-
-	public UhcpCommandHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
-	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
@@ -54,7 +48,7 @@ public class UhcpCommandHandler implements CommandExecutor {
 				
 				//uhcp start
 				} else if(args[0].equalsIgnoreCase("start")) { // /uhcp start
-					UhcHandler uhcHandler = new UhcHandler(plugin);
+					UhcHandler uhcHandler = new UhcHandler();
 					
 					if(args.length == 2) {
 						
@@ -75,7 +69,7 @@ public class UhcpCommandHandler implements CommandExecutor {
 				} else if(args[0].equalsIgnoreCase("preset")) {
 					
 					//process the command in the preset class
-					Preset presets = new Preset(plugin);
+					Preset presets = new Preset();
 					presets.presetSubcommand(sender, command, label, args);
 				
 					
@@ -83,7 +77,7 @@ public class UhcpCommandHandler implements CommandExecutor {
 				} else if(args[0].equalsIgnoreCase("teams")) {
 					
 					//process the command in the teams class
-					Teams teams = new Teams(plugin);
+					Teams teams = new Teams();
 					teams.teamsSubcommand(sender, command, label, args);
 					
 				}

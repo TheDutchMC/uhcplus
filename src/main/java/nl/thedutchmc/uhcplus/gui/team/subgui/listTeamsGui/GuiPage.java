@@ -72,19 +72,19 @@ public class GuiPage {
 			}
 			
 			//Add the item to the inventory
-			gui.setItem(j, ListTeamsGui.createItems(Material.PAPER, team.getTeamColor() + "Team " + i, lore));
+			gui.setItem(j, ListTeamsGui.createItems(Material.PAPER, ChatColor.RESET + "" + team.getTeamColor() + "Team " + i, lore));
 			
 		}
 		
 		//Calculate the position of the back button based on if there's a next page, and add the item to the inventory
 		int positionBackButton = nextPage ? guiSize - 3 : guiSize - 2;
-		gui.setItem(positionBackButton, CreateItem.create(Material.WHITE_STAINED_GLASS_PANE, "Previous page"));
+		gui.setItem(positionBackButton, CreateItem.create(Material.WHITE_STAINED_GLASS_PANE, ChatColor.RESET + "Previous page"));
 		
 		//Button to go the next page, if there is one
-		if(nextPage) gui.setItem(guiSize - 2, CreateItem.create(Material.BLACK_STAINED_GLASS_PANE, "Next page"));
+		if(nextPage) gui.setItem(guiSize - 2, CreateItem.create(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET + "Next page"));
 		
 		//Add the button to go back to the main menu
-		gui.setItem(guiSize - 1, CreateItem.create(Material.BARRIER, "Main menu"));
+		gui.setItem(guiSize - 1, CreateItem.create(Material.BARRIER, ChatColor.RESET + "Main menu"));
 	}
 	
 	public void openGui(HumanEntity ent) {

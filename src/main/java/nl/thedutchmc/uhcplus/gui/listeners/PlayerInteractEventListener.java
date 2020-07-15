@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.gui.recipe.RecipeGui;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
 
 public class PlayerInteractEventListener implements Listener {
@@ -24,6 +25,7 @@ public class PlayerInteractEventListener implements Listener {
 		
 		//The teams gui
 		if(item.getType().equals(Material.IRON_SWORD)) TeamGui.openGui(event.getPlayer());
+		if(item.getType().equals(Material.CRAFTING_TABLE)) RecipeGui.openGui(event.getPlayer());
 	}
 
 }

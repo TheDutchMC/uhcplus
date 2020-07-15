@@ -32,12 +32,7 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class LobbyHandler {
 
-	private UhcPlus plugin;
 	World overworld = null;
-	
-	public LobbyHandler(UhcPlus plugin) {
-		this.plugin = plugin;
-	}
 	
 	public void loadLobby() {
 		
@@ -68,7 +63,7 @@ public class LobbyHandler {
 	//Iterate over all schematic files in the schematics folder
 	String[] filenames;
 	
-	File file = new File(plugin.getDataFolder() + File.separator + "lobby");
+	File file = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "lobby");
 	
 	//Check if the directory exists, if not, make it.
 	if(!file.exists()) {
@@ -89,7 +84,7 @@ public class LobbyHandler {
 	//Check if any lobby's exist.
 	if(filenames.length < 1) {
 		System.out.println("[UhcPlus] No deathmatch arena schematics found! Disabling UhcPlus");
-		plugin.getServer().getPluginManager().disablePlugin(plugin);	
+		UhcPlus.INSTANCE.getServer().getPluginManager().disablePlugin(UhcPlus.INSTANCE);	
 	}
 
 	//Iterate over all the files in folder
@@ -114,7 +109,7 @@ public class LobbyHandler {
 	 void loadSchematic(String lobbySchematic) {
 		
 		//load the schematic into the clipboard
-		File schematic = new File(plugin.getDataFolder() + File.separator + "lobby", lobbySchematic + ".schem");
+		File schematic = new File(UhcPlus.INSTANCE.getDataFolder() + File.separator + "lobby", lobbySchematic + ".schem");
 		
 		Clipboard clipboard = null;
 		ClipboardFormat format = ClipboardFormats.findByFile(schematic);

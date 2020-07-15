@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import nl.thedutchmc.uhcplus.commands.BroadcastCommandHandler;
 import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
+import nl.thedutchmc.uhcplus.commands.TeamInventoryCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
@@ -24,20 +25,20 @@ import nl.thedutchmc.uhcplus.world.WorldHandler;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION = "1.1-BETA";
-		
+	public static String VERSION = "DEV-1.3";
 	public static boolean PLAYER_CAN_JOIN = false;	
-	
 	public static boolean UHC_STARTED = false;
-	
 	public static Scoreboard scoreboard;
+	public static UhcPlus INSTANCE;
 	
-	public static void debugLog(String log) {
-		System.out.println("[UhcPlus][Debug]" + log);
+	public static void log(String log) {
+		System.out.println("[UhcPlus]" + log);
 	}
 	
 	@Override
 	public void onEnable() {
+		INSTANCE = this;
+		
 		System.out.println("Welcome to UHCPlus - Version " + VERSION);
 		
 		//Register the LoginPlayerListener
@@ -53,8 +54,12 @@ public class UhcPlus extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(), this);
 		
 		//Set the executor and tab completer for the /uhcp command
-		getCommand("uhcp").setExecutor(new UhcpCommandHandler(this));
+		getCommand("uhcp").setExecutor(new UhcpCommandHandler());
 		getCommand("uhcp").setTabCompleter(new UhcpTabCompleter());
+		
+		//set the executor for /ti and /teaminventory
+		getCommand("ti").setExecutor(new TeamInventoryCommandHandler());
+		getCommand("teaminventory").setExecutor(new TeamInventoryCommandHandler());
 		
 		//Set the executor for the /chat command
 		getCommand("chat").setExecutor(new ChatCommandHandler());
@@ -63,11 +68,11 @@ public class UhcPlus extends JavaPlugin {
 		getCommand("broadcast").setExecutor(new BroadcastCommandHandler());
 		
 		//Load the configuration file
-		ConfigurationHandler configurationHandler = new ConfigurationHandler(this);
+		ConfigurationHandler configurationHandler = new ConfigurationHandler();
 		configurationHandler.loadConfig();
 		
 		//Load all the presets
-		PresetHandler presetHandler = new PresetHandler(this);
+		PresetHandler presetHandler = new PresetHandler();
 		presetHandler.loadPresets();
 		
 		//Check if the files in the presets/ directory match what's in config.
@@ -78,12 +83,11 @@ public class UhcPlus extends JavaPlugin {
 		file.mkdir();
 		
 		//Create teams
-		TeamHandler teamHandler = new TeamHandler(this, null, false);
+		TeamHandler teamHandler = new TeamHandler(null, false);
 		teamHandler.createTeams();
 		
 		//Set up the GUI system
-		GuiHandler gHandler = new GuiHandler(this);
-		gHandler.setupGuiSystem();
+		GuiHandler.setupGuiSystem();
 		
 		UhcPlus plugin = this;
 		
@@ -92,7 +96,7 @@ public class UhcPlus extends JavaPlugin {
 			@Override
 			public void run() {
 				
-				WorldHandler worldHandler = new WorldHandler(plugin);
+				WorldHandler worldHandler = new WorldHandler();
 				worldHandler.setupWorld();				
 			}
 		}.runTaskLater(plugin, 120);
