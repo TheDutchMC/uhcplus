@@ -1,5 +1,7 @@
 package nl.thedutchmc.uhcplus.gui.listeners;
 
+import java.util.Map;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,8 +21,13 @@ public class PlayerJoinEventListener implements Listener {
 			final Inventory inv = event.getPlayer().getInventory();
 			
 			//Give them all the items they need to open the main GUIs
-			for(ItemStack item : GuiHandler.getItemsForPlayers()) {
-				inv.addItem(item);
+			for(Map.Entry<ItemStack, Boolean> entry : GuiHandler.getItemsForPlayers().entrySet()) {
+				
+				if(entry.getValue()) {
+					if(event.getPlayer().isOp()) inv.addItem(entry.getKey());
+				} else {
+					inv.addItem(entry.getKey());
+				}
 			}
 		}
 	}

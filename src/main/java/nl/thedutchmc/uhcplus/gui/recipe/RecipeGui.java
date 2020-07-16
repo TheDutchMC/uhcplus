@@ -21,6 +21,8 @@ public class RecipeGui {
 	
 	static void setupItems() {
 
+		gui.clear();
+		
 		int totalRecipes = 0;
 		if(PresetHandler.moduleLightAnvil) totalRecipes++;
 		if(PresetHandler.moduleLightGoldenApple) totalRecipes++;

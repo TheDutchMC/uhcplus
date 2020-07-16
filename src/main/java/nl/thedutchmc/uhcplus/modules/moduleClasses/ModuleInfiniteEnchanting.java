@@ -18,8 +18,8 @@ public class ModuleInfiniteEnchanting implements Listener {
 	public void onUhcStartedEvent(UhcStartedEvent event) {		
 		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
 			
-			player.getInventory().addItem(new ItemStack(Material.ENCHANTING_TABLE, 64));
-			player.getInventory().addItem(new ItemStack(Material.ANVIL, 64));
+			player.getInventory().setItem(0, new ItemStack(Material.ENCHANTING_TABLE, 64));
+			player.getInventory().setItem(1, new ItemStack(Material.ANVIL, 64));
 			player.setLevel(Integer.MAX_VALUE);
 		}
 	}

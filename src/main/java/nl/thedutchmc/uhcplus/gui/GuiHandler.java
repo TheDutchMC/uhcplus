@@ -1,7 +1,6 @@
 package nl.thedutchmc.uhcplus.gui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,6 +11,8 @@ import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerInteractEventListener;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerJoinEventListener;
+import nl.thedutchmc.uhcplus.gui.modules.ModulesEventListener;
+import nl.thedutchmc.uhcplus.gui.modules.ModulesGui;
 import nl.thedutchmc.uhcplus.gui.recipe.RecipeEventListener;
 import nl.thedutchmc.uhcplus.gui.recipe.RecipeGui;
 import nl.thedutchmc.uhcplus.gui.recipe.subgui.RecipeAxeOfDestruction;
@@ -27,13 +28,14 @@ import nl.thedutchmc.uhcplus.gui.team.subgui.listTeamsGui.ListTeamsGui;
 public class GuiHandler {
 
 	private static UhcPlus plugin;
-	private static List<ItemStack> itemsForPlayers = new ArrayList<>();
+	private static HashMap<ItemStack, Boolean> itemsForPlayers = new HashMap<>();
 	private static PlayerInteractEventListener playerInteractEventListener;
 	private static PlayerJoinEventListener playerJoinEventListener;
 	private static TeamEventListener teamEventListener;
 	private static ListTeamsEventListener listTeamsEventListener;
 	private static RecipeEventListener recipeEventListener;
 	private static SubguiEventListener subguiEventListener;
+	private static ModulesEventListener modulesEventListener;
 	
 	public static void setupGuiSystem() {
 		
@@ -46,6 +48,7 @@ public class GuiHandler {
 		listTeamsEventListener = new ListTeamsEventListener();
 		recipeEventListener = new RecipeEventListener();
 		subguiEventListener = new SubguiEventListener();
+		modulesEventListener = new ModulesEventListener();
 		
 		//Setup listeners required for the system
 		Bukkit.getPluginManager().registerEvents(playerInteractEventListener, plugin);
@@ -53,9 +56,8 @@ public class GuiHandler {
 		
 		//START OF TEAM GUI
 		
-		//Setup the main GUI
 		TeamGui.initGui();
-		itemsForPlayers.add(CreateItem.create(Material.IRON_SWORD, ChatColor.GOLD + "Teams", "Right click me"));
+		itemsForPlayers.put(CreateItem.create(Material.IRON_SWORD, ChatColor.GOLD + "Teams", "Right click me"), false);
 		Bukkit.getPluginManager().registerEvents(teamEventListener, plugin);
 		
 		//Setup the ListTeams GUI
@@ -66,7 +68,7 @@ public class GuiHandler {
 		
 		//START OF RECIPE GUI
 		RecipeGui.setupGui();
-		itemsForPlayers.add(CreateItem.create(Material.CRAFTING_TABLE, ChatColor.GOLD + "Recipes", "Right click me"));
+		itemsForPlayers.put(CreateItem.create(Material.CRAFTING_TABLE, ChatColor.GOLD + "Recipes", "Right click me"), false);
 		 
 		Bukkit.getPluginManager().registerEvents(recipeEventListener, plugin);
 		
@@ -79,6 +81,15 @@ public class GuiHandler {
 		RecipeAxeOfDestruction.setupGui();
 		RecipeSwordOfDivinity.setupGui();
 		
+		//END OF RECIPE GUI
+		
+		//START OF MODULES GUI
+		ModulesGui.setupGui();
+		itemsForPlayers.put(CreateItem.create(Material.IRON_PICKAXE, ChatColor.GOLD + "Modules", "Right click me"), true);
+		Bukkit.getPluginManager().registerEvents(modulesEventListener, plugin);
+		
+		//END OF MODULES GUI
+		
 	}
 	
 	public static void unregisterGuiSystem() {
@@ -90,7 +101,7 @@ public class GuiHandler {
 		HandlerList.unregisterAll(subguiEventListener);
 	}
 	
-	public static List<ItemStack> getItemsForPlayers() {
+	public static HashMap<ItemStack, Boolean> getItemsForPlayers() {
 		return itemsForPlayers;
 	}
 }

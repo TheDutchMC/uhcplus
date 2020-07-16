@@ -49,6 +49,8 @@ public class ListTeamsGui {
 	}
 	
 	static void initItems() {
+		
+		gui.clear();
 				
 		//loop over all the teams, and add them as items
 		for(int i = 0; i < TeamHandler.teams.size() && i < 51; i++) {

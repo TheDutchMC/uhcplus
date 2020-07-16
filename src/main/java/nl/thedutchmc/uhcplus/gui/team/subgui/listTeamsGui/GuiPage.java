@@ -37,6 +37,8 @@ public class GuiPage {
 	
 	void setupGui() {
 		
+		gui.clear();
+		
 		//Base size, what the minimum size should be
 		int baseSize = ((TeamHandler.teams.size()) - (51* pageId)) + 5;
 				

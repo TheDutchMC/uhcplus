@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
@@ -25,6 +27,7 @@ public class PlayerRespawnEventListener implements Listener {
 			@Override
 			public void run() {
 				player.setGameMode(GameMode.SPECTATOR);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 200));
 			}
 		}.runTaskLater(UhcPlus.INSTANCE, 1);
 
