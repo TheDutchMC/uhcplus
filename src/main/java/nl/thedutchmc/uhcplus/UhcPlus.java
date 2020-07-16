@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import nl.thedutchmc.uhcplus.commands.BroadcastCommandHandler;
 import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
+import nl.thedutchmc.uhcplus.commands.CoordsCommandHandler;
 import nl.thedutchmc.uhcplus.commands.TeamInventoryCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
@@ -57,8 +58,7 @@ public class UhcPlus extends JavaPlugin {
 		getCommand("uhcp").setExecutor(new UhcpCommandHandler());
 		getCommand("uhcp").setTabCompleter(new UhcpTabCompleter());
 		
-		//set the executor for /ti and /teaminventory
-		getCommand("ti").setExecutor(new TeamInventoryCommandHandler());
+		//set the executor for /teaminventory (/ti)                                               
 		getCommand("teaminventory").setExecutor(new TeamInventoryCommandHandler());
 		
 		//Set the executor for the /chat command
@@ -66,6 +66,9 @@ public class UhcPlus extends JavaPlugin {
 		
 		//set the executor for the /broadcast command
 		getCommand("broadcast").setExecutor(new BroadcastCommandHandler());
+		
+		//set the executor for the /coords command (/c)
+		getCommand("coords").setExecutor(new CoordsCommandHandler());
 		
 		//Load the configuration file
 		ConfigurationHandler configurationHandler = new ConfigurationHandler();

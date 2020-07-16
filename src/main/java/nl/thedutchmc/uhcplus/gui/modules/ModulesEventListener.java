@@ -39,6 +39,7 @@ public class ModulesEventListener implements Listener {
 		if(clickedItem.getType().equals(Material.NETHERITE_SWORD)) PresetHandler.swordOfDivinityLevelling = !clickedItem.getItemMeta().hasEnchants();
 		if(clickedItem.getType().equals(Material.BARREL)) PresetHandler.moduleTeamInventory = !clickedItem.getItemMeta().hasEnchants();
 		if(clickedItem.getType().equals(Material.OAK_LOG)) PresetHandler.moduleTreeFullRemove = !clickedItem.getItemMeta().hasEnchants();
+		if(clickedItem.getType().equals(Material.APPLE)) PresetHandler.moduleOneHeartStart = !clickedItem.getItemMeta().hasEnchants();
 		
 	
 		PresetHandler.changedPresetOption();

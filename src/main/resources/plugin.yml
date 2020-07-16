@@ -15,5 +15,108 @@ commands:
   description: Broadcast a message to all online players.
  teaminventory:
   description: Opens team inventory for the executor's team
- ti:
-  description: alias for Teaminventory
+  aliases: ti
+ coords:
+  description: Put your coordinates into Team Chat
+  aliases: c
+permissions:
+ uhcp.*:
+  description: Grants access to all UHCPlus commands
+  default: op
+  children:
+   uhcp.preset.*: true
+   uhcp.teams.*: true
+   uhcp.broadcast: true
+   uhcp.chat: true
+   uhcp.teaminventory: true
+   uhcp.coords: true
+   uhcp.gui.*: true
+ uhcp.preset.*:
+  description: Grants the player access to all /uhcp preset <arguments> commands
+  default: op
+  children:
+   uhcp.preset.create: true
+   uhcp.preset.delete: true
+   uhcp.preset.list: true
+   uhcp.preset.load: true
+   uhcp.preset.options: true
+   uhcp.preset.options: true
+   uhcp.preset.seeloaded: true
+   uhcp.preset.setdefault: true
+   uhcp.preset.help: true
+ uhcp.preset.create:
+  description: Allows the player to create a new preset
+  default: op
+ uhcp.preset.delete:
+  description: Allows the player to delete a preset
+  default: op 
+ uhcp.preset.list:
+  description: Allows the player to list existing presets
+  default: op
+ uhcp.preset.load:
+  description: Allows the player to load a preset
+  default: op
+ uhcp.preset.options:
+  description: Allows the player to modify options for the loaded preset
+  default: op
+ uhcp.preset.seeloaded:
+  description: Allows the player to see which preset is currently loaded
+  default: op
+ uhcp.preset.setdefault:
+  description: Allows the player to set the default preset
+  default: op
+ uhcp.preset.help:
+  description: Allows the user to access the preset help page
+  default: op
+ uhcp.teams.*:
+  description: Grants the player access to all /uhcp teams <arguments> commands
+  default: op
+  children:
+   uhcp.teams.getteams: true
+   uhcp.teams.randomfill: true
+   uhcp.teams.help: true
+   uhcp.teams.whichteam: true
+   uhcp.teams.jointeam: true
+ uhcp.teams.getteams:
+  description: Allows the user to list all the teams
+  default: op
+ uhcp.teams.randomfill:
+  description: Allows the user to force resort the teams randomly
+  default: op
+ uhcp.teams.help:
+  description: Allows the user to access the teams help page
+  default: op
+ uhcp.teams.whichteam:
+  description: Allows the user to see in which team a player is
+  default: op
+ uhcp.teams.jointeam:
+  description: Allows the user to join a team
+  default: op
+ uhcp.broadcast:
+  description: Allows the use of /broadcast
+  default: op
+ uhcp.chat:
+  description: Allows the use of /chat
+  default: true
+ uhcp.teaminventory:
+  description: Allows the use of /ti and /teaminventory
+  default: true
+ uhcp.coords:
+  description: Allows the use of /c and /coords
+  default: true
+ uhcp.gui.*:
+  description: Grans the player access to all GUIs
+  default: op
+  children:
+   uhcp.gui.teams: true
+   uhcp.gui.recipes: true
+   uhcp.gui.modules: true
+ uhcp.gui.teams:
+  description: Allows the user to see and use the Teams gui
+  default: true
+ uhcp.gui.recipes:
+  description: Allows the user to see and use the Recipes gui
+  default: true
+ uhcp.gui.modules:
+  description: Allows the user to see and use the Modules gui
+  default: op

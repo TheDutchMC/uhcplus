@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.potion.PotionEffect;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.teams.Team;
@@ -26,6 +27,7 @@ public class PlayerLoginJoinEventListener implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		
@@ -58,8 +60,15 @@ public class PlayerLoginJoinEventListener implements Listener {
 					player.sendMessage(ChatColor.GOLD + "The UHC has already started. You are a spectator.");
 				}
 			} else {
+				
+				for(PotionEffect pe : player.getActivePotionEffects()) {
+					player.removePotionEffect(pe.getType());
+				}
+				
+				player.setMaxHealth(20);
+				player.setHealth(20);
 				player.getInventory().clear();
-				player.setExp(0);
+				player.setTotalExperience(0);
 				
 				player.setGameMode(GameMode.ADVENTURE);
 				player.teleport(new Location(uhcWorld, 0, 201, 0));

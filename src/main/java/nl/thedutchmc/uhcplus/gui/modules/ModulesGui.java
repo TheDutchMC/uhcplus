@@ -70,6 +70,8 @@ public class ModulesGui {
 		
 		gui.setItem(13, createItem(Material.OAK_LOG, "Tree full Remove", PresetHandler.moduleTreeFullRemove, "This module will remove the entire stem of a tree if one block of it is broken"));
 		
+		gui.setItem(14, createItem(Material.APPLE, "One Heart Start", PresetHandler.moduleOneHeartStart, "This module will give players one heart of health at the start of the UHC"));
+		
 		gui.setItem(26, CreateItem.create(Material.BARRIER, ChatColor.RESET + "Close menu"));
 	}
 	

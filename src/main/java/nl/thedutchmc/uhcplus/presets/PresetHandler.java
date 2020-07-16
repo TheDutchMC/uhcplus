@@ -12,7 +12,7 @@ public class PresetHandler {
 	public static String loadedPreset;
 	
 	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools, moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow, moduleDissalowGrindingEnchantedTools,
-	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity, swordOfDivinityLevelling, moduleTeamInventory;
+	moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage, moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity, swordOfDivinityLevelling, moduleTeamInventory, moduleOneHeartStart;
 	public static int maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize, worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime, moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime,
 	moduleSwordOfDivinityLevelOneTime, moduleSwordOfDivinityLevelTwoTime;
 	

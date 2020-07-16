@@ -22,6 +22,7 @@ public class ModuleHandler {
 	static ModuleDioriteDamage moduleDioriteDamage;
 	static ModuleAxeOfDestruction moduleAxeOfDestruction;
 	static ModuleSwordOfDivinity moduleSwordOfDivinity;
+	static ModuleOneHeartStart moduleOneHeartStart;
 	
 	static Recipes recipes;
 	static ModuleAntiCheat moduleAntiCheat;
@@ -40,6 +41,7 @@ public class ModuleHandler {
 		moduleAntiCheat = new ModuleAntiCheat();
 		moduleAxeOfDestruction = new ModuleAxeOfDestruction();
 		moduleSwordOfDivinity = new ModuleSwordOfDivinity();
+		moduleOneHeartStart = new ModuleOneHeartStart();
 		
 		recipes = new Recipes();
 	
@@ -76,6 +78,8 @@ public class ModuleHandler {
 		if(PresetHandler.axeOfDestructionLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleAxeOfDestruction, plugin);
 		
 		if(PresetHandler.swordOfDivinityLevelling) Bukkit.getServer().getPluginManager().registerEvents(moduleSwordOfDivinity, plugin);
+		
+		if(PresetHandler.moduleOneHeartStart) Bukkit.getServer().getPluginManager().registerEvents(new ModuleOneHeartStart(), plugin);
 	}
 	
 	public void unloadModules() {
@@ -100,7 +104,8 @@ public class ModuleHandler {
 		if(!PresetHandler.axeOfDestructionLevelling) HandlerList.unregisterAll(moduleAxeOfDestruction);
 
 		if(!PresetHandler.swordOfDivinityLevelling) HandlerList.unregisterAll(moduleSwordOfDivinity);
-
+		
+		if(!PresetHandler.moduleOneHeartStart) HandlerList.unregisterAll(moduleOneHeartStart);
 
 		/*Iterator<Recipe> it = plugin.getServer().recipeIterator();
 		while(it.hasNext()) {

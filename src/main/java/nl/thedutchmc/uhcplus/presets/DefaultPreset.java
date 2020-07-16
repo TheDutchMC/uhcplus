@@ -68,6 +68,7 @@ public class DefaultPreset {
 		PresetHandler.moduleSwordOfDivinity = Boolean.valueOf(this.getPresetConfig().getString("moduleSwordOfDivinity"));
 		PresetHandler.swordOfDivinityLevelling = Boolean.valueOf(this.getPresetConfig().getString("swordOfDivinityLevelling"));
 		PresetHandler.moduleTeamInventory = Boolean.valueOf(this.getPresetConfig().getString("moduleTeamInventory"));
+		PresetHandler.moduleOneHeartStart = Boolean.valueOf(this.getPresetConfig().getString("moduleOneHeartStart"));
 		
 		//Integer
 		PresetHandler.maxTeamCount = Integer.valueOf(this.getPresetConfig().getString("maxTeamCount"));
@@ -120,6 +121,7 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleSwordOfDivinityLevelOneTime", PresetHandler.moduleSwordOfDivinityLevelOneTime);
 		this.getPresetConfig().set("moduleSwordOfDivinityLevelTwoTime", PresetHandler.moduleSwordOfDivinityLevelTwoTime);
 		this.getPresetConfig().set("moduleTeamInventory", PresetHandler.moduleTeamInventory);
+		this.getPresetConfig().set("moduleOneHeartStart", PresetHandler.moduleOneHeartStart);
 		
 		savePreset();
 	}

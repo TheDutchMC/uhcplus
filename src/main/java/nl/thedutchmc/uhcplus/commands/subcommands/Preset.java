@@ -188,6 +188,7 @@ public class Preset {
 							sender.sendMessage("- " + cg + "moduleSwordOfDivinity " + cw + "This module will add the Sword of Divinity, crafted with two iron blocks and one iron ingot. Options: true/false");
 							sender.sendMessage("- " + cg + "swordOfDivinityLevelling " + cw + "Enabling this will allow the Sword of Divinity to level up. Options: true/false");
 							sender.sendMessage("- " + cg + "moduleTeamInventory " + cw + "This module will add an inventory accessible by every member of a team. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleOneHeartStart " + cw + "This module will set the player's health to 1 heart at start. Options: true/false");
 						}
 					} else {
 						
@@ -506,6 +507,22 @@ public class Preset {
 									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
 								}
 							
+							//uhcp preset options moduleOneHeartStart <arg>
+							} else if(args[2].equalsIgnoreCase("moduleoneheartstart")) {
+								if(args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleOneHeartStart = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true" + cg + "!");
+
+								} else if(args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleOneHeartStart = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
 							//uhcp preset options timeToPvp <arg>
 							} else if(args[2].equalsIgnoreCase("timetopvp")) {
 								if(isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {

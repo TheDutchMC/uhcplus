@@ -89,6 +89,9 @@ moduleSwordOfDivinityLevelTwoTime: "2400"
 #Do we enable team inventory. Default: true
 moduleTeamInventory: "true"
 
+#Should players start with only one heart. Default: false
+moduleOneHeartStart: "false"
+
 
 
 

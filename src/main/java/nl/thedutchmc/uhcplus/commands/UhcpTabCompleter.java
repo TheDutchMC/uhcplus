@@ -38,6 +38,7 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("seeloaded");
 				possibleCommands.add("delete");
 				possibleCommands.add("options");
+				possibleCommands.add("help");
 				
 				return possibleCommands;
 				
@@ -48,6 +49,8 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("randomfill");
 				possibleCommands.add("getteams");
 				possibleCommands.add("whichteam");
+				possibleCommands.add("jointeam");
+				possibleCommands.add("teamcount");
 				
 				return possibleCommands;
 				
@@ -70,7 +73,7 @@ public class UhcpTabCompleter implements TabCompleter {
 					possibleCommands.add("moduleTreeFullRemove");
 					possibleCommands.add("moduleLeaveDecay");
 					possibleCommands.add("moduleEnchantedTools");
-					possibleCommands.add("moduleInfiniteEnchanting");
+					possibleCommands.add("moduleInfiniteEn)chanting");
 					possibleCommands.add("moduleSheepDropString");
 					possibleCommands.add("moduleGravelDropArrow");
 					possibleCommands.add("moduleDissalowGrindingEnchantedTools");
@@ -83,6 +86,7 @@ public class UhcpTabCompleter implements TabCompleter {
 					possibleCommands.add("moduleSwordOfDivinity");
 					possibleCommands.add("swordOfDivinityLevelling");
 					possibleCommands.add("moduleTeamInventory");
+					possibleCommands.add("moduleOneHeartStart");
 					
 					//Most of the integer variables
 					possibleCommands.add("ingotDropCount");
