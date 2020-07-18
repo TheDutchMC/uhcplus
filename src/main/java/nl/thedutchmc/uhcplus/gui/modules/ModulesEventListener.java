@@ -57,6 +57,8 @@ public class ModulesEventListener implements Listener {
 			PresetHandler.moduleTreeFullRemove = !clickedItem.getItemMeta().hasEnchants();
 		if (clickedItem.getType().equals(Material.APPLE))
 			PresetHandler.moduleOneHeartStart = !clickedItem.getItemMeta().hasEnchants();
+		if (clickedItem.getType().equals(Material.SLIME_BALL))
+			PresetHandler.moduleSlimeBoost = !clickedItem.getItemMeta().hasEnchants();
 
 		PresetHandler.changedPresetOption();
 

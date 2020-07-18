@@ -15,7 +15,7 @@ public class PresetHandler {
 			moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow,
 			moduleDissalowGrindingEnchantedTools, moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage,
 			moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity,
-			swordOfDivinityLevelling, moduleTeamInventory, moduleOneHeartStart;
+			swordOfDivinityLevelling, moduleTeamInventory, moduleOneHeartStart, moduleSlimeBoost, moduleSticksFromLogs;
 	public static int maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize,
 			worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime,
 			moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime, moduleSwordOfDivinityLevelOneTime,

@@ -274,6 +274,7 @@ public class Preset {
 									+ "This module will add an inventory accessible by every member of a team. Options: true/false");
 							sender.sendMessage("- " + cg + "moduleOneHeartStart " + cw
 									+ "This module will set the player's health to 1 heart at start. Options: true/false");
+							sender.sendMessage("- " + cg + "moduleSlimeBoost " + cw + "This module will give players a strength boost if they hold on to slime for a while");
 						}
 					} else {
 
@@ -645,7 +646,25 @@ public class Preset {
 									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
 								}
 
-								// uhcp preset options timeToPvp <arg>
+							//uhcp preset options moduleSlimeBoost <arg>
+							} else if (args[2].equalsIgnoreCase("moduleslimeboost")) {
+								if (args[3].equalsIgnoreCase("true")) {
+									PresetHandler.moduleSlimeBoost = true;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
+											+ cg + "!");
+
+								} else if (args[3].equalsIgnoreCase("false")) {
+									PresetHandler.moduleSlimeBoost = false;
+									PresetHandler.changedPresetOption();
+									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
+											+ "false" + cg + "!");
+
+								} else {
+									sender.sendMessage(ChatColor.RED + "Invalid option! Either true or false.");
+								}
+								
+							// uhcp preset options timeToPvp <arg>
 							} else if (args[2].equalsIgnoreCase("timetopvp")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
 									PresetHandler.timeToPvp = Integer.valueOf(args[4]);
@@ -765,6 +784,10 @@ public class Preset {
 								} else {
 									sender.sendMessage(ChatColor.RED + "Invalid option! Must be a number!");
 								}
+								
+								//uhcp preset options <invalid option>
+							} else {
+								sender.sendMessage(ChatColor.RED + "Invalid option!");
 							}
 						}
 					}

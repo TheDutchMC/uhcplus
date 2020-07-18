@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleClasses;
+package nl.thedutchmc.uhcplus.modules.modules;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

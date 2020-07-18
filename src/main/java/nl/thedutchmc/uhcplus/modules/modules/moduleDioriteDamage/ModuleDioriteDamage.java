@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleClasses;
+package nl.thedutchmc.uhcplus.modules.modules.moduleDioriteDamage;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -19,8 +19,7 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class ModuleDioriteDamage implements Listener {
 
-	static HashMap<UUID, Integer> playersWithDiorite = new HashMap<>();
-	static HashMap<UUID, Boolean> playersWarningGiven = new HashMap<>();
+	static HashMap<UUID, DioritePlayer> playersWithDiorite = new HashMap<>();
 	static BukkitTask damageTask;
 	
 	@EventHandler
@@ -31,11 +30,11 @@ public class ModuleDioriteDamage implements Listener {
 		ItemStack i = event.getItem().getItemStack();
 		if(!i.getType().equals(Material.DIORITE) && !i.getType().equals(Material.POLISHED_DIORITE)) return;
 		
-		Player player = (Player) event.getEntity();
+		Player p = (Player) event.getEntity();
+		UUID uuid = p.getUniqueId();
 		
-		if(!playersWithDiorite.containsKey(player.getUniqueId())) {
-			playersWithDiorite.put(player.getUniqueId(), 0);
-			playersWarningGiven.put(player.getUniqueId(), false);
+		if(!playersWithDiorite.containsKey(uuid)) {
+			playersWithDiorite.put(uuid, new DioritePlayer(uuid));
 		}
 	}
 	
@@ -54,11 +53,12 @@ public class ModuleDioriteDamage implements Listener {
 						
 						if(!p.getInventory().contains(Material.DIORITE) && !p.getInventory().contains(Material.POLISHED_DIORITE)) {
 							playersWithDiorite.remove(uuid);
-							playersWarningGiven.remove(uuid);
 							continue;
 						}
 						
-						int itemHeldSeconds = playersWithDiorite.get(uuid);
+						final DioritePlayer dp = playersWithDiorite.get(uuid);
+						
+						int itemHeldSeconds = dp.getSecondsHeld();
 												
 						if(itemHeldSeconds >= 10 && itemHeldSeconds < 50) {
 							p.damage(0.1);
@@ -68,13 +68,16 @@ public class ModuleDioriteDamage implements Listener {
 							p.damage(1.0);
 						}
 						
-						if(p.getHealth() < 4 && !playersWarningGiven.get(uuid)) {
+						if(p.getHealth() < 4 && !dp.getWarned()) {
 							p.sendMessage(ChatColor.RED + "Warning! You are dying of diorite poisioning! Remove it from your inventory quickly!");
-							playersWarningGiven.put(uuid, true);
+							
+							dp.setWarned(true);
+							playersWithDiorite.put(uuid, dp);
 						}
 						
 						itemHeldSeconds++;
-						playersWithDiorite.put(uuid, itemHeldSeconds);
+						dp.setSecondsHeld(itemHeldSeconds);
+						playersWithDiorite.put(uuid, dp);
 					}
 				}
 			}

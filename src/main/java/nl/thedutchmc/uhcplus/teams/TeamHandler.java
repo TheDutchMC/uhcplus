@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleTeamInventory;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleTeamInventory;
 import nl.thedutchmc.uhcplus.players.PlayerHandler;
 import nl.thedutchmc.uhcplus.players.PlayerObject;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;

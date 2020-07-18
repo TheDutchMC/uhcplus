@@ -1,4 +1,4 @@
-package nl.thedutchmc.uhcplus.modules.moduleClasses;
+package nl.thedutchmc.uhcplus.modules.modules;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;

@@ -150,9 +150,7 @@ public class DeathmatchHandler {
 
 		// Pick a random deathmatch schematic
 		Random random = new Random();
-		int i = random.nextInt((availableSchematics.size() - 0) + 1);
-
-		i -= 1;
+		int i = random.nextInt((availableSchematics.size()));
 
 		System.out.println("[UhcPlus][Debug][world.DeathmatchHandler: 163] i: " + i);
 

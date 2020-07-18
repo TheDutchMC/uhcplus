@@ -83,7 +83,7 @@ public class LobbyHandler {
 
 		// Check if any lobby's exist.
 		if (filenames.length < 1) {
-			System.out.println("[UhcPlus] No deathmatch arena schematics found! Disabling UhcPlus");
+			System.out.println("[UhcPlus] No lobby arena schematics found! Disabling UhcPlus");
 			UhcPlus.INSTANCE.getServer().getPluginManager().disablePlugin(UhcPlus.INSTANCE);
 		}
 

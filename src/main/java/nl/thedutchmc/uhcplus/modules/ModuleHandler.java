@@ -5,20 +5,25 @@ import org.bukkit.event.HandlerList;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.ModuleAntiCheat;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleAxeOfDestruction;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleDioriteDamage;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleDissalowGrindingEnchantedTools;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleEnchantedTools;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleGravelDropArrow;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleInfiniteEnchanting;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleLeaveDecay;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleOneHeartStart;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleOreAutoSmelt;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleSheepDropString;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleSwordOfDivinity;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleTreeFullRemove;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleAxeOfDestruction;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleDissalowGrindingEnchantedTools;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleEnchantedTools;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleGravelDropArrow;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleInfiniteEnchanting;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleLeaveDecay;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleOneHeartStart;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleOreAutoSmelt;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleSheepDropString;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleSlimeBoost;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleSwordOfDivinity;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleTreeFullRemove;
+import nl.thedutchmc.uhcplus.modules.modules.moduleDioriteDamage.ModuleDioriteDamage;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeAxeOfDestruction;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightGoldenApple;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSticksFromLogs;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSwordOfDivinity;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightAnvil;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
-import nl.thedutchmc.uhcplus.uhc.Recipes;
 
 public class ModuleHandler {
 
@@ -34,10 +39,17 @@ public class ModuleHandler {
 	static ModuleAxeOfDestruction moduleAxeOfDestruction;
 	static ModuleSwordOfDivinity moduleSwordOfDivinity;
 	static ModuleOneHeartStart moduleOneHeartStart;
+	static ModuleSlimeBoost moduleSlimeBoost;
 
-	static Recipes recipes;
 	static ModuleAntiCheat moduleAntiCheat;
 
+	//Recipes
+	static RecipeAxeOfDestruction recipeAxeOfDestruction;
+	static RecipeLightAnvil recipeLightAnvil;
+	static RecipeLightGoldenApple recipeLightGoldenApple;
+	static RecipeSwordOfDivinity recipeSwordOfDivinity;
+	static RecipeSticksFromLogs recipeSticksFromLogs;
+	
 	public void loadModules() {
 
 		moduleOreAutoSmelt = new ModuleOreAutoSmelt();
@@ -53,8 +65,14 @@ public class ModuleHandler {
 		moduleAxeOfDestruction = new ModuleAxeOfDestruction();
 		moduleSwordOfDivinity = new ModuleSwordOfDivinity();
 		moduleOneHeartStart = new ModuleOneHeartStart();
-
-		recipes = new Recipes();
+		moduleSlimeBoost = new ModuleSlimeBoost();
+		
+		//Recipes
+		recipeAxeOfDestruction = new RecipeAxeOfDestruction();
+		recipeLightAnvil = new RecipeLightAnvil();
+		recipeLightGoldenApple = new RecipeLightGoldenApple();
+		recipeSwordOfDivinity = new RecipeSwordOfDivinity();
+		recipeSticksFromLogs = new RecipeSticksFromLogs();
 
 		UhcPlus plugin = UhcPlus.INSTANCE;
 
@@ -87,17 +105,17 @@ public class ModuleHandler {
 			moduleDioriteDamage.dioriteDamage();
 		}
 
-		if (PresetHandler.moduleLightGoldenApple && !Recipes.lightGoldenAppleRegistered)
-			plugin.getServer().addRecipe(recipes.getLightGoldenAppleRecipe());
+		if (PresetHandler.moduleLightGoldenApple && !RecipeLightGoldenApple.appleRegistered)
+			plugin.getServer().addRecipe(recipeLightGoldenApple.getLightGoldenAppleRecipe());
 
-		if (PresetHandler.moduleLightAnvil && !Recipes.lightAnvilRegistered)
-			plugin.getServer().addRecipe(recipes.getLightAnvilRecipe());
+		if (PresetHandler.moduleLightAnvil && !RecipeLightAnvil.anvilRegistered)
+			plugin.getServer().addRecipe(recipeLightAnvil.getLightAnvilRecipe());
 
-		if (PresetHandler.moduleAxeOfDestruction && !Recipes.axeOfDestructionRegistered)
-			plugin.getServer().addRecipe(recipes.getAxeOfDestructionRecipe());
+		if (PresetHandler.moduleAxeOfDestruction && !RecipeAxeOfDestruction.axeRegistered)
+			plugin.getServer().addRecipe(recipeAxeOfDestruction.getAxeOfDestructionRecipe());
 
-		if (PresetHandler.moduleSwordOfDivinity && !Recipes.swordOfDivinityRegistered)
-			plugin.getServer().addRecipe(recipes.getSwordOfDivinity());
+		if (PresetHandler.moduleSwordOfDivinity && !RecipeSwordOfDivinity.swordRegistered)
+			plugin.getServer().addRecipe(recipeSwordOfDivinity.getSwordOfDivinity());
 
 		if (PresetHandler.moduleAntiCheat)
 			moduleAntiCheat.enableModule();
@@ -110,6 +128,14 @@ public class ModuleHandler {
 
 		if (PresetHandler.moduleOneHeartStart)
 			Bukkit.getServer().getPluginManager().registerEvents(moduleOneHeartStart, plugin);
+		
+		if(PresetHandler.moduleSlimeBoost) {
+			Bukkit.getServer().getPluginManager().registerEvents(moduleSlimeBoost, plugin);
+			moduleSlimeBoost.slimeBoost();
+		}
+		
+		if(PresetHandler.moduleSticksFromLogs)
+			recipeSticksFromLogs.setupRecipe();
 	}
 
 	public void unloadModules() {
@@ -154,6 +180,12 @@ public class ModuleHandler {
 		if (!PresetHandler.moduleOneHeartStart)
 			HandlerList.unregisterAll(moduleOneHeartStart);
 
+		if(!PresetHandler.moduleSlimeBoost) {
+			HandlerList.unregisterAll(moduleSlimeBoost);
+			if(moduleSlimeBoost != null) moduleSlimeBoost.cancelBoostTask();
+		}
+			
+		
 		/*
 		 * Iterator<Recipe> it = plugin.getServer().recipeIterator();
 		 * while(it.hasNext()) { Recipe itRecipe = it.next(); if(itRecipe instanceof
@@ -172,9 +204,5 @@ public class ModuleHandler {
 		 * if(Recipes.lightAnvilKey != null)
 		 * plugin.getServer().removeRecipe(Recipes.lightAnvilKey); }
 		 */
-
-		if (!PresetHandler.moduleDioriteDamage)
-			HandlerList.unregisterAll(moduleDioriteDamage);
-
 	}
 }

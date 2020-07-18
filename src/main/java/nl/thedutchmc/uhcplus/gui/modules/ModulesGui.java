@@ -65,7 +65,7 @@ public class ModulesGui {
 		gui.setItem(10,
 				createItem(Material.IRON_SWORD, "Sword of Divinity", PresetHandler.moduleSwordOfDivinity,
 						"This module enables the Sword of Divinity", "This is an iron sword enchanted with:",
-						"- Sharpness II", "- Knockback I", "- Efficiency III", "- Durability II",
+						"- Sharpness II", "- Knockback I",
 						"This weapon can level up if it is enabled to a diamond and netherrite variant.",
 						"Each level-up adds +1 on the enchantments."));
 
@@ -81,6 +81,9 @@ public class ModulesGui {
 		gui.setItem(14, createItem(Material.APPLE, "One Heart Start", PresetHandler.moduleOneHeartStart,
 				"This module will give players one heart of health at the start of the UHC"));
 
+		gui.setItem(15, createItem(Material.SLIME_BALL, "Slime Boost", PresetHandler.moduleSlimeBoost, "This module will give players a strength boost if they hold on to slime for a while"));
+		
+		//close menu button
 		gui.setItem(26, CreateItem.create(Material.BARRIER, ChatColor.RESET + "Close menu"));
 	}
 

@@ -70,6 +70,8 @@ public class DefaultPreset {
 		PresetHandler.moduleTeamInventory = Boolean.valueOf(this.getPresetConfig().getString("moduleTeamInventory"));
 		PresetHandler.moduleOneHeartStart = Boolean.valueOf(this.getPresetConfig().getString("moduleOneHeartStart"));
 		PresetHandler.moduleDioriteDamage = Boolean.valueOf(this.getPresetConfig().getString("moduleDioriteDamage"));
+		PresetHandler.moduleSlimeBoost = Boolean.valueOf(this.getPresetConfig().getString("moduleSlimeBoost"));
+		PresetHandler.moduleSticksFromLogs = Boolean.valueOf(this.getPresetConfig().getString("moduleSticksFromLogs"));
 		
 		// Integer
 		PresetHandler.maxTeamCount = Integer.valueOf(this.getPresetConfig().getString("maxTeamCount"));
@@ -134,6 +136,8 @@ public class DefaultPreset {
 		this.getPresetConfig().set("moduleTeamInventory", PresetHandler.moduleTeamInventory);
 		this.getPresetConfig().set("moduleOneHeartStart", PresetHandler.moduleOneHeartStart);
 		this.getPresetConfig().set("moduleDioriteDamage", PresetHandler.moduleDioriteDamage);
+		this.getPresetConfig().set("moduleSlimeBoost", PresetHandler.moduleSlimeBoost);
+		this.getPresetConfig().set("moduleSticksFromLogs", PresetHandler.moduleSticksFromLogs);
 		
 		savePreset();
 	}

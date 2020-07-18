@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.modules.moduleClasses.ModuleTeamInventory;
+import nl.thedutchmc.uhcplus.modules.modules.ModuleTeamInventory;
 
 public class Team {
 
