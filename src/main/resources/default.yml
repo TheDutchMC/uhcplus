@@ -92,6 +92,9 @@ moduleTeamInventory: "true"
 #Should players start with only one heart. Default: false
 moduleOneHeartStart: "false"
 
+#Should players get damaged if they hold on to diorite for too long. Default: false
+moduleDioriteDamage: "false"
+
 
 
 

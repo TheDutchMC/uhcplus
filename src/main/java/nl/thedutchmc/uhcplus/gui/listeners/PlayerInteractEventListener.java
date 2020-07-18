@@ -13,20 +13,25 @@ import nl.thedutchmc.uhcplus.gui.recipe.RecipeGui;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
 
 public class PlayerInteractEventListener implements Listener {
-	
+
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent event) {
-		
-		if(UhcPlus.UHC_STARTED || event.getItem() == null) return;
-		
+
+		if (UhcPlus.UHC_STARTED || event.getItem() == null)
+			return;
+
 		Action a = event.getAction();
-		if(!(a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK))) return;
-		
+		if (!(a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK)))
+			return;
+
 		final ItemStack item = event.getItem();
-		
-		if(item.getType().equals(Material.IRON_SWORD)) TeamGui.openGui(event.getPlayer());
-		if(item.getType().equals(Material.CRAFTING_TABLE)) RecipeGui.openGui(event.getPlayer());
-		if(item.getType().equals(Material.IRON_PICKAXE)) ModulesGui.openGui(event.getPlayer());
+
+		if (item.getType().equals(Material.IRON_SWORD))
+			TeamGui.openGui(event.getPlayer());
+		if (item.getType().equals(Material.CRAFTING_TABLE))
+			RecipeGui.openGui(event.getPlayer());
+		if (item.getType().equals(Material.IRON_PICKAXE))
+			ModulesGui.openGui(event.getPlayer());
 	}
 
 }

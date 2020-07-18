@@ -10,14 +10,15 @@ public class ModuleGravelDropArrow implements Listener {
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		
-		if(event.getBlock().getType().equals(Material.GRAVEL)) {
-			
+
+		if (event.getBlock().getType().equals(Material.GRAVEL)) {
+
 			event.setDropItems(false);
-			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.ARROW));
-			
+			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
+					new ItemStack(Material.ARROW));
+
 		}
-		
+
 	}
-	
+
 }

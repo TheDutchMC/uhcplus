@@ -18,7 +18,7 @@ import nl.thedutchmc.uhcplus.players.PlayerObject;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class TeamHandler {
-	
+
 	private int maxTeamCount = Integer.valueOf(PresetHandler.maxTeamCount);
 	private int maxPlayerCountPerTeam = Integer.valueOf(PresetHandler.maxPlayerCountPerTeam);
 
@@ -47,13 +47,13 @@ public class TeamHandler {
 
 			team.setTeamColor(ChatColor.of("#" + c));
 			colorsUsed.add(c);
-			
-			if(PresetHandler.moduleTeamInventory) {
+
+			if (PresetHandler.moduleTeamInventory) {
 				ModuleTeamInventory teamInventory = new ModuleTeamInventory();
 				teamInventory.setupGui();
 				team.setTeamInventory(teamInventory);
 			}
-			
+
 			teams.add(team);
 		}
 	}
@@ -69,52 +69,53 @@ public class TeamHandler {
 	}
 
 	public void playerJoinTeam(int teamId, UUID uuid) {
-	
+
 		teamManuallySelect = true;
-		
-		//Check if teams have been made yet, if not do so
-		if(teams.isEmpty()) {
+
+		// Check if teams have been made yet, if not do so
+		if (teams.isEmpty()) {
 			createTeams();
 		}
-				
-		//Loop over all teams
-		for(Team team : teams) {
-			
-			//Check if the current team is the team the player wants to join
-			if(team.getTeamId() == teamId) {
-								
-				//Check if the player is already in the team, if yes inform them
-				if(team.getTeamMembers().contains(uuid)) {
+
+		// Loop over all teams
+		for (Team team : teams) {
+
+			// Check if the current team is the team the player wants to join
+			if (team.getTeamId() == teamId) {
+
+				// Check if the player is already in the team, if yes inform them
+				if (team.getTeamMembers().contains(uuid)) {
 					Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "You are already in this team!");
 				} else {
-					
-					//Check if the selected team isnt full yet
-					if(team.getTeamSize() < maxPlayerCountPerTeam) {
-						
-						//Add the player to the team
+
+					// Check if the selected team isnt full yet
+					if (team.getTeamSize() < maxPlayerCountPerTeam) {
+
+						// Add the player to the team
 						team.playerJoinTeam(uuid);
-						
-						//Set the player object values						
+
+						// Set the player object values
 						PlayerObject playerObject;
-						if(!PlayerHandler.playerObjects.containsKey(uuid)) {
+						if (!PlayerHandler.playerObjects.containsKey(uuid)) {
 							playerObject = PlayerHandler.addPlayerToListAndReturn(uuid);
-							
+
 						} else {
 							playerObject = PlayerHandler.playerObjects.get(uuid);
 						}
-												
-						//If the player's in a team, their teamId will be >= 0, else -1
-						if(playerObject.getTeamId() >= 0) {
-							//Remove the player from their old Team
+
+						// If the player's in a team, their teamId will be >= 0, else -1
+						if (playerObject.getTeamId() >= 0) {
+							// Remove the player from their old Team
 							Team oldTeam = getTeamById(playerObject.getTeamId());
 							oldTeam.playerLeaveTeam(uuid);
 						}
-						
-						//Set the new team ID and teamchat enabled
+
+						// Set the new team ID and teamchat enabled
 						playerObject.setTeamId(team.getTeamId());
 						playerObject.setTeamChatEnabled(true);
-						
-						Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "You joined team " + ChatColor.RED + team.getTeamId());
+
+						Bukkit.getPlayer(uuid)
+								.sendMessage(ChatColor.GOLD + "You joined team " + ChatColor.RED + team.getTeamId());
 					} else {
 
 						Bukkit.getPlayer(uuid).sendMessage(ChatColor.GOLD + "Sorry, this team is full.");

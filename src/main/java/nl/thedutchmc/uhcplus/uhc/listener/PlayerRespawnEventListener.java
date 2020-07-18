@@ -14,16 +14,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerRespawnEventListener implements Listener {
-	
+
 	@EventHandler
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-		
+
 		Player player = event.getPlayer();
-		
+
 		event.setRespawnLocation(new Location(Bukkit.getServer().getWorld("uhcworld"), 0, 100, 0));
-				 
+
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
 				player.setGameMode(GameMode.SPECTATOR);

@@ -15,21 +15,21 @@ public class UhcpTabCompleter implements TabCompleter {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		
-		if(args.length == 1) {
+
+		if (args.length == 1) {
 			List<String> possibleCommands = new ArrayList<>();
 			possibleCommands.add("help");
 			possibleCommands.add("version");
 			possibleCommands.add("preset");
 			possibleCommands.add("teams");
 			possibleCommands.add("start");
-			
+
 			return possibleCommands;
-			
-		} else if(args.length == 2) {
-			
-			if(args[0].equalsIgnoreCase("preset")) {
-				
+
+		} else if (args.length == 2) {
+
+			if (args[0].equalsIgnoreCase("preset")) {
+
 				List<String> possibleCommands = new ArrayList<>();
 				possibleCommands.add("create");
 				possibleCommands.add("list");
@@ -39,11 +39,11 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("delete");
 				possibleCommands.add("options");
 				possibleCommands.add("help");
-				
+
 				return possibleCommands;
-				
-			} else if(args[0].equalsIgnoreCase("teams")) {
-				
+
+			} else if (args[0].equalsIgnoreCase("teams")) {
+
 				List<String> possibleCommands = new ArrayList<>();
 				possibleCommands.add("help");
 				possibleCommands.add("randomfill");
@@ -51,21 +51,22 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("whichteam");
 				possibleCommands.add("jointeam");
 				possibleCommands.add("teamcount");
-				
+
 				return possibleCommands;
-				
+
 			}
-		} else if(args.length == 3) {
-			
-			if(args[0].equalsIgnoreCase("preset")) {
-				
-				if(args[1].equalsIgnoreCase("setdefault") || args[1].equalsIgnoreCase("load") || args[1].equalsIgnoreCase("delete")) {
+		} else if (args.length == 3) {
+
+			if (args[0].equalsIgnoreCase("preset")) {
+
+				if (args[1].equalsIgnoreCase("setdefault") || args[1].equalsIgnoreCase("load")
+						|| args[1].equalsIgnoreCase("delete")) {
 					return ConfigurationHandler.availablePresets;
-					
+
 				} else if (args[1].equalsIgnoreCase("options")) {
 					List<String> possibleCommands = new ArrayList<>();
-					
-					//Mostly the boolean variables
+
+					// Mostly the boolean variables
 					possibleCommands.add("list");
 					possibleCommands.add("maxTeamCount");
 					possibleCommands.add("maxPlayersPerTeam");
@@ -87,8 +88,8 @@ public class UhcpTabCompleter implements TabCompleter {
 					possibleCommands.add("swordOfDivinityLevelling");
 					possibleCommands.add("moduleTeamInventory");
 					possibleCommands.add("moduleOneHeartStart");
-					
-					//Most of the integer variables
+
+					// Most of the integer variables
 					possibleCommands.add("ingotDropCount");
 					possibleCommands.add("timeToPvp");
 					possibleCommands.add("worldBorderSize");
@@ -103,22 +104,22 @@ public class UhcpTabCompleter implements TabCompleter {
 
 					return possibleCommands;
 				}
-			} else if(args[0].equalsIgnoreCase("teams")) {
-				if(args[1].equalsIgnoreCase("whichteam")) {
+			} else if (args[0].equalsIgnoreCase("teams")) {
+				if (args[1].equalsIgnoreCase("whichteam")) {
 					Player[] players = new Player[Bukkit.getServer().getOnlinePlayers().toArray().length];
-					
+
 					Bukkit.getServer().getOnlinePlayers().toArray(players);
-					
+
 					List<String> playerNames = new ArrayList<>();
-					for(Player player : players) {
+					for (Player player : players) {
 						playerNames.add(player.getName());
 					}
-					
+
 					return playerNames;
 				}
 			}
 		}
-		
+
 		List<String> emptyList = new ArrayList<>();
 		emptyList.add("");
 		return emptyList;

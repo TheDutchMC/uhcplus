@@ -11,12 +11,12 @@ public class ModuleSheepDropString implements Listener {
 
 	@EventHandler
 	public void onEntityDeathEvent(EntityDeathEvent event) {
-		
-		if(event.getEntityType().equals(EntityType.SHEEP)) {
-			
+
+		if (event.getEntityType().equals(EntityType.SHEEP)) {
+
 			event.getDrops().clear();
 			event.getDrops().add(new ItemStack(Material.STRING, 1));
-			
-		}	
+
+		}
 	}
 }

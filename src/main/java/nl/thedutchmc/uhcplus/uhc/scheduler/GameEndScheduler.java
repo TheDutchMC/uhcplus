@@ -11,70 +11,73 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
 
 public class GameEndScheduler {
-	
-	public void scheduleGameEnd() { 
+
+	public void scheduleGameEnd() {
 		int gameTime = PresetHandler.gameTime;
 		int gameTimeTicks = gameTime * 60 * 20;
-		
+
 		int fiveMinGameTimeTicks = (gameTime - 5) * 60 * 20;
 		int oneminGameTimeTicks = (gameTime - 1) * 60 * 20;
 		int thirtySecondGameTimeTicks = ((gameTime * 60) - 30) * 20;
 		int tenSecGameTimeTicks = ((gameTime * 60) - 10) * 20;
-		
-		//game end
+
+		// game end
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
+
 				DeathmatchHandler deathmatchHandler = new DeathmatchHandler();
 				deathmatchHandler.startDeathmatch();
 			}
-			
+
 		}.runTaskLater(UhcPlus.INSTANCE, gameTimeTicks);
-		
-		//5 minutes until game end 
+
+		// 5 minutes until game end
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
-				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.GRAY + " minutes!");
-				
+
+				Bukkit.broadcastMessage(
+						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.GRAY + " minutes!");
+
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, fiveMinGameTimeTicks);
-		
-		//1 minute until game end;
+
+		// 1 minute until game end;
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
-				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.GRAY + " minute!");
-				
+
+				Bukkit.broadcastMessage(
+						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.GRAY + " minute!");
+
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, oneminGameTimeTicks);
-		
-		//30 seconds until game end;
+
+		// 30 seconds until game end;
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
-				Bukkit.broadcastMessage(ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.GRAY + " seconds!");
-				
+
+				Bukkit.broadcastMessage(
+						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.GRAY + " seconds!");
+
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, thirtySecondGameTimeTicks);
-		
-		//10 seconds until game end;
+
+		// 10 seconds until game end;
 		new BukkitRunnable() {
-			
+
 			@Override
 			public void run() {
-				
-				for(int i = 10; i > 0; i--) {
+
+				for (int i = 10; i > 0; i--) {
 					Bukkit.broadcastMessage(ChatColor.AQUA + String.valueOf(i));
-					
+
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
@@ -83,6 +86,6 @@ public class GameEndScheduler {
 				}
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, tenSecGameTimeTicks);
-	
+
 	}
 }

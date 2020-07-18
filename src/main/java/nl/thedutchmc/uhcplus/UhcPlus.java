@@ -27,86 +27,86 @@ import nl.thedutchmc.uhcplus.world.WorldHandler;
 public class UhcPlus extends JavaPlugin {
 
 	public static String VERSION = "0.4-BETA";
-	public static boolean PLAYER_CAN_JOIN = false;	
+	public static boolean PLAYER_CAN_JOIN = false;
 	public static boolean UHC_STARTED = false;
 	public static Scoreboard scoreboard;
 	public static UhcPlus INSTANCE;
-	
+
 	public static void log(String log) {
 		System.out.println("[UhcPlus]" + log);
 	}
-	
+
 	@Override
 	public void onEnable() {
 		INSTANCE = this;
-		
+
 		System.out.println("Welcome to UHCPlus - Version " + VERSION);
-		
-		//Register the LoginPlayerListener
+
+		// Register the LoginPlayerListener
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
-		
+
 		ScoreboardManager sbManager = Bukkit.getScoreboardManager();
 		scoreboard = sbManager.getNewScoreboard();
 		Objective healthObjective = scoreboard.registerNewObjective("health", "health", "health");
 		healthObjective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		healthObjective.setRenderType(RenderType.HEARTS);
-		
-		//Register the EntityDamageByEntityEventListener
+
+		// Register the EntityDamageByEntityEventListener
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(), this);
-		
-		//Set the executor and tab completer for the /uhcp command
+
+		// Set the executor and tab completer for the /uhcp command
 		getCommand("uhcp").setExecutor(new UhcpCommandHandler());
 		getCommand("uhcp").setTabCompleter(new UhcpTabCompleter());
-		
-		//set the executor for /teaminventory (/ti)                                               
+
+		// set the executor for /teaminventory (/ti)
 		getCommand("teaminventory").setExecutor(new TeamInventoryCommandHandler());
-		
-		//Set the executor for the /chat command
+
+		// Set the executor for the /chat command
 		getCommand("chat").setExecutor(new ChatCommandHandler());
-		
-		//set the executor for the /broadcast command
+
+		// set the executor for the /broadcast command
 		getCommand("broadcast").setExecutor(new BroadcastCommandHandler());
-		
-		//set the executor for the /coords command (/c)
+
+		// set the executor for the /coords command (/c)
 		getCommand("coords").setExecutor(new CoordsCommandHandler());
-		
-		//Load the configuration file
+
+		// Load the configuration file
 		ConfigurationHandler configurationHandler = new ConfigurationHandler();
 		configurationHandler.loadConfig();
-		
-		//Load all the presets
+
+		// Load all the presets
 		PresetHandler presetHandler = new PresetHandler();
 		presetHandler.loadPresets();
-		
-		//Check if the files in the presets/ directory match what's in config.
+
+		// Check if the files in the presets/ directory match what's in config.
 		configurationHandler.readAvailablePresets();
-		
-		//Create a folder for the deathmatch schematics
+
+		// Create a folder for the deathmatch schematics
 		File file = new File(this.getDataFolder() + File.separator + "deathmatch");
 		file.mkdir();
-		
-		//Create teams
+
+		// Create teams
 		TeamHandler teamHandler = new TeamHandler(null, false);
 		teamHandler.createTeams();
-		
-		//Set up the GUI system
+
+		// Set up the GUI system
 		GuiHandler.setupGuiSystem();
-		
+
 		UhcPlus plugin = this;
-		
+
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
-				
+
 				WorldHandler worldHandler = new WorldHandler();
-				worldHandler.setupWorld();				
+				worldHandler.setupWorld();
 			}
 		}.runTaskLater(plugin, 120);
 	}
-	
+
 	@Override
 	public void onDisable() {
-		
+
 	}
 }

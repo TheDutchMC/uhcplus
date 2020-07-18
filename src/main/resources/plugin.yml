@@ -31,6 +31,8 @@ permissions:
    uhcp.teaminventory: true
    uhcp.coords: true
    uhcp.gui.*: true
+   uhcp.start: true
+   uhcp.help: true
  uhcp.preset.*:
   description: Grants the player access to all /uhcp preset <arguments> commands
   default: op
@@ -77,6 +79,7 @@ permissions:
    uhcp.teams.help: true
    uhcp.teams.whichteam: true
    uhcp.teams.jointeam: true
+   uhcp.teams.teamcount: true
  uhcp.teams.getteams:
   description: Allows the user to list all the teams
   default: op
@@ -91,6 +94,9 @@ permissions:
   default: op
  uhcp.teams.jointeam:
   description: Allows the user to join a team
+  default: op
+ uhcp.teams.teamcount:
+  description: Shows the amount of teams configured
   default: op
  uhcp.broadcast:
   description: Allows the use of /broadcast
@@ -120,3 +126,12 @@ permissions:
  uhcp.gui.modules:
   description: Allows the user to see and use the Modules gui
   default: op
+ uhcp.start:
+  description: Allows the user to start the uhc
+  default: op
+ uhcp.help:
+  description: Allows the user to see the UHCPlus help page
+  default: op
+ uhcp.version:
+  description: Allows the user to use the version command
+  default: true

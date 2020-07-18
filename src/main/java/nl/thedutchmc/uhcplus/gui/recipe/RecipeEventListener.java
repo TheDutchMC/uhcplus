@@ -14,30 +14,38 @@ import nl.thedutchmc.uhcplus.gui.recipe.subgui.RecipeLightGoldenApple;
 import nl.thedutchmc.uhcplus.gui.recipe.subgui.RecipeSwordOfDivinity;
 
 public class RecipeEventListener implements Listener {
-	
+
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
-		
-		if(!event.getInventory().equals(RecipeGui.getGui())) return;
-		
-		event.setCancelled(true);
-		
-		final ItemStack clickedItem = event.getCurrentItem();
-		
-		if(clickedItem == null || clickedItem.getType().equals(Material.AIR)) return;
-		
-		HumanEntity ent = event.getWhoClicked();
-		
-		if(clickedItem.getType().equals(Material.ANVIL)) RecipeLightAnvil.openGui(ent);
-		if(clickedItem.getType().equals(Material.GOLDEN_APPLE)) RecipeLightGoldenApple.openGui(ent);
-		if(clickedItem.getType().equals(Material.IRON_AXE)) RecipeAxeOfDestruction.openGui(ent);
-		if(clickedItem.getType().equals(Material.IRON_SWORD)) RecipeSwordOfDivinity.openGui(ent);
 
-		if(clickedItem.getType().equals(Material.BARRIER)) ent.closeInventory();
-	}	
-	
+		if (!event.getInventory().equals(RecipeGui.getGui()))
+			return;
+
+		event.setCancelled(true);
+
+		final ItemStack clickedItem = event.getCurrentItem();
+
+		if (clickedItem == null || clickedItem.getType().equals(Material.AIR))
+			return;
+
+		HumanEntity ent = event.getWhoClicked();
+
+		if (clickedItem.getType().equals(Material.ANVIL))
+			RecipeLightAnvil.openGui(ent);
+		if (clickedItem.getType().equals(Material.GOLDEN_APPLE))
+			RecipeLightGoldenApple.openGui(ent);
+		if (clickedItem.getType().equals(Material.IRON_AXE))
+			RecipeAxeOfDestruction.openGui(ent);
+		if (clickedItem.getType().equals(Material.IRON_SWORD))
+			RecipeSwordOfDivinity.openGui(ent);
+
+		if (clickedItem.getType().equals(Material.BARRIER))
+			ent.closeInventory();
+	}
+
 	@EventHandler
 	public void onInventoryDragEvent(InventoryDragEvent event) {
-		if(event.getInventory().equals(RecipeGui.getGui())) event.setCancelled(true);
+		if (event.getInventory().equals(RecipeGui.getGui()))
+			event.setCancelled(true);
 	}
 }

@@ -17,26 +17,32 @@ public class ChatCommandHandler implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
+
 		Player p = (Player) sender;
 
-		if(!p.getGameMode().equals(GameMode.SURVIVAL)) {
+		if (!sender.hasPermission("uhcp.chat")) {
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
+			return true;
+		}
+
+		if (!p.getGameMode().equals(GameMode.SURVIVAL)) {
 			sender.sendMessage(ChatColor.RED + "This command may only be used by playing players!");
 			return true;
 		}
-		
-		//chat, to toggle between team and global chat
-		for(Map.Entry<UUID, PlayerObject> entry : PlayerHandler.playerObjects.entrySet()) {
+
+		// chat, to toggle between team and global chat
+		for (Map.Entry<UUID, PlayerObject> entry : PlayerHandler.playerObjects.entrySet()) {
 			PlayerObject playerObject = entry.getValue();
-			
-			if(playerObject.getPlayerUuid().equals(p.getUniqueId())) {
-				
+
+			if (playerObject.getPlayerUuid().equals(p.getUniqueId())) {
+
 				playerObject.setTeamChatEnabled(!playerObject.getTeamChatEnabled());
-				sender.sendMessage(ChatColor.GOLD + "Chat toggled to " + ChatColor.RED + (playerObject.getTeamChatEnabled() ? "team" : "global") + ChatColor.GOLD +  " chat!");
-			}	
-		}	
+				sender.sendMessage(ChatColor.GOLD + "Chat toggled to " + ChatColor.RED
+						+ (playerObject.getTeamChatEnabled() ? "team" : "global") + ChatColor.GOLD + " chat!");
+			}
+		}
 
 		return true;
-		
+
 	}
 }

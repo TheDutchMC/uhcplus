@@ -36,12 +36,12 @@ public class GuiHandler {
 	private static RecipeEventListener recipeEventListener;
 	private static SubguiEventListener subguiEventListener;
 	private static ModulesEventListener modulesEventListener;
-	
+
 	public static void setupGuiSystem() {
-		
+
 		plugin = UhcPlus.INSTANCE;
-		
-		//Create listeners
+
+		// Create listeners
 		playerInteractEventListener = new PlayerInteractEventListener();
 		playerJoinEventListener = new PlayerJoinEventListener();
 		teamEventListener = new TeamEventListener();
@@ -49,49 +49,51 @@ public class GuiHandler {
 		recipeEventListener = new RecipeEventListener();
 		subguiEventListener = new SubguiEventListener();
 		modulesEventListener = new ModulesEventListener();
-		
-		//Setup listeners required for the system
+
+		// Setup listeners required for the system
 		Bukkit.getPluginManager().registerEvents(playerInteractEventListener, plugin);
 		Bukkit.getPluginManager().registerEvents(playerJoinEventListener, plugin);
-		
-		//START OF TEAM GUI
-		
+
+		// START OF TEAM GUI
+
 		TeamGui.initGui();
 		itemsForPlayers.put(CreateItem.create(Material.IRON_SWORD, ChatColor.GOLD + "Teams", "Right click me"), false);
 		Bukkit.getPluginManager().registerEvents(teamEventListener, plugin);
-		
-		//Setup the ListTeams GUI
+
+		// Setup the ListTeams GUI
 		ListTeamsGui.initGui();
 		Bukkit.getPluginManager().registerEvents(listTeamsEventListener, plugin);
-		
-		//END OF TEAM GUI
-		
-		//START OF RECIPE GUI
+
+		// END OF TEAM GUI
+
+		// START OF RECIPE GUI
 		RecipeGui.setupGui();
-		itemsForPlayers.put(CreateItem.create(Material.CRAFTING_TABLE, ChatColor.GOLD + "Recipes", "Right click me"), false);
-		 
+		itemsForPlayers.put(CreateItem.create(Material.CRAFTING_TABLE, ChatColor.GOLD + "Recipes", "Right click me"),
+				false);
+
 		Bukkit.getPluginManager().registerEvents(recipeEventListener, plugin);
-		
-		//EventListener for all subguis
+
+		// EventListener for all subguis
 		Bukkit.getPluginManager().registerEvents(subguiEventListener, plugin);
-		
-		//Subguis
+
+		// Subguis
 		RecipeLightAnvil.setupGui();
 		RecipeLightGoldenApple.setupGui();
 		RecipeAxeOfDestruction.setupGui();
 		RecipeSwordOfDivinity.setupGui();
-		
-		//END OF RECIPE GUI
-		
-		//START OF MODULES GUI
+
+		// END OF RECIPE GUI
+
+		// START OF MODULES GUI
 		ModulesGui.setupGui();
-		itemsForPlayers.put(CreateItem.create(Material.IRON_PICKAXE, ChatColor.GOLD + "Modules", "Right click me"), true);
+		itemsForPlayers.put(CreateItem.create(Material.IRON_PICKAXE, ChatColor.GOLD + "Modules", "Right click me"),
+				true);
 		Bukkit.getPluginManager().registerEvents(modulesEventListener, plugin);
-		
-		//END OF MODULES GUI
-		
+
+		// END OF MODULES GUI
+
 	}
-	
+
 	public static void unregisterGuiSystem() {
 		HandlerList.unregisterAll(playerInteractEventListener);
 		HandlerList.unregisterAll(playerJoinEventListener);
@@ -100,7 +102,7 @@ public class GuiHandler {
 		HandlerList.unregisterAll(recipeEventListener);
 		HandlerList.unregisterAll(subguiEventListener);
 	}
-	
+
 	public static HashMap<ItemStack, Boolean> getItemsForPlayers() {
 		return itemsForPlayers;
 	}

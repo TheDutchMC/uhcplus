@@ -16,31 +16,35 @@ public class TeamInventoryCommandHandler implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
-		if(!UhcPlus.UHC_STARTED) {
+
+		if (!sender.hasPermission("uhcp.teaminventory")) {
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
+			return true;
+		}
+
+		if (!UhcPlus.UHC_STARTED) {
 			sender.sendMessage(ChatColor.RED + "The UHC hasn't started yet!");
 			return true;
 		}
 
-		if(!PresetHandler.moduleTeamInventory) {
+		if (!PresetHandler.moduleTeamInventory) {
 			sender.sendMessage(ChatColor.RED + "This module is not enabled!");
 			return true;
 		}
-		
+
 		Player player = (Player) sender;
-		
-		for(Team team : TeamHandler.teams) {
-			if(team.getTeamMembers().contains(player.getUniqueId())) {
+
+		for (Team team : TeamHandler.teams) {
+			if (team.getTeamMembers().contains(player.getUniqueId())) {
 				sender.sendMessage(ChatColor.GOLD + "Opening Team Inventory...");
-				
+
 				HumanEntity ent = (HumanEntity) sender;
 				team.getTeamInventory().openGui(ent);
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
-	
 }

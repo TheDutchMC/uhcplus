@@ -12,31 +12,27 @@ public class ModuleTreeFullRemove implements Listener {
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		Block block = event.getBlock();		
-				
-		if(BlockChecker.isLog(block.getType())) {
+		Block block = event.getBlock();
+
+		if (BlockChecker.isLog(block.getType())) {
 			breakTree(block, 2);
 		}
 	}
-	
-	
+
 	private void breakTree(Block block, int i) {
 		if (BlockChecker.isLog(block.getType())) {
 			block.breakNaturally();
 			i = 2;
-		}else {
+		} else {
 			i--;
 		}
-		
+
 		if (i > 0) {
 			for (BlockFace blockFace : BlockFace.values()) {
-				if (blockFace.equals(BlockFace.DOWN) || 
-						blockFace.equals(BlockFace.UP) || 
-						blockFace.equals(BlockFace.NORTH) || 
-						blockFace.equals(BlockFace.EAST) || 
-						blockFace.equals(BlockFace.SOUTH) || 
-						blockFace.equals(BlockFace.WEST)) {
-					
+				if (blockFace.equals(BlockFace.DOWN) || blockFace.equals(BlockFace.UP)
+						|| blockFace.equals(BlockFace.NORTH) || blockFace.equals(BlockFace.EAST)
+						|| blockFace.equals(BlockFace.SOUTH) || blockFace.equals(BlockFace.WEST)) {
+
 					breakTree(block.getRelative(blockFace), i);
 				}
 			}

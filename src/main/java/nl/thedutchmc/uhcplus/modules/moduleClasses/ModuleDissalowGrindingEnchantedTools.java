@@ -17,33 +17,31 @@ import org.bukkit.scheduler.BukkitRunnable;
 import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleDissalowGrindingEnchantedTools implements Listener {
-	
+
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent event) {
-		
-		if(event.getInventory().getType().equals(InventoryType.GRINDSTONE)) {
-			
 
-			
+		if (event.getInventory().getType().equals(InventoryType.GRINDSTONE)) {
+
 			new BukkitRunnable() {
-				
+
 				@Override
 				public void run() {
-					
+
 					ItemStack[] itemsInInventory = event.getInventory().getContents();
-					for(ItemStack itemStack : itemsInInventory) {
-						
-						if(itemStack != null) {
+					for (ItemStack itemStack : itemsInInventory) {
+
+						if (itemStack != null) {
 							ItemMeta itemMeta = itemStack.getItemMeta();
 							List<String> lore = new ArrayList<>();
 							lore = itemMeta.getLore();
-							
-							if(lore != null) {
-								if(lore.contains("An enchanted tool")) {
-									
+
+							if (lore != null) {
+								if (lore.contains("An enchanted tool")) {
+
 									HumanEntity humanEntity = event.getWhoClicked();
 									humanEntity.closeInventory();
-									
+
 									Player p = (Player) humanEntity;
 									p.sendMessage(ChatColor.RED + "You may not use this tool in a grindstone!");
 								}
@@ -51,7 +49,7 @@ public class ModuleDissalowGrindingEnchantedTools implements Listener {
 						}
 					}
 				}
-			}.runTaskLater(UhcPlus.INSTANCE, 1);	
+			}.runTaskLater(UhcPlus.INSTANCE, 1);
 		}
 	}
 }

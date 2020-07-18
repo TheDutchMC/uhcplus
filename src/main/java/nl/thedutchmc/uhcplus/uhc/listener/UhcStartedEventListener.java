@@ -16,26 +16,25 @@ import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 
 public class UhcStartedEventListener implements Listener {
 
-	//This listener will remove the lobby at the start of the UHC
+	// This listener will remove the lobby at the start of the UHC
 	@EventHandler
 	public void onUhcStartedEvent(UhcStartedEvent event) {
-		
+
 		World uhcWorld = Bukkit.getServer().getWorld("uhcworld");
 		com.sk89q.worldedit.world.World uhcWorldWE = BukkitAdapter.adapt(uhcWorld);
-		
+
 		BlockVector3 posA = BlockVector3.at(-50, 199, -50);
 		BlockVector3 posB = BlockVector3.at(50, 250, 50);
-		
+
 		CuboidRegion lobbySelection = new CuboidRegion(uhcWorldWE, posA, posB);
-		
-		for(BlockVector3 point : lobbySelection) {
-			
+
+		for (BlockVector3 point : lobbySelection) {
+
 			Location pointLocation = new Location(uhcWorld, point.getX(), point.getY(), point.getZ());
 			Block pointBlock = pointLocation.getBlock();
 			pointBlock.setType(Material.AIR);
-			
+
 		}
-		
-		
+
 	}
 }

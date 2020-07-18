@@ -22,64 +22,64 @@ public class ChunkGenerator {
 	static int progress = 0;
 
 	public void generateChunks() {
-		
+
 		int worldRadius = 700;
-		
+
 		int startingCoordZ = worldRadius;
-		
-		z = -startingCoordZ;		
-		
+
+		z = -startingCoordZ;
+
 		overworld = Bukkit.getServer().getWorld("uhcworld");
-				
-		//Calculate the amount of chunks
-		double chunkCount = Math.pow((worldRadius/8), 2);
+
+		// Calculate the amount of chunks
+		double chunkCount = Math.pow((worldRadius / 8), 2);
 		checkEvery = (int) chunkCount / 20;
 		checkEveryOriginal = checkEvery;
-		
-		//Generate the chunks 
+
+		// Generate the chunks
 		new BukkitRunnable() {
 
 			@Override
-			public void run() {	
-				
-				if(!(Runtime.getRuntime().freeMemory() < 524288000)) { //In Bytes, so 500MB
-					if(x > -worldRadius) {
-						
-						//System.out.println("chunk: " + x + "," + z);
-						
+			public void run() {
+
+				if (!(Runtime.getRuntime().freeMemory() < 524288000)) { // In Bytes, so 500MB
+					if (x > -worldRadius) {
+
+						// System.out.println("chunk: " + x + "," + z);
+
 						Location location = new Location(overworld, x, 0, z);
 						PaperLib.getChunkAtAsync(location, true);
-			
+
 						chunk = location.getChunk();
-											
-						if(z > worldRadius) {
+
+						if (z > worldRadius) {
 							x -= 16;
 							z = -startingCoordZ;
 						}
-												
+
 						cIndex++;
 						chunksDone++;
-						
-						if(cIndex == 100) {
+
+						if (cIndex == 100) {
 							overworld.save();
 							cIndex = 0;
 						}
-						
-						if(chunksDone == checkEvery) {
+
+						if (chunksDone == checkEvery) {
 							progress += 5;
 							checkEvery += checkEveryOriginal;
 							System.out.println("[UhcPlus] Chunk generation progress: " + progress + "%");
 						}
-							
-						if(chunk != null) {
+
+						if (chunk != null) {
 							overworld.unloadChunkRequest(x, z);
 						}
-						
+
 						z += 16;
 					} else {
 						System.out.println("[UhcPlus] Done. Players may now join.");
 						UhcPlus.PLAYER_CAN_JOIN = true;
-						
+
 						this.cancel();
 					}
 				} else {

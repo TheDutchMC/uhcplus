@@ -13,24 +13,24 @@ import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.listeners.BlockBreakEventLi
 public class ModuleAntiCheat {
 
 	public static HashMap<UUID, Date> timeSinceLastDiamond = new HashMap<>();
-	
+
 	private static BlockBreakEventListener blockBreakEventListener;
-	
+
 	private static UhcPlus plugin;
-	
+
 	public void enableModule() {
 		plugin = UhcPlus.INSTANCE;
-		
+
 		blockBreakEventListener = new BlockBreakEventListener();
-		
+
 		Bukkit.getPluginManager().registerEvents(blockBreakEventListener, plugin);
-		
+
 	}
-	
+
 	public void disableModule() {
-		
+
 		HandlerList.unregisterAll(blockBreakEventListener);
-		
+
 	}
-	
+
 }
