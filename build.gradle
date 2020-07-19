@@ -8,7 +8,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version '0.4-BETA'
+version '0.5-BETA'
 
 repositories {
 	jcenter()
@@ -60,7 +60,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId 'nl.thedutchmc'
 			artifactId 'uhcplus'
-			version '0.4-BETA'
+			version '0.5-BETA'
 			
 			from components.java
 		}

@@ -1,6 +1,6 @@
 name: UHCPlus
 main: nl.thedutchmc.uhcplus.UhcPlus
-version: 0.4-BETA
+version: 0.5-BETA
 author: TheDutchMC
 api-version: 1.16
 description: A highly configurable UHC Plugin

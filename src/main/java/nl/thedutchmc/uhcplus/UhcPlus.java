@@ -27,7 +27,7 @@ import nl.thedutchmc.uhcplus.world.WorldHandler;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION = "0.4-BETA";
+	public static String VERSION = "0.5-BETA";
 	public static boolean PLAYER_CAN_JOIN = false;
 	public static boolean UHC_STARTED = false;
 	public static Scoreboard scoreboard;
