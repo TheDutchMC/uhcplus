@@ -20,6 +20,7 @@ import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.GameState;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;
@@ -31,7 +32,8 @@ public class UhcPlus extends JavaPlugin {
 	public static boolean UHC_STARTED = false;
 	public static Scoreboard scoreboard;
 	public static UhcPlus INSTANCE;
-
+	public static GameState currentState;
+	
 	public static void log(String log) {
 		System.out.println("[UhcPlus]" + log);
 	}
@@ -103,6 +105,8 @@ public class UhcPlus extends JavaPlugin {
 				worldHandler.setupWorld();
 			}
 		}.runTaskLater(plugin, 120);
+		
+		currentState = GameState.LOADING;
 	}
 
 	@Override

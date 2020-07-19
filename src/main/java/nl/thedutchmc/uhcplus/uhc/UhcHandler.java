@@ -19,6 +19,7 @@ import org.bukkit.scoreboard.Objective;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
@@ -227,6 +228,10 @@ public class UhcHandler {
 		// Remove the gui system, since we no longer want it
 		GuiHandler.unregisterGuiSystem();
 
+		//Change the game state to PLAYING
+		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcPlus.currentState, GameState.PLAYING));
+		UhcPlus.currentState = GameState.PLAYING;
+		
 		// lastly, Call the UhcStartedEvent
 		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent());
 	}
