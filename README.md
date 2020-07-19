@@ -1,3 +1,6 @@
-# uhcplus
+# UhcPlus
+Minecraft 1.16 and up
 
-@timemaster should write this probably :p
+The highly configurable UHC Plugin.
+
+For more info, you can find the wiki [here](https://github.com/TheDutchMC/uhcplus/wiki)
