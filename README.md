@@ -1,4 +1,6 @@
 # UhcPlus
+[![Release](https://jitpack.io/v/nl.thedutchmc/uhcplus.svg)]
+(https://jitpack.io/#nl.thedutchmc/uhcplus)
 Minecraft 1.16 and up
 
 The highly configurable UHC Plugin.
