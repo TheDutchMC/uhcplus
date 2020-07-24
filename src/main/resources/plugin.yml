@@ -1,6 +1,6 @@
 name: UHCPlus
 main: nl.thedutchmc.uhcplus.UhcPlus
-version: 0.5-BETA
+version: @version@
 author: TheDutchMC
 api-version: 1.16
 description: A highly configurable UHC Plugin
@@ -33,6 +33,7 @@ permissions:
    uhcp.gui.*: true
    uhcp.start: true
    uhcp.help: true
+   uhcp.kits.*: true
  uhcp.preset.*:
   description: Grants the player access to all /uhcp preset <arguments> commands
   default: op
@@ -135,3 +136,38 @@ permissions:
  uhcp.version:
   description: Allows the user to use the version command
   default: true
+ uhcp.kits.*:
+  description: Grants the user access to use all /uhcp kits commands
+  default: op
+  children:
+   uhcp.kits.create: true
+   uhcp.kits.modify: true
+   uhcp.kits.list: true
+   uhcp.kits.help: true
+   uhcp.kits.remove: true
+ uhcp.kits.create:
+  description: Allows the user to use /uhcp kits create
+  default: op
+ uhcp.kits.modify:
+  description: Allows the user to use /uhcp kits modify
+  default: op
+ uhcp.kits.list:
+  description: Allows the user to use /uhcp kits list
+  default: op
+ uhcp.kits.help:
+  description: Allows the user to use /uhcp kits help
+  default: op
+ uhcp.kits.remove:
+  description: Allows the user to use /uhcp kits remove
+  default: op
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

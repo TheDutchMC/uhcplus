@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.commands.subcommands.Kits;
 import nl.thedutchmc.uhcplus.commands.subcommands.Preset;
 import nl.thedutchmc.uhcplus.commands.subcommands.Teams;
 import nl.thedutchmc.uhcplus.uhc.UhcHandler;
@@ -98,6 +99,11 @@ public class UhcpCommandHandler implements CommandExecutor {
 					Teams teams = new Teams();
 					teams.teamsSubcommand(sender, command, label, args);
 
+					
+				} else if(args[0].equalsIgnoreCase("kits")) {
+					
+					Kits kits = new Kits();
+					kits.kitCommand(sender, command, label, args);
 				}
 			}
 		}

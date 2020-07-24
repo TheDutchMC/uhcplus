@@ -1,35 +1,47 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.apache.tools.ant.filters.ReplaceTokens
+
 plugins {
 	id 'java'
 	id 'com.github.johnrengelman.shadow' version '5.0.0'
 	id 'eclipse'
-	id 'maven-publish'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+allprojects {
 
-version '0.5-BETA'
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	
+	version = pluginVersion
+	group = pluginGroup	
 
-repositories {
-	jcenter()
-	mavenCentral()
-	mavenLocal()
-	
-	maven {
-		url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+	repositories {
+		jcenter()
+		mavenCentral()
+		mavenLocal()
+		
+		maven {
+			url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+		}
+		
+		maven {
+			url "https://oss.sonatype.org/content/repositories/snapshots"
+		}
+		
+		maven {
+			url "https://maven.enginehub.org/repo/"
+		}
+		
+		maven {
+	    	name 'papermc'
+	    	url 'https://papermc.io/repo/repository/maven-public/'
+		}
 	}
 	
-	maven {
-		url "https://oss.sonatype.org/content/repositories/snapshots"
-	}
-	
-	maven {
-		url "https://maven.enginehub.org/repo/"
-	}
-	
-	maven {
-    	name 'papermc'
-    	url 'https://papermc.io/repo/repository/maven-public/'
+	processResources {
+		from(sourceSets.main.resources.srcDirs) {
+			filter ReplaceTokens, tokens: [version: version]
+		}
 	}
 }
 
@@ -48,22 +60,30 @@ dependencies {
     compile "io.papermc:paperlib:1.0.4"
 }
 
-shadowJar {
+task testJar(type: ShadowJar) {
 
-	destinationDir = file("$rootDir/server/plugins")
-	
-	relocate 'io.papermc.lib', 'nl.thedutchmc.uhcplus.paperlib'
-}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			groupId 'nl.thedutchmc'
-			artifactId 'uhcplus'
-			version '0.5-BETA'
-			
-			from components.java
-		}
+	doFirst {
+		relocate 'io.papermc.lib', 'nl.thedutchmc.libs.paperlib'
+		relocate 'org.apache.commons.io', 'nl.thedutchmc.libs.commons.io'
 	}
+
+	description 'Build a test Jar'
+	archiveClassifier = 'DEV'
+	destinationDirectory = file("$rootDir/server/plugins")
+	configurations = [project.configurations.runtime]
+	from sourceSets.main.output
 }
 
+task releaseJar(type: ShadowJar) {
+
+	doFirst {
+		relocate 'io.papermc.lib', 'nl.thedutchmc.libs.paperlib'
+		relocate 'org.apache.commons.io', 'nl.thedutchmc.libs.commons.io'
+	}
+
+	description 'Build a release jar'
+	archiveClassifier = 'RELEASE'
+	destinationDirectory = file("$rootDir/releases")
+	configurations = [project.configurations.runtime]
+	from sourceSets.main.output
+}

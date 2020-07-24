@@ -53,7 +53,16 @@ public class UhcpTabCompleter implements TabCompleter {
 				possibleCommands.add("teamcount");
 
 				return possibleCommands;
-
+				
+			} else if (args[0].equalsIgnoreCase("kits")) {
+				
+				List<String> possibleCommands = new ArrayList<>();
+				possibleCommands.add("create");
+				possibleCommands.add("modify");
+				possibleCommands.add("list");
+				possibleCommands.add("help");
+				possibleCommands.add("remove");
+				
 			}
 		} else if (args.length == 3) {
 

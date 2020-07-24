@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.gui.kit.KitsEventListener;
+import nl.thedutchmc.uhcplus.gui.kit.KitsGui;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerInteractEventListener;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerJoinEventListener;
 import nl.thedutchmc.uhcplus.gui.modules.ModulesEventListener;
@@ -36,6 +38,7 @@ public class GuiHandler {
 	private static RecipeEventListener recipeEventListener;
 	private static SubguiEventListener subguiEventListener;
 	private static ModulesEventListener modulesEventListener;
+	private static KitsEventListener kitsEventListener;
 
 	public static void setupGuiSystem() {
 
@@ -49,7 +52,8 @@ public class GuiHandler {
 		recipeEventListener = new RecipeEventListener();
 		subguiEventListener = new SubguiEventListener();
 		modulesEventListener = new ModulesEventListener();
-
+		kitsEventListener = new KitsEventListener();
+		
 		// Setup listeners required for the system
 		Bukkit.getPluginManager().registerEvents(playerInteractEventListener, plugin);
 		Bukkit.getPluginManager().registerEvents(playerJoinEventListener, plugin);
@@ -91,6 +95,11 @@ public class GuiHandler {
 		Bukkit.getPluginManager().registerEvents(modulesEventListener, plugin);
 
 		// END OF MODULES GUI
+		
+		//START OF KITS GUI
+		KitsGui.setupGui();
+		itemsForPlayers.put(CreateItem.create(Material.PAPER, ChatColor.GOLD + "Kits", "Right click me"), true);
+		Bukkit.getPluginManager().registerEvents(kitsEventListener, plugin);
 
 	}
 
@@ -101,6 +110,7 @@ public class GuiHandler {
 		HandlerList.unregisterAll(listTeamsEventListener);
 		HandlerList.unregisterAll(recipeEventListener);
 		HandlerList.unregisterAll(subguiEventListener);
+		HandlerList.unregisterAll(kitsEventListener);
 	}
 
 	public static HashMap<ItemStack, Boolean> getItemsForPlayers() {

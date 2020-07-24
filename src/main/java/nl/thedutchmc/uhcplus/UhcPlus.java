@@ -18,6 +18,7 @@ import nl.thedutchmc.uhcplus.commands.TeamInventoryCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
+import nl.thedutchmc.uhcplus.modules.modules.kits.KitHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
@@ -79,7 +80,10 @@ public class UhcPlus extends JavaPlugin {
 		// Load all the presets
 		PresetHandler presetHandler = new PresetHandler();
 		presetHandler.loadPresets();
-
+		
+		//Load the Kits from file
+		KitHandler.setup();
+		
 		// Check if the files in the presets/ directory match what's in config.
 		configurationHandler.readAvailablePresets();
 
