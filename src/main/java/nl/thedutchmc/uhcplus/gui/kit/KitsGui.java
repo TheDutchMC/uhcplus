@@ -27,6 +27,10 @@ public class KitsGui {
 	
 	static void setupItems() {
 		
+		if(KitHandler.kits == null) return;
+		
+		gui.clear();
+		
 		for(Kit k : KitHandler.kits) {
 			
 			gui.addItem(createItem(Material.PAPER, ChatColor.RESET + k.getKitName(), k.getKitEnabled(), k.getKitEnabled() ? "This kit is enabled" : ""));

@@ -28,7 +28,7 @@ import nl.thedutchmc.uhcplus.world.WorldHandler;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION = "0.5-BETA";
+	public static String VERSION;
 	public static boolean PLAYER_CAN_JOIN = false;
 	public static boolean UHC_STARTED = false;
 	public static Scoreboard scoreboard;
@@ -36,14 +36,15 @@ public class UhcPlus extends JavaPlugin {
 	public static GameState currentState;
 	
 	public static void log(String log) {
-		System.out.println("[UhcPlus]" + log);
+		System.out.println("[UhcPlus] " + log);
 	}
 
 	@Override
 	public void onEnable() {
 		INSTANCE = this;
-
-		System.out.println("Welcome to UHCPlus - Version " + VERSION);
+		VERSION = this.getDescription().getVersion();
+		
+		log("Welcome to UHCPlus - Version " + VERSION);
 
 		// Register the LoginPlayerListener
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);

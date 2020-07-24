@@ -1,11 +1,14 @@
 package nl.thedutchmc.uhcplus.modules.modules.kits;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.bukkit.inventory.ItemStack;
 
-public class Kit {
+public class Kit implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+	
 	private String kitName;
 	private List<ItemStack> kitItems;
 	private boolean kitEnabled;
