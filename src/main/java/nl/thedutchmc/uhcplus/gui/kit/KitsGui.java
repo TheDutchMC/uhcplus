@@ -1,6 +1,7 @@
 package nl.thedutchmc.uhcplus.gui.kit;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -33,7 +34,16 @@ public class KitsGui {
 		
 		for(Kit k : KitHandler.kits) {
 			
-			gui.addItem(createItem(Material.PAPER, ChatColor.RESET + k.getKitName(), k.getKitEnabled(), k.getKitEnabled() ? "This kit is enabled" : ""));
+			List<String> itemsInKit = new ArrayList<>();
+			for(ItemStack stack : k.getKitItems()) {
+				final ItemMeta meta = stack.getItemMeta();
+				
+				if(!meta.hasDisplayName()) continue;
+				
+				itemsInKit.add(meta.getDisplayName());
+			}
+			
+			gui.addItem(createItem(Material.PAPER, ChatColor.RESET + k.getKitName(), k.getKitEnabled(), itemsInKit));
 		}	
 	}
 	
@@ -46,13 +56,13 @@ public class KitsGui {
 		ent.openInventory(gui);
 	}
 	
-	static ItemStack createItem(Material m, String name, boolean enchanted, String... lore) {
+	static ItemStack createItem(Material m, String name, boolean enchanted, List<String> lore) {
 	
 		final ItemStack item = new ItemStack(m, 1);
 		final ItemMeta meta = item.getItemMeta();
 
 		meta.setDisplayName(name);
-		meta.setLore(Arrays.asList(lore));
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		item.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		

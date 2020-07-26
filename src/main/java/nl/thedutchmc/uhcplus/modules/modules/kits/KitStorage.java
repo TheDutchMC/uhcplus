@@ -7,9 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -30,8 +28,6 @@ public class KitStorage {
 			}
 		}
 		
-		
-		
 		try {
 			FileInputStream fileIn = new FileInputStream(file);
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
@@ -42,20 +38,14 @@ public class KitStorage {
 			
 			KitWritable kw = (KitWritable) obj;
 			
-			List<ItemStack> kitItems = new ArrayList<>();
-			for(ItemStackSerialized itemStackSerialized : kw.getItemsSerialized()) {
-				Map<String, Object> itemSerialized = itemStackSerialized.getSerializedItemStack();
-				
-				ItemStack stack = ItemStack.deserialize(itemSerialized);
-								
-				kitItems.add(stack);
-			}
+			List<ItemStack> kitItems = ItemStackSerializer.getStackListFromString(kw.getSerializedItemStack());
 			
 			Kit k = new Kit(kw.getKitName());
 			k.setKitEnabled(kw.getKitEnabled());
 			k.setKitItems(kitItems);
 			
 			return k;
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -79,16 +69,10 @@ public class KitStorage {
 			}
 		}	
 		
-		List<ItemStackSerialized> serializedItems = new ArrayList<>();
-		for(int i = 0; i < k.getKitItems().size(); i++) {
-			ItemStack stack = k.getKitItems().get(i);
-			
-			if(stack == null) continue;
-			stack.setItemMeta(null);
-			
-			serializedItems.add(new ItemStackSerialized(stack.serialize()));
-		}
+		if(k == null) return;
 		
+		String serializedItems = ItemStackSerializer.getStringFromStackList(k.getKitItems());
+	
 		KitWritable kw = new KitWritable(k.getKitName(), k.getKitEnabled(), serializedItems);
 		
 		try {

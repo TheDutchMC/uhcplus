@@ -1,7 +1,6 @@
 package nl.thedutchmc.uhcplus.modules.modules.kits;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class KitWritable implements Serializable {
 
@@ -9,12 +8,12 @@ public class KitWritable implements Serializable {
 
 	private String kitName;
 	private boolean kitEnabled;
-	private List<ItemStackSerialized> itemsSerialized;
+	private String serializedItemStack;
 	
-	public KitWritable(String kitName, boolean kitEnabled, List<ItemStackSerialized> itemsSerialized) {
+	public KitWritable(String kitName, boolean kitEnabled, String serializedItemStack) {
 		this.kitName = kitName;
 		this.kitEnabled = kitEnabled;
-		this.itemsSerialized = itemsSerialized;
+		this.serializedItemStack = serializedItemStack;
 	}
 	
 	public String getKitName() {
@@ -25,7 +24,7 @@ public class KitWritable implements Serializable {
 		return kitEnabled;
 	}
 	
-	public List<ItemStackSerialized> getItemsSerialized() {
-		return itemsSerialized;
+	public String getSerializedItemStack() {
+		return serializedItemStack;
 	}
 }
