@@ -11,7 +11,7 @@ public class Kit implements Serializable {
 	
 	private String kitName;
 	private List<ItemStack> kitItems;
-	private boolean kitEnabled;
+	private boolean kitEnabled = false;
 	
 	public Kit(String kitName) {
 		this.kitName = kitName;
@@ -34,7 +34,7 @@ public class Kit implements Serializable {
 	}
 	
 	public void setKitEnabled(boolean enabled) {
-		enabled = kitEnabled;
+		kitEnabled = enabled;
 	}
 	
 	public boolean getKitEnabled() {

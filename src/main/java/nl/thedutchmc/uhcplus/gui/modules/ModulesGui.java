@@ -83,6 +83,8 @@ public class ModulesGui {
 
 		gui.setItem(15, createItem(Material.SLIME_BALL, "Slime Boost", PresetHandler.moduleSlimeBoost, "This module will give players a strength boost if they hold on to slime for a while"));
 		
+		gui.setItem(16, createItem(Material.STICK, "Sticks from logs", PresetHandler.moduleSticksFromLogs, "This module will allow players to craft 16 sticks from 2 logs"));
+		
 		//close menu button
 		gui.setItem(26, CreateItem.create(Material.BARRIER, ChatColor.RESET + "Close menu"));
 	}

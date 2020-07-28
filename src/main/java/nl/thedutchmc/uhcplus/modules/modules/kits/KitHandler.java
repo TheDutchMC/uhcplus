@@ -39,6 +39,7 @@ public class KitHandler {
 	public static void newKit(String kitName, List<ItemStack> kitItems) {
 		Kit k = new Kit(kitName);
 		k.setKitItems(kitItems);
+		k.setKitEnabled(true);
 		kits.add(k);
 		KitStorage.writeKit(kitName);
 	}
@@ -93,7 +94,9 @@ public class KitHandler {
 		for(int i = 0; i < kits.size(); i++) {
 			Kit k = kits.get(i);
 			if(k.getKitName().equals(kitName)) {
-				k.setKitEnabled(enabled);
+							
+				k.setKitEnabled(enabled);				
+				
 				kits.set(i, k);
 				KitStorage.writeKit(kitName);
 			}

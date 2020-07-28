@@ -71,7 +71,7 @@ public class UhcEndedEventListener implements Listener {
 						@Override
 						public void run() {
 							Bukkit.broadcastMessage(ChatColor.GRAY + "[UhcPlus]" + ChatColor.AQUA + " Restarting in "
-									+ ChatColor.RED + "60" + ChatColor.GOLD + " seconds!");
+									+ ChatColor.RED + "60" + ChatColor.AQUA + " seconds!");
 						}
 					}.runTask(UhcPlus.INSTANCE);
 
@@ -90,7 +90,7 @@ public class UhcEndedEventListener implements Listener {
 
 						@Override
 						public void run() {
-							Bukkit.broadcastMessage(ChatColor.GRAY + "[UhcPlus]" + ChatColor.AQUA + "Restarting in "
+							Bukkit.broadcastMessage(ChatColor.GRAY + "[UhcPlus] " + ChatColor.AQUA + "Restarting in "
 									+ ChatColor.RED + "10" + ChatColor.AQUA + "seconds!");
 						}
 					}.runTask(UhcPlus.INSTANCE);

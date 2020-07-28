@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
-import nl.thedutchmc.uhcplus.modules.moduleAntiCheat.ModuleAntiCheat;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleAxeOfDestruction;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleDissalowGrindingEnchantedTools;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleEnchantedTools;
@@ -17,7 +16,9 @@ import nl.thedutchmc.uhcplus.modules.modules.ModuleSheepDropString;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleSlimeBoost;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleSwordOfDivinity;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleTreeFullRemove;
+import nl.thedutchmc.uhcplus.modules.modules.moduleAntiCheat.ModuleAntiCheat;
 import nl.thedutchmc.uhcplus.modules.modules.moduleDioriteDamage.ModuleDioriteDamage;
+import nl.thedutchmc.uhcplus.modules.modules.moduleStatistics.ModuleStatistics;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeAxeOfDestruction;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightGoldenApple;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSticksFromLogs;
@@ -42,6 +43,7 @@ public class ModuleHandler {
 	static ModuleSlimeBoost moduleSlimeBoost;
 
 	static ModuleAntiCheat moduleAntiCheat;
+	static ModuleStatistics moduleStatistics;
 
 	//Recipes
 	static RecipeAxeOfDestruction recipeAxeOfDestruction;
@@ -66,6 +68,7 @@ public class ModuleHandler {
 		moduleSwordOfDivinity = new ModuleSwordOfDivinity();
 		moduleOneHeartStart = new ModuleOneHeartStart();
 		moduleSlimeBoost = new ModuleSlimeBoost();
+		moduleStatistics = new ModuleStatistics();
 		
 		//Recipes
 		recipeAxeOfDestruction = new RecipeAxeOfDestruction();
@@ -136,8 +139,12 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleSticksFromLogs)
 			recipeSticksFromLogs.setupRecipe();
+		
+		if(PresetHandler.moduleStatistics) 
+			moduleStatistics.loadModule();
+	
 	}
-
+	
 	public void unloadModules() {
 		if (!PresetHandler.moduleOreAutoSmelt)
 			HandlerList.unregisterAll(moduleOreAutoSmelt);
@@ -184,7 +191,10 @@ public class ModuleHandler {
 			HandlerList.unregisterAll(moduleSlimeBoost);
 			if(moduleSlimeBoost != null) moduleSlimeBoost.cancelBoostTask();
 		}
+		
+		if(!PresetHandler.moduleStatistics) {
 			
+		}
 		
 		/*
 		 * Iterator<Recipe> it = plugin.getServer().recipeIterator();

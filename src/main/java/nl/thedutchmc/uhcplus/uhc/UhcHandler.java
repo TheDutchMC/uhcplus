@@ -12,6 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,6 +23,8 @@ import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
+import nl.thedutchmc.uhcplus.modules.modules.kits.Kit;
+import nl.thedutchmc.uhcplus.modules.modules.kits.KitHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
@@ -101,6 +104,15 @@ public class UhcHandler {
 					+ ChatColor.GOLD + "chat! Use " + ChatColor.RED + "/chat " + ChatColor.GOLD
 					+ " to switch between global and team chat!");
 			player.getInventory().clear();
+			
+			//Give them the kits that they should get
+			for(Kit k : KitHandler.getEnabledKits()) {
+				for(ItemStack item : k.getKitItems()) {
+					if(item == null) continue;
+					player.getInventory().addItem(item);
+				}
+			}
+			
 		}
 
 		// Register the UHCEndedEventListener, this fires after the UHC ends

@@ -59,6 +59,8 @@ public class ModulesEventListener implements Listener {
 			PresetHandler.moduleOneHeartStart = !clickedItem.getItemMeta().hasEnchants();
 		if (clickedItem.getType().equals(Material.SLIME_BALL))
 			PresetHandler.moduleSlimeBoost = !clickedItem.getItemMeta().hasEnchants();
+		if (clickedItem.getType().equals(Material.STICK))
+			PresetHandler.moduleSticksFromLogs = !clickedItem.getItemMeta().hasEnchants();
 
 		PresetHandler.changedPresetOption();
 

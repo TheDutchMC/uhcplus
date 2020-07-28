@@ -98,6 +98,9 @@ moduleDioriteDamage: "false"
 #Should players get a strength boost if they hold on to slime for a period of time. Default: false
 moduleSlimeBoost: "false"
 
+#should the statistics module be enabled. Default: false
+moduleStatistics: "false"
+
 
 
 

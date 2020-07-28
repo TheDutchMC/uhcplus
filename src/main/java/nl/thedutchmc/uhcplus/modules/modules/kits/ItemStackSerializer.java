@@ -56,9 +56,7 @@ public class ItemStackSerializer {
 		for (int i = 0; i < stacks.length; i++) {
 			try {
 				stacks[i] = (ItemStack) dataInput.readObject();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+			} catch (Exception e) {}
 		}
 
 		try {

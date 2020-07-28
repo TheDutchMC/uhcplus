@@ -1,0 +1,17 @@
+#The MySql database IP
+ip: ""
+
+#The MySql database port. Default: 3306
+port: "3306"
+
+#The MySql database name
+name: ""
+
+#The MySql database timezone (usually UTC).
+timezone: "UTC"
+
+#The MySql database user
+username: ""
+
+#The password corresponding with the above username
+password: ""

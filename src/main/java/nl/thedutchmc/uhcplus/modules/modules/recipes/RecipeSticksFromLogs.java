@@ -31,6 +31,7 @@ public class RecipeSticksFromLogs {
 		
 		ShapedRecipe recipe = new ShapedRecipe(stickKey, new ItemStack(Material.STICK, 16));
 		
+		recipe.shape("l","l");
         recipe.setIngredient('l', new RecipeChoice.MaterialChoice(Material.ACACIA_LOG, 
                 Material.BIRCH_LOG, 
                 Material.DARK_OAK_LOG, 

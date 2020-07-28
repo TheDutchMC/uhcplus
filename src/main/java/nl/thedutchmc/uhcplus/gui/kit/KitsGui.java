@@ -33,14 +33,36 @@ public class KitsGui {
 		gui.clear();
 		
 		for(Kit k : KitHandler.kits) {
-			
+						
 			List<String> itemsInKit = new ArrayList<>();
 			for(ItemStack stack : k.getKitItems()) {
-				final ItemMeta meta = stack.getItemMeta();
+				if(stack == null) continue;
+								
+				String firstName = stack.getType().name().toLowerCase().replace("_", " ");
+				String finalName = "";
 				
-				if(!meta.hasDisplayName()) continue;
+				boolean shouldNextBeCapitalized = false;
+				for(int i = 0; i < firstName.toCharArray().length; i++) {
+					char c = firstName.toCharArray()[i];
+					
+					if(shouldNextBeCapitalized || i == 0) {
+						
+						String str = String.valueOf(c);
+						str = str.toUpperCase();
+						c = str.toCharArray()[0];
+						shouldNextBeCapitalized = false;
+					}
+					
+					if(c == ' ') {
+						shouldNextBeCapitalized = true;
+					}
+					
+								
+					finalName += String.valueOf(c);
+				}
 				
-				itemsInKit.add(meta.getDisplayName());
+				
+				itemsInKit.add(finalName);
 			}
 			
 			gui.addItem(createItem(Material.PAPER, ChatColor.RESET + k.getKitName(), k.getKitEnabled(), itemsInKit));
@@ -64,7 +86,8 @@ public class KitsGui {
 		meta.setDisplayName(name);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		item.addUnsafeEnchantment(Enchantment.MENDING, 1);
+		
+		if(enchanted) item.addUnsafeEnchantment(Enchantment.MENDING, 1);
 		
 		return item;
 	}

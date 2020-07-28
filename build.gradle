@@ -58,6 +58,11 @@ dependencies {
 	
 	//PaperLib
     compile "io.papermc:paperlib:1.0.4"
+    
+    //MySQL
+    compile ("mysql:mysql-connector-java:8.0.21") {
+    	exclude module: 'protobuf-java'
+    }
 }
 
 task testJar(type: ShadowJar) {
@@ -65,6 +70,7 @@ task testJar(type: ShadowJar) {
 	doFirst {
 		relocate 'io.papermc.lib', 'nl.thedutchmc.libs.paperlib'
 		relocate 'org.apache.commons.io', 'nl.thedutchmc.libs.commons.io'
+		relocate 'com.mysql', 'nl.thedutchmc.libs.mysql'
 	}
 
 	description 'Build a test Jar'

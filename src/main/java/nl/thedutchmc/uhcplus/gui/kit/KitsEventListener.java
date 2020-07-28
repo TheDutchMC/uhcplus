@@ -25,16 +25,16 @@ public class KitsEventListener implements Listener {
 		if (clickedItem == null || clickedItem.getType().equals(Material.AIR)) return;
 		
 		String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
-		
+				
 		for(int i = 0; i < KitHandler.kits.size(); i++) {
 			Kit k = KitHandler.kits.get(i);
-			
-			System.out.println(itemName);
 			
 			if(k.getKitName().equals(itemName)) {
 				
 				KitHandler.setKitEnabled(itemName, !clickedItem.getItemMeta().hasEnchants());
+								
 				event.getWhoClicked().sendMessage(ChatColor.GOLD + "The kit " + ChatColor.RED + itemName + ChatColor.GOLD + " has been " + ChatColor.RED + (!clickedItem.getItemMeta().hasEnchants() ? "enabled" : "disabled"));
+				break;
 			}
 		}
 		

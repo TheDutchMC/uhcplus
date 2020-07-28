@@ -118,4 +118,12 @@ public class UhcPlus extends JavaPlugin {
 	public void onDisable() {
 
 	}
+	
+	public static void logInfo(String log) {
+		System.out.println("[UhcPlus] " + log);
+	}
+	
+	public static void logWarn(String log) {
+		System.err.println("[UhcPlus] " + log);
+	}
 }
