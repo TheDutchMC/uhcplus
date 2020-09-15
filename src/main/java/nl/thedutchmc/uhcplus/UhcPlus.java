@@ -14,6 +14,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import nl.thedutchmc.uhcplus.commands.BroadcastCommandHandler;
 import nl.thedutchmc.uhcplus.commands.ChatCommandHandler;
 import nl.thedutchmc.uhcplus.commands.CoordsCommandHandler;
+import nl.thedutchmc.uhcplus.commands.ReviveCommandHandler;
 import nl.thedutchmc.uhcplus.commands.TeamInventoryCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpCommandHandler;
 import nl.thedutchmc.uhcplus.commands.UhcpTabCompleter;
@@ -34,17 +35,13 @@ public class UhcPlus extends JavaPlugin {
 	public static Scoreboard scoreboard;
 	public static UhcPlus INSTANCE;
 	public static GameState currentState;
-	
-	public static void log(String log) {
-		System.out.println("[UhcPlus] " + log);
-	}
 
 	@Override
 	public void onEnable() {
 		INSTANCE = this;
 		VERSION = this.getDescription().getVersion();
 		
-		log("Welcome to UHCPlus - Version " + VERSION);
+		logInfo("Welcome to UHCPlus - Version " + VERSION);
 
 		// Register the LoginPlayerListener
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
@@ -73,6 +70,9 @@ public class UhcPlus extends JavaPlugin {
 
 		// set the executor for the /coords command (/c)
 		getCommand("coords").setExecutor(new CoordsCommandHandler());
+		
+		//Set the executor for the /revive command (/r)
+		getCommand("revive").setExecutor(new ReviveCommandHandler());
 
 		// Load the configuration file
 		ConfigurationHandler configurationHandler = new ConfigurationHandler();
@@ -120,10 +120,22 @@ public class UhcPlus extends JavaPlugin {
 	}
 	
 	public static void logInfo(String log) {
-		System.out.println("[UhcPlus] " + log);
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				Bukkit.getLogger().info("[UhcPlus] " + log);
+			}
+		}.runTask(INSTANCE);
 	}
 	
 	public static void logWarn(String log) {
-		System.err.println("[UhcPlus] " + log);
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				Bukkit.getLogger().warning("[UhcPlus] " + log);
+			}
+		}.runTask(INSTANCE);
 	}
 }

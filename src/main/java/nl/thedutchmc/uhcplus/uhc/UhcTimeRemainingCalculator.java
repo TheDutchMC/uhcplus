@@ -15,8 +15,16 @@ public class UhcTimeRemainingCalculator {
 
 		new BukkitRunnable() {
 
+			
+			
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					timeRemaining = 0;
+					return;
+				}
 
 				timeRemaining--;
 

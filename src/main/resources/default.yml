@@ -101,6 +101,9 @@ moduleSlimeBoost: "false"
 #should the statistics module be enabled. Default: false
 moduleStatistics: "false"
 
+#Should players be able to use /revive (/r). Default: true
+moduleRevive: "true"
+
 
 
 

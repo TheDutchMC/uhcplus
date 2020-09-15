@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.uhc.GameState;
 
 public class WorldborderScheduler {
 
@@ -36,8 +37,14 @@ public class WorldborderScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					worldBorder.setSize(100000);
+					this.cancel();
+					return;
+				}
+				
 				worldBorder.setSize(worldBorderShrinkTo, gameTimeLeftSecond);
-
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, worldBorderStartShrinkAfterTick);
 

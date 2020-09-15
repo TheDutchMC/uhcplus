@@ -19,6 +19,9 @@ commands:
  coords:
   description: Put your coordinates into Team Chat
   aliases: c
+ revive:
+  description: Revive a team member
+  aliases: r
 permissions:
  uhcp.*:
   description: Grants access to all UHCPlus commands
@@ -34,6 +37,7 @@ permissions:
    uhcp.start: true
    uhcp.help: true
    uhcp.kits.*: true
+   uhcp.revive: true
  uhcp.preset.*:
   description: Grants the player access to all /uhcp preset <arguments> commands
   default: op
@@ -159,6 +163,9 @@ permissions:
   default: op
  uhcp.kits.remove:
   description: Allows the user to use /uhcp kits remove
+  default: op
+ uhcp.revive:
+  description: Allows the user to use /revive even when they are not playing
   default: op
   
   

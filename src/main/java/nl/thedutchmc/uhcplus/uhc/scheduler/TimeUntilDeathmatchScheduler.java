@@ -8,9 +8,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.uhc.GameState;
 import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
 
-public class GameEndScheduler {
+public class TimeUntilDeathmatchScheduler {
 
 	public void scheduleGameEnd() {
 		int gameTime = PresetHandler.gameTime;
@@ -27,6 +28,11 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+				
 				DeathmatchHandler deathmatchHandler = new DeathmatchHandler();
 				deathmatchHandler.startDeathmatch();
 			}
@@ -38,6 +44,10 @@ public class GameEndScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+				}
 
 				Bukkit.broadcastMessage(
 						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "5" + ChatColor.GRAY + " minutes!");
@@ -50,6 +60,11 @@ public class GameEndScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
 
 				Bukkit.broadcastMessage(
 						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "1" + ChatColor.GRAY + " minute!");
@@ -63,6 +78,11 @@ public class GameEndScheduler {
 			@Override
 			public void run() {
 
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+				
 				Bukkit.broadcastMessage(
 						ChatColor.GRAY + "Deathmatch in " + ChatColor.RED + "30" + ChatColor.GRAY + " seconds!");
 
@@ -74,6 +94,11 @@ public class GameEndScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
 
 				for (int i = 10; i > 0; i--) {
 					Bukkit.broadcastMessage(ChatColor.AQUA + String.valueOf(i));

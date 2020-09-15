@@ -53,6 +53,8 @@ public class PlayerDeathEventListener implements Listener {
 			UhcPlus.currentState = GameState.END;
 			
 			Bukkit.getServer().getPluginManager().callEvent(new UhcEndedEvent(winningTeam.getTeamMembers()));
+			
+			UhcPlus.logWarn("[DEBUG] " + UhcPlus.currentState);
 		}
 
 	}

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -324,6 +325,40 @@ public class TeamHandler {
 				newAliveTeamMembers.remove(uuid);
 
 				team.setAliveTeamMembers(newAliveTeamMembers);
+			}
+		}
+	}
+	
+	public static void revivePlayer(UUID uuid) {
+		for(Team team : teams) {
+			if(team.getTeamMembers().contains(uuid)) {
+				
+				//Check if the player isnt actually still alive, if not, add them to the Team, if they are, return
+				if(!team.getAliveTeamMembers().contains(uuid)) {
+					team.getAliveTeamMembers().add(uuid);
+				} else return;
+				
+				//Get the two players involved in teleportation
+				Player teleportTo = Bukkit.getPlayer(team.getAliveTeamMembers().get(0));
+				Player toRevive = Bukkit.getPlayer(uuid);
+				
+				//Teleport the player to revive to another team member
+				toRevive.teleport(teleportTo);
+				
+				//Set the gamemode of the revived player to Survival.
+				toRevive.setGameMode(GameMode.SURVIVAL);
+				
+				//If the infinite enchanting module is enabled, we want to set the XP of the revived player to Integer.MAX_VALUE
+				if(PresetHandler.moduleInfiniteEnchanting) {
+					toRevive.setTotalExperience(Integer.MAX_VALUE);
+				}
+				
+				//If the module for a one heart start is enabled, set the revived player's health to one heart. If not, set it to the maximum health value (usually 10 hearts, or 20 in code)
+				if(PresetHandler.moduleOneHeartStart) {
+					toRevive.setHealth(2);
+				} else {
+					toRevive.setHealth(toRevive.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+				}				
 			}
 		}
 	}

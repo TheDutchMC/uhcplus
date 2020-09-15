@@ -21,6 +21,7 @@ import nl.thedutchmc.uhcplus.modules.modules.moduleDioriteDamage.ModuleDioriteDa
 import nl.thedutchmc.uhcplus.modules.modules.moduleStatistics.ModuleStatistics;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeAxeOfDestruction;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightGoldenApple;
+import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeReviveToken;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSticksFromLogs;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSwordOfDivinity;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightAnvil;
@@ -51,6 +52,7 @@ public class ModuleHandler {
 	static RecipeLightGoldenApple recipeLightGoldenApple;
 	static RecipeSwordOfDivinity recipeSwordOfDivinity;
 	static RecipeSticksFromLogs recipeSticksFromLogs;
+	static RecipeReviveToken recipeReviveToken;
 	
 	public void loadModules() {
 
@@ -76,6 +78,7 @@ public class ModuleHandler {
 		recipeLightGoldenApple = new RecipeLightGoldenApple();
 		recipeSwordOfDivinity = new RecipeSwordOfDivinity();
 		recipeSticksFromLogs = new RecipeSticksFromLogs();
+		recipeReviveToken = new RecipeReviveToken();
 
 		UhcPlus plugin = UhcPlus.INSTANCE;
 
@@ -142,6 +145,10 @@ public class ModuleHandler {
 		
 		if(PresetHandler.moduleStatistics) 
 			moduleStatistics.loadModule();
+		
+		if(PresetHandler.moduleRevive) {
+			plugin.getServer().addRecipe(recipeReviveToken.getReviveTokenRecipe());
+		}
 	
 	}
 	

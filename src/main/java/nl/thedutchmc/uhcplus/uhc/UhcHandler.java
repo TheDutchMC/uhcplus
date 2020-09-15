@@ -35,7 +35,7 @@ import nl.thedutchmc.uhcplus.uhc.listener.PlayerDeathEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerRespawnEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.UhcEndedEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.UhcStartedEventListener;
-import nl.thedutchmc.uhcplus.uhc.scheduler.GameEndScheduler;
+import nl.thedutchmc.uhcplus.uhc.scheduler.TimeUntilDeathmatchScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.PvpScheduler;
 import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
 
@@ -170,7 +170,7 @@ public class UhcHandler {
 		}.runTaskTimerAsynchronously(plugin, 0, 20);
 
 		// Schedule game end
-		GameEndScheduler gameEndScheduler = new GameEndScheduler();
+		TimeUntilDeathmatchScheduler gameEndScheduler = new TimeUntilDeathmatchScheduler();
 		gameEndScheduler.scheduleGameEnd();
 
 		// Get a list of all Players playing

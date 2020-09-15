@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.uhc.GameState;
 
 public class PvpScheduler {
 
@@ -33,6 +34,12 @@ public class PvpScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+								
 				overworld.setPVP(true);
 
 				Bukkit.broadcastMessage(ChatColor.GRAY + "PVP is now enabled!");
@@ -45,6 +52,15 @@ public class PvpScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+				
+				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+
+				
 				Bukkit.broadcastMessage(ChatColor.GRAY + "One minute until PVP will be enabled!");
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, oneMinuteToPvpTick);
@@ -54,6 +70,15 @@ public class PvpScheduler {
 
 			@Override
 			public void run() {
+				
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+				
+				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+
+				
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Thirty seconds until PVP will be enabled!");
 			}
 		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, thirtySecondsToPvptick);
@@ -64,6 +89,13 @@ public class PvpScheduler {
 			@Override
 			public void run() {
 
+				if(UhcPlus.currentState.equals(GameState.END)) {
+					this.cancel();
+					return;
+				}
+				
+				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+				
 				for (int i = 10; i > 0; i--) {
 					Bukkit.broadcastMessage(ChatColor.GRAY + "PVP starting in " + String.valueOf(i));
 
