@@ -12,6 +12,9 @@ import org.bukkit.WorldCreator;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
+import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class WorldHandler {
 
@@ -30,8 +33,9 @@ public class WorldHandler {
 			ChunkGenerator chunkGenerator = new ChunkGenerator();
 			chunkGenerator.generateChunks();
 		} else {
-			System.out.println("[UhcPlus] Done. Players may now join.");
-			UhcPlus.PLAYER_CAN_JOIN = true;
+			UhcPlus.logInfo("Players may now join");
+			Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcHandler.getGameState(), GameState.LOBBY));
+			UhcHandler.setGameState(GameState.LOBBY);
 		}
 	}
 

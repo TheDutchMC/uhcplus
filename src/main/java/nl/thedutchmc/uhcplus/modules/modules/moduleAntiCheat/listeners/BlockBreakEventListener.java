@@ -34,7 +34,7 @@ public class BlockBreakEventListener implements Listener {
 
 				// Check if its more than 5 and less than the configured (default 60 seconds)
 				// time
-				if (seconds > 10 && seconds <= PresetHandler.moduleAntiCheatTime) {
+				if (seconds > 10 && seconds <= (int) PresetHandler.getPrefabOption("moduleAntiCheatTime")) {
 
 					// Get all players, and then check for the OP Players
 					for (Player p : Bukkit.getOnlinePlayers()) {
@@ -45,7 +45,7 @@ public class BlockBreakEventListener implements Listener {
 							p.sendMessage(ChatColor.LIGHT_PURPLE + "[UhcPlus AntiCheat] " + ChatColor.AQUA
 									+ event.getPlayer().getName() + ChatColor.GOLD
 									+ " Might be cheating, they have found diamonds within " + ChatColor.RED
-									+ PresetHandler.moduleAntiCheatTime + ChatColor.GOLD + " seconds");
+									+ PresetHandler.getPrefabOption("moduleAntiCheatTime") + ChatColor.GOLD + " seconds");
 						}
 					}
 				}

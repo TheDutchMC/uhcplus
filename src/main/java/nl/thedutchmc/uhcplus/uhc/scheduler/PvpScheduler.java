@@ -7,9 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PvpScheduler {
 
@@ -21,7 +22,7 @@ public class PvpScheduler {
 
 	public void schedulePvp() {
 
-		long timeToPvpMin = Long.valueOf(PresetHandler.timeToPvp);
+		long timeToPvpMin = Long.valueOf((int) PresetHandler.getPrefabOption("timeToPvp"));
 
 		long timeToPvpTick = timeToPvpMin * 60 * 20;
 
@@ -35,7 +36,7 @@ public class PvpScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
@@ -53,12 +54,12 @@ public class PvpScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
 				
-				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+				UhcPlus.logInfo("GameState:" + UhcHandler.getGameState());
 
 				
 				Bukkit.broadcastMessage(ChatColor.GRAY + "One minute until PVP will be enabled!");
@@ -71,12 +72,12 @@ public class PvpScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
 				
-				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+				UhcPlus.logInfo("GameState:" + UhcHandler.getGameState());
 
 				
 				Bukkit.broadcastMessage(ChatColor.GRAY + "Thirty seconds until PVP will be enabled!");
@@ -89,12 +90,12 @@ public class PvpScheduler {
 			@Override
 			public void run() {
 
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
 				
-				UhcPlus.logInfo("GameState:" + UhcPlus.currentState);
+				UhcPlus.logInfo("GameState:" + UhcHandler.getGameState());
 				
 				for (int i = 10; i > 0; i--) {
 					Bukkit.broadcastMessage(ChatColor.GRAY + "PVP starting in " + String.valueOf(i));

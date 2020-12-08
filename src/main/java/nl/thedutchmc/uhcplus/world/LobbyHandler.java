@@ -28,8 +28,9 @@ import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
 
 public class LobbyHandler {
@@ -57,8 +58,8 @@ public class LobbyHandler {
 			player.setGameMode(GameMode.ADVENTURE);
 		}
 		
-		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcPlus.currentState, GameState.LOBBY));
-		UhcPlus.currentState = GameState.LOBBY;
+		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcHandler.getGameState(), GameState.LOBBY));
+		UhcHandler.setGameState(GameState.LOBBY);
 	}
 
 	String chooseLobby() {

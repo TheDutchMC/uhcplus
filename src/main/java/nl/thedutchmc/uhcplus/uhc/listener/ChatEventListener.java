@@ -28,7 +28,6 @@ public class ChatEventListener implements Listener {
 		// Spectator chat
 		// Check if the gamemode is spectator
 		if (p.getGameMode().equals(GameMode.SPECTATOR)) {
-
 			event.setCancelled(true);
 
 			// loop over all the online players
@@ -54,7 +53,7 @@ public class ChatEventListener implements Listener {
 					String message = event.getMessage();
 
 					// Check if the sender has teamchat enabled
-					if (playerObject.getTeamChatEnabled()) {
+					if (playerObject.getTeamChatEnabled() && !message.startsWith("!")) {
 						event.setCancelled(true);
 
 						// loop over the team and send the message to them
@@ -62,8 +61,7 @@ public class ChatEventListener implements Listener {
 						for (UUID uuid : team.getAliveTeamMembers()) {
 							if (uuid != null) {
 								Player teamPlayer = Bukkit.getServer().getPlayer(uuid);
-								teamPlayer.sendMessage(
-										ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
+								teamPlayer.sendMessage(ChatColor.AQUA + "[Team] " + ChatColor.WHITE + p.getName() + ": " + message);
 							}
 						}
 					}

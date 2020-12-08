@@ -1,109 +1,73 @@
-#Welcome to the preset configuration file of UHCPLus!
-
+#Welcome to the preset configuration file of UHCPlus!
 #Set the maximum amount of teams. default: 16
-maxTeamCount: "16"
-
+maxTeamCount: 16
 #Set the maximum amount of players per team. Range: 1-infinite. Default: 4.
 #If there are more players than that can be fit into teams, they will become spectators!
-maxPlayerCountPerTeam: "4"
-
+maxPlayerCountPerTeam: 4
 #Enable or disable the auto smelting of ores when a player mines them. Applies to gold, iron, emerald and coal ore. Coal ore will drop torches.
-moduleOreAutoSmelt: "true"
-
+moduleOreAutoSmelt: true
 #How many ingots should the mined ore drop
 #For this to work moduleOreAutoSmelt needs to be enabled!
-moduleOreAutoSmeltIngotDrop: "1"
-
+moduleOreAutoSmeltIngotDrop: 1
 #Time until PVP will be enabled, in minutes. Default: 5
-timeToPvp: "5"
-
+timeToPvp: 5
 #The size of the world border at game start, in side length, For example: 1400 means the border will be at coordinate 700. Default: 1400
-worldBorderSize: "1400"
-
+worldBorderSize: 1400
 #Time until the world border starts shrinking in minutes. Default: 0
-worldBorderShrinkAfter: "0"
-
+worldBorderShrinkAfter: 0
 #The size of the world border after it has stopped shrinking, in side length. Default: 40
-worldBorderShrinkTo: "40"
-
+worldBorderShrinkTo: 40
 #Game time in minutes, default 60
-gameTime: "60"
-
+gameTime: 60
 #Chop down trees when one block of the tree is broken. Can be true/false. Default: true
-moduleTreeFullRemove: "true"
-
+moduleTreeFullRemove: true
 #Should leaves decay fast. Default: true
-moduleLeaveDecay: "true"
-
+moduleLeaveDecay: true
 #Should all tools get the enchants Efficiency 4 and Unbreaking 2. Default: true
-moduleEnchantedTools: "true"
-
+moduleEnchantedTools: true
 #Should player get a stack of enchanting tables, lapis blocks, anvils and the maximum amount of levels possible at the start of the UHC. Default: true
-moduleInfiniteEnchanting: "true"
-
+moduleInfiniteEnchanting: true
 #Should sheep drop string when they die. Default: true
-moduleSheepDropString: "true"
-
+moduleSheepDropString: true
 #Should gravel drop arrows when broken. Default: true
-moduleGravelDropArrow: "true"
-
+moduleGravelDropArrow: true
 #Should we block tools crafted with the Enchanted Tools module from being used in a grindstone.  Default: trueDefault: true
-moduleDissalowGrindingEnchantedTools: "true"
-
+moduleDissalowGrindingEnchantedTools: true
 #Do we allow the crafting of light golden apples. Default: true
-moduleLightGoldenApple: "true"
-
+moduleLightGoldenApple: true
 #Do we allow the crafting of light anvils. Default: true
-moduleLightAnvil: "true"
-
+moduleLightAnvil: true
 #Enable or disable the anti cheat module. Default: true
-moduleAntiCheat: "true"
-
+moduleAntiCheat: true
 #The time after which a player can safely mine diamond ore again without OPs being notified. In Seconds, Default: 60
-moduleAntiCheatTime: "60"
-
+moduleAntiCheatTime: 60
 #Do we want the Axe of Destruction to be craftable? Default: true
-moduleAxeOfDestruction: "true"
-
+moduleAxeOfDestruction: true
 #Do we want the Axe of Destruction to level up over time? Default: true
-axeOfDestructionLevelling: "true"
- 
+axeOfDestructionLevelling: true
 #Time in seconds until the Axe levels up to level 2, Requires axeOfDestructionLevelling to be true to work. In seconds. Default: 1200
-moduleAxeOfDestructionLevelOneTime: "1200"
-
+moduleAxeOfDestructionLevelOneTime: 1200
 #Time in seconds until the Axe levels up to level 3, Requires axeOfDestructionLevelling to be true to work. In seconds. Default: 2400
-moduleAxeOfDestructionLevelTwoTime: "2400"
-
+moduleAxeOfDestructionLevelTwoTime: 2400
 #Do we want the Sword of Divinty to be craftable: 
-moduleSwordOfDivinity: "true"
-
+moduleSwordOfDivinity: true
 #Do we want the Sword of Divnity to level up over time? Default: true
-swordOfDivinityLevelling: "true"
-
+swordOfDivinityLevelling: true
 #Time in seconds until the Sword levels up to level 2, Requires swordOfDivinityLevelling to be true to work. In Seconds. Default: 1200
-moduleSwordOfDivinityLevelOneTime: "1200"
-
+moduleSwordOfDivinityLevelOneTime: 1200
 #Time in seconds until the Sword levels up to level 3, Requires swordOfDivinityLevelling to be true to work. In Seconds. Default: 2400
-moduleSwordOfDivinityLevelTwoTime: "2400"
-
+moduleSwordOfDivinityLevelTwoTime: 2400
 #Do we enable team inventory. Default: true
-moduleTeamInventory: "true"
-
+moduleTeamInventory: true
 #Should players start with only one heart. Default: false
-moduleOneHeartStart: "false"
-
+moduleOneHeartStart: false
 #Should players get damaged if they hold on to diorite for too long. Default: false
-moduleDioriteDamage: "false"
-
+moduleDioriteDamage: false
 #Should players get a strength boost if they hold on to slime for a period of time. Default: false
-moduleSlimeBoost: "false"
-
+moduleSlimeBoost: false
 #should the statistics module be enabled. Default: false
-moduleStatistics: "false"
-
+moduleStatistics: false
 #Should players be able to use /revive (/r). Default: true
-moduleRevive: "true"
-
-
-
-
+moduleRevive: true
+#Should players be able to craft logs directly into sticks. Default: true
+moduleSticksFromLogs: true

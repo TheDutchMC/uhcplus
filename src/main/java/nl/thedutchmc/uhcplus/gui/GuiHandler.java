@@ -8,7 +8,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.kit.KitsEventListener;
 import nl.thedutchmc.uhcplus.gui.kit.KitsGui;
 import nl.thedutchmc.uhcplus.gui.listeners.PlayerInteractEventListener;
@@ -26,6 +25,7 @@ import nl.thedutchmc.uhcplus.gui.team.TeamEventListener;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
 import nl.thedutchmc.uhcplus.gui.team.subgui.listTeamsGui.ListTeamsEventListener;
 import nl.thedutchmc.uhcplus.gui.team.subgui.listTeamsGui.ListTeamsGui;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class GuiHandler {
 

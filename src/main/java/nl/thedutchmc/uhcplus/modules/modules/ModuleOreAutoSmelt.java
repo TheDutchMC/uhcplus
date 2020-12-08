@@ -12,7 +12,7 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 public class ModuleOreAutoSmelt implements Listener {
 
 	public ModuleOreAutoSmelt() {
-		dropCount = PresetHandler.moduleOreAutoSmeltIngotDrop;
+		dropCount = (int) PresetHandler.getPrefabOption("moduleOreAutoSmeltIngotDrop");
 	}
 
 	int dropCount;

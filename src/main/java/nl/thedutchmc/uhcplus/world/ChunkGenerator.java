@@ -8,6 +8,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import io.papermc.lib.PaperLib;
 import nl.thedutchmc.uhcplus.UhcPlus;
+import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
+import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class ChunkGenerator {
 
@@ -44,9 +47,6 @@ public class ChunkGenerator {
 
 				if (!(Runtime.getRuntime().freeMemory() < 524288000)) { // In Bytes, so 500MB
 					if (x > -worldRadius) {
-
-						// System.out.println("chunk: " + x + "," + z);
-
 						Location location = new Location(overworld, x, 0, z);
 						PaperLib.getChunkAtAsync(location, true);
 
@@ -68,7 +68,7 @@ public class ChunkGenerator {
 						if (chunksDone == checkEvery) {
 							progress += 5;
 							checkEvery += checkEveryOriginal;
-							System.out.println("[UhcPlus] Chunk generation progress: " + progress + "%");
+							UhcPlus.logInfo("Chunk generation progress: " + progress + "%");
 						}
 
 						if (chunk != null) {
@@ -77,13 +77,12 @@ public class ChunkGenerator {
 
 						z += 16;
 					} else {
-						System.out.println("[UhcPlus] Done. Players may now join.");
-						UhcPlus.PLAYER_CAN_JOIN = true;
+						UhcPlus.logInfo("World generated.Players may now join");
+						Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcHandler.getGameState(), GameState.LOBBY));
+						UhcHandler.setGameState(GameState.LOBBY);
 
 						this.cancel();
 					}
-				} else {
-					System.gc();
 				}
 			}
 		}.runTaskTimer(UhcPlus.INSTANCE, 200, 1);

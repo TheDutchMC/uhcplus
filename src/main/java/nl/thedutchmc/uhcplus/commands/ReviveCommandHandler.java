@@ -16,7 +16,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
@@ -26,7 +25,7 @@ public class ReviveCommandHandler implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
-		if(!PresetHandler.moduleRevive) {
+		if(!(boolean) PresetHandler.getPrefabOption("moduleRevive")) {
 			sender.sendMessage(ChatColor.RED + "This module is not enabled!");
 			return true;
 		}
@@ -107,7 +106,7 @@ public class ReviveCommandHandler implements CommandExecutor {
 		
 		Player revive = Bukkit.getPlayer(candidates.get(candidateIndex));
 
-		if(tries > PresetHandler.maxPlayerCountPerTeam * 2) return null;
+		if(tries > (int) PresetHandler.getPrefabOption("maxPlayerCountPerTeam") * 2) return null;
 		
 		if(!revive.isOnline()) getPlayerToRevive(candidates, tries++);
 		

@@ -11,7 +11,7 @@ public class UhcTimeRemainingCalculator {
 
 	public void startCountdown() {
 
-		timeRemaining = PresetHandler.gameTime * 60;
+		timeRemaining = (int) PresetHandler.getPrefabOption("gameTime") * 60;
 
 		new BukkitRunnable() {
 
@@ -20,7 +20,7 @@ public class UhcTimeRemainingCalculator {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					timeRemaining = 0;
 					return;

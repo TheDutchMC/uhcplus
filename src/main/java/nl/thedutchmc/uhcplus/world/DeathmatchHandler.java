@@ -30,11 +30,12 @@ import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class DeathmatchHandler {
 
@@ -107,8 +108,8 @@ public class DeathmatchHandler {
 		}
 		
 		//Set the GameState to Deathmatch
-		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcPlus.currentState, GameState.DEATHMATCH));
-		UhcPlus.currentState = GameState.DEATHMATCH;
+		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcHandler.getGameState(), GameState.DEATHMATCH));
+		UhcHandler.setGameState(GameState.DEATHMATCH);
 		
 	}
 

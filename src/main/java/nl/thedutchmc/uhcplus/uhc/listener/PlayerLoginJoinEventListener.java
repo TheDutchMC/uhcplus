@@ -14,16 +14,17 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.potion.PotionEffect;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerLoginJoinEventListener implements Listener {
 
 	@EventHandler
 	public void onPlayerLoginEvent(PlayerLoginEvent event) {
 
-		if (!UhcPlus.PLAYER_CAN_JOIN) {
+		if (!UhcHandler.playersCanJoin()) {
 			event.disallow(Result.KICK_OTHER, ChatColor.RED + "You shall not pass!\n\n" + ChatColor.GOLD
 					+ "(you are not allowed to join just yet)");
 		}
@@ -32,7 +33,7 @@ public class PlayerLoginJoinEventListener implements Listener {
 	@EventHandler
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 
-		if (UhcPlus.PLAYER_CAN_JOIN) {
+		if (UhcHandler.playersCanJoin()) {
 
 			Player player = event.getPlayer();
 
@@ -42,7 +43,7 @@ public class PlayerLoginJoinEventListener implements Listener {
 
 			// If the UHC has started, we dont want the players to spawn in survival, so put
 			// them in spectator and tp them to 0,100,0. Else TP them to the lobby
-			if (UhcPlus.UHC_STARTED) {
+			if (UhcHandler.isPlaying()) {
 
 				boolean playerWasPlaying = false;
 

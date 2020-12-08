@@ -28,39 +28,39 @@ public class ModulesEventListener implements Listener {
 		}
 
 		if (clickedItem.getType().equals(Material.IRON_AXE))
-			PresetHandler.moduleAxeOfDestruction = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleAxeOfDestruction", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.NETHERITE_AXE))
-			PresetHandler.axeOfDestructionLevelling = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("axeOfDestructionLevelling", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.DIORITE))
-			PresetHandler.moduleDioriteDamage = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleDioriteDamage", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.GRINDSTONE))
-			PresetHandler.moduleDissalowGrindingEnchantedTools = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleDissalowGrindingEnchantedTools", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.IRON_PICKAXE))
-			PresetHandler.moduleEnchantedTools = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleEnchantedTools", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.GRAVEL))
-			PresetHandler.moduleGravelDropArrow = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleGravelDropArrow", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.ENCHANTING_TABLE))
-			PresetHandler.moduleInfiniteEnchanting = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleInfiniteEnchanting", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.OAK_LEAVES))
-			PresetHandler.moduleLeaveDecay = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleLeaveDecay", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.FURNACE))
-			PresetHandler.moduleOreAutoSmelt = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleOreAutoSmelt", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.STRING))
-			PresetHandler.moduleSheepDropString = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleSheepDropString", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.IRON_SWORD))
-			PresetHandler.moduleSwordOfDivinity = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleSwordOfDivinity", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.NETHERITE_SWORD))
-			PresetHandler.swordOfDivinityLevelling = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("swordOfDivinityLevelling", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.BARREL))
-			PresetHandler.moduleTeamInventory = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleTeamInventory", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.OAK_LOG))
-			PresetHandler.moduleTreeFullRemove = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleTreeFullRemove", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.APPLE))
-			PresetHandler.moduleOneHeartStart = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleOneHeartStart", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.SLIME_BALL))
-			PresetHandler.moduleSlimeBoost = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleSlimeBoost", !clickedItem.getItemMeta().hasEnchants());
 		if (clickedItem.getType().equals(Material.STICK))
-			PresetHandler.moduleSticksFromLogs = !clickedItem.getItemMeta().hasEnchants();
+			PresetHandler.setPrefabOption("moduleSticksFromLogs", !clickedItem.getItemMeta().hasEnchants());
 
 		PresetHandler.changedPresetOption();
 

@@ -16,8 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleSlimeBoost implements Listener {
 
@@ -47,7 +47,7 @@ public class ModuleSlimeBoost implements Listener {
 			@Override
 			public void run() {
 				
-				if(!PresetHandler.moduleSlimeBoost) return;
+				if(!(boolean) PresetHandler.getPrefabOption("moduleSlimeBoost")) return;
 				
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					UUID uuid = p.getUniqueId();

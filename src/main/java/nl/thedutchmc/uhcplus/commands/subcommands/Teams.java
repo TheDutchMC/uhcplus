@@ -52,7 +52,7 @@ public class Teams {
 				}
 
 				sender.sendMessage(cg + "You have configured that there may be a maximum of " + cr
-						+ PresetHandler.maxTeamCount + cg + " teams.");
+						+ PresetHandler.getPrefabOption("maxTeamCount") + cg + " teams.");
 
 				// uhcp teams randomfill
 			} else if (args[1].equalsIgnoreCase("randomfill")) {

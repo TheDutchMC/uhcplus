@@ -20,9 +20,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.SwordOfDivinityLevelUpEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleSwordOfDivinity implements Listener {
 
@@ -92,7 +92,7 @@ public class ModuleSwordOfDivinity implements Listener {
 
 				}
 			}
-		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, PresetHandler.moduleSwordOfDivinityLevelOneTime * 20);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (int) PresetHandler.getPrefabOption("moduleSwordOfDivinityLevelOneTime") * 20);
 	}
 
 	@EventHandler
@@ -134,7 +134,7 @@ public class ModuleSwordOfDivinity implements Listener {
 					}
 				}
 			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE,
-					(PresetHandler.moduleSwordOfDivinityLevelTwoTime - PresetHandler.moduleSwordOfDivinityLevelOneTime)
+					((int) PresetHandler.getPrefabOption("moduleSwordOfDivinityLevelTwoTime") - (int) PresetHandler.getPrefabOption("moduleSwordOfDivinityLevelOneTime"))
 							* 20);
 		}
 

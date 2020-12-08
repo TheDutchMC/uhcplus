@@ -10,12 +10,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.GameStateChangedEvent;
 import nl.thedutchmc.uhcplus.events.UhcEndedEvent;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerDeathEventListener implements Listener {
 
@@ -49,12 +50,12 @@ public class PlayerDeathEventListener implements Listener {
 			// Call the UhcEndedEvent
 			Team winningTeam = aliveTeams.get(0);
 
-			Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcPlus.currentState, GameState.END));
-			UhcPlus.currentState = GameState.END;
+			Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcHandler.getGameState(), GameState.END));
+			UhcHandler.setGameState(GameState.END);
 			
 			Bukkit.getServer().getPluginManager().callEvent(new UhcEndedEvent(winningTeam.getTeamMembers()));
 			
-			UhcPlus.logWarn("[DEBUG] " + UhcPlus.currentState);
+			UhcPlus.logWarn("[DEBUG] " + UhcHandler.getGameState());
 		}
 
 	}

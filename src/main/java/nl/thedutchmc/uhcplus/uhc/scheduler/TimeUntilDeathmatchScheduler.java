@@ -6,15 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.world.DeathmatchHandler;
 
 public class TimeUntilDeathmatchScheduler {
 
 	public void scheduleGameEnd() {
-		int gameTime = PresetHandler.gameTime;
+		int gameTime = (int) PresetHandler.getPrefabOption("gameTime");
 		int gameTimeTicks = gameTime * 60 * 20;
 
 		int fiveMinGameTimeTicks = (gameTime - 5) * 60 * 20;
@@ -28,7 +29,7 @@ public class TimeUntilDeathmatchScheduler {
 			@Override
 			public void run() {
 
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
@@ -45,7 +46,7 @@ public class TimeUntilDeathmatchScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 				}
 
@@ -61,7 +62,7 @@ public class TimeUntilDeathmatchScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
@@ -78,7 +79,7 @@ public class TimeUntilDeathmatchScheduler {
 			@Override
 			public void run() {
 
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}
@@ -95,7 +96,7 @@ public class TimeUntilDeathmatchScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					this.cancel();
 					return;
 				}

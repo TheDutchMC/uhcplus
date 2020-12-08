@@ -8,8 +8,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.GuiHandler;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class PlayerJoinEventListener implements Listener {
 
@@ -17,7 +17,7 @@ public class PlayerJoinEventListener implements Listener {
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		// We only want to give players these items if they're still in lobby, ie the
 		// uhc hasnt started yet
-		if (!UhcPlus.UHC_STARTED) {
+		if (!UhcHandler.isPlaying()) {
 
 			final Inventory inv = event.getPlayer().getInventory();
 

@@ -7,10 +7,10 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class TeamInventoryCommandHandler implements CommandExecutor {
 
@@ -22,12 +22,12 @@ public class TeamInventoryCommandHandler implements CommandExecutor {
 			return true;
 		}
 
-		if (!UhcPlus.UHC_STARTED) {
+		if (!UhcHandler.isPlaying()) {
 			sender.sendMessage(ChatColor.RED + "The UHC hasn't started yet!");
 			return true;
 		}
 
-		if (!PresetHandler.moduleTeamInventory) {
+		if (!(boolean) PresetHandler.getPrefabOption("moduleTeamInventory")) {
 			sender.sendMessage(ChatColor.RED + "This module is not enabled!");
 			return true;
 		}

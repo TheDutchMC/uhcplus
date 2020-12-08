@@ -24,36 +24,36 @@ public class RecipeGui {
 		gui.clear();
 
 		int totalRecipes = 0;
-		if (PresetHandler.moduleLightAnvil)
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightAnvil"))
 			totalRecipes++;
-		if (PresetHandler.moduleLightGoldenApple)
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightGoldenApple"))
 			totalRecipes++;
-		if (PresetHandler.moduleAxeOfDestruction)
+		if ((boolean) PresetHandler.getPrefabOption("moduleAxeOfDestruction"))
 			totalRecipes++;
-		if (PresetHandler.moduleSwordOfDivinity)
+		if ((boolean) PresetHandler.getPrefabOption("moduleSwordOfDivinity"))
 			totalRecipes++;
 
 		totalRecipes--;
 
-		if (PresetHandler.moduleLightAnvil) {
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightAnvil")) {
 			gui.setItem(totalRecipes, CreateItem.create(Material.ANVIL,
 					ChatColor.RESET + "" + ChatColor.AQUA + "Light Anvil", "Click me to see recipe"));
 			totalRecipes--;
 		}
 
-		if (PresetHandler.moduleLightGoldenApple) {
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightGoldenApple")) {
 			gui.setItem(totalRecipes, CreateItem.create(Material.GOLDEN_APPLE,
 					ChatColor.RESET + "" + ChatColor.AQUA + "Light Golden Apple", "Click me to see recipe"));
 			totalRecipes--;
 		}
 
-		if (PresetHandler.moduleAxeOfDestruction) {
+		if ((boolean) PresetHandler.getPrefabOption("moduleAxeOfDestruction")) {
 			gui.setItem(totalRecipes, CreateItem.create(Material.IRON_AXE,
 					ChatColor.RESET + "" + ChatColor.RED + "Axe of Destruction", "Click me to see recipe"));
 			totalRecipes--;
 		}
 
-		if (PresetHandler.moduleSwordOfDivinity) {
+		if ((boolean) PresetHandler.getPrefabOption("moduleSwordOfDivinity")) {
 			gui.setItem(totalRecipes, CreateItem.create(Material.IRON_SWORD,
 					ChatColor.RESET + "" + ChatColor.LIGHT_PURPLE + "Sword of Divinity", "Click me to see recipe"));
 			totalRecipes--;

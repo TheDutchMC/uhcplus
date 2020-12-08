@@ -291,7 +291,7 @@ public class Preset {
 
 								if (isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {
 
-									PresetHandler.maxTeamCount = Integer.valueOf(args[3]);
+									PresetHandler.setPrefabOption("maxTeamCount",Integer.valueOf(args[3]));
 									PresetHandler.changedPresetOption();
 
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
@@ -306,7 +306,7 @@ public class Preset {
 																						// maxplayersperteam <value>
 
 								if (isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {
-									PresetHandler.maxPlayerCountPerTeam = Integer.valueOf(args[3]);
+									PresetHandler.setPrefabOption("maxPlayerCountPerTeam", Integer.valueOf(args[3]));
 									PresetHandler.changedPresetOption();
 
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
@@ -319,7 +319,7 @@ public class Preset {
 								// uhcp preset options moduleoreautosmelt <arg>
 							} else if (args[2].equalsIgnoreCase("moduleoreautosmelt")) {
 								if (args[3].equalsIgnoreCase("true") || args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleOreAutoSmelt = Boolean.valueOf(args[3]);
+									PresetHandler.setPrefabOption("moduleOreAutoSmelt", Boolean.valueOf(args[3]));
 									PresetHandler.changedPresetOption();
 
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
@@ -332,7 +332,7 @@ public class Preset {
 								// uhcp preset options ingotDropCount <arg>
 							} else if (args[2].equalsIgnoreCase("ingotdropcount")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[3]) > 0) {
-									PresetHandler.moduleOreAutoSmeltIngotDrop = Integer.valueOf(args[3]);
+									PresetHandler.setPrefabOption("moduleOreAutoSmeltIngotDrop", Integer.valueOf(args[3]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ args[3] + cg + "!");
@@ -344,13 +344,13 @@ public class Preset {
 								// uhcp preset options moduleTreeFullRemove <arg>
 							} else if (args[2].equalsIgnoreCase("moduletreefullremove")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleTreeFullRemove = true;
+									PresetHandler.setPrefabOption("moduleTreeFullRemove", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleTreeFullRemove = false;
+									PresetHandler.setPrefabOption("moduleTreeFullRemove", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -362,13 +362,13 @@ public class Preset {
 								// uhcp preset options moduleLeaveDecay <arg>
 							} else if (args[2].equalsIgnoreCase("moduleleavedecay")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleLeaveDecay = true;
+									PresetHandler.setPrefabOption("moduleLeaveDecay", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleLeaveDecay = false;
+									PresetHandler.setPrefabOption("moduleLeaveDecay", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -380,13 +380,13 @@ public class Preset {
 								// uhcp preset options moduleEnchantedTools <arg>
 							} else if (args[2].equalsIgnoreCase("moduleenchantedtools")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleEnchantedTools = true;
+									PresetHandler.setPrefabOption("moduleEnchantedTools", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleEnchantedTools = false;
+									PresetHandler.setPrefabOption("moduleEnchantedTools", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -398,13 +398,13 @@ public class Preset {
 								// uhcp preset options moduleInfiniteEnchanting <arg>
 							} else if (args[2].equalsIgnoreCase("moduleinfiniteenchanting")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleInfiniteEnchanting = true;
+									PresetHandler.setPrefabOption("moduleInfiniteEnchanting", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleInfiniteEnchanting = false;
+									PresetHandler.setPrefabOption("moduleInfiniteEnchanting", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -416,13 +416,13 @@ public class Preset {
 								// uhcp preset options moduleSheepDropString <arg>
 							} else if (args[2].equalsIgnoreCase("modulesheepdropstring")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleSheepDropString = true;
+									PresetHandler.setPrefabOption("moduleSheepDropString", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleSheepDropString = false;
+									PresetHandler.setPrefabOption("moduleSheepDropString", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -434,13 +434,13 @@ public class Preset {
 								// uhcp preset options moduleGravelDropArrow <arg>
 							} else if (args[2].equalsIgnoreCase("graveldroparrow")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleGravelDropArrow = true;
+									PresetHandler.setPrefabOption("moduleGravelDropArrow", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleGravelDropArrow = false;
+									PresetHandler.setPrefabOption("moduleGravelDropArrow", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -452,13 +452,13 @@ public class Preset {
 								// uhcp preset options moduleDissalowGrindingEnchantedTools <arg>
 							} else if (args[2].equalsIgnoreCase("moduledissalowgrindingenchantedtools")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleDissalowGrindingEnchantedTools = true;
+									PresetHandler.setPrefabOption("moduleDissalowGrindingEnchantedTools", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleDissalowGrindingEnchantedTools = false;
+									PresetHandler.setPrefabOption("moduleDissalowGrindingEnchantedTools", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -470,13 +470,13 @@ public class Preset {
 								// uhcp preset options moduleLightGoldenApple <arg>
 							} else if (args[2].equalsIgnoreCase("modulelightgoldenapple")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleLightGoldenApple = true;
+									PresetHandler.setPrefabOption("moduleLightGoldenApple", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleLightGoldenApple = false;
+									PresetHandler.setPrefabOption("moduleLightGoldenApple", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -488,13 +488,13 @@ public class Preset {
 								// uhcp preset options moduleLightAnvil <arg>
 							} else if (args[2].equalsIgnoreCase("modulelightanvil")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleLightAnvil = true;
+									PresetHandler.setPrefabOption("moduleLightAnvil", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleLightAnvil = false;
+									PresetHandler.setPrefabOption("moduleLightAnvil", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -506,13 +506,13 @@ public class Preset {
 								// uhcp preset options moduleDioriteDamage <arg>
 							} else if (args[2].equalsIgnoreCase("moduledioritedamage")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleDioriteDamage = true;
+									PresetHandler.setPrefabOption("moduleDioriteDamage", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleDioriteDamage = false;
+									PresetHandler.setPrefabOption("moduleDioriteDamage", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -524,13 +524,13 @@ public class Preset {
 								// uhcp preset options moduleAntiCheat <arg>
 							} else if (args[2].equalsIgnoreCase("moduleanticheat")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleAntiCheat = true;
+									PresetHandler.setPrefabOption("moduleAntiCheat", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleAntiCheat = false;
+									PresetHandler.setPrefabOption("moduleAntiCheat", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -542,13 +542,13 @@ public class Preset {
 								// uhcp preset options moduleAxeOfDestruction <arg>
 							} else if (args[2].equalsIgnoreCase("moduleaxeofdestruction")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleAxeOfDestruction = true;
+									PresetHandler.setPrefabOption("moduleAxeOfDestruction", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleAxeOfDestruction = false;
+									PresetHandler.setPrefabOption("moduleAxeOfDestruction", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -560,13 +560,13 @@ public class Preset {
 								// uhcp preset options axeOfDestructionLevelling <arg>
 							} else if (args[2].equalsIgnoreCase("axeofdestructionlevelling")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.axeOfDestructionLevelling = true;
+									PresetHandler.setPrefabOption("axeOfDestructionLevelling", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.axeOfDestructionLevelling = false;
+									PresetHandler.setPrefabOption("axeOfDestructionLevelling", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -578,13 +578,13 @@ public class Preset {
 								// uhcp preset options moduleSwordOfDivinity <arg>
 							} else if (args[2].equalsIgnoreCase("moduleswordofdivinity")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleSwordOfDivinity = true;
+									PresetHandler.setPrefabOption("moduleSwordOfDivinity", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleSwordOfDivinity = false;
+									PresetHandler.setPrefabOption("moduleSwordOfDivinity", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -596,13 +596,13 @@ public class Preset {
 								// uhcp preset options swordOfDivinityLevelling <arg>
 							} else if (args[2].equalsIgnoreCase("swordofdivinitylevelling")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.swordOfDivinityLevelling = true;
+									PresetHandler.setPrefabOption("swordOfDivinityLevelling", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.swordOfDivinityLevelling = false;
+									PresetHandler.setPrefabOption("swordOfDivinityLevelling", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -614,13 +614,13 @@ public class Preset {
 								// uhcp preset options moduleTeamInventory <arg>
 							} else if (args[2].equalsIgnoreCase("moduleteaminventory")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleTeamInventory = true;
+									PresetHandler.setPrefabOption("moduleTeamInventory", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleTeamInventory = false;
+									PresetHandler.setPrefabOption("moduleTeamInventory", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -632,13 +632,12 @@ public class Preset {
 								// uhcp preset options moduleOneHeartStart <arg>
 							} else if (args[2].equalsIgnoreCase("moduleoneheartstart")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleOneHeartStart = true;
+									PresetHandler.setPrefabOption("moduleOneHeartStart", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleOneHeartStart = false;
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -650,13 +649,13 @@ public class Preset {
 							//uhcp preset options moduleSlimeBoost <arg>
 							} else if (args[2].equalsIgnoreCase("moduleslimeboost")) {
 								if (args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleSlimeBoost = true;
+									PresetHandler.setPrefabOption("moduleSlimeBoost", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleSlimeBoost = false;
+									PresetHandler.setPrefabOption("moduleSlimeBoost", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -668,13 +667,13 @@ public class Preset {
 							//uhcp preset options moduleStatistics <arg>
 							} else if(args[2].equalsIgnoreCase("moduleStatistics")) {
 								if(args[3].equalsIgnoreCase("true")) {
-									PresetHandler.moduleStatistics = true;
+									PresetHandler.setPrefabOption("moduleStatistics", true);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr + "true"
 											+ cg + "!");
 
 								} else if (args[3].equalsIgnoreCase("false")) {
-									PresetHandler.moduleStatistics = false;
+									PresetHandler.setPrefabOption("moduleStatistics", false);
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[2] + cg + " changed to " + cr
 											+ "false" + cg + "!");
@@ -685,7 +684,7 @@ public class Preset {
 							// uhcp preset options timeToPvp <arg>
 							} else if (args[2].equalsIgnoreCase("timetopvp")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.timeToPvp = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("timeToPvp", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -697,7 +696,7 @@ public class Preset {
 								// uhcp preset options worldBorderSize <arg>
 							} else if (args[2].equalsIgnoreCase("worldbordersize")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.worldBorderSize = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("worldBorderSize", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -709,7 +708,7 @@ public class Preset {
 								// uhcp preset options worldBorderShrinkAfter <arg>
 							} else if (args[2].equalsIgnoreCase("worldbordershrinkafter")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.worldBorderShrinkAfter = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("worldBorderShrinkAfter", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -721,7 +720,7 @@ public class Preset {
 								// uhcp preset options worldBorderShrinkTo <arg>
 							} else if (args[2].equalsIgnoreCase("worldbordershrinkto")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.worldBorderShrinkTo = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("worldBorderShrinkTo", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -733,7 +732,7 @@ public class Preset {
 								// uhcp preset options gameTime <arg>
 							} else if (args[2].equalsIgnoreCase("gametime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.gameTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("gameTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -745,7 +744,7 @@ public class Preset {
 								// uhcp preset options moduleAntiCheatTime <arg>
 							} else if (args[2].equalsIgnoreCase("moduleanticheattime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.moduleAntiCheatTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("moduleAntiCheatTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -757,7 +756,7 @@ public class Preset {
 								// uhcp preset options moduleAxeOfDestructionLevelOneTime <arg>
 							} else if (args[2].equalsIgnoreCase("moduleaxeofdestructionlevelonetime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.moduleAxeOfDestructionLevelOneTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("moduleAxeOfDestructionLevelOneTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -769,7 +768,7 @@ public class Preset {
 								// uhcp preset options moduleAxeOfDestructionLevelTwoTime <arg>
 							} else if (args[2].equalsIgnoreCase("moduleaxeofdestructionleveltwotime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.moduleAxeOfDestructionLevelTwoTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("moduleAxeOfDestructionLevelTwoTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -782,7 +781,7 @@ public class Preset {
 								// uhcp preset options moduleSwordOfDivinityLevelOneTime <arg>
 							} else if (args[2].equalsIgnoreCase("moduleswordofdivinitylevelonetime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.moduleSwordOfDivinityLevelOneTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("moduleSwordOfDivinityLevelOneTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");
@@ -794,7 +793,7 @@ public class Preset {
 								// uhcp preset options moduleSwordOfDivinityLevelTwoTime <arg>
 							} else if (args[2].equalsIgnoreCase("moduleswordofdivinityleveltwotime")) {
 								if (isNumber(args[3]) && Integer.valueOf(args[4]) > 0) {
-									PresetHandler.moduleSwordOfDivinityLevelTwoTime = Integer.valueOf(args[4]);
+									PresetHandler.setPrefabOption("moduleSwordOfDivinityLevelTwoTime", Integer.valueOf(args[4]));
 									PresetHandler.changedPresetOption();
 									sender.sendMessage(cg + "Option " + cr + args[3] + cg + " changed to " + cr
 											+ args[4] + cg + "!");

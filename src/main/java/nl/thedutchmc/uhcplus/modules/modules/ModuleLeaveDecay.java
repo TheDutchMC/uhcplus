@@ -12,8 +12,8 @@ import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.BlockChecker;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleLeaveDecay implements Listener {
 

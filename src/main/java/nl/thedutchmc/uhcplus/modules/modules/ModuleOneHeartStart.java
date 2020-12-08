@@ -9,10 +9,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcStartedEvent;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleOneHeartStart implements Listener {
 

@@ -6,19 +6,20 @@ import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class WorldborderScheduler {
 
 	public void scheduleWorldborder() {
 
-		double worldBorderStartingSize = Double.valueOf(PresetHandler.worldBorderSize);
-		double worldBorderShrinkTo = Double.valueOf(PresetHandler.worldBorderShrinkTo);
+		double worldBorderStartingSize = Double.valueOf((int) PresetHandler.getPrefabOption("worldBorderSize"));
+		double worldBorderShrinkTo = Double.valueOf((int) PresetHandler.getPrefabOption("worldBorderShrinkTo"));
 
-		long worldBorderStartShrinkAfter = Long.valueOf(PresetHandler.worldBorderShrinkAfter);
-		long gameTimeLeft = Long.valueOf(PresetHandler.gameTime - worldBorderStartShrinkAfter);
+		long worldBorderStartShrinkAfter = Long.valueOf((int) PresetHandler.getPrefabOption("worldBorderShrinkAfter"));
+		long gameTimeLeft = Long.valueOf((int) PresetHandler.getPrefabOption("gameTime") - worldBorderStartShrinkAfter);
 
 		long worldBorderStartShrinkAfterTick = worldBorderStartShrinkAfter * 60 * 20;
 		long gameTimeLeftSecond = gameTimeLeft * 60;
@@ -38,7 +39,7 @@ public class WorldborderScheduler {
 			@Override
 			public void run() {
 				
-				if(UhcPlus.currentState.equals(GameState.END)) {
+				if(UhcHandler.getGameState().equals(GameState.END)) {
 					worldBorder.setSize(100000);
 					this.cancel();
 					return;

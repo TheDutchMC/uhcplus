@@ -20,9 +20,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.AxeOfDestructionLevelUpEvent;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleAxeOfDestruction implements Listener {
 
@@ -105,7 +105,7 @@ public class ModuleAxeOfDestruction implements Listener {
 					}
 				}
 			}
-		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, PresetHandler.moduleAxeOfDestructionLevelOneTime * 20);
+		}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (int) PresetHandler.getPrefabOption("moduleAxeOfDestructionLevelOneTime") * 20);
 	}
 
 	// If a player picks up the axe, we want to transfer the ownership, ie change it
@@ -156,8 +156,8 @@ public class ModuleAxeOfDestruction implements Listener {
 					}
 
 				}
-			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, (PresetHandler.moduleAxeOfDestructionLevelTwoTime
-					- PresetHandler.moduleAxeOfDestructionLevelOneTime) * 20);
+			}.runTaskLaterAsynchronously(UhcPlus.INSTANCE, ((int) PresetHandler.getPrefabOption("moduleAxeOfDestructionLevelTwoTime")
+					- (int) PresetHandler.getPrefabOption("moduleAxeOfDestructionLevelOneTime")) * 20);
 		}
 
 	}

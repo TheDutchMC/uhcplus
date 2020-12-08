@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.teams.Team;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class CoordsCommandHandler implements CommandExecutor {
 
@@ -26,7 +26,7 @@ public class CoordsCommandHandler implements CommandExecutor {
 			return true;
 		}
 
-		if (!UhcPlus.UHC_STARTED) {
+		if (!UhcHandler.isPlaying()) {
 			sender.sendMessage(ChatColor.RED + "This command may only be used during the UHC!");
 			return true;
 		}

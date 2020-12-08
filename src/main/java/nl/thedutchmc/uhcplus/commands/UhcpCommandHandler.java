@@ -5,11 +5,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.commands.subcommands.Kits;
 import nl.thedutchmc.uhcplus.commands.subcommands.Preset;
 import nl.thedutchmc.uhcplus.commands.subcommands.Teams;
 import nl.thedutchmc.uhcplus.uhc.UhcHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class UhcpCommandHandler implements CommandExecutor {
 
@@ -58,7 +58,7 @@ public class UhcpCommandHandler implements CommandExecutor {
 						return true;
 					}
 
-					sender.sendMessage(cg + "You are on UHCPlus version " + cr + UhcPlus.VERSION + cg + ".");
+					sender.sendMessage(cg + "You are on UHCPlus version " + cr + UhcPlus.INSTANCE.getDescription().getVersion() + cg + ".");
 
 					// uhcp start
 				} else if (args[0].equalsIgnoreCase("start")) { // /uhcp start

@@ -13,8 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.modules.moduleStatistics.Database;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PlayerDeathEventListener implements Listener {
 

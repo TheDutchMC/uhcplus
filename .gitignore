@@ -3,7 +3,11 @@
 
 # Ignore Gradle build output directory
 build
-/bin/
+bin/
+
+# Build dir
+releases/
+server/
 
 # Eclipse
 .classpath

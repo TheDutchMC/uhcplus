@@ -14,8 +14,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import net.md_5.bungee.api.ChatColor;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleDioriteDamage implements Listener {
 
@@ -44,7 +44,7 @@ public class ModuleDioriteDamage implements Listener {
 			@Override
 			public void run() {
 				
-				if(!PresetHandler.moduleDioriteDamage) return;
+				if(!(boolean) PresetHandler.getPrefabOption("moduleDioriteDamage")) return;
 				
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					UUID uuid = p.getUniqueId();

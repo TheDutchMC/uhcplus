@@ -20,8 +20,8 @@ import nl.thedutchmc.uhcplus.presets.PresetHandler;
 
 public class TeamHandler {
 
-	private int maxTeamCount = Integer.valueOf(PresetHandler.maxTeamCount);
-	private int maxPlayerCountPerTeam = Integer.valueOf(PresetHandler.maxPlayerCountPerTeam);
+	private int maxTeamCount = (int) PresetHandler.getPrefabOption("maxTeamCount");
+	private int maxPlayerCountPerTeam = (int) PresetHandler.getPrefabOption("maxPlayerCountPerTeam");
 
 	private boolean shouldReturn = false;
 
@@ -49,7 +49,7 @@ public class TeamHandler {
 			team.setTeamColor(ChatColor.of("#" + c));
 			colorsUsed.add(c);
 
-			if (PresetHandler.moduleTeamInventory) {
+			if ((boolean) PresetHandler.getPrefabOption("moduleTeamInventory")) {
 				ModuleTeamInventory teamInventory = new ModuleTeamInventory();
 				teamInventory.setupGui();
 				team.setTeamInventory(teamInventory);
@@ -349,12 +349,12 @@ public class TeamHandler {
 				toRevive.setGameMode(GameMode.SURVIVAL);
 				
 				//If the infinite enchanting module is enabled, we want to set the XP of the revived player to Integer.MAX_VALUE
-				if(PresetHandler.moduleInfiniteEnchanting) {
+				if((boolean) PresetHandler.getPrefabOption("moduleInfiniteEnchanting")) {
 					toRevive.setTotalExperience(Integer.MAX_VALUE);
 				}
 				
 				//If the module for a one heart start is enabled, set the revived player's health to one heart. If not, set it to the maximum health value (usually 10 hearts, or 20 in code)
-				if(PresetHandler.moduleOneHeartStart) {
+				if((boolean) PresetHandler.getPrefabOption("moduleOneHeartStart")) {
 					toRevive.setHealth(2);
 				} else {
 					toRevive.setHealth(toRevive.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());

@@ -7,18 +7,18 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.gui.kit.KitsGui;
 import nl.thedutchmc.uhcplus.gui.modules.ModulesGui;
 import nl.thedutchmc.uhcplus.gui.recipe.RecipeGui;
 import nl.thedutchmc.uhcplus.gui.team.TeamGui;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 
 public class PlayerInteractEventListener implements Listener {
 
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent event) {
 
-		if (UhcPlus.UHC_STARTED || event.getItem() == null)
+		if (UhcHandler.isPlaying() || event.getItem() == null)
 			return;
 
 		Action a = event.getAction();

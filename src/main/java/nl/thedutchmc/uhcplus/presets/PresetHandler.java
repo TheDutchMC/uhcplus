@@ -1,26 +1,18 @@
 package nl.thedutchmc.uhcplus.presets;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.ModuleHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class PresetHandler {
 
 	public static String loadedPreset;
 
-	public static boolean moduleOreAutoSmelt, moduleTreeFullRemove, moduleLeaveDecay, moduleEnchantedTools,
-			moduleInfiniteEnchanting, moduleSheepDropString, moduleGravelDropArrow,
-			moduleDissalowGrindingEnchantedTools, moduleLightGoldenApple, moduleLightAnvil, moduleDioriteDamage,
-			moduleAntiCheat, moduleAxeOfDestruction, axeOfDestructionLevelling, moduleSwordOfDivinity,
-			swordOfDivinityLevelling, moduleTeamInventory, moduleOneHeartStart, moduleSlimeBoost, moduleSticksFromLogs, moduleStatistics,
-			moduleRevive;
-	public static int maxTeamCount, maxPlayerCountPerTeam, moduleOreAutoSmeltIngotDrop, timeToPvp, worldBorderSize,
-			worldBorderShrinkAfter, worldBorderShrinkTo, gameTime, moduleAntiCheatTime,
-			moduleAxeOfDestructionLevelOneTime, moduleAxeOfDestructionLevelTwoTime, moduleSwordOfDivinityLevelOneTime,
-			moduleSwordOfDivinityLevelTwoTime;
+	private static HashMap<String, Object> presetParams = new HashMap<>();
 
 	public void loadPresets() {
 		List<String> availablePresets = ConfigurationHandler.availablePresets;
@@ -33,6 +25,18 @@ public class PresetHandler {
 		}
 
 		loadPreset(ConfigurationHandler.defaultPreset);
+	}
+	
+	public static void setPrefabOption(String option, Object value) {
+		presetParams.put(option, value);
+	}
+	
+	public static Object getPrefabOption(String name) {
+		return presetParams.get(name);
+	}
+	
+	public static HashMap<String, Object> getPrefabOptions() {
+		return presetParams;
 	}
 
 	public void loadPreset(String presetName) {

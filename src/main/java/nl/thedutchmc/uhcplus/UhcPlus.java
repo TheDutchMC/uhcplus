@@ -23,25 +23,21 @@ import nl.thedutchmc.uhcplus.modules.modules.kits.KitHandler;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
 import nl.thedutchmc.uhcplus.teams.TeamHandler;
 import nl.thedutchmc.uhcplus.uhc.GameState;
+import nl.thedutchmc.uhcplus.uhc.UhcHandler;
 import nl.thedutchmc.uhcplus.uhc.listener.EntityDamageByEntityEventListener;
 import nl.thedutchmc.uhcplus.uhc.listener.PlayerLoginJoinEventListener;
 import nl.thedutchmc.uhcplus.world.WorldHandler;
 
 public class UhcPlus extends JavaPlugin {
 
-	public static String VERSION;
-	public static boolean PLAYER_CAN_JOIN = false;
-	public static boolean UHC_STARTED = false;
 	public static Scoreboard scoreboard;
 	public static UhcPlus INSTANCE;
-	public static GameState currentState;
 
 	@Override
 	public void onEnable() {
 		INSTANCE = this;
-		VERSION = this.getDescription().getVersion();
 		
-		logInfo("Welcome to UHCPlus - Version " + VERSION);
+		logInfo("Welcome to UHCPlus - Version " + this.getDescription().getVersion());
 
 		// Register the LoginPlayerListener
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLoginJoinEventListener(), this);
@@ -55,23 +51,13 @@ public class UhcPlus extends JavaPlugin {
 		// Register the EntityDamageByEntityEventListener
 		Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntityEventListener(), this);
 
-		// Set the executor and tab completer for the /uhcp command
+		//Register commands
 		getCommand("uhcp").setExecutor(new UhcpCommandHandler());
 		getCommand("uhcp").setTabCompleter(new UhcpTabCompleter());
-
-		// set the executor for /teaminventory (/ti)
 		getCommand("teaminventory").setExecutor(new TeamInventoryCommandHandler());
-
-		// Set the executor for the /chat command
 		getCommand("chat").setExecutor(new ChatCommandHandler());
-
-		// set the executor for the /broadcast command
 		getCommand("broadcast").setExecutor(new BroadcastCommandHandler());
-
-		// set the executor for the /coords command (/c)
 		getCommand("coords").setExecutor(new CoordsCommandHandler());
-		
-		//Set the executor for the /revive command (/r)
 		getCommand("revive").setExecutor(new ReviveCommandHandler());
 
 		// Load the configuration file
@@ -99,8 +85,6 @@ public class UhcPlus extends JavaPlugin {
 		// Set up the GUI system
 		GuiHandler.setupGuiSystem();
 
-		UhcPlus plugin = this;
-
 		new BukkitRunnable() {
 
 			@Override
@@ -109,9 +93,9 @@ public class UhcPlus extends JavaPlugin {
 				WorldHandler worldHandler = new WorldHandler();
 				worldHandler.setupWorld();
 			}
-		}.runTaskLater(plugin, 120);
+		}.runTaskLater(this, 120);
 		
-		currentState = GameState.LOADING;
+		UhcHandler.setGameState(GameState.LOADING);;
 	}
 
 	@Override

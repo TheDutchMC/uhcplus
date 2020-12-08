@@ -9,8 +9,8 @@ import java.sql.Statement;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.modules.moduleStatistics.listeners.PlayerDeathEventListener;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleStatistics {
 

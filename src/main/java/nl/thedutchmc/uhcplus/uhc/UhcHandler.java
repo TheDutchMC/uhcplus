@@ -41,6 +41,7 @@ import nl.thedutchmc.uhcplus.uhc.scheduler.WorldborderScheduler;
 
 public class UhcHandler {
 
+	private static GameState gameState;
 	TeamHandler teamHandler = new TeamHandler(null, false);
 
 	public void startUhc(boolean resortTeams) {
@@ -50,9 +51,10 @@ public class UhcHandler {
 		UhcTimeRemainingCalculator uhcTRC = new UhcTimeRemainingCalculator();
 		uhcTRC.startCountdown();
 
-		// Set the global flag that the uhc has started to true
-		UhcPlus.UHC_STARTED = true;
-
+		//Change the game state to PLAYING
+		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(gameState, GameState.PLAYING));
+		gameState = GameState.PLAYING;
+		
 		// If we need to resort the teams, do it.
 		if (resortTeams) {
 			teamHandler.playerRandomTeamJoiner();
@@ -114,6 +116,9 @@ public class UhcHandler {
 			}
 			
 		}
+		
+		// Disable PVP
+		uhcworld.setPVP(false);
 
 		// Register the UHCEndedEventListener, this fires after the UHC ends
 		plugin.getServer().getPluginManager().registerEvents(new UhcEndedEventListener(), plugin);
@@ -123,9 +128,6 @@ public class UhcHandler {
 
 		// Register the PlayerDeathEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new PlayerDeathEventListener(), plugin);
-
-		// Disable PVP
-		uhcworld.setPVP(false);
 
 		// Register the EntityDeathEvent listener
 		plugin.getServer().getPluginManager().registerEvents(new EntityDeathEventListener(), plugin);
@@ -153,6 +155,7 @@ public class UhcHandler {
 		// Set the information scoreboard for all the players
 		ScoreboardHandler scoreboardHandler = new ScoreboardHandler();
 
+		//Scoreboard on the side of the screen
 		Objective infObjective = scoreboardHandler.getInformationObjective();
 
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
@@ -161,10 +164,8 @@ public class UhcHandler {
 
 		// Schedule the information scoreboard to update every seconds (20 ticks)
 		new BukkitRunnable() {
-
 			@Override
 			public void run() {
-
 				scoreboardHandler.updateInformationScoreboard(infObjective);
 			}
 		}.runTaskTimerAsynchronously(plugin, 0, 20);
@@ -185,7 +186,7 @@ public class UhcHandler {
 		// Spread the teams
 
 		// Calculate distance that the "spawncircle" should be from 0,0.
-		int worldborderSize = PresetHandler.worldBorderSize;
+		int worldborderSize = (int) PresetHandler.getPrefabOption("worldBorderSize");
 		int spawnCircleRadius = (worldborderSize / 2) / 4 * 3;
 
 		List<Location> teleportLocations = new ArrayList<>();
@@ -225,7 +226,6 @@ public class UhcHandler {
 
 			// Check if the block they're being teleported to is air or not, if not Y+1
 			while (location.getBlock().getType() != Material.AIR) {
-
 				location = new Location(uhcworld, location.getX(), location.getY() + 1, location.getZ());
 			}
 
@@ -239,12 +239,24 @@ public class UhcHandler {
 
 		// Remove the gui system, since we no longer want it
 		GuiHandler.unregisterGuiSystem();
-
-		//Change the game state to PLAYING
-		Bukkit.getPluginManager().callEvent(new GameStateChangedEvent(UhcPlus.currentState, GameState.PLAYING));
-		UhcPlus.currentState = GameState.PLAYING;
 		
 		// lastly, Call the UhcStartedEvent
 		Bukkit.getServer().getPluginManager().callEvent(new UhcStartedEvent());
+	}
+	
+	public static GameState getGameState() {
+		return UhcHandler.gameState;
+	}
+	
+	public static void setGameState(GameState gameState) {
+		UhcHandler.gameState = gameState;
+	}
+	
+	public static boolean isPlaying() {
+		return (gameState.equals(GameState.PLAYING) || gameState.equals(GameState.DEATHMATCH));
+	}
+	
+	public static boolean playersCanJoin() {
+		return (!gameState.equals(GameState.LOADING) && !gameState.equals(GameState.END));
 	}
 }

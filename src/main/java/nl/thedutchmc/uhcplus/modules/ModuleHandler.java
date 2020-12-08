@@ -1,9 +1,9 @@
 package nl.thedutchmc.uhcplus.modules;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.HandlerList;
 
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleAxeOfDestruction;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleDissalowGrindingEnchantedTools;
 import nl.thedutchmc.uhcplus.modules.modules.ModuleEnchantedTools;
@@ -26,6 +26,7 @@ import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSticksFromLogs;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeSwordOfDivinity;
 import nl.thedutchmc.uhcplus.modules.modules.recipes.RecipeLightAnvil;
 import nl.thedutchmc.uhcplus.presets.PresetHandler;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class ModuleHandler {
 
@@ -82,124 +83,125 @@ public class ModuleHandler {
 
 		UhcPlus plugin = UhcPlus.INSTANCE;
 
-		if (PresetHandler.moduleOreAutoSmelt)
+		if ((boolean) PresetHandler.getPrefabOption("moduleOreAutoSmelt"))
 			plugin.getServer().getPluginManager().registerEvents(moduleOreAutoSmelt, plugin);
 
-		if (PresetHandler.moduleTreeFullRemove)
+		if ((boolean) PresetHandler.getPrefabOption("moduleTreeFullRemove"))
 			plugin.getServer().getPluginManager().registerEvents(moduleTreeFullRemove, plugin);
 
-		if (PresetHandler.moduleLeaveDecay)
+		if ((boolean) PresetHandler.getPrefabOption("moduleLeaveDecay"))
 			plugin.getServer().getPluginManager().registerEvents(moduleLeaveDecay, plugin);
 
-		if (PresetHandler.moduleEnchantedTools)
+		if ((boolean) PresetHandler.getPrefabOption("moduleEnchantedTools"))
 			plugin.getServer().getPluginManager().registerEvents(moduleEnchantedTools, plugin);
 
-		if (PresetHandler.moduleInfiniteEnchanting)
+		if ((boolean) PresetHandler.getPrefabOption("moduleInfiniteEnchanting"))
 			plugin.getServer().getPluginManager().registerEvents(moduleInfiniteEnchanting, plugin);
 
-		if (PresetHandler.moduleSheepDropString)
+		if ((boolean) PresetHandler.getPrefabOption("moduleSheepDropString"))
 			plugin.getServer().getPluginManager().registerEvents(moduleSheepDropString, plugin);
 
-		if (PresetHandler.moduleGravelDropArrow)
+		if ((boolean) PresetHandler.getPrefabOption("moduleGravelDropArrow"))
 			plugin.getServer().getPluginManager().registerEvents(moduleGravelDropArrow, plugin);
 
-		if (PresetHandler.moduleDissalowGrindingEnchantedTools)
+		if ((boolean) PresetHandler.getPrefabOption("moduleDissalowGrindingEnchantedTools"))
 			plugin.getServer().getPluginManager().registerEvents(moduleDissalowGrindingEnchantedTools, plugin);
 
-		if (PresetHandler.moduleDioriteDamage) {
+		if ((boolean) PresetHandler.getPrefabOption("moduleDioriteDamage")) {
 			plugin.getServer().getPluginManager().registerEvents(moduleDioriteDamage, plugin);
 			moduleDioriteDamage.dioriteDamage();
 		}
 
-		if (PresetHandler.moduleLightGoldenApple && !RecipeLightGoldenApple.appleRegistered)
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightGoldenApple") && !RecipeLightGoldenApple.appleRegistered)
 			plugin.getServer().addRecipe(recipeLightGoldenApple.getLightGoldenAppleRecipe());
 
-		if (PresetHandler.moduleLightAnvil && !RecipeLightAnvil.anvilRegistered)
+		if ((boolean) PresetHandler.getPrefabOption("moduleLightAnvil") && !RecipeLightAnvil.anvilRegistered)
 			plugin.getServer().addRecipe(recipeLightAnvil.getLightAnvilRecipe());
 
-		if (PresetHandler.moduleAxeOfDestruction && !RecipeAxeOfDestruction.axeRegistered)
+		if ((boolean) PresetHandler.getPrefabOption("moduleAxeOfDestruction") && !RecipeAxeOfDestruction.axeRegistered)
 			plugin.getServer().addRecipe(recipeAxeOfDestruction.getAxeOfDestructionRecipe());
 
-		if (PresetHandler.moduleSwordOfDivinity && !RecipeSwordOfDivinity.swordRegistered)
+		if ((boolean) PresetHandler.getPrefabOption("moduleSwordOfDivinity") && !RecipeSwordOfDivinity.swordRegistered)
 			plugin.getServer().addRecipe(recipeSwordOfDivinity.getSwordOfDivinity());
 
-		if (PresetHandler.moduleAntiCheat)
+		if ((boolean) PresetHandler.getPrefabOption("moduleAntiCheat"))
 			moduleAntiCheat.enableModule();
 
-		if (PresetHandler.axeOfDestructionLevelling)
+		if ((boolean) PresetHandler.getPrefabOption("axeOfDestructionLevelling"))
 			Bukkit.getServer().getPluginManager().registerEvents(moduleAxeOfDestruction, plugin);
 
-		if (PresetHandler.swordOfDivinityLevelling)
+		if ((boolean) PresetHandler.getPrefabOption("swordOfDivinityLevelling"))
 			Bukkit.getServer().getPluginManager().registerEvents(moduleSwordOfDivinity, plugin);
 
-		if (PresetHandler.moduleOneHeartStart)
+		if ((boolean) PresetHandler.getPrefabOption("moduleOneHeartStart"))
 			Bukkit.getServer().getPluginManager().registerEvents(moduleOneHeartStart, plugin);
 		
-		if(PresetHandler.moduleSlimeBoost) {
+		if((boolean) PresetHandler.getPrefabOption("moduleSlimeBoost")) {
 			Bukkit.getServer().getPluginManager().registerEvents(moduleSlimeBoost, plugin);
 			moduleSlimeBoost.slimeBoost();
 		}
 		
-		if(PresetHandler.moduleSticksFromLogs)
+		if((boolean) PresetHandler.getPrefabOption("moduleSticksFromLogs"))
 			recipeSticksFromLogs.setupRecipe();
 		
-		if(PresetHandler.moduleStatistics) 
+		if((boolean) PresetHandler.getPrefabOption("moduleStatistics")) 
 			moduleStatistics.loadModule();
 		
-		if(PresetHandler.moduleRevive) {
-			plugin.getServer().addRecipe(recipeReviveToken.getReviveTokenRecipe());
+		if((boolean) PresetHandler.getPrefabOption("moduleRevive")) {
+			if(Bukkit.getRecipe((RecipeReviveToken.reviveTokenKey != null) ? RecipeReviveToken.reviveTokenKey : new NamespacedKey(UhcPlus.INSTANCE, "revive_token")) == null) {
+				Bukkit.addRecipe(recipeReviveToken.getReviveTokenRecipe());
+			}
 		}
-	
 	}
 	
 	public void unloadModules() {
-		if (!PresetHandler.moduleOreAutoSmelt)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleOreAutoSmelt"))
 			HandlerList.unregisterAll(moduleOreAutoSmelt);
 
-		if (!PresetHandler.moduleTreeFullRemove)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleTreeFullRemove"))
 			HandlerList.unregisterAll(moduleTreeFullRemove);
 
-		if (!PresetHandler.moduleLeaveDecay)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleLeaveDecay"))
 			HandlerList.unregisterAll(moduleLeaveDecay);
 
-		if (!PresetHandler.moduleEnchantedTools)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleEnchantedTools"))
 			HandlerList.unregisterAll(moduleEnchantedTools);
 
-		if (!PresetHandler.moduleInfiniteEnchanting)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleInfiniteEnchanting"))
 			HandlerList.unregisterAll(moduleInfiniteEnchanting);
 
-		if (!PresetHandler.moduleSheepDropString)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleSheepDropString"))
 			HandlerList.unregisterAll(moduleSheepDropString);
 
-		if (!PresetHandler.moduleGravelDropArrow)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleGravelDropArrow"))
 			HandlerList.unregisterAll(moduleGravelDropArrow);
 
-		if (!PresetHandler.moduleDissalowGrindingEnchantedTools)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleDissalowGrindingEnchantedTools"))
 			HandlerList.unregisterAll(moduleDissalowGrindingEnchantedTools);
 
-		if(!PresetHandler.moduleDioriteDamage) {
+		if(!(boolean) PresetHandler.getPrefabOption("moduleDioriteDamage")) {
 			HandlerList.unregisterAll(moduleDioriteDamage);
 			if(moduleDioriteDamage != null) moduleDioriteDamage.cancelDamageTask();
 		}
 		
-		if (!PresetHandler.moduleAntiCheat)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleAntiCheat"))
 			moduleAntiCheat.disableModule();
 
-		if (!PresetHandler.axeOfDestructionLevelling)
+		if (!(boolean) PresetHandler.getPrefabOption("axeOfDestructionLevelling"))
 			HandlerList.unregisterAll(moduleAxeOfDestruction);
 
-		if (!PresetHandler.swordOfDivinityLevelling)
+		if (!(boolean) PresetHandler.getPrefabOption("swordOfDivinityLevelling"))
 			HandlerList.unregisterAll(moduleSwordOfDivinity);
 
-		if (!PresetHandler.moduleOneHeartStart)
+		if (!(boolean) PresetHandler.getPrefabOption("moduleOneHeartStart"))
 			HandlerList.unregisterAll(moduleOneHeartStart);
 
-		if(!PresetHandler.moduleSlimeBoost) {
+		if(!(boolean) PresetHandler.getPrefabOption("moduleSlimeBoost")) {
 			HandlerList.unregisterAll(moduleSlimeBoost);
 			if(moduleSlimeBoost != null) moduleSlimeBoost.cancelBoostTask();
 		}
 		
-		if(!PresetHandler.moduleStatistics) {
+		if(!(boolean) PresetHandler.getPrefabOption("moduleStatistics")) {
 			
 		}
 		

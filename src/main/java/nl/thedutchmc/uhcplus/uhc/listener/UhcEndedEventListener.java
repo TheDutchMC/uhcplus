@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import nl.thedutchmc.uhcplus.ConfigurationHandler;
-import nl.thedutchmc.uhcplus.UhcPlus;
 import nl.thedutchmc.uhcplus.events.UhcEndedEvent;
+import nl.thedutchmc.uhcplus.UhcPlus;
 
 public class UhcEndedEventListener implements Listener {
 
